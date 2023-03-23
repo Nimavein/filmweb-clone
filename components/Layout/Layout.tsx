@@ -1,10 +1,13 @@
 import React, { PropsWithChildren } from "react";
-import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
+
 const Layout = ({ children }: PropsWithChildren) => {
   return (
     <>
-      <Navbar />
+      <Header />
       {children}
+      <Footer />
     </>
   );
 };

@@ -1,10 +1,10 @@
-import { Movie } from "@/types/types";
+import { ApiStatus, Movie } from "@/types/types";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 // Define a type for the slice state
 interface MoviesState {
   movies: Movie[];
-  status: "idle" | "loading" | "succeeded" | "failed";
+  status: ApiStatus;
   error: string | null;
 }
 

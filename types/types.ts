@@ -2,7 +2,7 @@ export interface Movie {
   id: number;
   original_language: string;
   original_title: string;
-  overview: number;
+  overview: string;
   popularity: number;
   poster_path: string;
   release_date: string;
@@ -16,9 +16,11 @@ export interface AppState {
   movies: MoviesState;
 }
 
+export type ApiStatus = "idle" | "loading" | "succeeded" | "failed";
+
 export interface MoviesState {
   movies: Movie[];
-  status: "idle" | "loading" | "succeeded" | "failed";
+  status: ApiStatus;
   error: string | null;
 }
 
