@@ -6,14 +6,9 @@ import MovieContentReviews from "./MovieContentReviews/MovieContentReviews";
 
 const MovieContent = ({
   id,
-  original_language,
   original_title,
-  overview,
-  popularity,
-  poster_path,
   release_date,
   title,
-  video,
   vote_average,
   vote_count,
   backdrop_path,

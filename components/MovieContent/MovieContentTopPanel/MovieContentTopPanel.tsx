@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "../MovieContent.module.scss";
+import styles from "./MovieContentTopPanel.module.scss";
 import Image from "next/image";
 import { formatDuration } from "date-fns";
-import { StarFilled } from "@ant-design/icons";
+import Rating from "@/components/Rating/Rating";
 
 interface MovieContentTopPanelProps {
   backdrop_path: string;
@@ -49,13 +49,23 @@ const MovieContentTopPanel = ({
           </span>
         </div>
         <div className={styles["movie-content__top-panel-rating"]}>
-          <StarFilled />
-          <span className={styles["movie-content__top-panel-votes-count"]}>
-            {vote_count}
-          </span>
-          <span className={styles["movie-content__top-panel-votes-average"]}>
-            {vote_average}
-          </span>
+          <Rating
+            fontSize={24}
+            small
+            defaultValue={parseFloat(vote_average.toFixed(2))}
+          />
+          <div className={styles["movie-content__top-panel-votes-count"]}>
+            <span
+              className={styles["movie-content__top-panel-votes-count-value"]}
+            >
+              {vote_count}
+            </span>
+            <span
+              className={styles["movie-content__top-panel-votes-count-title"]}
+            >
+              votes
+            </span>
+          </div>
         </div>
       </div>
     </section>

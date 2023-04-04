@@ -20,28 +20,27 @@ const MovieContentReviews = ({ id }: MovieContentReviewsProps) => {
     if (id) dispatch(fetchMovieReviews({ movie_id: id, page: currentPage }));
   }, [dispatch, id, currentPage]);
 
-  return (
-    reviews?.results &&
-    reviews?.results?.length > 0 && (
-      <section className={styles["movie-reviews"]}>
-        <h2 className={styles["movie-reviews__title"]}>Reviews</h2>
-        <ul className={styles["movie-reviews__list"]}>
-          {reviews?.results?.map((review: MovieReview) => (
-            <li className={styles["movie-review__item"]} key={review.id}>
-              <MovieContentReview {...review} />
-            </li>
-          ))}
-        </ul>
-        {reviews?.total_pages && reviews.total_pages > 1 && (
-          <Pagination
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            totalItemsAmount={reviews?.total_results}
-            pageSize={10}
-          />
-        )}
-      </section>
-    )
+  return reviews?.results && reviews?.results?.length > 0 ? (
+    <section className={styles["movie-reviews"]}>
+      <h2 className={styles["movie-reviews__title"]}>Reviews</h2>
+      <ul className={styles["movie-reviews__list"]}>
+        {reviews?.results?.map((review: MovieReview) => (
+          <li className={styles["movie-review__item"]} key={review.id}>
+            <MovieContentReview {...review} />
+          </li>
+        ))}
+      </ul>
+      {reviews?.total_pages && reviews.total_pages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          totalItemsAmount={reviews?.total_results}
+          pageSize={10}
+        />
+      )}
+    </section>
+  ) : (
+    <></>
   );
 };
 

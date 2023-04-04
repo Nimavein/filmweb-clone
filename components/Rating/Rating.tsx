@@ -9,6 +9,7 @@ interface RatingProps {
   defaultValue: number;
   starCount?: number;
   small?: boolean;
+  fontSize?: number;
 }
 
 const Rating = ({
@@ -17,11 +18,12 @@ const Rating = ({
   defaultValue = 0,
   starCount = 10,
   small = false,
+  fontSize,
 }: RatingProps) =>
   small ? (
-    <div className={styles["small-rating"]}>
-      <span className={styles["small-rating__value"]}>{defaultValue}</span>
+    <div className={styles["small-rating"]} style={{ fontSize: fontSize }}>
       <StarFilled className={styles["small-rating__icon"]} />
+      <span className={styles["small-rating__value"]}>{defaultValue}</span>
     </div>
   ) : (
     <Rate
