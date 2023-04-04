@@ -1,0 +1,13 @@
+.small-rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    &__value {
+
+    }
+
+    &__icon {
+        color: $gold;
+    }
+}

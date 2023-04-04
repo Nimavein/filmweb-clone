@@ -1,3 +1,5 @@
+export type ApiStatus = "idle" | "loading" | "succeeded" | "failed";
+
 export interface Movie {
   id: number;
   original_language: string;
@@ -90,6 +92,7 @@ export interface MovieReview {
     name?: string;
     username?: string;
     avatar_path?: string | null;
+    rating?: number;
   };
   content?: string;
   created_at?: string;
@@ -109,8 +112,6 @@ export interface MovieReviews {
 export interface AppState {
   movies: MoviesState;
 }
-
-export type ApiStatus = "idle" | "loading" | "succeeded" | "failed";
 
 export interface MoviesState {
   movies: Movie[];

@@ -1,15 +1,14 @@
 import Image from "next/image";
 import styles from "./MoviesListItem.module.scss";
-import { Card } from "antd";
 import Link from "next/link";
-
-const { Meta } = Card;
-
+import Rating from "@/components/Rating/Rating";
 interface MoviesListItemProps {
   title: string;
   id: number;
   overview: string;
   poster_path: string;
+  vote_count: number;
+  vote_average: number;
 }
 
 const MoviesListItem = ({
@@ -17,24 +16,34 @@ const MoviesListItem = ({
   overview,
   poster_path,
   id,
+  vote_count,
+  vote_average,
 }: MoviesListItemProps) => {
   return (
     <Link href={`/movie/${id}`}>
-      <Card
-        className={styles["movies-list__item-card"]}
-        hoverable
-        bordered
-        cover={
-          <Image
-            src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${poster_path}`}
-            alt=""
-            width={200}
-            height={200}
-          />
-        }
-      >
-        <Meta title={title} description={overview} />
-      </Card>
+      <div className={styles["movies-list__item"]}>
+        <Image
+          src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${poster_path}`}
+          alt=""
+          width={200}
+          height={200}
+          className={styles["movies-list__item-cover"]}
+        />
+        <div className={styles["movies-list__item-content"]}>
+          <div className={styles["movies-list__item-text"]}>
+            <h2 className={styles["movies-list__item-title"]}>{title}</h2>
+            <p className={styles["movies-list__item-overview"]}>{overview}</p>
+          </div>
+          <div className={styles["movies-list__item-rating"]}>
+            <span className={styles["movies-list__item-vote-average"]}>
+              <Rating small defaultValue={vote_average} />
+            </span>
+            <span
+              className={styles["movies-list__item-vote-count"]}
+            >{`${vote_count} votes`}</span>
+          </div>
+        </div>
+      </div>
     </Link>
   );
 };

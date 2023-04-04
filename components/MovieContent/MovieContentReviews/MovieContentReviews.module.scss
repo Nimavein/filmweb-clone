@@ -1,0 +1,39 @@
+.movie-reviews {
+  margin-top: 20px;
+
+  &__title {
+    margin-bottom: 14px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+}
+
+.movie-review__item {
+  display: flex;
+  border: 1px solid rgba($black, 0.2);
+  border-radius: 6px;
+  padding: 20px;
+  gap: 14px;
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 80%;
+  }
+
+  &-rating {
+    margin-left: auto;
+  }
+
+  &-text-toggle {
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin-left: 4px;
+  }
+}
