@@ -42,7 +42,7 @@ const MovieContentTopPanel = ({
             {original_title}
           </span>
           <span className={styles["movie-content__top-panel-release"]}>
-            {release_date}
+            {release_date?.substring(0, 4)}
           </span>
           <span className={styles["movie-content__top-panel-runtime"]}>
             {formattedMovieDuration}

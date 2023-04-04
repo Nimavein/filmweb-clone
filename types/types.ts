@@ -11,7 +11,6 @@ export interface Movie {
   vote_average: number;
   vote_count: number;
 }
-
 export interface MovieDetails {
   adult: boolean;
   backdrop_path: string;
@@ -50,6 +49,63 @@ export interface MovieDetails {
   vote_count: number;
 }
 
+export interface Crew {
+  adult?: boolean;
+  gender?: number | null;
+  id?: number;
+  known_for_department?: string;
+  name?: string;
+  original_name?: string;
+  popularity?: number;
+  profile_path?: string | null;
+  credit_id?: string;
+  department?: string;
+  job?: string;
+}
+
+export interface Cast {
+  adult: boolean;
+  gender?: number | null;
+  id?: number;
+  known_for_department?: string;
+  name?: string;
+  original_name?: string;
+  popularity?: number;
+  profile_path?: string | null;
+  cast_id?: number;
+  character?: string;
+  credit_id?: string;
+  order?: number;
+}
+
+export interface Credits {
+  id: number;
+  crew: Crew;
+  cast: Cast;
+}
+
+export interface MovieReview {
+  author?: string;
+  author_details?: {
+    name?: string;
+    username?: string;
+    avatar_path?: string | null;
+  };
+  content?: string;
+  created_at?: string;
+  id?: string;
+  updated_at?: string;
+  url?: string;
+  rating?: number | null;
+}
+
+export interface MovieReviews {
+  id?: number;
+  page?: number;
+  results?: MovieReview[];
+  total_pages?: number;
+  total_results?: number;
+}
 export interface AppState {
   movies: MoviesState;
 }

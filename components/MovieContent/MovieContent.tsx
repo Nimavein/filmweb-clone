@@ -1,10 +1,8 @@
 import React from "react";
 import { MovieDetails } from "@/types/types";
-import Image from "next/image";
 import styles from "./MovieContent.module.scss";
-import { StarFilled } from "@ant-design/icons";
-import { formatDuration } from "date-fns";
 import MovieContentTopPanel from "./MovieContentTopPanel/MovieContentTopPanel";
+import MovieContentReviews from "./MovieContentReviews/MovieContentReviews";
 
 const MovieContent = ({
   id,
@@ -32,6 +30,7 @@ const MovieContent = ({
         vote_average={vote_average}
         title={title}
       />
+      <MovieContentReviews id={id} />
     </main>
   );
 };

@@ -14,10 +14,9 @@ const Movie = () => {
 
   useEffect(() => {
     if (id) dispatch(fetchMovieData(Number(id)));
-  }, [dispatch, id]);
-  console.log(movieDetails);
+  }, [id]);
 
-  return status === "loading" && movieDetails?.id ? (
+  return status === "loading" ? (
     <Loader />
   ) : (
     <>

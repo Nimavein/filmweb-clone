@@ -6,6 +6,12 @@
         height: 400px;
         position: relative;
         background-color: $black;
+
+        &-wrapper {
+            display: flex;
+            gap: 10px;
+        }
+        
         &-details {
             position: absolute;
             bottom: 30px;
