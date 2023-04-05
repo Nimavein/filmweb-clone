@@ -36,7 +36,8 @@ export const fetchMovieData = createAsyncThunk<
       ).then((res) => res.json()) as Promise<Credits>,
     ]);
     return { movieDetails, credits };
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
     return rejectWithValue(error.message);
   }
 });

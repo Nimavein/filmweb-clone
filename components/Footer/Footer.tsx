@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const Footer = () => {
-  return (
-    <footer style={{ textAlign: "center" }}>Footer</footer>
-  );
-}
+  return <footer style={{ textAlign: "center" }}>Footer</footer>;
+};
 
 export default Footer;

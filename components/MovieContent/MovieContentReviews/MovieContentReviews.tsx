@@ -6,19 +6,18 @@ import MovieContentReview from "./MovieContentReview/MovieContentReview";
 import Pagination from "@/components/Pagination/Pagination";
 import styles from "./MovieContentReviews.module.scss";
 
-interface MovieContentReviewsProps {
-  id: number;
-}
-
-const MovieContentReviews = ({ id }: MovieContentReviewsProps) => {
+const MovieContentReviews = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const dispatch = useAppDispatch();
 
-  const { reviews } = useAppSelector((state) => state.movie);
+  const { reviews, movieDetails } = useAppSelector((state) => state.movie);
 
   useEffect(() => {
-    if (id) dispatch(fetchMovieReviews({ movie_id: id, page: currentPage }));
-  }, [dispatch, id, currentPage]);
+    if (movieDetails?.id)
+      dispatch(
+        fetchMovieReviews({ movie_id: movieDetails?.id, page: currentPage })
+      );
+  }, [dispatch, currentPage, movieDetails?.id]);
 
   return reviews?.results && reviews?.results?.length > 0 ? (
     <section className={styles["movie-reviews"]}>

@@ -1,17 +1,17 @@
 import { useEffect } from "react";
-import { fetchMovies } from "@/store/moviesSlice";
 import { useAppDispatch, useAppSelector } from "@/store";
 import MoviesList from "@/components/MoviesList/MoviesList";
+import { fetchPopularMovies } from "@/store/moviesSlice";
 
 function PopularMoviesPage() {
   const dispatch = useAppDispatch();
-  const movies = useAppSelector((state) => state.movies.movies);
+  const popularMovies = useAppSelector((state) => state.movies.popularMovies);
 
   useEffect(() => {
-    dispatch(fetchMovies());
+    dispatch(fetchPopularMovies());
   }, []);
 
-  return <MoviesList movies={movies} />;
+  return <MoviesList movies={popularMovies} />;
 }
 
 export default PopularMoviesPage;

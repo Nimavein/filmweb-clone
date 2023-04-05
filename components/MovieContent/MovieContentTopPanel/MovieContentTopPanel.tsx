@@ -3,46 +3,33 @@ import styles from "./MovieContentTopPanel.module.scss";
 import Image from "next/image";
 import { formatDuration } from "date-fns";
 import Rating from "@/components/Rating/Rating";
+import { useAppSelector } from "@/store";
 
-interface MovieContentTopPanelProps {
-  backdrop_path: string;
-  original_title: string;
-  runtime: number;
-  release_date: string;
-  vote_count: number;
-  vote_average: number;
-  title: string;
-}
+const MovieContentTopPanel = () => {
+  const { movieDetails } = useAppSelector((state) => state.movie);
 
-const MovieContentTopPanel = ({
-  backdrop_path,
-  original_title,
-  runtime,
-  release_date,
-  vote_count,
-  vote_average,
-  title,
-}: MovieContentTopPanelProps) => {
-  const movieDuration = { minutes: runtime };
+  const movieDuration = { minutes: movieDetails?.runtime };
   const formattedMovieDuration = formatDuration(movieDuration, {
     format: ["hours", "minutes"],
   });
   return (
     <section className={styles["movie-content__top-panel"]}>
       <Image
-        src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${backdrop_path}`}
+        src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${movieDetails?.backdrop_path}`}
         alt=""
         fill
         className={styles["movie-content__top-panel-banner"]}
       />
       <div className={styles["movie-content__top-panel-details"]}>
-        <h1 className={styles["movie-content__top-panel-title"]}>{title}</h1>
+        <h1 className={styles["movie-content__top-panel-title"]}>
+          {movieDetails?.title}
+        </h1>
         <div className={styles["movie-content__top-panel-wrapper"]}>
           <span className={styles["movie-content__top-panel-title-original"]}>
-            {original_title}
+            {movieDetails?.original_title}
           </span>
           <span className={styles["movie-content__top-panel-release"]}>
-            {release_date?.substring(0, 4)}
+            {movieDetails?.release_date?.substring(0, 4)}
           </span>
           <span className={styles["movie-content__top-panel-runtime"]}>
             {formattedMovieDuration}
@@ -52,13 +39,17 @@ const MovieContentTopPanel = ({
           <Rating
             fontSize={24}
             small
-            defaultValue={parseFloat(vote_average.toFixed(2))}
+            defaultValue={
+              movieDetails?.vote_average
+                ? parseFloat(movieDetails?.vote_average.toFixed(2))
+                : 0
+            }
           />
           <div className={styles["movie-content__top-panel-votes-count"]}>
             <span
               className={styles["movie-content__top-panel-votes-count-value"]}
             >
-              {vote_count}
+              {movieDetails?.vote_count}
             </span>
             <span
               className={styles["movie-content__top-panel-votes-count-title"]}
