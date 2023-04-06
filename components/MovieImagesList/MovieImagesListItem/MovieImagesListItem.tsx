@@ -1,7 +1,6 @@
 import React from "react";
 import { Backdrop } from "@/types/types";
 import Image from "next/image";
-import styles from "../MovieImagesList.module.scss";
 
 const MovieImagesListItem = ({ file_path, height, width }: Backdrop) => {
   return height && width && file_path ? (

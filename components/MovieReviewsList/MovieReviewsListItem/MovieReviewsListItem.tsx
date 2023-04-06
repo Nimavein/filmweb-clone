@@ -1,51 +1,31 @@
 import React, { useState } from "react";
 import { MovieReview } from "@/types/types";
-import { UserOutlined } from "@ant-design/icons";
-import { Avatar } from "antd";
-import Image from "next/image";
 import Rating from "@/components/Rating/Rating";
 import styles from "../MovieReviewsList.module.scss";
+import ReadMoreText from "@/components/ReadMoreText/ReadMoreText";
+import UserAvatar from "@/components/UserAvatar/UserAvatar";
 
 const MovieReviewsListItem = ({ content, author_details }: MovieReview) => {
   const [isReadMore, setIsReadMore] = useState<boolean>(false);
-  const isLongContent = content && content.length > 200;
-
-  const handleReadMoreClick = () => setIsReadMore(!isReadMore);
 
   return (
     <>
-      <Avatar
-        className={styles["movie-review__item-avatar"]}
-        icon={
-          author_details?.avatar_path ? (
-            <Image
-              alt=""
-              fill
-              src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${author_details.avatar_path}`}
-            />
-          ) : (
-            <UserOutlined />
-          )
-        }
+      <UserAvatar
+        avatarPath={author_details?.avatar_path}
+        avatarClassname={styles["movie-review__item-avatar"]}
       />
       <div className={styles["movie-review__item-content"]}>
         <h3 className={styles["movie-review__item-author"]}>
           {author_details?.name}
         </h3>
-        <p className={styles["movie-review__item-description"]}>
-          {content && (isReadMore || !isLongContent)
-            ? content
-            : `${content?.substring(0, 200)}...`}
-          {isLongContent && (
-            <button
-              className={styles["movie-review__item-text-toggle"]}
-              onClick={handleReadMoreClick}
-              type="button"
-            >
-              <span>{isReadMore ? "Collapse" : "Read more"}</span>
-            </button>
-          )}
-        </p>
+        {content && (
+          <ReadMoreText
+            text={content}
+            isReadMore={isReadMore}
+            setIsReadMore={setIsReadMore}
+            showTextLength={250}
+          />
+        )}
       </div>
       <div className={styles["movie-review__item-rating"]}>
         {author_details?.rating && (

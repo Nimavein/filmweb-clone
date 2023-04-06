@@ -10,6 +10,7 @@ interface RatingProps {
   starCount?: number;
   small?: boolean;
   fontSize?: number;
+  showNumber?: boolean;
 }
 
 const Rating = ({
@@ -19,6 +20,7 @@ const Rating = ({
   starCount = 10,
   small = false,
   fontSize,
+  showNumber = false,
 }: RatingProps) =>
   small ? (
     <div className={styles["small-rating"]} style={{ fontSize: fontSize }}>
@@ -26,12 +28,17 @@ const Rating = ({
       <span className={styles["small-rating__value"]}>{defaultValue}</span>
     </div>
   ) : (
-    <Rate
-      count={starCount}
-      allowHalf={allowHalf}
-      disabled={disabled}
-      defaultValue={defaultValue}
-    />
+    <div className={styles["rating"]}>
+      {showNumber && (
+        <span className={styles["rating__value"]}>{defaultValue}</span>
+      )}
+      <Rate
+        count={starCount}
+        allowHalf={allowHalf}
+        disabled={disabled}
+        defaultValue={defaultValue}
+      />
+    </div>
   );
 
 export default Rating;

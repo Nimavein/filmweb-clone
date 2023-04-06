@@ -1,13 +1,18 @@
-.small-rating {
+.rating {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 10px;
+}
 
-    &__value {
+.small-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 
-    }
+  &__value {
+  }
 
-    &__icon {
-        color: $gold;
-    }
+  &__icon {
+    color: $gold;
+  }
 }

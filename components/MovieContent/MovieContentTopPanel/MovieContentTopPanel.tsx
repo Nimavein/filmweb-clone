@@ -19,6 +19,7 @@ const MovieContentTopPanel = () => {
         alt=""
         fill
         className={styles["movie-content__top-panel-banner"]}
+        quality={100}
       />
       <div className={styles["movie-content__top-panel-details"]}>
         <h1 className={styles["movie-content__top-panel-title"]}>
