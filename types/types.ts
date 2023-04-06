@@ -143,3 +143,38 @@ export interface NavbarLink {
   name: string;
   path: string;
 }
+
+export interface Backdrop {
+  aspect_ratio?: number;
+  file_path?: string;
+  height?: number;
+  iso_639_1?: string | null;
+  vote_average?: number;
+  vote_count?: number;
+  width?: number;
+}
+
+export interface Poster {
+  aspect_ratio?: number;
+  file_path?: string;
+  height?: number;
+  iso_639_1?: string | null;
+  vote_average?: number;
+  vote_count?: number;
+  width?: number;
+}
+
+export interface Image {
+  id: number;
+  backdrops?: Backdrop[];
+  aspect_ratio?: number;
+  file_path?: string;
+  height?: number;
+  iso_639_1?: string | null;
+  vote_average?: number;
+  vote_count?: number;
+  width?: number;
+  posters?: Poster[];
+}
+
+export type Images = Image[];

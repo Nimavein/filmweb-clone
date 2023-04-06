@@ -1,7 +1,8 @@
 .button {
   background: none;
   border: 1px solid $gray;
-  padding: 20px 12px;
+  padding: 12px 20px;
+  cursor: pointer;
 
   &--uppercase {
     text-transform: uppercase;

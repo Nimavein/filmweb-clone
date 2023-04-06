@@ -1,4 +1,10 @@
-import { ApiStatus, Credits, MovieDetails, MovieReviews } from "@/types/types";
+import {
+  ApiStatus,
+  Credits,
+  Images,
+  MovieDetails,
+  MovieReviews,
+} from "@/types/types";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 // Define a type for the slice state
@@ -6,6 +12,7 @@ interface MovieState {
   movieDetails: MovieDetails | null;
   credits: Credits | null;
   reviews: MovieReviews | null;
+  images: Images | null;
   status: ApiStatus;
   reviewsStatus: ApiStatus;
   error: string | null;
@@ -16,26 +23,30 @@ const initialState: MovieState = {
   movieDetails: null,
   credits: null,
   reviews: null,
+  images: null,
   status: "idle",
   reviewsStatus: "idle",
   error: null,
 };
 
 export const fetchMovieData = createAsyncThunk<
-  { movieDetails: MovieDetails; credits: Credits },
+  { movieDetails: MovieDetails; credits: Credits; images: Images },
   number,
   { rejectValue: string }
 >("movieData/fetchMovieData", async (movie_id, { rejectWithValue }) => {
   try {
-    const [movieDetails, credits] = await Promise.all([
+    const [movieDetails, credits, images] = await Promise.all([
       fetch(
         `${process.env.NEXT_PUBLIC_BASE_MOVIE_API_URL}${movie_id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
       ).then((res) => res.json()) as Promise<MovieDetails>,
       fetch(
         `${process.env.NEXT_PUBLIC_BASE_MOVIE_API_URL}${movie_id}/credits?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
       ).then((res) => res.json()) as Promise<Credits>,
+      fetch(
+        `${process.env.NEXT_PUBLIC_BASE_MOVIE_API_URL}${movie_id}/images?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+      ).then((res) => res.json()) as Promise<Images>,
     ]);
-    return { movieDetails, credits };
+    return { movieDetails, credits, images };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return rejectWithValue(error.message);
@@ -78,6 +89,7 @@ const movieSlice = createSlice({
         state.status = "succeeded";
         state.movieDetails = action.payload.movieDetails;
         state.credits = action.payload.credits;
+        state.images = action.payload.images;
       })
       .addCase(fetchMovieData.rejected, (state, action) => {
         state.status = "failed";
