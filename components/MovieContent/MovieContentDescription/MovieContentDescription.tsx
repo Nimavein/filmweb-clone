@@ -38,19 +38,28 @@ const MovieContentDescription = () => {
           {movieDetails?.overview}
         </p>
         <div className={styles["movie-content__description-details"]}>
-          {details.map((detail) => (
-            <div
-              className={styles["movie-content__description-detail"]}
-              key={detail.name}
-            >
-              <p className={styles["movie-content__description-detail-name"]}>
-                {detail.name}
-              </p>
-              <p className={styles["movie-content__description-detail-value"]}>
-                {detail.value}
-              </p>
-            </div>
-          ))}
+          {details.map(
+            (detail) =>
+              detail?.value && (
+                <div
+                  className={styles["movie-content__description-detail"]}
+                  key={detail.name}
+                >
+                  <p
+                    className={styles["movie-content__description-detail-name"]}
+                  >
+                    {detail.name}
+                  </p>
+                  <p
+                    className={
+                      styles["movie-content__description-detail-value"]
+                    }
+                  >
+                    {detail.value}
+                  </p>
+                </div>
+              )
+          )}
         </div>
       </div>
     </section>
