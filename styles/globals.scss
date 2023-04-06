@@ -1,16 +1,16 @@
 /* Apply a reset to all elements */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 /* Apply basic styles to the body */
 body {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    color: $black;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: $black;
 }
 
 /* Apply basic styles to headings */
@@ -20,16 +20,28 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: Arial, sans-serif;
-    font-weight: bold;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
 }
 
 /* Apply basic styles to links */
 a {
-    text-decoration: none;
-    color: $black;
+  text-decoration: none;
+  color: $black;
 }
 
 ul {
-    list-style: none;
+  list-style: none;
+}
+
+.embla {
+  overflow: hidden;
+
+  &__container {
+    display: flex;
+  }
+  &__slide {
+    flex: 0 0 100%;
+    min-width: 0;
+  }
 }

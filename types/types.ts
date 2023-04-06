@@ -164,7 +164,7 @@ export interface Poster {
   width?: number;
 }
 
-export interface Image {
+export interface Images {
   id: number;
   backdrops?: Backdrop[];
   aspect_ratio?: number;
@@ -176,5 +176,3 @@ export interface Image {
   width?: number;
   posters?: Poster[];
 }
-
-export type Images = Image[];

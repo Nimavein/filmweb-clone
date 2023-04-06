@@ -14,7 +14,7 @@ const MovieReviewsList = ({ movieId }: MovieReviewsListProps) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const dispatch = useAppDispatch();
 
-  const { reviews } = useAppSelector((state) => state.movie);
+  const { reviews, movieDetails } = useAppSelector((state) => state.movie);
 
   useEffect(() => {
     if (movieId)
@@ -23,7 +23,9 @@ const MovieReviewsList = ({ movieId }: MovieReviewsListProps) => {
 
   return reviews?.results && reviews?.results?.length > 0 ? (
     <section className={styles["movie-reviews"]}>
-      <h2 className={styles["movie-reviews__title"]}>Reviews</h2>
+      <h1
+        className={styles["movie-reviews__title"]}
+      >{`Reviews of ${movieDetails?.title}`}</h1>
       <ul className={styles["movie-reviews__list"]}>
         {reviews?.results?.map((review: MovieReview) => (
           <li className={styles["movie-reviews__item"]} key={review.id}>

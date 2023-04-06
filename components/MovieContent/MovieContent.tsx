@@ -3,6 +3,7 @@ import styles from "./MovieContent.module.scss";
 import MovieContentTopPanel from "./MovieContentTopPanel/MovieContentTopPanel";
 import MovieContentReviews from "./MovieContentReviews/MovieContentReviews";
 import MovieContentDescription from "./MovieContentDescription/MovieContentDescription";
+import MovieContentImages from "./MovieContentImages/MovieContentImages";
 
 const MovieContent = () => {
   return (
@@ -10,6 +11,7 @@ const MovieContent = () => {
       <MovieContentTopPanel />
       <MovieContentDescription />
       <MovieContentReviews />
+      <MovieContentImages />
     </main>
   );
 };

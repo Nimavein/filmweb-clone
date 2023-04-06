@@ -2,12 +2,16 @@ import React from "react";
 import MovieReviewsList from "@/components/MovieReviewsList/MovieReviewsList";
 import { useRouter } from "next/router";
 
-const MoviesReviews = () => {
+const MovieReviews = () => {
   const router = useRouter();
 
   const { id } = router.query;
 
-  return <MovieReviewsList movieId={parseInt(id as string, 10)} />;
+  return (
+    <main>
+      <MovieReviewsList movieId={parseInt(id as string, 10)} />
+    </main>
+  );
 };
 
-export default MoviesReviews;
+export default MovieReviews;

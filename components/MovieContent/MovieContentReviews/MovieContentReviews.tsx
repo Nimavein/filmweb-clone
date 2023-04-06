@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/store";
 import Link from "next/link";
 import styles from "./MovieContentReviews.module.scss";
+import sectionStyles from "../MovieContent.module.scss";
 import Button from "@/components/Button/Button";
 import useEmblaCarousel from "embla-carousel-react";
 import MovieContentReview from "./MovieContentReview/MovieContentReview";
@@ -18,9 +19,9 @@ const MovieContentReviews = () => {
     `Review of the movie ${movieDetails?.title}`.toUpperCase();
 
   useEffect(() => {
-    if (movieDetails?.id)
+    if (movieDetails?.id && !reviews)
       dispatch(fetchMovieReviews({ movie_id: movieDetails?.id, page: 1 }));
-  }, []);
+  }, [movieDetails?.id, dispatch, reviews]);
 
   const onSelect = (index: number) => {
     setSelectedIndex(index);
@@ -32,12 +33,12 @@ const MovieContentReviews = () => {
 
   return (
     <section
-      className={styles["movie-content__reviews"]}
+      className={`${styles["movie-content__reviews"]} ${sectionStyles["movie-content__section"]}`}
       aria-labelledby="movie-content-reviews"
     >
       <h2
         id="movie-content-reviews"
-        className={styles["movie-content__reviews-header"]}
+        className={`${styles["movie-content__reviews-header"]} ${sectionStyles["movie-content__section-header"]}`}
       >
         {reviewsHeader}
       </h2>
