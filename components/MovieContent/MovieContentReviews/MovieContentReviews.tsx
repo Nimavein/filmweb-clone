@@ -12,6 +12,7 @@ const MovieContentReviews = () => {
   const { movieDetails, reviews } = useAppSelector((state) => state.movie);
   const reviewsHeader =
     `Review of the movie ${movieDetails?.title}`.toUpperCase();
+  const displayedReviewsInCarousel = 3;
 
   return (
     <section
@@ -31,16 +32,22 @@ const MovieContentReviews = () => {
         prevArrow={<LeftOutlined />}
       >
         {reviews?.results
-          ?.slice(0, Math.min(3, reviews?.results?.length))
+          ?.slice(
+            0,
+            Math.min(displayedReviewsInCarousel, reviews?.results?.length)
+          )
           .map((review, index) => (
             <div key={index}>
               <MovieContentReview slideId={index} {...review} />
             </div>
           ))}
       </Carousel>
-      <Link href={`/movie/${movieDetails?.id}/reviews`}>
-        <Button>See all</Button>
-      </Link>
+      {reviews?.results &&
+        reviews?.results?.length > displayedReviewsInCarousel && (
+          <Link href={`/movie/${movieDetails?.id}/reviews`}>
+            <Button>See all</Button>
+          </Link>
+        )}
     </section>
   );
 };
