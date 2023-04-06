@@ -1,5 +1,21 @@
 export type ApiStatus = "idle" | "loading" | "succeeded" | "failed";
 
+export interface Genre {
+  id: number;
+  name: string;
+}
+
+export interface ProductionCountry {
+  iso_3166_1: string;
+  name: string;
+}
+
+export interface SpokenLanguage {
+  english_name: string;
+  iso_639_1: string;
+  name: string;
+}
+
 export interface Movie {
   id: number;
   original_language: string;
@@ -23,7 +39,7 @@ export interface MovieDetails {
     backdrop_path: string;
   };
   budget: number;
-  genres: { id: number; name: string }[];
+  genres: Genre[];
   homepage: string;
   id: number;
   imdb_id: string;
@@ -38,11 +54,11 @@ export interface MovieDetails {
     name: string;
     origin_country: string;
   }[];
-  production_countries: { iso_3166_1: string; name: string }[];
+  production_countries: ProductionCountry[];
   release_date: string;
   revenue: number;
   runtime: number;
-  spoken_languages: { english_name: string; iso_639_1: string; name: string }[];
+  spoken_languages: SpokenLanguage[];
   status: string;
   tagline: string;
   title: string;
@@ -51,7 +67,7 @@ export interface MovieDetails {
   vote_count: number;
 }
 
-export interface Crew {
+export interface CrewMember {
   adult?: boolean;
   gender?: number | null;
   id?: number;
@@ -65,7 +81,9 @@ export interface Crew {
   job?: string;
 }
 
-export interface Cast {
+export type Crew = CrewMember[];
+
+export interface CastMember {
   adult: boolean;
   gender?: number | null;
   id?: number;
@@ -79,6 +97,8 @@ export interface Cast {
   credit_id?: string;
   order?: number;
 }
+
+export type Cast = CastMember[];
 
 export interface Credits {
   id: number;

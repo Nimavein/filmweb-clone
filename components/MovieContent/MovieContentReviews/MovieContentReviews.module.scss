@@ -1,39 +1,20 @@
-.movie-reviews {
-  margin-top: 20px;
-
-  &__title {
-    margin-bottom: 14px;
+.movie-content__reviews {
+  max-width: 724px;
+  margin: 40px auto;
+  &-header {
+    font-size: 20px;
   }
-
-  &__list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
 }
 
-.movie-review__item {
+.embla {
+  overflow: hidden;
+}
+
+.embla__container {
   display: flex;
-  border: 1px solid rgba($black, 0.2);
-  border-radius: 6px;
-  padding: 20px;
-  gap: 14px;
+}
 
-  &-content {
-    display: flex;
-    flex-direction: column;
-    max-width: 80%;
-  }
-
-  &-rating {
-    margin-left: auto;
-  }
-
-  &-text-toggle {
-    border: none;
-    background: none;
-    cursor: pointer;
-    margin-left: 4px;
-  }
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
 }
