@@ -1,24 +1,17 @@
-import React, { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/store";
+import React from "react";
+import { useAppSelector } from "@/store";
 import Link from "next/link";
 import styles from "./MovieContentReviews.module.scss";
 import sectionStyles from "../MovieContent.module.scss";
 import Button from "@/components/Button/Button";
 import MovieContentReview from "./MovieContentReview/MovieContentReview";
-import { fetchMovieReviews } from "@/store/movieSlice";
 import { Carousel } from "antd";
 import { RightOutlined, LeftOutlined } from "@ant-design/icons";
 
 const MovieContentReviews = () => {
-  const dispatch = useAppDispatch();
   const { movieDetails, reviews } = useAppSelector((state) => state.movie);
   const reviewsHeader =
     `Review of the movie ${movieDetails?.title}`.toUpperCase();
-
-  useEffect(() => {
-    if (movieDetails?.id && !reviews)
-      dispatch(fetchMovieReviews({ movie_id: movieDetails?.id, page: 1 }));
-  }, [movieDetails?.id, dispatch, reviews]);
 
   return (
     <section
@@ -37,11 +30,13 @@ const MovieContentReviews = () => {
         nextArrow={<RightOutlined />}
         prevArrow={<LeftOutlined />}
       >
-        {reviews?.results?.slice(0, 3).map((review, index) => (
-          <div key={index}>
-            <MovieContentReview slideId={index} {...review} />
-          </div>
-        ))}
+        {reviews?.results
+          ?.slice(0, Math.min(3, reviews?.results?.length))
+          .map((review, index) => (
+            <div key={index}>
+              <MovieContentReview slideId={index} {...review} />
+            </div>
+          ))}
       </Carousel>
       <Link href={`/movie/${movieDetails?.id}/reviews`}>
         <Button>See all</Button>
