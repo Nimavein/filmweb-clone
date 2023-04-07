@@ -1,13 +1,5 @@
 .main-navbar {
-  &__links-list {
-    display: flex;
-    list-style: none;
-    gap: 20px;
-  }
-  &__link {
-    a {
-      color: $white;
-      text-decoration: none;
-    }
-  }
+  &__list {
+    background-color: $black;
+  } 
 }

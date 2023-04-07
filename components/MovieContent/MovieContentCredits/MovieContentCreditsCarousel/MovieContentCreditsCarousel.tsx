@@ -9,7 +9,6 @@ interface MovieContentCreditsCarouselProps {
   cast?: Cast;
   crew?: Crew;
 }
-
 const MovieContentCreditsCarousel = ({
   cast,
   crew,

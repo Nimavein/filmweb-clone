@@ -1,3 +1,5 @@
+import { MenuProps } from "antd";
+
 export type ApiStatus = "idle" | "loading" | "succeeded" | "failed";
 
 export interface Genre {
@@ -142,6 +144,19 @@ export interface MoviesState {
 export interface NavbarLink {
   name: string;
   path: string;
+  key: string;
+}
+
+export interface NavbarLinks {
+  home: NavbarLink;
+  movies: {
+    main: NavbarLink;
+    popular: NavbarLink;
+    ranking: NavbarLink;
+  };
+  tvSeries: {
+    main: NavbarLink;
+  };
 }
 
 export interface Backdrop {
@@ -176,3 +191,5 @@ export interface Images {
   width?: number;
   posters?: Poster[];
 }
+
+export type MenuItem = Required<MenuProps>["items"][number];

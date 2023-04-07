@@ -36,9 +36,17 @@ ul {
 
 .ant-carousel {
   margin-bottom: 40px;
+
   .slick-dots {
-    bottom: -20px;
+    bottom: -14px;
+
+    .slick-active, li {
+      button {
+        background-color: $black !important;
+      }
+    }
   }
+
   .slick-next {
     right: 20px;
   }

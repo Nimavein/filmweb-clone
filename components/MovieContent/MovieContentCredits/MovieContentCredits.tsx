@@ -13,12 +13,12 @@ const MovieContentCredits = () => {
   const tabs: TabsProps["items"] = [
     {
       key: "1",
-      label: `CAST`,
+      label: `CAST (${credits?.cast?.length})`,
       children: <MovieContentCreditsCarousel cast={credits?.cast} />,
     },
     {
       key: "2",
-      label: `CREW`,
+      label: `CREW (${credits?.crew?.length})`,
       children: <MovieContentCreditsCarousel crew={credits?.crew} />,
     },
   ];

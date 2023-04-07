@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "@/store";
 import MoviesList from "@/components/MoviesList/MoviesList";
 import { fetchPopularMovies } from "@/store/moviesSlice";
 
-function PopularMoviesPage() {
+const PopularMoviesPage = () => {
   const dispatch = useAppDispatch();
   const popularMovies = useAppSelector((state) => state.movies.popularMovies);
 
@@ -12,6 +12,6 @@ function PopularMoviesPage() {
   }, []);
 
   return <MoviesList movies={popularMovies} />;
-}
+};
 
 export default PopularMoviesPage;
