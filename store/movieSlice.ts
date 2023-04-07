@@ -7,7 +7,6 @@ import {
 } from "@/types/types";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-// Define a type for the slice state
 interface MovieState {
   movieDetails: MovieDetails | null;
   credits: Credits | null;
@@ -18,7 +17,6 @@ interface MovieState {
   error: string | null;
 }
 
-// Define the initial state using that type
 const initialState: MovieState = {
   movieDetails: null,
   credits: null,

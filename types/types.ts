@@ -192,4 +192,36 @@ export interface Images {
   posters?: Poster[];
 }
 
+interface Profile {
+  aspect_ratio?: number;
+  file_path?: string;
+  height?: number;
+  iso_639_1?: null;
+  vote_average?: number;
+  vote_count?: number;
+  width?: number;
+}
+
+export interface PersonImages {
+  id?: number;
+  profiles?: Profile[];
+}
+
 export type MenuItem = Required<MenuProps>["items"][number];
+
+export interface PersonDetails {
+  birthday?: string | null;
+  known_for_department?: string;
+  deathday?: string | null;
+  id?: number;
+  name?: string;
+  also_known_as?: string[];
+  gender?: number;
+  biography?: string;
+  popularity?: number;
+  place_of_birth?: string | null;
+  profile_path?: string | null;
+  adult?: boolean;
+  imdb_id?: string;
+  homepage?: string | null;
+}
