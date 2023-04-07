@@ -1,0 +1,22 @@
+.credits-carousel {
+    &__person {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+
+        &-image {
+            &-placeholder {
+                height: 197px;
+                width: 130px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+        &-character {
+            color: $gray;
+        }
+    }
+}

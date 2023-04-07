@@ -6,10 +6,11 @@ import MovieContentDescription from "./MovieContentDescription/MovieContentDescr
 import MovieContentImages from "./MovieContentImages/MovieContentImages";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { fetchMovieReviews } from "@/store/movieSlice";
+import MovieContentCredits from "./MovieContentCredits/MovieContentCredits";
 
 const MovieContent = () => {
   const dispatch = useAppDispatch();
-  const { movieDetails, reviews, images } = useAppSelector(
+  const { movieDetails, reviews, images, credits } = useAppSelector(
     (state) => state.movie
   );
 
@@ -25,6 +26,7 @@ const MovieContent = () => {
       {reviews?.results && reviews?.results?.length > 0 && (
         <MovieContentReviews />
       )}
+      {credits?.cast && credits?.cast?.length > 0 && <MovieContentCredits />}
       {images?.backdrops && images?.backdrops?.length > 0 && (
         <MovieContentImages />
       )}
