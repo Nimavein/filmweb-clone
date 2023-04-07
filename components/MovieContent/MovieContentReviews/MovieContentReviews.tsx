@@ -10,8 +10,8 @@ import { RightOutlined, LeftOutlined } from "@ant-design/icons";
 
 const MovieContentReviews = () => {
   const { movieDetails, reviews } = useAppSelector((state) => state.movie);
-  const reviewsHeader =
-    `Review of the movie ${movieDetails?.title}`.toUpperCase();
+  const reviewsSectionHeader =
+    `Reviews of the movie ${movieDetails?.title}`.toUpperCase();
   const displayedReviewsInCarousel = 3;
 
   return (
@@ -23,7 +23,7 @@ const MovieContentReviews = () => {
         id="movie-content-reviews"
         className={`${styles["movie-content__reviews-header"]} ${sectionStyles["movie-content__section-header"]}`}
       >
-        {reviewsHeader}
+        {reviewsSectionHeader}
       </h2>
       <Carousel
         dots

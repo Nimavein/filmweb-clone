@@ -7,6 +7,7 @@ import MovieContentImages from "./MovieContentImages/MovieContentImages";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { fetchMovieReviews } from "@/store/movieSlice";
 import MovieContentCredits from "./MovieContentCredits/MovieContentCredits";
+import MovieContentInformation from "./MovieContentInformation/MovieContentInformation";
 
 const MovieContent = () => {
   const dispatch = useAppDispatch();
@@ -27,6 +28,7 @@ const MovieContent = () => {
         <MovieContentReviews />
       )}
       {credits?.cast && credits?.cast?.length > 0 && <MovieContentCredits />}
+      <MovieContentInformation />
       {images?.backdrops && images?.backdrops?.length > 0 && (
         <MovieContentImages />
       )}
