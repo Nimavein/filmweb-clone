@@ -1,36 +1,32 @@
-import { ApiStatus, Movie } from "@/types/types";
+import { ApiStatus, Movie, Movies } from "@/types/types";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-// Define a type for the slice state
 interface MoviesState {
-  popularMovies: Movie[];
+  popularMovies: Movies | null;
   status: ApiStatus;
   error: string | null;
 }
 
-// Define the initial state using that type
 const initialState: MoviesState = {
-  popularMovies: [],
+  popularMovies: null,
   status: "idle",
   error: null,
 };
 
-// Define a thunk that will fetch movies from the movie database API
-export const fetchPopularMovies = createAsyncThunk(
+export const fetchPopularMovies = createAsyncThunk<Movies, { page: number }>(
   "movies/fetchPopularMovies",
-  async () => {
+  async ({ page }) => {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_MOVIE_API_URL}popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+      `${process.env.NEXT_PUBLIC_BASE_MOVIE_API_URL}popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${page}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch popular movies.");
     }
     const data = await response.json();
-    return data.results as Movie[];
+    return data;
   }
 );
 
-// Define the slice
 const moviesSlice = createSlice({
   name: "movies",
   initialState,
@@ -51,6 +47,5 @@ const moviesSlice = createSlice({
   },
 });
 
-// Export the actions and reducer
 export default moviesSlice.reducer;
 export const {} = moviesSlice.actions;

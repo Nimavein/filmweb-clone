@@ -31,6 +31,13 @@ export interface Movie {
   vote_average: number;
   vote_count: number;
 }
+
+export interface Movies {
+  page?: number;
+  results?: Movie[];
+  total_results?: number;
+  total_pages?: number;
+}
 export interface MovieDetails {
   adult: boolean;
   backdrop_path: string;
@@ -157,6 +164,10 @@ export interface NavbarLinks {
   tvSeries: {
     main: NavbarLink;
   };
+  people: {
+    main: NavbarLink;
+    popular: NavbarLink;
+  };
 }
 
 export interface Backdrop {
@@ -224,4 +235,57 @@ export interface PersonDetails {
   adult?: boolean;
   imdb_id?: string;
   homepage?: string | null;
+}
+
+export interface KnownForMovie {
+  poster_path?: string | null;
+  adult?: boolean;
+  overview?: string;
+  release_date?: string;
+  original_title?: string;
+  genre_ids?: Array<number>;
+  id?: number;
+  media_type?: "movie";
+  original_language?: string;
+  title?: string;
+  backdrop_path?: string | null;
+  popularity?: number;
+  vote_count?: number;
+  video?: boolean;
+  vote_average?: number;
+}
+
+export interface KnownForTv {
+  poster_path?: string | null;
+  popularity?: number;
+  id?: number;
+  overview?: string;
+  backdrop_path?: string | null;
+  vote_average?: number;
+  media_type: "tv";
+  first_air_date?: string;
+  origin_country?: Array<string>;
+  genre_ids?: Array<number>;
+  original_language?: string;
+  vote_count?: number;
+  name?: string;
+  original_name?: string;
+}
+
+export interface PeopleResult {
+  adult?: boolean;
+  gender: number;
+  known_for_department: string;
+  name: string;
+  popularity: number;
+  id?: number;
+  known_for?: KnownForMovie[] | KnownForTv[];
+  profile_path?: string;
+}
+
+export interface People {
+  page?: number;
+  results?: PeopleResult[];
+  total_results?: number;
+  total_pages?: number;
 }

@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/store";
-import MoviesList from "@/components/MoviesList/MoviesList";
-import { fetchPopularMovies } from "@/store/moviesSlice";
+import PeopleList from "@/components/PeopleList/PeopleList";
+import { fetchPopularPeople } from "@/store/peopleSlice";
 
 const PopularMoviesPage = () => {
   const dispatch = useAppDispatch();
-  const popularMovies = useAppSelector((state) => state.movies.popularMovies);
+  const popularPeople = useAppSelector((state) => state.people.popular);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
-    dispatch(fetchPopularMovies({ page: currentPage }));
-  }, [dispatch, currentPage]);
+    dispatch(fetchPopularPeople({page: currentPage}));
+  }, [currentPage, dispatch]);
 
   return (
     <main>
-      {popularMovies && (
-        <MoviesList
-          movies={popularMovies}
+      {popularPeople && (
+        <PeopleList
+          people={popularPeople}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
         />

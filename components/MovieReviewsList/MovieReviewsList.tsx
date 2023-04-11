@@ -33,14 +33,12 @@ const MovieReviewsList = ({ movieId }: MovieReviewsListProps) => {
           </li>
         ))}
       </ul>
-      {reviews?.total_pages && reviews.total_pages > 1 && (
         <Pagination
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           totalItemsAmount={reviews?.total_results}
-          pageSize={10}
+          pageSize={20}
         />
-      )}
     </section>
   ) : (
     <></>

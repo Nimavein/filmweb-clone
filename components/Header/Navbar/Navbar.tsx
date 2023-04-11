@@ -34,26 +34,24 @@ const Navbar = () => {
   };
 
   const menuItems: MenuProps["items"] = [
-    getNavbarItem(
-      createLink(navbarLinks.home),
-      navbarLinks.home.key,
-      <HomeFilled />
-    ),
+    getNavbarItem(createLink(navbarLinks.home), navbarLinks.home.key, <HomeFilled />),
     getNavbarItem(
       navbarLinks.movies.main.name,
       navbarLinks.movies.main.key,
       null,
-      Object.values(navbarLinks.movies).map((link) =>
-        getNavbarItem(createLink(link), link.key)
-      )
+      Object.values(navbarLinks.movies).map((link) => getNavbarItem(createLink(link), link.key))
     ),
     getNavbarItem(
       navbarLinks.tvSeries.main.name,
       navbarLinks.tvSeries.main.key,
       null,
-      Object.values(navbarLinks.tvSeries).map((link) =>
-        getNavbarItem(createLink(link), link.key)
-      )
+      Object.values(navbarLinks.tvSeries).map((link) => getNavbarItem(createLink(link), link.key))
+    ),
+    getNavbarItem(
+      navbarLinks.people.main.name,
+      navbarLinks.people.main.key,
+      null,
+      Object.values(navbarLinks.people).map((link) => getNavbarItem(createLink(link), link.key))
     ),
   ];
 

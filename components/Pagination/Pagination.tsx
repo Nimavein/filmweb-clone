@@ -7,6 +7,7 @@ interface PaginationProps {
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   pageSize: number;
+  hideOnSinglePage?: boolean;
 }
 
 const Pagination = ({
@@ -14,10 +15,14 @@ const Pagination = ({
   currentPage,
   setCurrentPage,
   pageSize,
+  hideOnSinglePage = true,
 }: PaginationProps) => {
+
   const onChange: AntdPaginationProps["onChange"] = (page: number) => {
     setCurrentPage(page);
+    window.scrollTo({ top: 0 } );
   };
+
   return (
     <AntdPagination
       onChange={onChange}
@@ -25,6 +30,8 @@ const Pagination = ({
       total={totalItemsAmount}
       current={currentPage}
       pageSize={pageSize}
+      hideOnSinglePage={hideOnSinglePage}
+      showSizeChanger={false}
     />
   );
 };

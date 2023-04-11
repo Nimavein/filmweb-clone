@@ -49,7 +49,7 @@ const MovieContentReview = ({
               <Rating
                 showNumber
                 disabled
-                defaultValue={author_details?.rating}
+                defaultValue={author_details.rating}
               />
             )}
           </div>

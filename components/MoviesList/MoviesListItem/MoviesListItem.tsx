@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./MoviesListItem.module.scss";
 import Link from "next/link";
 import Rating from "@/components/Rating/Rating";
+
 interface MoviesListItemProps {
   title: string;
   id: number;
