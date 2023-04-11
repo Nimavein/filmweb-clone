@@ -17,15 +17,12 @@ const MovieReviewsList = ({ movieId }: MovieReviewsListProps) => {
   const { reviews, movieDetails } = useAppSelector((state) => state.movie);
 
   useEffect(() => {
-    if (movieId)
-      dispatch(fetchMovieReviews({ movie_id: movieId, page: currentPage }));
+    if (movieId) dispatch(fetchMovieReviews({ movie_id: movieId, page: currentPage }));
   }, [dispatch, currentPage, movieId]);
 
   return reviews?.results && reviews?.results?.length > 0 ? (
     <section className={styles["movie-reviews"]}>
-      <h1
-        className={styles["movie-reviews__title"]}
-      >{`Reviews of ${movieDetails?.title}`}</h1>
+      <h1 className={styles["movie-reviews__title"]}>{`Reviews of ${movieDetails?.title}`}</h1>
       <ul className={styles["movie-reviews__list"]}>
         {reviews?.results?.map((review: MovieReview) => (
           <li className={styles["movie-reviews__item"]} key={review.id}>
@@ -33,12 +30,12 @@ const MovieReviewsList = ({ movieId }: MovieReviewsListProps) => {
           </li>
         ))}
       </ul>
-        <Pagination
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          totalItemsAmount={reviews?.total_results}
-          pageSize={20}
-        />
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalItemsAmount={reviews?.total_results}
+        pageSize={20}
+      />
     </section>
   ) : (
     <></>

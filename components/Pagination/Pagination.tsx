@@ -17,10 +17,9 @@ const Pagination = ({
   pageSize,
   hideOnSinglePage = true,
 }: PaginationProps) => {
-
   const onChange: AntdPaginationProps["onChange"] = (page: number) => {
     setCurrentPage(page);
-    window.scrollTo({ top: 0 } );
+    window.scrollTo({ top: 0 });
   };
 
   return (

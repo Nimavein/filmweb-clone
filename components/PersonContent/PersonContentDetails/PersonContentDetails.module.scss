@@ -1,0 +1,51 @@
+.person-content__details {
+  &-top {
+    display: flex;
+    gap: 30px;
+  }
+
+  &-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-bio {
+    font-size: 15px;
+    margin-top: 20px;
+  }
+
+  &-aka {
+    font-size: 12px;
+    color: $gray;
+  }
+
+  &-personal-header {
+    margin-top: 20px;
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+
+  &-personal {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+
+    &-detail {
+      display: flex;
+      gap: 4px;
+      justify-content: space-between;
+      align-items: center;
+
+      &-name {
+        color: $gray;
+        font-size: 14px;
+      }
+
+      &-value {
+        svg {
+          width: 20px;
+        }
+      }
+    }
+  }
+}
