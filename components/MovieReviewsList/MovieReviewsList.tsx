@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { fetchMovieReviews } from "@/store/movieSlice";
-import { MovieReview } from "@/types/types";
 import Pagination from "@/components/Pagination/Pagination";
 import styles from "./MovieReviewsList.module.scss";
 import MovieReviewsListItem from "./MovieReviewsListItem/MovieReviewsListItem";
+import { Review } from "@/types/types";
 
 interface MovieReviewsListProps {
   movieId: number;
@@ -24,7 +24,7 @@ const MovieReviewsList = ({ movieId }: MovieReviewsListProps) => {
     <section className={styles["movie-reviews"]}>
       <h1 className={styles["movie-reviews__title"]}>{`Reviews of ${movieDetails?.title}`}</h1>
       <ul className={styles["movie-reviews__list"]}>
-        {reviews?.results?.map((review: MovieReview) => (
+        {reviews?.results?.map((review: Review) => (
           <li className={styles["movie-reviews__item"]} key={review.id}>
             <MovieReviewsListItem {...review} />
           </li>

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { MovieReview } from "@/types/types";
 import Rating from "@/components/Rating/Rating";
 import styles from "../MovieReviewsList.module.scss";
 import ReadMoreText from "@/components/ReadMoreText/ReadMoreText";
 import UserAvatar from "@/components/UserAvatar/UserAvatar";
+import { Review } from "@/types/types";
 
-const MovieReviewsListItem = ({ content, author_details }: MovieReview) => {
+const MovieReviewsListItem = ({ content, author_details }: Review) => {
   const [isReadMore, setIsReadMore] = useState<boolean>(false);
 
   return (
