@@ -19,13 +19,13 @@ const PersonContentCredits = ({ cast, crew, type }: PersonContentCreditsProps) =
     {
       key: "1",
       label: `AS CAST MEMBER (${cast?.length})`,
-      children: <PersonContentCreditsCarousel credits={cast} />,
+      children: <PersonContentCreditsCarousel type={type} credits={cast} />,
       disabled: cast?.length === 0,
     },
     {
       key: "2",
       label: `AS CREW MEMBER (${crew?.length})`,
-      children: <PersonContentCreditsCarousel credits={crew} />,
+      children: <PersonContentCreditsCarousel type={type} credits={crew} />,
       disabled: crew?.length === 0,
     },
   ];

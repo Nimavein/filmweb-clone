@@ -115,7 +115,7 @@ export interface Credits {
   cast: Cast;
 }
 
-export interface MovieReview {
+export interface Review {
   author?: string;
   author_details?: {
     name?: string;
@@ -131,10 +131,10 @@ export interface MovieReview {
   rating?: number | null;
 }
 
-export interface MovieReviews {
+export interface Reviews {
   id?: number;
   page?: number;
-  results?: MovieReview[];
+  results?: Reviews[];
   total_pages?: number;
   total_results?: number;
 }
@@ -193,17 +193,10 @@ export interface Poster {
 export interface Images {
   id: number;
   backdrops?: Backdrop[];
-  aspect_ratio?: number;
-  file_path?: string;
-  height?: number;
-  iso_639_1?: string | null;
-  vote_average?: number;
-  vote_count?: number;
-  width?: number;
   posters?: Poster[];
 }
 
-interface Profile {
+export interface Profile {
   aspect_ratio?: number;
   file_path?: string;
   height?: number;
@@ -387,4 +380,125 @@ export interface PersonTvCredits {
   cast: PersonTvCast;
   crew: PersonTvCrew;
   id: number;
+}
+
+export interface SeriesCreator {
+  id: number;
+  credit_id: string;
+  name: string;
+  gender: number;
+  profile_path: string | null;
+}
+
+export interface SeriesNetwork {
+  name: string;
+  id: number;
+  logo_path: string | null;
+  origin_country: string;
+}
+
+export interface SeriesProductionCompany {
+  id: number;
+  logo_path: string | null;
+  name: string;
+  origin_country?: string;
+}
+
+export interface SeriesSeason {
+  air_date?: string;
+  episode_count?: number;
+  id?: number;
+  name?: string;
+  overview?: string;
+  poster_path?: string;
+  season_number?: number;
+}
+
+export interface SeriesLastEpisode {
+  air_date?: string;
+  episode_number?: number;
+  id?: number;
+  name?: string;
+  overview?: string;
+  production_code?: string;
+  season_number?: number;
+  still_path?: string | null;
+  vote_average?: number;
+  vote_count?: number;
+}
+export interface SeriesDetails {
+  backdrop_path?: string | null;
+  created_by?: SeriesCreator[];
+  episode_run_time?: number[];
+  first_air_date?: string;
+  genres?: Genre[];
+  homepage?: string;
+  id?: number;
+  in_production?: boolean;
+  languages?: string[];
+  last_air_date?: string;
+  last_episode_to_air?: SeriesLastEpisode;
+  name?: string;
+  next_episode_to_air?: null;
+  networks?: SeriesNetwork[];
+  number_of_episodes?: number;
+  number_of_seasons?: number;
+  origin_country?: string[];
+  original_language?: string;
+  original_name?: string;
+  overview?: string;
+  popularity?: number;
+  poster_path?: string | null;
+  production_companies?: SeriesProductionCompany[];
+  production_countries?: ProductionCountry[];
+  seasons?: SeriesSeason[];
+  spoken_languages?: SpokenLanguage[];
+  status?: string;
+  tagline?: string;
+  type?: string;
+  vote_average?: number;
+  vote_count?: number;
+}
+
+export interface SeriesAggregateCreditsCastRoles {
+  credit_id?: string;
+  character?: string;
+  episode_count?: number;
+  total_episode_count?: number;
+  order?: number;
+}
+export interface SeriesAggregateCreditsCast {
+  adult?: boolean;
+  gender?: number | null;
+  id?: number;
+  known_for_department?: string;
+  name?: string;
+  original_name?: string;
+  popularity?: number;
+  profile_path?: string | null;
+  roles?: SeriesAggregateCreditsCastRoles[];
+}
+
+export interface SeriesAggregateCreditsCastCrewJobs {
+  credit_id?: string;
+  job?: string;
+  episode_count?: number;
+  department?: string;
+  total_episode_count?: number;
+}
+export interface SeriesAggregateCreditsCastCrew {
+  adult?: boolean;
+  gender?: number | null;
+  id?: number;
+  known_for_department?: string;
+  name?: string;
+  original_name?: string;
+  popularity?: number;
+  profile_path?: string | null;
+  jobs?: SeriesAggregateCreditsCastCrewJobs[];
+}
+
+export interface SeriesAggregateCredits {
+  cast?: SeriesAggregateCreditsCast[];
+  crew?: SeriesAggregateCreditsCastCrew[];
 }

@@ -3,14 +3,14 @@ import {
   Credits,
   Images,
   MovieDetails,
-  MovieReviews,
+  Reviews,
 } from "@/types/types";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 interface MovieState {
   movieDetails: MovieDetails | null;
   credits: Credits | null;
-  reviews: MovieReviews | null;
+  reviews: Reviews | null;
   images: Images | null;
   status: ApiStatus;
   reviewsStatus: ApiStatus;
@@ -52,7 +52,7 @@ export const fetchMovieData = createAsyncThunk<
 });
 
 export const fetchMovieReviews = createAsyncThunk<
-  MovieReviews,
+  Reviews,
   { movie_id: number; page: number }
 >(
   "movieData/fetchMovieReviews",

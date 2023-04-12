@@ -1,19 +1,18 @@
-import React from 'react'
+import React from "react";
 import styles from "./PersonContentImages.module.scss";
 import sectionStyles from "../PersonContent.module.scss";
-import { useAppSelector } from '@/store';
-import Link from 'next/link';
-import Button from '@/components/Button/Button';
-import PersonContentImage from './PersonContentImage/PersonContentImage';
+import { useAppSelector } from "@/store";
+import Link from "next/link";
+import Button from "@/components/Button/Button";
+import PersonContentImage from "./PersonContentImage/PersonContentImage";
 
 const PersonContentImages = () => {
   const { details, images } = useAppSelector((state) => state.person);
 
-      const creditsSectionHeader = `Images of ${
-        details?.name
-      }`.toUpperCase();
+  const creditsSectionHeader =
+    `Images of ${details?.name} (${images?.profiles?.length})`.toUpperCase();
 
-      const displayedImagesAmount = 12;
+  const displayedImagesAmount = 12;
 
   return (
     <section
@@ -34,10 +33,10 @@ const PersonContentImages = () => {
         ))}
       </ul>
       <Link href={`/person/${details?.id}/images`}>
-        <Button>See all images</Button>
+        <Button>{`See all ${images?.profiles?.length} images`}</Button>
       </Link>
     </section>
   );
-}
+};
 
 export default PersonContentImages;

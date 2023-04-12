@@ -9,9 +9,10 @@ import styles from "../PersonContentCredits.module.scss";
 
 interface PersonContentCreditsCarouselProps {
   credits: PersonMovieCast | PersonMovieCrew | PersonTvCast | PersonTvCrew | undefined;
+  type: "movies" | "tv-series";
 }
 
-const PersonContentCreditsCarousel = ({ credits }: PersonContentCreditsCarouselProps) => {
+const PersonContentCreditsCarousel = ({ credits, type }: PersonContentCreditsCarouselProps) => {
   const imageHeight = 240;
   const imageWidth = imageHeight * 0.667;
 
@@ -26,7 +27,7 @@ const PersonContentCreditsCarousel = ({ credits }: PersonContentCreditsCarouselP
     >
       {credits?.map((credit) =>
         credit.poster_path ? (
-          <Link href={`/movie/${credit.id}`}>
+          <Link href={`/${type === "movies" ? "movie" : "series"}/${credit.id}`}>
             <div className={styles["person-content__credits-slide"]}>
               <Image
                 src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${credit.poster_path}`}

@@ -8,7 +8,7 @@ const PersonImagesList = () => {
 
   return (
     <section className={styles["person-images"]}>
-      <h1 className={styles["person-images__title"]}>{`Images of ${details?.name}`}</h1>
+      <h1 className={styles["person-images__title"]}>{`Images of ${details?.name} (${images?.profiles?.length})`}</h1>
       <ul className={styles["person-images__list"]}>
         {images?.profiles?.map((image) => (
           <li key={image.file_path} className={styles["person-images__list-item"]}>
