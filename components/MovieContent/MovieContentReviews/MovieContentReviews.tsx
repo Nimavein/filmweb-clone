@@ -30,6 +30,7 @@ const MovieContentReviews = () => {
         arrows
         nextArrow={<RightOutlined />}
         prevArrow={<LeftOutlined />}
+        infinite={false}
       >
         {reviews?.results
           ?.slice(

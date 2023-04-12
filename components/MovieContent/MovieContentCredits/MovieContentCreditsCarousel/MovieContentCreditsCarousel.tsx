@@ -20,6 +20,7 @@ const MovieContentCreditsCarousel = ({
       nextArrow={<RightOutlined />}
       prevArrow={<LeftOutlined />}
       dots={false}
+      infinite={false}
     >
       {cast
         ? cast?.map((castMember) => (

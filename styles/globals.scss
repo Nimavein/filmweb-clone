@@ -81,4 +81,8 @@ ul {
       background-color: $black;
     }
   }
+
+  .slick-disabled, .slick-disabled:hover {
+    background-color: $gray;
+  }
 }

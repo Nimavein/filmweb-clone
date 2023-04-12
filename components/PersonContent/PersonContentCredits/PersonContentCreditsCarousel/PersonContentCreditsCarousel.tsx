@@ -22,6 +22,7 @@ const PersonContentCreditsCarousel = ({ credits }: PersonContentCreditsCarouselP
       nextArrow={<RightOutlined />}
       prevArrow={<LeftOutlined />}
       dots={false}
+      infinite={false}
     >
       {credits?.map((credit) =>
         credit.poster_path ? (
