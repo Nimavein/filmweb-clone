@@ -43,7 +43,7 @@ const SeriesContentDescription = () => {
         <p className={styles["series-content__description-overview"]}>{details?.overview}</p>
         <div className={styles["series-content__description-seasons"]}>
           {details?.seasons?.map((season, index) => (
-            <Link href={`series/${details?.id}/seasons/${season.id}`}>
+            <Link key={index} href={`series/${details?.id}/seasons/${season.id}`}>
                 <Button>{`Season ${index + 1}`}</Button>
             </Link>
           ))}

@@ -25,9 +25,9 @@ const PersonContentCreditsCarousel = ({ credits, type }: PersonContentCreditsCar
       dots={false}
       infinite={false}
     >
-      {credits?.map((credit) =>
+      {credits?.map((credit, index) =>
         credit.poster_path ? (
-          <Link href={`/${type === "movies" ? "movie" : "series"}/${credit.id}`}>
+          <Link key={index} href={`/${type === "movies" ? "movie" : "series"}/${credit.id}`}>
             <div className={styles["person-content__credits-slide"]}>
               <Image
                 src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${credit.poster_path}`}
@@ -56,7 +56,7 @@ const PersonContentCreditsCarousel = ({ credits, type }: PersonContentCreditsCar
             </div>
           </Link>
         ) : (
-          <ImagePlaceholder height={imageHeight} width={imageWidth} icon={<CameraOutlined />} />
+          <ImagePlaceholder key={index} height={imageHeight} width={imageWidth} icon={<CameraOutlined />} />
         )
       )}
     </Carousel>
