@@ -5,6 +5,7 @@ import styles from "../MovieContentCreditsCarousel.module.scss";
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import Link from "next/link";
+import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 
 const MovieContentCreditsCarouselCastMember = ({
   name,
@@ -26,14 +27,10 @@ const MovieContentCreditsCarouselCastMember = ({
             className={styles["credits-carousel__person-image"]}
           />
         ) : (
-          <div className={styles["credits-carousel__person-image-placeholder"]}>
-            <Avatar size="large" shape="square" icon={<UserOutlined />} />
-          </div>
+          <ImagePlaceholder width={imageWidth} height={imageHeight} />
         )}
         <p className={styles["credits-carousel__person-name"]}>{name}</p>
-        <p className={styles["credits-carousel__person-character"]}>
-          {character}
-        </p>
+        <p className={styles["credits-carousel__person-character"]}>{character}</p>
       </div>
     </Link>
   );
