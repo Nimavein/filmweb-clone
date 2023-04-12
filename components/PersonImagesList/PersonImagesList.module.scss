@@ -1,0 +1,17 @@
+.person-images {
+  max-width: 1024px;
+  margin: 40px auto;
+
+  &__title {
+    margin-bottom: 14px;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
+    &-item {
+    }
+  }
+}

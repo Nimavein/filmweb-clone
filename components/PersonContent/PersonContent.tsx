@@ -3,26 +3,30 @@ import { useAppSelector } from "@/store";
 import styles from "./PersonContent.module.scss";
 import PersonContentDetails from "./PersonContentDetails/PersonContentDetails";
 import PersonContentCredits from "./PersonContentCredits/PersonContentCredits";
+import PersonContentImages from "./PersonContentImages/PersonContentImages";
 
 const PersonContent = () => {
-  const { details, movieCredits, tvCredits } = useAppSelector((state) => state.person);
-  const isTvCredits =
+  const { details, movieCredits, tvCredits, images } = useAppSelector((state) => state.person);
+  const areTvCreditsAvailable =
     (tvCredits?.cast && tvCredits?.cast?.length > 0) ||
     (tvCredits?.crew && tvCredits?.crew.length > 0);
     
-  const isMovieCredits =
+  const areMovieCreditsAvailable =
     (movieCredits?.cast && movieCredits?.cast?.length > 0) ||
     (movieCredits?.crew && movieCredits?.crew?.length > 0);
+
+  const areImagesAvailable = images?.profiles && images?.profiles?.length > 0;
 
   return (
     <main className={styles["person-content"]}>
       <PersonContentDetails />
-      {isMovieCredits && (
+      {areMovieCreditsAvailable && (
         <PersonContentCredits cast={movieCredits?.cast} crew={movieCredits?.crew} type="movies" />
       )}
-      {isTvCredits && (
+      {areTvCreditsAvailable && (
         <PersonContentCredits cast={tvCredits?.cast} crew={tvCredits?.crew} type="tv-series" />
       )}
+      {areImagesAvailable && <PersonContentImages />}
     </main>
   );
 };

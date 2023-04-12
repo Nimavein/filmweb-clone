@@ -2,13 +2,14 @@ import React from "react";
 import { Backdrop } from "@/types/types";
 import Image from "next/image";
 
-const MovieImagesListItem = ({ file_path, height, width }: Backdrop) => {
-  return height && width && file_path ? (
+const MovieImagesListItem = ({ file_path, height, width, aspect_ratio }: Backdrop) => {
+  const imageHeight = 216;
+  return height && width && file_path && aspect_ratio ? (
     <Image
       src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${file_path}`}
       alt=""
-      height={216}
-      width={384}
+      height={imageHeight}
+      width={imageHeight * aspect_ratio}
     />
   ) : (
     <></>

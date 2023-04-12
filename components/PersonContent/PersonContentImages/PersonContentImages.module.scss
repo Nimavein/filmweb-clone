@@ -1,0 +1,13 @@
+.person-content__images {
+  &-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    &-item {
+      position: relative;
+    }
+  }
+
+  &-image {
+  }
+}
