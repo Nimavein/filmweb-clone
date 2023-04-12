@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { MovieReview } from "@/types/types";
 import styles from "./MovieContentReview.module.scss";
 import ReadMoreText from "@/components/ReadMoreText/ReadMoreText";
 import Rating from "@/components/Rating/Rating";
 import UserAvatar from "@/components/UserAvatar/UserAvatar";
 import Image from "next/image";
 import { useAppSelector } from "@/store";
+import { Review } from "@/types/types";
 
-type MovieContentReviewType = MovieReview & {
+type MovieContentReviewType = Review & {
   slideId: number;
 };
 
