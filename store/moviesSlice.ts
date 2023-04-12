@@ -1,4 +1,4 @@
-import { ApiStatus, Movie, Movies } from "@/types/types";
+import { ApiStatus, Movies } from "@/types/types";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 interface MoviesState {

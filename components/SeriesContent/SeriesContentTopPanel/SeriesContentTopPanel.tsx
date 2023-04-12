@@ -27,6 +27,9 @@ const SeriesContentTopPanel = () => {
               details?.last_air_date && ` - ${details?.last_air_date?.substring(0, 4)}`
             }`}
           </span>
+          <span className={styles["series-content__top-panel-runtime"]}>
+            {`${details?.episode_run_time} minutes`}
+          </span>
         </div>
         <div className={styles["series-content__top-panel-rating"]}>
           <Rating

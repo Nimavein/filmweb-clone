@@ -5,6 +5,8 @@ import styles from "./SeriesContentDescription.module.scss";
 import { findPeopleByJob } from "@/helpers/findPeopleByJob";
 import { getGenresNames } from "@/helpers/getGenresNames";
 import { getProductionCountries } from "@/helpers/getProductionCountries";
+import Link from "next/link";
+import Button from "@/components/Button/Button";
 
 interface SeriesDetail {
   name: string;
@@ -39,6 +41,13 @@ const SeriesContentDescription = () => {
       />
       <div className={styles["series-content__description-info"]}>
         <p className={styles["series-content__description-overview"]}>{details?.overview}</p>
+        <div className={styles["series-content__description-seasons"]}>
+          {details?.seasons?.map((season, index) => (
+            <Link href={`series/${details?.id}/seasons/${season.id}`}>
+                <Button>{`Season ${index + 1}`}</Button>
+            </Link>
+          ))}
+        </div>
         <div className={styles["series-content__description-details"]}>
           {displayedDetails.map(
             (detail) =>

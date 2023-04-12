@@ -4,6 +4,13 @@
   display: flex;
   gap: 20px;
 
+  &-seasons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
   &-details {
     display: flex;
     flex-direction: column;
