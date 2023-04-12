@@ -125,7 +125,7 @@ export interface Review {
   };
   content?: string;
   created_at?: string;
-  id?: string;
+  id?: string | number | null;
   updated_at?: string;
   url?: string;
   rating?: number | null;
