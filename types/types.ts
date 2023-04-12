@@ -163,6 +163,7 @@ export interface NavbarLinks {
   };
   tvSeries: {
     main: NavbarLink;
+    popular: NavbarLink;
   };
   people: {
     main: NavbarLink;
@@ -326,7 +327,6 @@ export interface PersonMovieCrewMember {
 
 export type PersonMovieCrew = PersonMovieCrewMember[];
 
-
 export interface PersonMovieCredits {
   cast: PersonMovieCast;
   crew: PersonMovieCrew;
@@ -382,6 +382,28 @@ export interface PersonTvCredits {
   id: number;
 }
 
+export interface Series {
+  poster_path?: string | null;
+  popularity?: number;
+  id?: number;
+  backdrop_path?: string | null;
+  vote_average?: number;
+  overview?: string;
+  first_air_date?: string;
+  origin_country?: string[];
+  genre_ids?: number[];
+  original_language?: string;
+  vote_count?: number;
+  name?: string;
+  original_name?: string;
+}
+
+export interface TvSeries {
+  page?: number;
+  results?: Series[];
+  total_results?: number;
+  total_pages?: number;
+}
 export interface SeriesCreator {
   id: number;
   credit_id: string;

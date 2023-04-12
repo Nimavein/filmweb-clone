@@ -17,6 +17,7 @@ export const navbarLinks: NavbarLinks = {
   },
   tvSeries: {
     main: { name: "TV Series", path: "/tv-series", key: "tv-series" },
+    popular: { name: "Popular", path: "/tv-series/popular", key: "tv-series-popular" },
   },
   people: {
     main: { name: "People", path: "/people", key: "people" },

@@ -2,15 +2,7 @@ import Image from "next/image";
 import styles from "./MoviesListItem.module.scss";
 import Link from "next/link";
 import Rating from "@/components/Rating/Rating";
-
-interface MoviesListItemProps {
-  title: string;
-  id: number;
-  overview: string;
-  poster_path: string;
-  vote_count: number;
-  vote_average: number;
-}
+import { Movie } from "@/types/types";
 
 const MoviesListItem = ({
   title,
@@ -19,7 +11,7 @@ const MoviesListItem = ({
   id,
   vote_count,
   vote_average,
-}: MoviesListItemProps) => {
+}: Movie) => {
   return (
     <Link href={`/movie/${id}`}>
       <div className={styles["movies-list__item"]}>

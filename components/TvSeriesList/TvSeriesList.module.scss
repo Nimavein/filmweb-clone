@@ -1,0 +1,12 @@
+.tv-series {
+  max-width: 768px;
+  margin: 40px auto;
+
+  &-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+}
