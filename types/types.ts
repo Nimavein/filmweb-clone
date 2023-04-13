@@ -505,6 +505,9 @@ export interface SeriesDetails {
   type?: string;
   vote_average?: number;
   vote_count?: number;
+  aggregate_credits: SeriesAggregateCredits | null;
+  images: Images;
+  videos: Videos;
 }
 
 export interface SeriesAggregateCreditsCastRoles {
@@ -549,6 +552,6 @@ export type SeriesAggregateCreditsCast = SeriesAggregateCreditsCastMember[];
 export type SeriesAggregateCreditsCrew = SeriesAggregateCreditsCrewMember[]; 
 
 export interface SeriesAggregateCredits {
-  cast?: SeriesAggregateCreditsCast[];
-  crew?: SeriesAggregateCreditsCrew[];
+  cast?: SeriesAggregateCreditsCast;
+  crew?: SeriesAggregateCreditsCrew;
 }

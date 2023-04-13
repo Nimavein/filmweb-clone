@@ -7,7 +7,8 @@ import Link from "next/link";
 import SeriesContentImage from "./SeriesContentImage/SeriesContentImage";
 
 const SeriesContentImages = () => {
-  const { images, details } = useAppSelector((state) => state.series);
+  const details = useAppSelector((state) => state.series.details);
+  const images = details?.images;
   const displayedImagesAmount = 12;
 
   const imagesSectionHeader =

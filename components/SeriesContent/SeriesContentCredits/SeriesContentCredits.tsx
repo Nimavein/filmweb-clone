@@ -8,7 +8,8 @@ import { Tabs, TabsProps } from "antd";
 import SeriesContentCreditsCarousel from "./SeriesContentCreditsCarousel/SeriesContentCreditsCarousel";
 
 const SeriesContentCredits = () => {
-  const { aggregateCredits, details } = useAppSelector((state) => state.series);
+  const details = useAppSelector((state) => state.series.details);
+  const aggregateCredits = details?.aggregate_credits;
 
   const tabs: TabsProps["items"] = [
     {

@@ -1,10 +1,8 @@
-import { ApiStatus, Images, Reviews, SeriesAggregateCredits, SeriesDetails } from "@/types/types";
+import { ApiStatus, Reviews, SeriesDetails } from "@/types/types";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 interface SeriesState {
   details: SeriesDetails | null;
-  images: Images | null;
-  aggregateCredits: SeriesAggregateCredits | null;
   reviews: Reviews | null;
   season: any;
   status: ApiStatus;
@@ -15,8 +13,6 @@ interface SeriesState {
 
 const initialState: SeriesState = {
   details: null,
-  images: null,
-  aggregateCredits: null,
   reviews: null,
   season: null,
   status: "idle",
@@ -26,23 +22,17 @@ const initialState: SeriesState = {
 };
 
 export const fetchSeriesData = createAsyncThunk<
-  { movieDetails: SeriesDetails; aggregateCredits: SeriesAggregateCredits; images: Images },
+  { details: SeriesDetails },
   number,
   { rejectValue: string }
 >("seriesData/fetchSeriesData", async (tv_id, { rejectWithValue }) => {
   try {
-    const [movieDetails, aggregateCredits, images] = await Promise.all([
+    const [details] = await Promise.all([
       fetch(
-        `${process.env.NEXT_PUBLIC_BASE_SERIES_API_URL}${tv_id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+        `${process.env.NEXT_PUBLIC_BASE_SERIES_API_URL}${tv_id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=images,videos,aggregate_credits`
       ).then((res) => res.json()) as Promise<SeriesDetails>,
-      fetch(
-        `${process.env.NEXT_PUBLIC_BASE_SERIES_API_URL}${tv_id}/aggregate_credits?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-      ).then((res) => res.json()) as Promise<SeriesAggregateCredits>,
-      fetch(
-        `${process.env.NEXT_PUBLIC_BASE_SERIES_API_URL}${tv_id}/images?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-      ).then((res) => res.json()) as Promise<Images>,
     ]);
-    return { movieDetails, aggregateCredits, images };
+    return { details };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return rejectWithValue(error.message);
@@ -86,7 +76,7 @@ export const fetchSeriesSeasonData = createAsyncThunk<
 });
 
 const seriesSlice = createSlice({
-  name: "movieData",
+  name: "seriesData",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -96,9 +86,7 @@ const seriesSlice = createSlice({
       })
       .addCase(fetchSeriesData.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.details = action.payload.movieDetails;
-        state.aggregateCredits = action.payload.aggregateCredits;
-        state.images = action.payload.images;
+        state.details = action.payload.details;
       })
       .addCase(fetchSeriesData.rejected, (state, action) => {
         state.status = "failed";

@@ -11,7 +11,9 @@ import SeriesContentDescription from "./SeriesContentDescription/SeriesContentDe
 
 const SeriesContent = () => {
   const dispatch = useAppDispatch();
-  const { details, reviews, images, aggregateCredits } = useAppSelector((state) => state.series);
+  const { details, reviews } = useAppSelector((state) => state.series);
+  const aggregateCredits = details?.aggregate_credits;
+  const images = details?.images;
 
   useEffect(() => {
     if (details?.id) dispatch(fetchSeriesReviews({ tv_id: details?.id, page: 1 }));

@@ -4,7 +4,8 @@ import styles from "./SeriesImagesList.module.scss";
 import SeriesImagesListItem from "./SeriesImagesListItem/SeriesImagesListItem";
 
 const SeriesImagesList = () => {
-  const { images, details } = useAppSelector((state) => state.series);
+  const details = useAppSelector((state) => state.series.details);
+  const images = details?.images;
 
   return (
     <section className={styles["series-images"]}>

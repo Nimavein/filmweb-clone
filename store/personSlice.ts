@@ -1,14 +1,12 @@
-import { ApiStatus, PersonDetails, PersonImages, PersonMovieCredits, PersonTvCredits } from "@/types/types";
+import { ApiStatus, PersonDetails } from "@/types/types";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-// Define a type for the slice state
 interface PersonState {
   details: PersonDetails | null;
   status: ApiStatus;
   error: string | null;
 }
 
-// Define the initial state using that type
 const initialState: PersonState = {
   details: null,
   status: "idle",
