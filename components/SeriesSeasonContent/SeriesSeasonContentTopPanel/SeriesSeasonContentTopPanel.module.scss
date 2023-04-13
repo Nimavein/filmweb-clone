@@ -1,0 +1,45 @@
+.series-season-content__top-panel {
+  background: $black;
+  padding: 20px;
+  color: $light-gray;
+  font-size: 14px;
+
+  &-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &-name {
+      color: $light-gray;
+    }
+
+    &-season {
+      color: $gray;
+    }
+  }
+
+  &-info {
+    color: $light-gray;
+    display: flex;
+    gap: 30px;
+
+    &-text {
+      gap: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-description {
+      display: flex;
+      gap: 30px;
+    }
+
+    &-overview {
+      font-size: 12px;
+    }
+
+    &-name {
+      text-transform: uppercase;
+    }
+  }
+}

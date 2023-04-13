@@ -15,7 +15,8 @@ interface SeriesDetail {
 }
 
 const SeriesContentDescription = () => {
-  const { aggregateCredits, details } = useAppSelector((state) => state.series);
+  const details = useAppSelector((state) => state.series.details);
+  const aggregateCredits = details?.aggregate_credits;
 
   const displayedDetails: SeriesDetail[] = [
     { name: "Created by", value: details?.created_by?.map((creator) => creator.name).join(", ") },
@@ -47,7 +48,7 @@ const SeriesContentDescription = () => {
         <p className={styles["series-content__description-overview"]}>{details?.overview}</p>
         <div className={styles["series-content__description-seasons"]}>
           {details?.seasons?.map((season, index) => (
-            <Link key={season.name} href={`/series/${details?.id}/season/${season.season_number! + 1}`}>
+            <Link key={season.name} href={`/series/${details?.id}/season/${season.season_number}`}>
               <Button>{`Season ${index + 1}`}</Button>
             </Link>
           ))}

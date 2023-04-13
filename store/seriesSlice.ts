@@ -1,10 +1,10 @@
-import { ApiStatus, Reviews, SeriesDetails } from "@/types/types";
+import { ApiStatus, Reviews, SeasonDetails, SeriesDetails } from "@/types/types";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 interface SeriesState {
   details: SeriesDetails | null;
   reviews: Reviews | null;
-  season: any;
+  season: SeasonDetails | null;
   status: ApiStatus;
   reviewsStatus: ApiStatus;
   seasonStatus: ApiStatus;
@@ -58,7 +58,7 @@ export const fetchSeriesReviews = createAsyncThunk<Reviews, { tv_id: number; pag
 );
 
 export const fetchSeriesSeasonData = createAsyncThunk<
-  any,
+  SeasonDetails,
   { tv_id: number; season_number: number }
 >("seriesData/fetchSeriesSeasonData", async ({ tv_id, season_number }, { rejectWithValue }) => {
   const response = await fetch(
