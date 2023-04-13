@@ -25,20 +25,4 @@
     gap: 12px;
     margin-top: 6px;
   }
-
-  &-votes-count {
-    display: flex;
-    flex-direction: column;
-    color: $light-gray;
-    justify-content: center;
-
-    &-title {
-      font-size: 12px;
-    }
-    
-    &-value {
-      font-size: 14px;
-      line-height: 16px;
-    }
-  }
 }

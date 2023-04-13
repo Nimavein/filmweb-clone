@@ -36,13 +36,8 @@ const SeriesContentTopPanel = () => {
             fontSize={24}
             small
             defaultValue={details?.vote_average ? parseFloat(details?.vote_average.toFixed(2)) : 0}
+            voteCount={details?.vote_count}
           />
-          <div className={styles["series-content__top-panel-votes-count"]}>
-            <span className={styles["series-content__top-panel-votes-count-value"]}>
-              {details?.vote_count}
-            </span>
-            <span className={styles["series-content__top-panel-votes-count-title"]}>votes</span>
-          </div>
         </div>
       </div>
     </section>

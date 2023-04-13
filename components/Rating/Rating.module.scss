@@ -1,15 +1,41 @@
 .rating {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .small-rating {
   display: flex;
+  margin-top: 6px;
   align-items: center;
-  gap: 4px;
-
+  &--vertical {
+    flex-direction: column;
+    justify-content: center;
+    .small-rating__value,
+    .small-rating__votes {
+      margin-left: 0;
+    }
+  }
   &__value {
+    margin-left: 4px;
+  }
+
+  &__votes {
+    text-align: center;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    color: $light-gray;
+    justify-content: center;
+
+    &-title {
+      font-size: 10px;
+    }
+
+    &-value {
+      font-size: 12px;
+      line-height: 14px;
+    }
   }
 
   &__icon {

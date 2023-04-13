@@ -10,6 +10,7 @@ interface ReadMoreTextProps {
   showTextLength: number;
   collapseText?: string;
   readMoreText?: string;
+  displayButton?: boolean;
 }
 
 const ReadMoreText = ({
@@ -21,16 +22,15 @@ const ReadMoreText = ({
   showTextLength,
   collapseText = "Collapse",
   readMoreText = "Read more",
+  displayButton = true,
 }: ReadMoreTextProps) => {
   const isLongText = text.length > showTextLength;
   const handleReadMoreClick = () => setIsReadMore(!isReadMore);
 
   return (
     <p className={`${textClassName} ${styles["read-more-text"]}`}>
-      {text && (isReadMore || !isLongText)
-        ? text
-        : `${text?.substring(0, showTextLength)}...`}
-      {isLongText && (
+      {text && (isReadMore || !isLongText) ? text : `${text?.substring(0, showTextLength)}...`}
+      {isLongText && displayButton && (
         <button
           className={`${buttonClassName} ${styles["read-more-text__button"]}`}
           onClick={handleReadMoreClick}

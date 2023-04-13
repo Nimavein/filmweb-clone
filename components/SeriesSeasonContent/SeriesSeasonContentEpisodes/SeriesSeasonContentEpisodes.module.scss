@@ -1,0 +1,32 @@
+.series-season-content__episodes {
+  &-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &-item {
+      border: 1px solid $light-gray;
+      display: flex;
+
+      &-content {
+        padding: 10px 20px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      &-release {
+        font-size: 14px;
+        color: $gray;
+      }
+
+      &-title {
+        font-size: 18px;
+      }
+
+      &-overview {
+        margin: 8px 0;
+        font-size: 13px;
+      }
+    }
+  }
+}

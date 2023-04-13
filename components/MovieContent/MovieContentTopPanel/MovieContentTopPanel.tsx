@@ -45,19 +45,8 @@ const MovieContentTopPanel = () => {
                 ? parseFloat(movieDetails?.vote_average.toFixed(2))
                 : 0
             }
+            voteCount={movieDetails?.vote_count}
           />
-          <div className={styles["movie-content__top-panel-votes-count"]}>
-            <span
-              className={styles["movie-content__top-panel-votes-count-value"]}
-            >
-              {movieDetails?.vote_count}
-            </span>
-            <span
-              className={styles["movie-content__top-panel-votes-count-title"]}
-            >
-              votes
-            </span>
-          </div>
         </div>
       </div>
     </section>

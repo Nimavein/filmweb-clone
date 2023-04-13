@@ -11,6 +11,8 @@ interface RatingProps {
   small?: boolean;
   fontSize?: number;
   showNumber?: boolean;
+  voteCount?: number;
+  vertical?: boolean;
 }
 
 const Rating = ({
@@ -21,17 +23,21 @@ const Rating = ({
   small = false,
   fontSize,
   showNumber = false,
+  voteCount,
+  vertical = false,
 }: RatingProps) =>
   small ? (
-    <div className={styles["small-rating"]} style={{ fontSize: fontSize }}>
+    <div className={`${styles["small-rating"]} ${vertical ? styles["small-rating--vertical"] : ""}`} style={{ fontSize: fontSize }}>
       <StarFilled className={styles["small-rating__icon"]} />
       <span className={styles["small-rating__value"]}>{defaultValue}</span>
+      <div className={styles["small-rating__votes"]}>
+        <span className={styles["small-rating__votes-value"]}>{voteCount}</span>
+        <span className={styles["small-rating__votes-title"]}>votes</span>
+      </div>
     </div>
   ) : (
     <div className={styles["rating"]}>
-      {showNumber && (
-        <span className={styles["rating__value"]}>{defaultValue}</span>
-      )}
+      {showNumber && <span className={styles["rating__value"]}>{defaultValue}</span>}
       <Rate
         count={starCount}
         allowHalf={allowHalf}

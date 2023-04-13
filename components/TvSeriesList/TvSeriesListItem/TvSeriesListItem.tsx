@@ -28,12 +28,9 @@ const TvSeriesListItem = ({
             <p className={styles["tv-series-list__item-overview"]}>{overview}</p>
           </div>
           <div className={styles["tv-series-list__item-rating"]}>
-            <span className={styles["tv-series-list__item-vote-average"]}>
-              <Rating small defaultValue={vote_average || 0} />
-            </span>
-            <span
-              className={styles["tv-series-list__item-vote-count"]}
-            >{`${vote_count} votes`}</span>
+            <div className={styles["tv-series-list__item-vote-average"]}>
+              <Rating vertical small defaultValue={vote_average || 0} voteCount={vote_count} />
+            </div>
           </div>
         </div>
       </div>
