@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./SeriesSeasonContent.module.scss";
 import { useAppSelector } from "@/store";
 import SeriesSeasonContentTopPanel from "./SeriesSeasonContentTopPanel/SeriesSeasonContentTopPanel";
+import SeriesSeasonContentSeasons from "./SeriesSeasonContentSeasons/SeriesSeasonContentSeasons";
 
 const SeriesSeasonContent = () => {
   const { details, reviews } = useAppSelector((state) => state.series);
@@ -11,6 +12,7 @@ const SeriesSeasonContent = () => {
   return (
     <main className={styles["series-season-content"]}>
       <SeriesSeasonContentTopPanel />
+      <SeriesSeasonContentSeasons />
     </main>
   );
 };

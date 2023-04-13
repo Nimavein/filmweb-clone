@@ -7,4 +7,9 @@
   &--uppercase {
     text-transform: uppercase;
   }
+
+  &--active {
+    background-color: $black;
+    color: $white;
+  }
 }

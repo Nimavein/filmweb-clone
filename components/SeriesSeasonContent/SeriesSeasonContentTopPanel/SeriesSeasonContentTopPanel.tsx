@@ -7,7 +7,7 @@ import { CaretRightOutlined } from "@ant-design/icons";
 import Image from "next/image";
 
 const SeriesSeasonContentTopPanel = () => {
-  const { details, reviews, season } = useAppSelector((state) => state.series);
+  const { details, season } = useAppSelector((state) => state.series);
   return (
     <section className={styles["series-season-content__top-panel"]}>
       <div className={styles["series-season-content__top-panel-breadcrumb"]}>

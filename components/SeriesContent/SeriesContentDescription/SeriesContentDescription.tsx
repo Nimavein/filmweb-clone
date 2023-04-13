@@ -46,13 +46,18 @@ const SeriesContentDescription = () => {
       </div>
       <div className={styles["series-content__description-info"]}>
         <p className={styles["series-content__description-overview"]}>{details?.overview}</p>
-        <div className={styles["series-content__description-seasons"]}>
+        <ul className={styles["series-content__description-seasons"]}>
           {details?.seasons?.map((season, index) => (
-            <Link key={season.name} href={`/series/${details?.id}/season/${season.season_number}`}>
-              <Button>{`Season ${index + 1}`}</Button>
-            </Link>
+            <li className={styles["series-content__description-season"]}>
+              <Link
+                key={season.name}
+                href={`/series/${details?.id}/season/${season.season_number}`}
+              >
+                <Button>{`Season ${index + 1}`}</Button>
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
         <div className={styles["series-content__description-details"]}>
           {displayedDetails.map(
             (detail) =>
