@@ -3,16 +3,16 @@ import styles from "./SeriesSeasonContent.module.scss";
 import { useAppSelector } from "@/store";
 import SeriesSeasonContentTopPanel from "./SeriesSeasonContentTopPanel/SeriesSeasonContentTopPanel";
 import SeriesSeasonContentSeasons from "./SeriesSeasonContentSeasons/SeriesSeasonContentSeasons";
+import SeriesSeasonContentEpisodes from "./SeriesSeasonContentEpisodes/SeriesSeasonContentEpisodes";
 
 const SeriesSeasonContent = () => {
-  const { details, reviews } = useAppSelector((state) => state.series);
-  const aggregateCredits = details?.aggregate_credits;
-  const images = details?.images;
+  const { details } = useAppSelector((state) => state.series);
 
   return (
     <main className={styles["series-season-content"]}>
       <SeriesSeasonContentTopPanel />
       <SeriesSeasonContentSeasons />
+      <SeriesSeasonContentEpisodes />
     </main>
   );
 };
