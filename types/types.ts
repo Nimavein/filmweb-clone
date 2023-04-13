@@ -489,7 +489,7 @@ export interface SeriesAggregateCreditsCastRoles {
   total_episode_count?: number;
   order?: number;
 }
-export interface SeriesAggregateCreditsCast {
+export interface SeriesAggregateCreditsCastMember {
   adult?: boolean;
   gender?: number | null;
   id?: number;
@@ -501,14 +501,14 @@ export interface SeriesAggregateCreditsCast {
   roles?: SeriesAggregateCreditsCastRoles[];
 }
 
-export interface SeriesAggregateCreditsCastCrewJobs {
+export interface SeriesAggregateCreditsCrewJobs {
   credit_id?: string;
   job?: string;
   episode_count?: number;
   department?: string;
   total_episode_count?: number;
 }
-export interface SeriesAggregateCreditsCastCrew {
+export interface SeriesAggregateCreditsCrewMember {
   adult?: boolean;
   gender?: number | null;
   id?: number;
@@ -517,10 +517,13 @@ export interface SeriesAggregateCreditsCastCrew {
   original_name?: string;
   popularity?: number;
   profile_path?: string | null;
-  jobs?: SeriesAggregateCreditsCastCrewJobs[];
+  jobs?: SeriesAggregateCreditsCrewJobs[];
 }
 
+export type SeriesAggregateCreditsCast = SeriesAggregateCreditsCastMember[];
+export type SeriesAggregateCreditsCrew = SeriesAggregateCreditsCrewMember[];
+
 export interface SeriesAggregateCredits {
-  cast?: SeriesAggregateCreditsCast[];
-  crew?: SeriesAggregateCreditsCastCrew[];
+  cast?: SeriesAggregateCreditsCast;
+  crew?: SeriesAggregateCreditsCrew;
 }

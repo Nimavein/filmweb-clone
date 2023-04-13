@@ -25,40 +25,45 @@ const PersonContentCreditsCarousel = ({ credits, type }: PersonContentCreditsCar
       dots={false}
       infinite={false}
     >
-      {credits?.map((credit, index) =>
-        credit.poster_path ? (
-          <Link key={index} href={`/${type === "movies" ? "movie" : "series"}/${credit.id}`}>
-            <div className={styles["person-content__credits-slide"]}>
+      {credits?.map((credit, index) => (
+        <Link key={index} href={`/${type === "movies" ? "movie" : "series"}/${credit.id}`}>
+          <div className={styles["person-content__credits-slide"]}>
+            {credit?.poster_path ? (
               <Image
-                src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${credit.poster_path}`}
+                src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${credit?.poster_path}`}
                 alt=""
                 height={imageHeight}
                 width={imageWidth}
               />
-              <p
-                className={styles["person-content__credits-slide-title"]}
-                style={{ maxWidth: imageWidth }}
-              >
-                {`${"title" in credit ? credit.title : "name" in credit && credit.name} (${
-                  "release_date" in credit
-                    ? credit?.release_date?.slice(0, 4)
-                    : "first_air_date" in credit && credit.first_air_date?.slice(0, 4)
-                })`}
+            ) : (
+              <ImagePlaceholder
+                key={index}
+                height={imageHeight}
+                width={imageWidth}
+                icon={<CameraOutlined />}
+              />
+            )}
+            <p
+              className={styles["person-content__credits-slide-title"]}
+              style={{ maxWidth: imageWidth }}
+            >
+              {`${"title" in credit ? credit.title : "name" in credit && credit.name} (${
+                "release_date" in credit
+                  ? credit?.release_date?.slice(0, 4)
+                  : "first_air_date" in credit && credit.first_air_date?.slice(0, 4)
+              })`}
+            </p>
+            {"job" in credit && credit.job && (
+              <p className={styles["person-content__credits-slide-job"]}>{credit.job}</p>
+            )}
+            {"character" in credit && credit.character && (
+              <p className={styles["person-content__credits-slide-character"]}>
+                {credit.character}
               </p>
-              {"job" in credit && credit.job && (
-                <p className={styles["person-content__credits-slide-job"]}>{credit.job}</p>
-              )}
-              {"character" in credit && credit.character && (
-                <p className={styles["person-content__credits-slide-character"]}>
-                  {credit.character}
-                </p>
-              )}
-            </div>
-          </Link>
-        ) : (
-          <ImagePlaceholder key={index} height={imageHeight} width={imageWidth} icon={<CameraOutlined />} />
-        )
-      )}
+            )}
+          </div>
+        </Link>
+      ))}
     </Carousel>
   ) : (
     <></>
