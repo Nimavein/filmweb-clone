@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { fetchSeriesReviews } from "@/store/seriesSlice";
 import Pagination from "@/components/Pagination/Pagination";
-import styles from "./seriesReviewsList.module.scss";
+import styles from "./SeriesReviewsList.module.scss";
 import { Review } from "@/types/types";
 import SeriesReviewsListItem from "./SeriesReviewsListItem/SeriesReviewsListItem";
 

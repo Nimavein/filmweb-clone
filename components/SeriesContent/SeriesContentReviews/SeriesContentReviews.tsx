@@ -41,7 +41,7 @@ const SeriesContentReviews = () => {
       </Carousel>
       {reviews?.results && reviews?.results?.length > displayedReviewsInCarousel && (
         <Link href={`/series/${details?.id}/reviews`}>
-          <Button>See all</Button>
+          <Button>{`See all ${reviews?.results?.length} reviews`}</Button>
         </Link>
       )}
     </section>

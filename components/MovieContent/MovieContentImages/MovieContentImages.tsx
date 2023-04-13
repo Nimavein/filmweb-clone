@@ -35,7 +35,7 @@ const MovieContentImages = () => {
         ))}
       </ul>
       <Link href={`/movie/${movieDetails?.id}/images`}>
-        <Button>See all images</Button>
+        <Button>{`See all ${images?.backdrops?.length} images`}</Button>
       </Link>
     </section>
   );
