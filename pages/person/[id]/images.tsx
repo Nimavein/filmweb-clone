@@ -10,7 +10,7 @@ const PersonImages = () => {
   const { id } = router.query;
 
   const dispatch = useAppDispatch();
-  const { images } = useAppSelector((state) => state.person);
+  const images = useAppSelector((state) => state.person.details?.images);
 
   useEffect(() => {
     if (id && !images) dispatch(fetchPersonData(Number(id)));

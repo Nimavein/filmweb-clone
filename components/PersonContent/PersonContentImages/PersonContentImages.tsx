@@ -7,7 +7,8 @@ import Button from "@/components/Button/Button";
 import PersonContentImage from "./PersonContentImage/PersonContentImage";
 
 const PersonContentImages = () => {
-  const { details, images } = useAppSelector((state) => state.person);
+  const details = useAppSelector((state) => state.person.details);
+  const images = details?.images;
 
   const creditsSectionHeader =
     `Images of ${details?.name} (${images?.profiles?.length})`.toUpperCase();

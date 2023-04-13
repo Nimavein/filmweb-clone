@@ -6,11 +6,15 @@ import PersonContentCredits from "./PersonContentCredits/PersonContentCredits";
 import PersonContentImages from "./PersonContentImages/PersonContentImages";
 
 const PersonContent = () => {
-  const { details, movieCredits, tvCredits, images } = useAppSelector((state) => state.person);
+  const details = useAppSelector((state) => state.person.details);
+  const tvCredits = details?.tv_credits;
+  const movieCredits = details?.movie_credits;
+  const images = details?.images;
+
   const areTvCreditsAvailable =
     (tvCredits?.cast && tvCredits?.cast?.length > 0) ||
     (tvCredits?.crew && tvCredits?.crew.length > 0);
-    
+
   const areMovieCreditsAvailable =
     (movieCredits?.cast && movieCredits?.cast?.length > 0) ||
     (movieCredits?.crew && movieCredits?.crew?.length > 0);

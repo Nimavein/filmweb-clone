@@ -1,8 +1,4 @@
-import {
-  ApiStatus,
-  MovieDetails,
-  Reviews,
-} from "@/types/types";
+import { ApiStatus, MovieDetails, Reviews } from "@/types/types";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 interface MovieState {
@@ -22,7 +18,7 @@ const initialState: MovieState = {
 };
 
 export const fetchMovieData = createAsyncThunk<
-  { movieDetails: MovieDetails; },
+  { movieDetails: MovieDetails },
   number,
   { rejectValue: string }
 >("movieData/fetchMovieData", async (movie_id, { rejectWithValue }) => {
@@ -39,10 +35,7 @@ export const fetchMovieData = createAsyncThunk<
   }
 });
 
-export const fetchMovieReviews = createAsyncThunk<
-  Reviews,
-  { movie_id: number; page: number }
->(
+export const fetchMovieReviews = createAsyncThunk<Reviews, { movie_id: number; page: number }>(
   "movieData/fetchMovieReviews",
   async ({ movie_id, page }, { rejectWithValue }) => {
     const response = await fetch(
@@ -50,9 +43,7 @@ export const fetchMovieReviews = createAsyncThunk<
     );
 
     if (!response.ok) {
-      const error = await Promise.reject(
-        "Failed to fetch reviews for the `movie."
-      );
+      const error = await Promise.reject("Failed to fetch reviews for the `movie.");
       return rejectWithValue(error);
     }
 

@@ -251,6 +251,9 @@ export interface PersonDetails {
   adult?: boolean;
   imdb_id?: string;
   homepage?: string | null;
+  tv_credits: PersonTvCredits;
+  movie_credits: PersonMovieCredits;
+  images: PersonImages;
 }
 
 export interface KnownForMovie {

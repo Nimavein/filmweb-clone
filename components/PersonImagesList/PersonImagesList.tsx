@@ -4,7 +4,8 @@ import styles from "./PersonImagesList.module.scss";
 import PersonImagesListItem from "./PersonImagesListItem/PersonImagesListItem";
 
 const PersonImagesList = () => {
-  const { images, details } = useAppSelector((state) => state.person);
+  const details = useAppSelector((state) => state.person.details);
+  const images = details?.images;
 
   return (
     <section className={styles["person-images"]}>
