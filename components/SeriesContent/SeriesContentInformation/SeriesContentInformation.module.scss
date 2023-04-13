@@ -1,4 +1,4 @@
-.movie-content__information {
+.series-content__information {
   &-details {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -9,7 +9,7 @@
     display: flex;
     gap: 10px;
     justify-content: space-between;
-    align-items: flex-start;
+    align-self: flex-start;
 
     &-name {
       color: $gray;

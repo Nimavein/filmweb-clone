@@ -56,10 +56,10 @@ const MovieContentInformation = () => {
   return (
     <section
       className={`${styles["movie-content__information"]} ${sectionStyles["movie-content__section"]}`}
-      aria-labelledby="movie-content-reviews"
+      aria-labelledby="movie-content-information"
     >
       <h2
-        id="movie-content-reviews"
+        id="movie-content-information"
         className={`${styles["movie-content__information-header"]} ${sectionStyles["movie-content__section-header"]}`}
       >
         {informationSectionHeader}
@@ -75,9 +75,7 @@ const MovieContentInformation = () => {
                 <p className={styles["movie-content__information-detail-name"]}>
                   {informationDetail.name}
                 </p>
-                <p
-                  className={styles["movie-content__information-detail-value"]}
-                >
+                <p className={styles["movie-content__information-detail-value"]}>
                   {informationDetail.value}
                 </p>
               </div>

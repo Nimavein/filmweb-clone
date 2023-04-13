@@ -49,7 +49,7 @@ export const fetchSeriesReviews = createAsyncThunk<Reviews, { tv_id: number; pag
   "seriesData/fetchSeriesReviews",
   async ({ tv_id, page }, { rejectWithValue }) => {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_MOVIE_API_URL}${tv_id}/reviews?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${page}`
+      `${process.env.NEXT_PUBLIC_BASE_SERIES_API_URL}${tv_id}/reviews?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${page}`
     );
 
     if (!response.ok) {

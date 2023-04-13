@@ -7,6 +7,7 @@ import { getGenresNames } from "@/helpers/getGenresNames";
 import { getProductionCountries } from "@/helpers/getProductionCountries";
 import Link from "next/link";
 import Button from "@/components/Button/Button";
+import SeriesContentNetworks from "../SeriesContentNetworks/SeriesContentNetworks";
 
 interface SeriesDetail {
   name: string;
@@ -32,19 +33,22 @@ const SeriesContentDescription = () => {
 
   return (
     <section className={styles["series-content__description"]}>
-      <Image
-        src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${details?.poster_path}`}
-        alt=""
-        width={200}
-        height={300}
-        className={styles["series-content__description-image"]}
-      />
+      <div>
+        <Image
+          src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${details?.poster_path}`}
+          alt=""
+          width={200}
+          height={300}
+          className={styles["series-content__description-image"]}
+        />
+        {details?.networks && details?.networks?.length > 0 && <SeriesContentNetworks />}
+      </div>
       <div className={styles["series-content__description-info"]}>
         <p className={styles["series-content__description-overview"]}>{details?.overview}</p>
         <div className={styles["series-content__description-seasons"]}>
           {details?.seasons?.map((season, index) => (
             <Link key={index} href={`series/${details?.id}/seasons/${season.id}`}>
-                <Button>{`Season ${index + 1}`}</Button>
+              <Button>{`Season ${index + 1}`}</Button>
             </Link>
           ))}
         </div>
