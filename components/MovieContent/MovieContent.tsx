@@ -11,27 +11,22 @@ import MovieContentInformation from "./MovieContentInformation/MovieContentInfor
 
 const MovieContent = () => {
   const dispatch = useAppDispatch();
-  const { movieDetails, reviews, images, credits } = useAppSelector(
-    (state) => state.movie
-  );
+  const { movieDetails, reviews } = useAppSelector((state) => state.movie);
+  const credits = movieDetails?.credits;
+  const images = movieDetails?.images;
 
   useEffect(() => {
-    if (movieDetails?.id)
-      dispatch(fetchMovieReviews({ movie_id: movieDetails?.id, page: 1 }));
+    if (movieDetails?.id) dispatch(fetchMovieReviews({ movie_id: movieDetails?.id, page: 1 }));
   }, [movieDetails?.id, dispatch]);
 
   return (
     <main className={styles["movie-content"]}>
       <MovieContentTopPanel />
       <MovieContentDescription />
-      {reviews?.results && reviews?.results?.length > 0 && (
-        <MovieContentReviews />
-      )}
+      {reviews?.results && reviews?.results?.length > 0 && <MovieContentReviews />}
       {credits?.cast && credits?.cast?.length > 0 && <MovieContentCredits />}
       <MovieContentInformation />
-      {images?.backdrops && images?.backdrops?.length > 0 && (
-        <MovieContentImages />
-      )}
+      {images?.backdrops && images?.backdrops?.length > 0 && <MovieContentImages />}
     </main>
   );
 };

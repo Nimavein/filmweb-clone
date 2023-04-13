@@ -9,7 +9,7 @@ const MovieImages = () => {
   const { id } = router.query;
 
   const dispatch = useAppDispatch();
-  const { images } = useAppSelector((state) => state.movie);
+  const images = useAppSelector((state) => state.movie.movieDetails?.images);
 
   useEffect(() => {
     if (id && !images) dispatch(fetchMovieData(Number(id)));

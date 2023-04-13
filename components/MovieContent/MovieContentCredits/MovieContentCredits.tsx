@@ -8,7 +8,8 @@ import { Tabs, TabsProps } from "antd";
 import MovieContentCreditsCarousel from "./MovieContentCreditsCarousel/MovieContentCreditsCarousel";
 
 const MovieContentCredits = () => {
-  const { credits, movieDetails } = useAppSelector((state) => state.movie);
+  const movieDetails = useAppSelector((state) => state.movie.movieDetails);
+  const credits = movieDetails?.credits;
 
   const tabs: TabsProps["items"] = [
     {
@@ -23,8 +24,7 @@ const MovieContentCredits = () => {
     },
   ];
 
-  const creditsSectionHeader =
-    `Credits of the movie ${movieDetails?.title}`.toUpperCase();
+  const creditsSectionHeader = `Credits of the movie ${movieDetails?.title}`.toUpperCase();
   return (
     <section
       className={`${styles["movie-content__credits"]} ${sectionStyles["movie-content__section"]}`}

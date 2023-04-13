@@ -17,7 +17,7 @@ const MovieContentReview = ({
   slideId,
 }: MovieContentReviewType) => {
   const [isReadMore, setIsReadMore] = useState<boolean>(false);
-  const { images } = useAppSelector((state) => state.movie);
+  const images = useAppSelector((state) => state.movie.movieDetails?.images);
 
   return (
     <div className={styles["movie-content__review"]}>

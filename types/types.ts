@@ -74,6 +74,9 @@ export interface MovieDetails {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  credits: Credits;
+  images: Images;
+  videos: Videos;
 }
 
 export interface CrewMember {
@@ -195,6 +198,25 @@ export interface Images {
   id: number;
   backdrops?: Backdrop[];
   posters?: Poster[];
+}
+
+export interface Video {
+  iso_639_1?: string;
+  iso_3166_1?: string;
+  name?: string;
+  key?: string;
+  site?: string;
+  size?: number;
+  type?: string;
+  official?: boolean;
+  published_at?: string;
+  id?: string;
+}
+
+export type VideosResults = Video[];
+export interface Videos {
+  id?: number;
+  results?: VideosResults[];
 }
 
 export interface Profile {
@@ -520,10 +542,10 @@ export interface SeriesAggregateCreditsCrewMember {
   jobs?: SeriesAggregateCreditsCrewJobs[];
 }
 
-export type SeriesAggregateCreditsCast = SeriesAggregateCreditsCastMember[];
-export type SeriesAggregateCreditsCrew = SeriesAggregateCreditsCrewMember[];
+export type SeriesAggregateCreditsCast = SeriesAggregateCreditsCastMember[]; 
+export type SeriesAggregateCreditsCrew = SeriesAggregateCreditsCrewMember[]; 
 
 export interface SeriesAggregateCredits {
-  cast?: SeriesAggregateCreditsCast;
-  crew?: SeriesAggregateCreditsCrew;
+  cast?: SeriesAggregateCreditsCast[];
+  crew?: SeriesAggregateCreditsCrew[];
 }

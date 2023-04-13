@@ -7,7 +7,8 @@ import Button from "@/components/Button/Button";
 import Link from "next/link";
 
 const MovieContentImages = () => {
-  const { images, movieDetails } = useAppSelector((state) => state.movie);
+  const movieDetails = useAppSelector((state) => state.movie.movieDetails);
+  const images = movieDetails?.images;
   const displayedImagesAmount = 12;
 
   const imagesSectionHeader =
