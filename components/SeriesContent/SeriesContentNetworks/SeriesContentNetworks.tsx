@@ -8,7 +8,7 @@ const SeriesContentNetworks = () => {
 
   return (
     <div className={styles["series-content__networks"]}>
-      <p className={styles["series-content__networks-header"]}>Networks: </p>
+      <p className={styles["series-content__networks-header"]}>Available on: </p>
       <ul className={styles["series-content__networks-list"]}>
         {details?.networks?.map((network, index) => (
           <SeriesContentNetwork key={index} {...network} />
