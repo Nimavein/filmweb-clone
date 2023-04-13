@@ -12,7 +12,8 @@ interface MovieDetail {
 }
 
 const MovieContentDescription = () => {
-  const { credits, movieDetails } = useAppSelector((state) => state.movie);
+  const movieDetails = useAppSelector((state) => state.movie.movieDetails);
+  const credits = movieDetails?.credits;
 
   const details: MovieDetail[] = [
     { name: "Screenplay", value: findPeopleByJob("Screenplay", credits?.crew) },
