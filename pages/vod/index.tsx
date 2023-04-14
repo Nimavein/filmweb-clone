@@ -1,0 +1,17 @@
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "@/store";
+import { fetchWatchProviders } from "@/store/watchProvidersSlice";
+import VodPageContent from "@/components/VodPageContent/VodPageContent";
+
+const VodPage = () => {
+  const dispatch = useAppDispatch();
+  const { tv, movies } = useAppSelector((state) => state.watchProviders);
+
+  useEffect(() => {
+    if (!tv && !movies) dispatch(fetchWatchProviders());
+  }, [dispatch]);
+
+  return <main>{tv && movies && <VodPageContent />}</main>;
+};
+
+export default VodPage;

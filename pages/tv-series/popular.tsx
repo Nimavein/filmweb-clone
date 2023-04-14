@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/store";
-import MoviesList from "@/components/MoviesList/MoviesList";
 import { fetchPopularTvSeries } from "@/store/tvSeriesSlice";
 import TvSeriesList from "@/components/TvSeriesList/TvSeriesList";
 

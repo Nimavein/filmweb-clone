@@ -23,4 +23,5 @@ export const navbarLinks: NavbarLinks = {
     main: { name: "People", path: "/people", key: "people" },
     popular: { name: "Popular", path: "/people/popular", key: "people-popular" },
   },
+  vod: { name: "Vod", path: "/vod", key: "vod" },
 };

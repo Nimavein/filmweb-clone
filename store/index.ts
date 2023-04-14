@@ -6,6 +6,7 @@ import personSlice from "./personSlice";
 import peopleSlice from "./peopleSlice";
 import seriesSlice from "./seriesSlice";
 import tvSeriesSlice from "./tvSeriesSlice";
+import watchProvidersSlice from "./watchProvidersSlice";
 
 const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ const store = configureStore({
     people: peopleSlice,
     series: seriesSlice,
     tvSeries: tvSeriesSlice,
+    watchProviders: watchProvidersSlice
   },
 });
 

@@ -7,6 +7,8 @@ interface ButtonProps {
   active?: boolean;
   uppercase?: boolean;
   children: ReactNode;
+  onClick?: () => void;
+  ariaLabel?: string;
 }
 
 const Button = ({
@@ -15,9 +17,11 @@ const Button = ({
   uppercase = false,
   active = false,
   children,
+  onClick, 
+  ariaLabel
 }: ButtonProps) => {
   return (
-    <button
+    <button aria-label={ariaLabel} onClick={onClick}
       className={`${styles["button"]}${size ? ` ${styles[`button--${size}`]}` : ""}${
         uppercase ? ` ${styles["button--uppercase"]}` : ""
       }${active ? ` ${styles["button--active"]}` : ""}`}

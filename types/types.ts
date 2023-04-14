@@ -172,6 +172,7 @@ export interface NavbarLinks {
     main: NavbarLink;
     popular: NavbarLink;
   };
+  vod: NavbarLink;
 }
 
 export interface Backdrop {
@@ -624,3 +625,15 @@ export interface WatchProviders {
   };
 };
 
+export interface GetWatchProvidersResult {
+  display_priority?: number;
+  logo_path?: string;
+  provider_name?: string;
+  provider_id: number;
+}
+
+export type GetWatchProvidersResults = GetWatchProvidersResult[];
+
+export interface GetWatchProviders {
+  results : GetWatchProvidersResults;
+}
