@@ -11,17 +11,19 @@ const SeriesSeasons = () => {
 
   const { id, seasonId } = router.query;
   
-  const { seasonStatus, season } = useAppSelector((state) => state.series);
+
+  const { seasonStatus, season, details } = useAppSelector((state) => state.series);
 
   useEffect(() => {
-    dispatch(fetchSeriesData(Number(id)));
-    dispatch(fetchSeriesSeasonData({ tv_id: Number(id), season_number: Number(seasonId) }));
+    if (id && details?.id !== Number(id)) dispatch(fetchSeriesData(Number(id)));
+    if (seasonId && season?.season_number !== Number(seasonId))
+      dispatch(fetchSeriesSeasonData({ tv_id: Number(id), season_number: Number(seasonId) }));
   }, [seasonId]);
 
   return seasonStatus === "loading" ? (
     <Loader />
   ) : (
-    <>{season && Object.keys(season).length > 0 && <SeriesSeasonContent />}</>
+    <>{season && <SeriesSeasonContent />}</>
   );
 };
 

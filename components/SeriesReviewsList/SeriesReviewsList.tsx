@@ -17,7 +17,8 @@ const SeriesReviewsList = ({ seriesId }: SeriesReviewsListProps) => {
   const { reviews, details } = useAppSelector((state) => state.series);
 
   useEffect(() => {
-    if (seriesId) dispatch(fetchSeriesReviews({ tv_id: seriesId, page: currentPage }));
+    if (seriesId && reviews?.id !== seriesId && currentPage !== reviews?.page)
+      dispatch(fetchSeriesReviews({ tv_id: seriesId, page: currentPage }));
   }, [dispatch, currentPage, seriesId]);
 
   return reviews?.results && reviews?.results?.length > 0 ? (

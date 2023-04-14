@@ -13,7 +13,7 @@ const Series = () => {
   const { details, status } = useAppSelector((state) => state.series);
 
   useEffect(() => {
-    if (id) dispatch(fetchSeriesData(Number(id)));
+    if (id && details?.id !== Number(id)) dispatch(fetchSeriesData(Number(id)));
   }, [id]);
 
   return status === "loading" ? (
