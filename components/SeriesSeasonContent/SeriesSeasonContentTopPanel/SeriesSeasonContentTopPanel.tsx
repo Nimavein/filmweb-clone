@@ -3,11 +3,14 @@ import { useAppSelector } from "@/store";
 import styles from "./SeriesSeasonContentTopPanel.module.scss";
 import Link from "next/link";
 import { Divider } from "antd";
-import { CaretRightOutlined } from "@ant-design/icons";
+import { CameraOutlined, CaretRightOutlined } from "@ant-design/icons";
 import Image from "next/image";
+import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 
 const SeriesSeasonContentTopPanel = () => {
   const { details, season } = useAppSelector((state) => state.series);
+  const imageWidth = 100;
+  const imageHeight = imageWidth * 1.5;
   return (
     <section className={styles["series-season-content__top-panel"]}>
       <div className={styles["series-season-content__top-panel-breadcrumb"]}>
@@ -25,12 +28,16 @@ const SeriesSeasonContentTopPanel = () => {
       </div>
       <Divider style={{ background: "gray" }} />
       <div className={styles["series-season-content__top-panel-info"]}>
-        <Image
-          alt=""
-          width={100}
-          height={150}
-          src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${season?.poster_path}`}
-        />
+        {season?.poster_path ? (
+          <Image
+            alt=""
+            width={imageWidth}
+            height={imageHeight}
+            src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${season?.poster_path}`}
+          />
+        ) : (
+          <ImagePlaceholder width={imageWidth} height={imageHeight} icon={<CameraOutlined />} />
+        )}
         <div className={styles["series-season-content__top-panel-info-text"]}>
           <h1
             className={styles["series-season-content__top-panel-info-name"]}
