@@ -19,7 +19,7 @@ const Series = () => {
   return status === "loading" ? (
     <Loader />
   ) : (
-    <>{details && Object.keys(details).length > 0 && <SeriesContent />}</>
+    <>{details && <SeriesContent />}</>
   );
 };
 

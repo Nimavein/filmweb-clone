@@ -20,7 +20,7 @@ const Movie = () => {
     <Loader />
   ) : (
     <>
-      {movieDetails && Object.keys(movieDetails).length > 0 && <MovieContent />}
+      {movieDetails && <MovieContent />}
     </>
   );
 };

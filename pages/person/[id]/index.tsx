@@ -13,13 +13,13 @@ const Person = () => {
   const { details, status } = useAppSelector((state) => state.person);
 
   useEffect(() => {
-    if (id) dispatch(fetchPersonData(Number(id)));
+    if (id && details?.id !== Number(id)) dispatch(fetchPersonData(Number(id)));
   }, [id]);
 
   return status === "loading" ? (
     <Loader />
   ) : (
-    <>{details && Object.keys(details).length > 0 && <PersonContent />}</>
+    <>{details && <PersonContent />}</>
   );
 };
 
