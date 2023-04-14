@@ -1,9 +1,10 @@
-import { ApiStatus, MovieDetails, Reviews } from "@/types/types";
+import { ApiStatus, MovieDetails, Reviews, WatchProviders } from "@/types/types";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 interface MovieState {
   movieDetails: MovieDetails | null;
   reviews: Reviews | null;
+  watchProviders: WatchProviders | null;
   status: ApiStatus;
   reviewsStatus: ApiStatus;
   error: string | null;
@@ -12,23 +13,27 @@ interface MovieState {
 const initialState: MovieState = {
   movieDetails: null,
   reviews: null,
+  watchProviders: null,
   status: "idle",
   reviewsStatus: "idle",
   error: null,
 };
 
 export const fetchMovieData = createAsyncThunk<
-  { movieDetails: MovieDetails },
+  { movieDetails: MovieDetails; watchProviders: WatchProviders; },
   number,
   { rejectValue: string }
 >("movieData/fetchMovieData", async (movie_id, { rejectWithValue }) => {
   try {
-    const [movieDetails] = await Promise.all([
+    const [movieDetails, watchProviders] = await Promise.all([
       fetch(
         `${process.env.NEXT_PUBLIC_BASE_MOVIE_API_URL}${movie_id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=images,videos,credits`
       ).then((res) => res.json()) as Promise<MovieDetails>,
+      fetch(
+        `${process.env.NEXT_PUBLIC_BASE_MOVIE_API_URL}${movie_id}/watch/providers?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+      ).then((res) => res.json()) as Promise<WatchProviders>,
     ]);
-    return { movieDetails };
+    return { movieDetails, watchProviders: watchProviders };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return rejectWithValue(error.message);
@@ -65,6 +70,7 @@ const movieSlice = createSlice({
       .addCase(fetchMovieData.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.movieDetails = action.payload.movieDetails;
+        state.watchProviders = action.payload.watchProviders;
       })
       .addCase(fetchMovieData.rejected, (state, action) => {
         state.status = "failed";

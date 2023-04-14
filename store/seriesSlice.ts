@@ -1,10 +1,11 @@
-import { ApiStatus, Reviews, SeasonDetails, SeriesDetails } from "@/types/types";
+import { ApiStatus, Reviews, SeasonDetails, SeriesDetails, WatchProviders } from "@/types/types";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 interface SeriesState {
   details: SeriesDetails | null;
   reviews: Reviews | null;
   season: SeasonDetails | null;
+  watchProviders: WatchProviders | null;
   status: ApiStatus;
   reviewsStatus: ApiStatus;
   seasonStatus: ApiStatus;
@@ -15,6 +16,7 @@ const initialState: SeriesState = {
   details: null,
   reviews: null,
   season: null,
+  watchProviders: null,
   status: "idle",
   reviewsStatus: "idle",
   seasonStatus: "idle",
@@ -22,17 +24,20 @@ const initialState: SeriesState = {
 };
 
 export const fetchSeriesData = createAsyncThunk<
-  { details: SeriesDetails },
+  { details: SeriesDetails; watchProviders: WatchProviders },
   number,
   { rejectValue: string }
 >("seriesData/fetchSeriesData", async (tv_id, { rejectWithValue }) => {
   try {
-    const [details] = await Promise.all([
+    const [details, watchProviders] = await Promise.all([
       fetch(
         `${process.env.NEXT_PUBLIC_BASE_SERIES_API_URL}${tv_id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=images,videos,aggregate_credits`
       ).then((res) => res.json()) as Promise<SeriesDetails>,
+      fetch(
+        `${process.env.NEXT_PUBLIC_BASE_SERIES_API_URL}${tv_id}/watch/providers?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+      ).then((res) => res.json()) as Promise<WatchProviders>,
     ]);
-    return { details };
+    return { details, watchProviders: watchProviders };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return rejectWithValue(error.message);
@@ -87,6 +92,7 @@ const seriesSlice = createSlice({
       .addCase(fetchSeriesData.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.details = action.payload.details;
+        state.watchProviders = action.payload.watchProviders;
       })
       .addCase(fetchSeriesData.rejected, (state, action) => {
         state.status = "failed";

@@ -599,3 +599,28 @@ export interface SeasonDetails {
   poster_path?: string | null;
   season_number?: number;
 }
+
+export interface ProviderItem {
+  logo_path: string;
+  provider_id: number;
+  provider_name: string;
+  display_priority: number;
+}
+
+export type ProviderRent = ProviderItem[] | null;
+export type ProviderFlatRate = ProviderItem[] | null;
+export type ProviderBuy = ProviderItem[] | null;
+export interface WatchProvidersResult {
+  link: string;
+  flatrate: ProviderFlatRate;
+  rent: ProviderRent;
+  buy: ProviderBuy;
+}
+
+export interface WatchProviders {
+  id: number;
+  results: {
+    [countryCode: string]: WatchProvidersResult;
+  };
+};
+
