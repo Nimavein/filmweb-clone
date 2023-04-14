@@ -16,7 +16,8 @@ const MovieContent = () => {
   const images = movieDetails?.images;
 
   useEffect(() => {
-    if (movieDetails?.id) dispatch(fetchMovieReviews({ movie_id: movieDetails?.id, page: 1 }));
+    if (movieDetails?.id && reviews?.id !== movieDetails?.id)
+      dispatch(fetchMovieReviews({ movie_id: movieDetails?.id, page: 1 }));
   }, [movieDetails?.id, dispatch]);
 
   return (

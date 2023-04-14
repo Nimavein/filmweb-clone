@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/store";
-import { fetchMovieReviews } from "@/store/movieSlice";
+import { fetchMovieData, fetchMovieReviews } from "@/store/movieSlice";
 import Pagination from "@/components/Pagination/Pagination";
 import styles from "./MovieReviewsList.module.scss";
 import MovieReviewsListItem from "./MovieReviewsListItem/MovieReviewsListItem";
@@ -17,7 +17,9 @@ const MovieReviewsList = ({ movieId }: MovieReviewsListProps) => {
   const { reviews, movieDetails } = useAppSelector((state) => state.movie);
 
   useEffect(() => {
-    if (movieId) dispatch(fetchMovieReviews({ movie_id: movieId, page: currentPage }));
+    if (movieId !== movieDetails?.id) dispatch(fetchMovieData(movieId));
+    if (movieId !== reviews?.id && reviews?.page !== currentPage)
+      dispatch(fetchMovieReviews({ movie_id: movieId, page: currentPage }));
   }, [dispatch, currentPage, movieId]);
 
   return reviews?.results && reviews?.results?.length > 0 ? (

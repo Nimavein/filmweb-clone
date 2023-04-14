@@ -13,7 +13,7 @@ const Movie = () => {
   const { movieDetails, status } = useAppSelector((state) => state.movie);
 
   useEffect(() => {
-    if (id) dispatch(fetchMovieData(Number(id)));
+    if ( id && Number(id) !== movieDetails?.id) dispatch(fetchMovieData(Number(id)));
   }, [id]);
 
   return status === "loading" ? (
