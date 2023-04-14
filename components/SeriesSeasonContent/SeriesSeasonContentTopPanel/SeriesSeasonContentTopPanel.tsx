@@ -19,9 +19,9 @@ const SeriesSeasonContentTopPanel = () => {
           }`}</span>
         </Link>
         <CaretRightOutlined />
-        <span
-          className={styles["series-season-content__top-panel-breadcrumb-season"]}
-        >{`Season ${season?.season_number}`}</span>
+        <span className={styles["series-season-content__top-panel-breadcrumb-season"]}>
+          {season?.name}
+        </span>
       </div>
       <Divider style={{ background: "gray" }} />
       <div className={styles["series-season-content__top-panel-info"]}>

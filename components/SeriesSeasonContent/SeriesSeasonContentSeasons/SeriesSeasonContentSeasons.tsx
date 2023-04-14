@@ -16,9 +16,7 @@ const SeriesSeasonContentSeasons = () => {
               key={seasonItem.name}
               href={`/series/${details?.id}/season/${seasonItem.season_number}`}
             >
-              <Button active={seasonItem.season_number === season?.season_number}>{`Season ${
-                index + 1
-              }`}</Button>
+              <Button active={seasonItem.season_number === season?.season_number}>{`${seasonItem?.name}`}</Button>
             </Link>
           </li>
         ))}
