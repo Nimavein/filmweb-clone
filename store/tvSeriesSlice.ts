@@ -1,14 +1,16 @@
 import { ApiStatus, TvSeries } from "@/types/types";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-interface MoviesState {
+interface TvSeriesState {
   popularTvSeries: TvSeries | null;
+  watchProviderTvSeries: TvSeries | null;
   status: ApiStatus;
   error: string | null;
 }
 
-const initialState: MoviesState = {
+const initialState: TvSeriesState = {
   popularTvSeries: null,
+  watchProviderTvSeries: null,
   status: "idle",
   error: null,
 };
@@ -27,6 +29,22 @@ export const fetchPopularTvSeries = createAsyncThunk<TvSeries, { page: number }>
   }
 );
 
+export const fetchWatchProviderTvSeries = createAsyncThunk<
+  TvSeries,
+  { page?: number; providerId?: number | null }
+>("tvSeries/fetchWatchProviderTvSeries", async ({ page, providerId }) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_API_URL}discover/tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}${
+      providerId !== null ? `&with_watch_providers=${providerId}` : ""
+    }`
+  );
+  if (!response.ok) {
+    throw new Error("Failed to fetch watch provider tv series.");
+  }
+  const data = await response.json();
+  return data;
+});
+
 const tvSeriesSlice = createSlice({
   name: "tvSeries",
   initialState,
@@ -41,6 +59,17 @@ const tvSeriesSlice = createSlice({
         state.popularTvSeries = action.payload;
       })
       .addCase(fetchPopularTvSeries.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message ?? "Unknown error";
+      })
+      .addCase(fetchWatchProviderTvSeries.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchWatchProviderTvSeries.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.watchProviderTvSeries = action.payload;
+      })
+      .addCase(fetchWatchProviderTvSeries.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message ?? "Unknown error";
       });

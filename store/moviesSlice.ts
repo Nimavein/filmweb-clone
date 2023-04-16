@@ -3,12 +3,14 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 interface MoviesState {
   popularMovies: Movies | null;
+  watchProviderMovies: Movies | null;
   status: ApiStatus;
   error: string | null;
 }
 
 const initialState: MoviesState = {
   popularMovies: null,
+  watchProviderMovies: null,
   status: "idle",
   error: null,
 };
@@ -27,6 +29,22 @@ export const fetchPopularMovies = createAsyncThunk<Movies, { page: number }>(
   }
 );
 
+export const fetchWatchProviderMovies = createAsyncThunk<
+  Movies,
+  { page: number; providerId: number | null }
+>("movies/fetchWatchProviderMovies", async ({ page, providerId }) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_API_URL}discover/movie?api_key=${
+      process.env.NEXT_PUBLIC_API_KEY
+    }&page=${page}${providerId !== null ? `&with_watch_providers=${providerId}` : ""}}`
+  );
+  if (!response.ok) {
+    throw new Error("Failed to fetch watch provider movies.");
+  }
+  const data = await response.json();
+  return data;
+});
+
 const moviesSlice = createSlice({
   name: "movies",
   initialState,
@@ -41,6 +59,17 @@ const moviesSlice = createSlice({
         state.popularMovies = action.payload;
       })
       .addCase(fetchPopularMovies.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message ?? "Unknown error";
+      })
+      .addCase(fetchWatchProviderMovies.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchWatchProviderMovies.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.watchProviderMovies = action.payload;
+      })
+      .addCase(fetchWatchProviderMovies.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message ?? "Unknown error";
       });

@@ -11,7 +11,7 @@ const VodPage = () => {
     if (!tv && !movies) dispatch(fetchWatchProviders());
   }, [dispatch]);
 
-  return <main>{tv && movies && <VodPageContent />}</main>;
+  return <>{tv && movies && <VodPageContent />}</>;
 };
 
 export default VodPage;
