@@ -8,25 +8,33 @@ import { fetchWatchProviderMovies } from "@/store/moviesSlice";
 import { fetchWatchProviderTvSeries } from "@/store/tvSeriesSlice";
 
 const VodPageContent = () => {
-  const { tv, filters } = useAppSelector((state) => state.watchProviders);
+  const { filters } = useAppSelector((state) => state.watchProviders);
   const { watchProviderMovies } = useAppSelector((state) => state.movies);
   const { watchProviderTvSeries } = useAppSelector((state) => state.tvSeries);
-  const chosenProviderName = tv?.results
-    ?.find((provider) => provider.provider_id === filters?.watchProviderId)
-    ?.provider_name?.toUpperCase();
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!watchProviderMovies) dispatch(fetchWatchProviderMovies({page: 1, providerId: null}));
+    if (!watchProviderMovies)
+      dispatch(
+        fetchWatchProviderMovies({
+          page: 1,
+          providerId: filters.watchProviderId,
+          filterBy: filters.filterBy,
+        })
+      );
     if (!watchProviderTvSeries)
-      dispatch(fetchWatchProviderTvSeries({page: 1, providerId: null}));
+      dispatch(
+        fetchWatchProviderTvSeries({
+          page: 1,
+          providerId: filters.watchProviderId,
+          filterBy: filters.filterBy,
+        })
+      );
   }, []);
 
   return (
     <main className={styles["vod-page-content"]}>
-      <h2 className={styles["vod-page-content__header"]}>{`Available content on ${
-        chosenProviderName || "platforms"
-      }`}</h2>
       <VodPageContentFilter />
       {watchProviderMovies && <VodPageContentMovies />}
       {watchProviderTvSeries && <VodPageContentTvSeries />}

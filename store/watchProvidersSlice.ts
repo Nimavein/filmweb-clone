@@ -19,7 +19,7 @@ const initialState: WatchProvidersState = {
   error: null,
   filters: {
     watchProviderId: null,
-    filterBy: null
+    filterBy: "popularity.desc"
   }
 };
 

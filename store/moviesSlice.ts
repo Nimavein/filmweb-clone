@@ -31,12 +31,14 @@ export const fetchPopularMovies = createAsyncThunk<Movies, { page: number }>(
 
 export const fetchWatchProviderMovies = createAsyncThunk<
   Movies,
-  { page: number; providerId: number | null }
->("movies/fetchWatchProviderMovies", async ({ page, providerId }) => {
+  { page: number; providerId: number | null; filterBy: string | null }
+>("movies/fetchWatchProviderMovies", async ({ page = 1, providerId, filterBy }) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_API_URL}discover/movie?api_key=${
       process.env.NEXT_PUBLIC_API_KEY
-    }&page=${page}${providerId !== null ? `&with_watch_providers=${providerId}` : ""}}`
+    }&page=${page}${providerId !== null ? `&with_watch_providers=${providerId}` : ""}${
+      filterBy !== null ? `&sort_by=${filterBy}` : ""
+    }&vote_count.gte=100`
   );
   if (!response.ok) {
     throw new Error("Failed to fetch watch provider movies.");

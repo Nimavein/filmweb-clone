@@ -11,7 +11,7 @@ const VodPageContentTvSeries = () => {
 
   return (
     <section
-      className={`${styles["vod-page-content__series"]} ${sectionStyles["vod-page-content__section"]} `}
+      className={`${styles["vod-page-content__tv-series"]} ${sectionStyles["vod-page-content__section"]} `}
     >
       <h2 className={sectionStyles["vod-page-content__section-header"]}>AVAILABLE TV SERIES</h2>
       <Carousel

@@ -1,0 +1,11 @@
+.vod-page-content__movie {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+
+  &-title {
+    max-width: 160px;
+    margin: 10px 0 20px 0;
+  }
+}

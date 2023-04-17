@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/store";
 import styles from "../VodPageContentFilter.module.scss";
@@ -14,8 +14,8 @@ const VodPageContentFilterProviders = () => {
 
   const onProviderClick = (providerId: number) => {
     dispatch(setWatchProviderId(providerId));
-      dispatch(fetchWatchProviderMovies({ page: 1, providerId: providerId }));
-      dispatch(fetchWatchProviderTvSeries({ page: 1, providerId: providerId }));
+    dispatch(fetchWatchProviderMovies({ page: 1, providerId, filterBy: filters?.filterBy }));
+    dispatch(fetchWatchProviderTvSeries({ page: 1, providerId, filterBy: filters?.filterBy }));
   };
 
   return (
@@ -33,8 +33,8 @@ const VodPageContentFilterProviders = () => {
               <Image
                 alt=""
                 src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${provider.logo_path}`}
-                width={40}
-                height={30}
+                width={30}
+                height={22}
               />
             </Button>
           </li>

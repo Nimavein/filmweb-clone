@@ -6,6 +6,7 @@ import Image from "next/image";
 import ReadMoreText from "@/components/ReadMoreText/ReadMoreText";
 import { CircularProgressbar } from "react-circular-progressbar";
 import { getYear } from "date-fns";
+import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 
 interface PersonDetail {
   name: string;
@@ -46,13 +47,17 @@ const PersonContentDetails = () => {
       className={`${styles["person-content__details"]} ${sectionStyles["person-content__section"]}`}
     >
       <div className={styles["person-content__details-top"]}>
-        <Image
-          src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${details?.profile_path}`}
-          alt=""
-          width={200}
-          height={300}
-          className={styles["person-content__details-image"]}
-        />
+        {details?.profile_path ? (
+          <Image
+            src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${details?.profile_path}`}
+            alt=""
+            width={200}
+            height={300}
+            className={styles["person-content__details-image"]}
+          />
+        ) : (
+          <ImagePlaceholder height={300} width={200} />
+        )}
         <div className={styles["person-content__details-text"]}>
           <h1 className={styles["person-content__details-name"]}>{details?.name}</h1>
           {details?.also_known_as && (
