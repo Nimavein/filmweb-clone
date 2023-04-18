@@ -5,22 +5,22 @@ import Pagination from "@/components/Pagination/Pagination";
 import styles from "./MovieReviewsList.module.scss";
 import MovieReviewsListItem from "./MovieReviewsListItem/MovieReviewsListItem";
 import { Review } from "@/types/types";
+import { useRouter } from "next/router";
 
-interface MovieReviewsListProps {
-  movieId: number;
-}
-
-const MovieReviewsList = ({ movieId }: MovieReviewsListProps) => {
+const MovieReviewsList = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const { id } = router.query;
 
   const { reviews, movieDetails } = useAppSelector((state) => state.movie);
 
   useEffect(() => {
-    if (movieId !== movieDetails?.id) dispatch(fetchMovieData(movieId));
-    if (movieId !== reviews?.id && reviews?.page !== currentPage)
-      dispatch(fetchMovieReviews({ movie_id: movieId, page: currentPage }));
-  }, [dispatch, currentPage, movieId]);
+    if (id && (Number(id) !== movieDetails?.id)) dispatch(fetchMovieData(Number(id)));
+    if (id && (Number(id) !== reviews?.id) && (reviews?.page !== currentPage))
+      dispatch(fetchMovieReviews({ movie_id: Number(id), page: currentPage }));
+  }, [dispatch, currentPage, id, movieDetails?.id]);
 
   return reviews?.results && reviews?.results?.length > 0 ? (
     <section className={styles["movie-reviews"]}>

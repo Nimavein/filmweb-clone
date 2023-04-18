@@ -16,7 +16,7 @@ const SeriesContent = () => {
   const images = details?.images;
 
   useEffect(() => {
-    if (details?.id && reviews?.id !== details?.id && reviews?.page !== 1)
+    if (details?.id && (reviews?.id !== details?.id || reviews?.page !== 1))
       dispatch(fetchSeriesReviews({ tv_id: details?.id, page: 1 }));
   }, [details?.id, dispatch]);
 

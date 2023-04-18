@@ -30,7 +30,7 @@ export const fetchMovieData = createAsyncThunk<
         `${process.env.NEXT_PUBLIC_BASE_MOVIE_API_URL}${movie_id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=images,videos,credits`
       ).then((res) => res.json()) as Promise<MovieDetails>,
       fetch(
-        `${process.env.NEXT_PUBLIC_BASE_MOVIE_API_URL}${movie_id}watch/providers?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+        `${process.env.NEXT_PUBLIC_BASE_MOVIE_API_URL}${movie_id}/watch/providers?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
       ).then((res) => res.json()) as Promise<WatchProviders>,
     ]);
     return { movieDetails, watchProviders: watchProviders };

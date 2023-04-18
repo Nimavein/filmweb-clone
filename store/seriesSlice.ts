@@ -34,7 +34,7 @@ export const fetchSeriesData = createAsyncThunk<
         `${process.env.NEXT_PUBLIC_BASE_SERIES_API_URL}${tv_id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=images,videos,aggregate_credits`
       ).then((res) => res.json()) as Promise<SeriesDetails>,
       fetch(
-        `${process.env.NEXT_PUBLIC_BASE_SERIES_API_URL}${tv_id}watch/providers?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+        `${process.env.NEXT_PUBLIC_BASE_SERIES_API_URL}${tv_id}/watch/providers?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
       ).then((res) => res.json()) as Promise<WatchProviders>,
     ]);
     return { details, watchProviders: watchProviders };
