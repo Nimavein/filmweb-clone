@@ -5,6 +5,7 @@ import { Menu, MenuProps } from "antd";
 import Link from "next/link";
 import { MenuItem, NavbarLink } from "@/types/types";
 import { HomeFilled } from "@ant-design/icons";
+import NavbarSearch from "./NavbarSearch/NavbarSearch";
 
 const Navbar = () => {
   const [current, setCurrent] = useState("mail");
@@ -56,6 +57,7 @@ const Navbar = () => {
 
   return (
     <nav className={styles["main-navbar"]}>
+      <NavbarSearch />
       <Menu
         theme="dark"
         className={styles["main-navbar__list"]}

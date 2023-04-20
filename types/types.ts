@@ -7,6 +7,8 @@ export interface Genre {
   name: string;
 }
 
+export type MediaType = "movie" | "tv" | "person";
+
 export interface ProductionCountry {
   iso_3166_1: string;
   name: string;
@@ -77,6 +79,7 @@ export interface MovieDetails {
   credits: Credits;
   images: Images;
   videos: Videos;
+  media_type: MediaType;
 }
 
 export interface CrewMember {
@@ -255,6 +258,7 @@ export interface PersonDetails {
   tv_credits: PersonTvCredits;
   movie_credits: PersonMovieCredits;
   images: PersonImages;
+  media_type: MediaType;
 }
 
 export interface KnownForMovie {
@@ -509,6 +513,7 @@ export interface SeriesDetails {
   aggregate_credits: SeriesAggregateCredits | null;
   images: Images;
   videos: Videos;
+  media_type: MediaType;
 }
 
 export interface SeriesAggregateCreditsCastRoles {
@@ -637,3 +642,5 @@ export type GetWatchProvidersResults = GetWatchProvidersResult[];
 export interface GetWatchProviders {
   results : GetWatchProvidersResults;
 }
+
+export type SearchResults = Array<MovieDetails | SeriesDetails | PersonDetails> | null;

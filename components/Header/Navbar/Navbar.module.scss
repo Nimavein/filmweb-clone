@@ -1,5 +1,17 @@
 .main-navbar {
+  max-width: 1024px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   &__list {
     background-color: $black;
   } 
+
+  &__search {
+    margin-bottom: 20px;
+    width: 500px;
+  }
 }
