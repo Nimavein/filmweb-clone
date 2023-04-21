@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { KeyboardEvent, useState } from "react";
 import { AutoComplete } from "antd";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { setSearchQuery, searchMulti } from "@/store/searchSlice";
@@ -36,7 +36,7 @@ const NavbarSearch = () => {
     setOpen(false);
   };
 
-  const handleEnterClick = (event: any) => {
+  const handleEnterClick = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "Enter" && query.length > 0 && router.asPath !== "/search") {
       router.push("/search");
       setOpen(false);
