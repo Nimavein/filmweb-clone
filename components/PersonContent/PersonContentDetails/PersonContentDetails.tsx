@@ -14,7 +14,6 @@ interface PersonDetail {
 }
 
 const PersonContentDetails = () => {
-  const [isReadMoreBiography, setIsReadMoreBiography] = useState<boolean>(false);
   const { details } = useAppSelector((state) => state.person);
   const currentYear = getYear(new Date());
   const birthYear = details?.birthday && parseInt(details?.birthday?.slice(0, 4));
@@ -69,8 +68,6 @@ const PersonContentDetails = () => {
             <ReadMoreText
               text={details?.biography}
               showTextLength={400}
-              isReadMore={isReadMoreBiography}
-              setIsReadMore={setIsReadMoreBiography}
               textClassName={styles["person-content__details-bio"]}
             />
           )}

@@ -12,7 +12,6 @@ type SeriesContentReviewType = Review & {
 };
 
 const SeriesContentReview = ({ content, author_details, slideId }: SeriesContentReviewType) => {
-  const [isReadMore, setIsReadMore] = useState<boolean>(false);
   const images = useAppSelector((state) => state.series.details?.images);
   const imageHeight = 162;
 
@@ -31,8 +30,6 @@ const SeriesContentReview = ({ content, author_details, slideId }: SeriesContent
           <ReadMoreText
             textClassName={styles["series-content__review-text"]}
             text={content}
-            isReadMore={isReadMore}
-            setIsReadMore={setIsReadMore}
             showTextLength={500}
           />
         )}

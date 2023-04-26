@@ -6,8 +6,6 @@ import UserAvatar from "@/components/UserAvatar/UserAvatar";
 import { Review } from "@/types/types";
 
 const SeriesReviewsListItem = ({ content, author_details }: Review) => {
-  const [isReadMore, setIsReadMore] = useState<boolean>(false);
-
   return (
     <>
       <UserAvatar
@@ -19,8 +17,6 @@ const SeriesReviewsListItem = ({ content, author_details }: Review) => {
         {content && (
           <ReadMoreText
             text={content}
-            isReadMore={isReadMore}
-            setIsReadMore={setIsReadMore}
             showTextLength={250}
           />
         )}

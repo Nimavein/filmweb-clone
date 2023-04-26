@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "@/store";
 import { fetchNews } from "@/store/newsSlice";
 import styles from "./News.module.scss";
 import Image from "next/image";
+import ReadMoreText from "../ReadMoreText/ReadMoreText";
 
 const News = () => {
   const dispatch = useAppDispatch();
@@ -45,7 +46,11 @@ const News = () => {
               <Image alt="" src={article.image} width={120} height={80} />
               <div>
                 <p className={styles["news__list-article-title"]}>{article.title}</p>
-                <p className={styles["news__list-article-description"]}>{article.description}</p>
+                <ReadMoreText
+                  text={article.description}
+                  showTextLength={200}
+                  textClassName={styles["news__list-article-description"]}
+                />
               </div>
             </a>
           </li>

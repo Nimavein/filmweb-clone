@@ -16,7 +16,6 @@ const MovieContentReview = ({
   author_details,
   slideId,
 }: MovieContentReviewType) => {
-  const [isReadMore, setIsReadMore] = useState<boolean>(false);
   const images = useAppSelector((state) => state.movie.movieDetails?.images);
 
   return (
@@ -34,8 +33,6 @@ const MovieContentReview = ({
           <ReadMoreText
             textClassName={styles["movie-content__review-text"]}
             text={content}
-            isReadMore={isReadMore}
-            setIsReadMore={setIsReadMore}
             showTextLength={500}
           />
         )}
