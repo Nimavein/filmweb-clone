@@ -24,25 +24,31 @@ const News = () => {
         </a>
         <ul className={styles["news__main-list"]}>
           {news?.slice(1, 3).map((article, index) => (
-            <a href={article.link} target="blank" className={styles["news__main-list-article"]} key={index}>
-              <div className={styles["news__main-list-article-image-wrapper"]}>
-                <Image alt="" src={article.image} fill />
-              </div>
-              <p className={styles["news__main-list-article-title"]}>{article.title}</p>
-              <p className={styles["news__main-list-article-description"]}>{article.description}</p>
-            </a>
+            <li key={index}>
+              <a href={article.link} target="blank" className={styles["news__main-list-article"]}>
+                <div className={styles["news__main-list-article-image-wrapper"]}>
+                  <Image alt="" src={article.image} fill />
+                </div>
+                <p className={styles["news__main-list-article-title"]}>{article.title}</p>
+                <p className={styles["news__main-list-article-description"]}>
+                  {article.description}
+                </p>
+              </a>
+            </li>
           ))}
         </ul>
       </div>
       <ul className={styles["news__list"]}>
         {news?.slice(4).map((article, index) => (
-          <a href={article?.link} target="blank" className={styles["news__list-article"]} key={index}>
-            <Image alt="" src={article.image} width={120} height={80} />
-            <div>
-              <p className={styles["news__list-article-title"]}>{article.title}</p>
-              <p className={styles["news__list-article-description"]}>{article.description}</p>
-            </div>
-          </a>
+          <li key={index}>
+            <a href={article?.link} target="blank" className={styles["news__list-article"]}>
+              <Image alt="" src={article.image} width={120} height={80} />
+              <div>
+                <p className={styles["news__list-article-title"]}>{article.title}</p>
+                <p className={styles["news__list-article-description"]}>{article.description}</p>
+              </div>
+            </a>
+          </li>
         ))}
       </ul>
     </section>
