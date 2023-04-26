@@ -9,7 +9,7 @@ const News = () => {
   const { news } = useAppSelector((state) => state.news);
 
   useEffect(() => {
-    dispatch(fetchNews());
+    if (news?.length === 0) dispatch(fetchNews());
   }, []);
 
   return (
