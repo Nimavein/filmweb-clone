@@ -17,25 +17,18 @@ const SearchListItem = (result: MovieDetails | SeriesDetails | PersonDetails) =>
   const imageUrl = `${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${imagePath}`;
   const linkUrl = `${getSearchResultType(mediaType)}${id}`;
   return (
-    <li>
-      <Link key={id} href={linkUrl}>
-        {imagePath ? (
-          <Image
-            alt=""
-            width={dropdownImageWidth}
-            height={dropdownImageHeight}
-            src={imageUrl}
-          />
-        ) : (
-          <ImagePlaceholder
-            width={dropdownImageWidth}
-            height={dropdownImageHeight}
-            icon={mediaType === "person" ? <UserOutlined /> : <CameraOutlined />}
-          />
-        )}
-        {title}
-      </Link>
-    </li>
+    <Link href={linkUrl}>
+      {imagePath ? (
+        <Image alt="" width={dropdownImageWidth} height={dropdownImageHeight} src={imageUrl} />
+      ) : (
+        <ImagePlaceholder
+          width={dropdownImageWidth}
+          height={dropdownImageHeight}
+          icon={mediaType === "person" ? <UserOutlined /> : <CameraOutlined />}
+        />
+      )}
+      {title}
+    </Link>
   );
 };
 

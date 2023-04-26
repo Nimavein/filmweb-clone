@@ -9,21 +9,29 @@ import NavbarSearchItem from "./NavbarSearchItem/NavbarSearchItem";
 const NavbarSearch = () => {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
+  const [timeoutId, setTimeoutId] = useState<ReturnType<typeof setTimeout> | null>(null);
   const dispatch = useAppDispatch();
   const { results } = useAppSelector((state) => state.search);
   const router = useRouter();
   const isSearchPage = router.pathname.includes("/search");
 
-  const dropdownImageHeight = 60;
-  const dropdownImageWidth = dropdownImageHeight * 0.667;
-
-  const handleSearch = async (value: string) => {
-    setQuery(value);
-    dispatch(setSearchQuery(value));
+  const delayedSearch = async (value: string) => {
     await dispatch(searchMulti(value));
   };
 
-  const handleSelect = async (value: string) => {
+  const handleSearch = async (value: string) => {
+    if (results && results?.length > 0 && !isSearchPage) setOpen(true);
+    setQuery(value);
+    dispatch(setSearchQuery(value));
+
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+
+    setTimeoutId(setTimeout(() => delayedSearch(value), 500));
+  };
+
+  const handleSelect = (value: string) => {
     setQuery(value);
     setOpen(false);
   };
@@ -37,8 +45,18 @@ const NavbarSearch = () => {
   };
 
   const handleEnterClick = (event: KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === "Enter" && query.length > 0 && router.asPath !== "/search") {
-      router.push("/search");
+    if (event.key === "Enter" && router.asPath !== "/search") {
+      const chosenOption = document.querySelector(
+        ".ant-select-item-option-active a"
+      ) as HTMLAnchorElement;
+      console.log(chosenOption);
+
+      if (chosenOption) {
+        event.preventDefault();
+        chosenOption.click();
+      } else if (query.length > 0) {
+        router.push("/search");
+      }
       setOpen(false);
     }
   };

@@ -10,6 +10,10 @@ interface SearchListTabProps {
 const SearchListTab = ({ results }: SearchListTabProps) => {
   const [visibleResults, setVisibleResults] = useState(results?.slice(0, 20));
 
+  useEffect(() => {
+    setVisibleResults(results?.slice(0, 20));
+  }, [results]);
+
   const loadMoreResults = useCallback(() => {
     const newVisibleResults = results?.slice(
       visibleResults?.length ?? 0,
@@ -28,9 +32,13 @@ const SearchListTab = ({ results }: SearchListTabProps) => {
       hasMore={visibleResults && results ? visibleResults?.length < results?.length : false}
       loader={<div>Loading...</div>}
     >
-      {visibleResults?.map((result) => (
-        <SearchListItem key={result.id} {...result} />
-      ))}
+      <ul>
+        {visibleResults?.map((result) => (
+          <li key={result.id}>
+            <SearchListItem {...result} />
+          </li>
+        ))}
+      </ul>
     </InfiniteScroll>
   );
 };
