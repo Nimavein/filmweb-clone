@@ -5,7 +5,7 @@ const nextConfig = {
   reactStrictMode: true,
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
-    additionalData: `@import "styles/variables.scss";`,
+    additionalData: `@import "styles/variables.scss"; @import "styles/responsive.scss";`,
   },
   images: {
     remotePatterns: [
@@ -18,6 +18,7 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
+
 
 
 

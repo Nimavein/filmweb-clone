@@ -1,0 +1,17 @@
+$breakpoint-small: 576px;
+$breakpoint-medium: 768px;
+$breakpoint-large: 992px;
+$breakpoint-extra-large: 1200px;
+
+// Define the media queries with names
+$mq-small: "only screen and (min-width: #{$breakpoint-small})";
+$mq-medium: "only screen and (min-width: #{$breakpoint-medium})";
+$mq-large: "only screen and (min-width: #{$breakpoint-large})";
+$mq-extra-large: "only screen and (min-width: #{$breakpoint-extra-large})";
+
+// Define the mixin that takes a media query as an argument
+@mixin respond-to($media-query) {
+  @media #{$media-query} {
+    @content;
+  }
+}

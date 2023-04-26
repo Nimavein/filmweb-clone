@@ -8,6 +8,7 @@ import seriesSlice from "./seriesSlice";
 import tvSeriesSlice from "./tvSeriesSlice";
 import watchProvidersSlice from "./watchProvidersSlice";
 import searchSlice from "./searchSlice";
+import newsSlice from "./newsSlice";
 
 const store = configureStore({
   reducer: {
@@ -19,6 +20,7 @@ const store = configureStore({
     tvSeries: tvSeriesSlice,
     watchProviders: watchProvidersSlice,
     search: searchSlice,
+    news: newsSlice,
   },
 });
 

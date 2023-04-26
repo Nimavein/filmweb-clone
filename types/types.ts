@@ -644,3 +644,13 @@ export interface GetWatchProviders {
 }
 
 export type SearchResults = Array<MovieDetails | SeriesDetails | PersonDetails> | null;
+
+export interface Article {
+  id: string;
+  title: string;
+  description: string;
+  link: string;
+  image: string;
+}
+
+export type News = Article[];
