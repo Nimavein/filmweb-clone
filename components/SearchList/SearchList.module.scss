@@ -1,4 +1,20 @@
 .search-list {
   max-width: 1024px;
   margin: 40px auto;
+
+  &__items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  &__item {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 120px;
+    text-align: center;
+  }
 }

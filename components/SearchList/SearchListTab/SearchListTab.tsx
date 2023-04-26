@@ -2,6 +2,7 @@ import { SearchResults } from "@/types/types";
 import React, { useCallback, useEffect, useState } from "react";
 import SearchListItem from "./SearchListItem/SearchListItem";
 import InfiniteScroll from "react-infinite-scroll-component";
+import styles from "../SearchList.module.scss";
 
 interface SearchListTabProps {
   results: SearchResults;
@@ -32,7 +33,7 @@ const SearchListTab = ({ results }: SearchListTabProps) => {
       hasMore={visibleResults && results ? visibleResults?.length < results?.length : false}
       loader={<div>Loading...</div>}
     >
-      <ul>
+      <ul className={styles["search-list__items"]}>
         {visibleResults?.map((result) => (
           <li key={result.id}>
             <SearchListItem {...result} />

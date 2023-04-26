@@ -1,10 +1,11 @@
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 import { getSearchResultType } from "@/helpers/getSearchResultType";
 import { MovieDetails, SeriesDetails, PersonDetails } from "@/types/types";
 import { UserOutlined, CameraOutlined } from "@ant-design/icons";
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
+import styles from "../../Navbar.module.scss";
 
 const NavbarSearchItem = (result: MovieDetails | SeriesDetails | PersonDetails) => {
   const title = "title" in result ? result.title : "name" in result && result.name;
@@ -18,7 +19,7 @@ const NavbarSearchItem = (result: MovieDetails | SeriesDetails | PersonDetails) 
   const dropdownImageWidth = dropdownImageHeight * 0.667;
 
   return (
-    <Link key={id} href={linkUrl}>
+    <Link className={styles["main-navbar__search-item"]} key={id} href={linkUrl}>
       {imagePath ? (
         <Image alt="" width={dropdownImageWidth} height={dropdownImageHeight} src={imageUrl} />
       ) : (

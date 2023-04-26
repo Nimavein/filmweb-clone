@@ -5,9 +5,10 @@ import Link from "next/link";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 import { getSearchResultType } from "@/helpers/getSearchResultType";
 import { MovieDetails, SeriesDetails, PersonDetails } from "@/types/types";
+import styles from "../../SearchList.module.scss";
 
 const SearchListItem = (result: MovieDetails | SeriesDetails | PersonDetails) => {
-  const dropdownImageHeight = 120;
+  const dropdownImageHeight = 180;
   const dropdownImageWidth = dropdownImageHeight * 0.667;
   const title = "title" in result ? result.title : "name" in result && result.name;
   const mediaType = result.media_type;
@@ -17,7 +18,7 @@ const SearchListItem = (result: MovieDetails | SeriesDetails | PersonDetails) =>
   const imageUrl = `${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${imagePath}`;
   const linkUrl = `${getSearchResultType(mediaType)}${id}`;
   return (
-    <Link href={linkUrl}>
+    <Link className={styles["search-list__item"]} href={linkUrl}>
       {imagePath ? (
         <Image alt="" width={dropdownImageWidth} height={dropdownImageHeight} src={imageUrl} />
       ) : (
