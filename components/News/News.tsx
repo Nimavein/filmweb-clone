@@ -31,9 +31,11 @@ const News = () => {
                   <Image alt="" src={article.image} fill />
                 </div>
                 <p className={styles["news__main-list-article-title"]}>{article.title}</p>
-                <p className={styles["news__main-list-article-description"]}>
-                  {article.description}
-                </p>
+                <ReadMoreText
+                  text={article.description}
+                  showTextLength={200}
+                  textClassName={styles["news__main-list-article-description"]}
+                />
               </a>
             </li>
           ))}
