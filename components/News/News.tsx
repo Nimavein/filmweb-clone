@@ -19,8 +19,8 @@ const News = () => {
         <a href={news[0]?.link} target="blank" className={styles["news__main-article"]}>
           <div className={styles["news__main-article-image-wrapper"]}>
             <Image alt="" src={news[0]?.image} fill />
+            <p className={styles["news__main-article-title"]}>{news[0]?.title}</p>
           </div>
-          <p className={styles["news__main-article-title"]}>{news[0]?.title}</p>
           <p className={styles["news__main-article-description"]}>{news[0]?.description}</p>
         </a>
         <ul className={styles["news__main-list"]}>

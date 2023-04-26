@@ -20,14 +20,21 @@
     &-article {
       display: flex;
       flex-direction: column;
+      position: relative;
 
       &-title {
         color: $white;
-        font-size: 18px;
-        margin: 14px 0 8px 0;
+        font-size: 20px;
+        position: absolute;
+        bottom: 10px;
+        left: 5%;
+        max-width: 90%;
+        background: rgba($black, 0.7);
+        padding: 20px;
       }
 
       &-description {
+        margin-top: 10px;
         font-size: 16px;
         color: $light-gray;
       }
@@ -35,7 +42,7 @@
       &-image-wrapper {
         position: relative;
         width: 100%;
-        min-height: 200px;
+        min-height: 280px;
       }
     }
 
