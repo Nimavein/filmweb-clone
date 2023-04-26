@@ -45,7 +45,7 @@ const News = () => {
         {news?.slice(4).map((article, index) => (
           <li key={index}>
             <a href={article?.link} target="blank" className={styles["news__list-article"]}>
-              <Image alt="" src={article.image} width={120} height={80} />
+              <Image alt="" src={article.image} width={140} height={80} />
               <div>
                 <p className={styles["news__list-article-title"]}>{article.title}</p>
                 <ReadMoreText
