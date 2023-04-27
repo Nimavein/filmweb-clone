@@ -9,7 +9,7 @@ const PopularMoviesPage = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
-    dispatch(fetchPopularMovies({ page: currentPage }));
+    if (!popularMovies || popularMovies?.page !== currentPage) dispatch(fetchPopularMovies({ page: currentPage }));
   }, [dispatch, currentPage]);
 
   return (

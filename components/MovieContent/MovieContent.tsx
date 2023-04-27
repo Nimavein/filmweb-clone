@@ -5,7 +5,7 @@ import MovieContentReviews from "./MovieContentReviews/MovieContentReviews";
 import MovieContentDescription from "./MovieContentDescription/MovieContentDescription";
 import MovieContentImages from "./MovieContentImages/MovieContentImages";
 import { useAppDispatch, useAppSelector } from "@/store";
-import { fetchCollectionData, fetchMovieReviews } from "@/store/movieSlice";
+import { fetchCollectionData, fetchMovieReviews, resetCollection } from "@/store/movieSlice";
 import MovieContentCredits from "./MovieContentCredits/MovieContentCredits";
 import MovieContentInformation from "./MovieContentInformation/MovieContentInformation";
 import MovieContentCollection from "./MovieContentCollection/MovieContentCollection";
@@ -28,6 +28,8 @@ const MovieContent = () => {
       collection?.id !== movieDetails.belongs_to_collection?.id
     ) {
       dispatch(fetchCollectionData(movieDetails?.belongs_to_collection?.id));
+    } else if (!movieDetails?.belongs_to_collection) {
+      dispatch(resetCollection());
     }
   }, [movieDetails?.belongs_to_collection, dispatch]);
 

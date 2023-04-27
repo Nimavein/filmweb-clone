@@ -83,7 +83,11 @@ export const fetchCollectionData = createAsyncThunk<
 const movieSlice = createSlice({
   name: "movieData",
   initialState,
-  reducers: {},
+  reducers: {
+    resetCollection: (state) => {
+      state.collection = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchMovieData.pending, (state) => {
@@ -124,3 +128,4 @@ const movieSlice = createSlice({
 });
 
 export default movieSlice.reducer;
+export const { resetCollection } = movieSlice.actions;
