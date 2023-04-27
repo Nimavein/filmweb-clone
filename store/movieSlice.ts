@@ -1,12 +1,14 @@
-import { ApiStatus, MovieDetails, Reviews, WatchProviders } from "@/types/types";
+import { ApiStatus, CollectionDetails, MovieDetails, Reviews, WatchProviders } from "@/types/types";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 interface MovieState {
   movieDetails: MovieDetails | null;
   reviews: Reviews | null;
   watchProviders: WatchProviders | null;
+  collection: CollectionDetails | null;
   status: ApiStatus;
   reviewsStatus: ApiStatus;
+  collectionStatus: ApiStatus;
   error: string | null;
 }
 
@@ -14,13 +16,15 @@ const initialState: MovieState = {
   movieDetails: null,
   reviews: null,
   watchProviders: null,
+  collection: null,
   status: "idle",
   reviewsStatus: "idle",
+  collectionStatus: "idle",
   error: null,
 };
 
 export const fetchMovieData = createAsyncThunk<
-  { movieDetails: MovieDetails; watchProviders: WatchProviders; },
+  { movieDetails: MovieDetails; watchProviders: WatchProviders },
   number,
   { rejectValue: string }
 >("movieData/fetchMovieData", async (movie_id, { rejectWithValue }) => {
@@ -43,20 +47,38 @@ export const fetchMovieData = createAsyncThunk<
 export const fetchMovieReviews = createAsyncThunk<Reviews, { movie_id: number; page: number }>(
   "movieData/fetchMovieReviews",
   async ({ movie_id, page }, { rejectWithValue }) => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_MOVIE_API_URL}${movie_id}/reviews?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${page}`
-    );
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_MOVIE_API_URL}${movie_id}/reviews?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${page}`
+      );
 
-    if (!response.ok) {
-      const error = await Promise.reject("Failed to fetch reviews for the `movie.");
-      return rejectWithValue(error);
+      const data = await response.json();
+
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.message);
     }
-
-    const data = await response.json();
-
-    return data;
   }
 );
+
+export const fetchCollectionData = createAsyncThunk<
+  CollectionDetails,
+  number,
+  { rejectValue: string }
+>("movieData/fetchCollectionData", async (collection_id, { rejectWithValue }) => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_COLLECTION_API_URL}${collection_id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+    );
+
+    const data = await response.json();
+    console.log(data);
+
+    return data;
+  } catch (error: any) {
+    return rejectWithValue(error.message);
+  }
+});
 
 const movieSlice = createSlice({
   name: "movieData",
@@ -85,6 +107,17 @@ const movieSlice = createSlice({
       })
       .addCase(fetchMovieReviews.rejected, (state, action) => {
         state.reviewsStatus = "failed";
+        state.error = action.error.message ?? "Unknown error";
+      })
+      .addCase(fetchCollectionData.pending, (state) => {
+        state.collectionStatus = "loading";
+      })
+      .addCase(fetchCollectionData.fulfilled, (state, action) => {
+        state.collectionStatus = "succeeded";
+        state.collection = action.payload;
+      })
+      .addCase(fetchCollectionData.rejected, (state, action) => {
+        state.collectionStatus = "failed";
         state.error = action.error.message ?? "Unknown error";
       });
   },

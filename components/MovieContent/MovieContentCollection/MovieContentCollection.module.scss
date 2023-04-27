@@ -1,0 +1,42 @@
+.movie-content__collection {
+  &-list {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+
+    &-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      max-width: 80px;
+
+      &-title, &-release {
+        font-size: 12px;
+      }
+
+      &-title {
+        margin: 8px 0 2px 0;
+      }
+    }
+  }
+
+  ::-webkit-scrollbar {
+    height: 8px;
+
+    &-track {
+      box-shadow: inset 0 0 2px $gray;
+      border-radius: 3px;
+    }
+
+    &-thumb {
+      background: $light-gray;
+      border-radius: 3px;
+
+      &:hover {
+        background: $gray;
+      }
+    }
+  }
+}
