@@ -35,7 +35,7 @@ const MovieContent = () => {
     <main className={styles["movie-content"]}>
       <MovieContentTopPanel />
       <MovieContentDescription />
-      {collection && <MovieContentCollection />}
+      {movieDetails?.belongs_to_collection && collection && <MovieContentCollection />}
       {reviews?.results && reviews?.results?.length > 0 && <MovieContentReviews />}
       {credits?.cast && credits?.cast?.length > 0 && <MovieContentCredits />}
       <MovieContentInformation />
