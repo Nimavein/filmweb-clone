@@ -1,10 +1,10 @@
-import { ApiStatus, Movies, RankingSort } from "@/types/types";
+import { ApiStatus, Movies, RankingSort, TvSeries } from "@/types/types";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface RankingState {
   sortBy: RankingSort;
-  moviesRanking: any;
-  tvSeriesRanking: any;
+  moviesRanking: Movies | null;
+  tvSeriesRanking: TvSeries | null;
   moviesStatus: ApiStatus;
   tvSeriesStatus: ApiStatus;
   error: string | null;
