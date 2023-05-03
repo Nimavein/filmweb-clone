@@ -52,6 +52,7 @@ const Navbar = () => {
       null,
       Object.values(navbarLinks.people).map((link) => getNavbarItem(createLink(link), link.key))
     ),
+    getNavbarItem(createLink(navbarLinks.rankings), navbarLinks.rankings.key),
     getNavbarItem(createLink(navbarLinks.vod), navbarLinks.vod.key),
   ];
 

@@ -8,7 +8,6 @@ const Footer = () => {
     { label: "popular movies", url: navbarLinks.movies.popular.path },
     { label: "popular tv series", url: navbarLinks.tvSeries.popular.path },
     { label: "popular people", url: navbarLinks.people.popular.path },
-    { label: "movies ranking", url: navbarLinks.movies.ranking.path },
   ];
 
   return (

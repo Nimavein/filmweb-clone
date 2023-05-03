@@ -165,7 +165,6 @@ export interface NavbarLinks {
   movies: {
     main: NavbarLink;
     popular: NavbarLink;
-    ranking: NavbarLink;
   };
   tvSeries: {
     main: NavbarLink;
@@ -176,6 +175,7 @@ export interface NavbarLinks {
     popular: NavbarLink;
   };
   vod: NavbarLink;
+  rankings: NavbarLink;
 }
 
 export interface Backdrop {
@@ -554,8 +554,8 @@ export interface SeriesAggregateCreditsCrewMember {
   jobs?: SeriesAggregateCreditsCrewJobs[];
 }
 
-export type SeriesAggregateCreditsCast = SeriesAggregateCreditsCastMember[]; 
-export type SeriesAggregateCreditsCrew = SeriesAggregateCreditsCrewMember[]; 
+export type SeriesAggregateCreditsCast = SeriesAggregateCreditsCastMember[];
+export type SeriesAggregateCreditsCrew = SeriesAggregateCreditsCrewMember[];
 
 export interface SeriesAggregateCredits {
   cast?: SeriesAggregateCreditsCast;
@@ -628,7 +628,7 @@ export interface WatchProviders {
   results: {
     [countryCode: string]: WatchProvidersResult;
   };
-};
+}
 
 export interface GetWatchProvidersResult {
   display_priority?: number;
@@ -640,7 +640,7 @@ export interface GetWatchProvidersResult {
 export type GetWatchProvidersResults = GetWatchProvidersResult[];
 
 export interface GetWatchProviders {
-  results : GetWatchProvidersResults;
+  results: GetWatchProvidersResults;
 }
 
 export type SearchResults = Array<MovieDetails | SeriesDetails | PersonDetails> | null;
@@ -663,3 +663,14 @@ export interface CollectionDetails {
   backdrop_path: string | null;
   parts: Movie[];
 }
+
+export type RankingSort =
+  | "popularity.desc"
+  | "popularity.inc"
+  | "vote_average.desc"
+  | "vote_average.inc";
+
+  export interface RankingSortOption {
+    label: string;
+    value: RankingSort;
+  }

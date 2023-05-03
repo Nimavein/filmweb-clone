@@ -9,11 +9,6 @@ export const navbarLinks: NavbarLinks = {
       path: "/movies/popular",
       key: "movies-popular",
     },
-    ranking: {
-      name: "Ranking",
-      path: "/movies/ranking",
-      key: "movies-ranking",
-    },
   },
   tvSeries: {
     main: { name: "TV Series", path: "/tv-series", key: "tv-series" },
@@ -24,4 +19,5 @@ export const navbarLinks: NavbarLinks = {
     popular: { name: "Popular", path: "/people/popular", key: "people-popular" },
   },
   vod: { name: "Vod", path: "/vod", key: "vod" },
+  rankings: {name: "Rankings", path: "/rankings", key:"rankings" },
 };
