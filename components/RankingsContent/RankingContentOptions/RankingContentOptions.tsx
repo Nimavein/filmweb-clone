@@ -1,22 +1,25 @@
 import React from "react";
 import { RankingSort, RankingSortOption } from "@/types/types";
 import styles from "../RankingsContent.module.scss";
-import { setSortBy } from "@/store/rankingSlice";
+import { fetchMoviesRankingData, fetchTvSeriesRankingData, setSortBy } from "@/store/rankingSlice";
 import { useAppDispatch, useAppSelector } from "@/store";
-import { AsyncThunk } from "@reduxjs/toolkit";
 
 interface RankingContentOptionsProps {
   options: RankingSortOption[];
-  fetchRankingData: AsyncThunk<any, RankingSort, any>;
+  contentType: "movies" | "tv-series";
 }
 
-const RankingContentOptions = ({ options, fetchRankingData }: RankingContentOptionsProps) => {
+const RankingContentOptions = ({ options, contentType }: RankingContentOptionsProps) => {
   const dispatch = useAppDispatch();
   const { sortBy } = useAppSelector((state) => state.ranking);
 
   const onOptionClick = async (value: RankingSort) => {
     dispatch(setSortBy(value));
-    await dispatch(fetchRankingData(value));
+    if (contentType === "movies") {
+      await dispatch(fetchMoviesRankingData(value));
+    } else if (contentType === "tv-series") {
+      await dispatch(fetchTvSeriesRankingData(value));
+    }
   };
 
   return (

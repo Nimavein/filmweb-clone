@@ -32,7 +32,7 @@ const RankingContentMovies = () => {
 
   return (
     <>
-      <RankingContentOptions options={options} fetchRankingData={fetchMoviesRankingData} />
+      <RankingContentOptions options={options} contentType="movies" />
       <ul className={styles["ranking-list"]}>
         {moviesRanking?.results?.map((movie: Movie, index: number) => (
           <li key={movie.id}>

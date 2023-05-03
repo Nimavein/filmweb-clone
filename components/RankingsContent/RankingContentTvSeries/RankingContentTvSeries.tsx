@@ -32,7 +32,7 @@ const RankingContentTvSeries = () => {
 
   return (
     <>
-      <RankingContentOptions options={options} fetchRankingData={fetchTvSeriesRankingData} />
+      <RankingContentOptions options={options} contentType="tv-series" />
       <ul className={styles["ranking-list"]}>
         {tvSeriesRanking?.results?.map((series: Series, index: number) => (
           <li key={series.id}>
