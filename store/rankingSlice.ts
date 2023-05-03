@@ -23,7 +23,7 @@ export const fetchMoviesRankingData = createAsyncThunk<Movies, RankingSort>(
   "search/fetchMoviesRankingData",
   async (sortBy: RankingSort = "vote_average.desc") => {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_DISCOVER_API_URL}movie/?api_key=${process.env.NEXT_PUBLIC_API_KEY}&sort_by=${sortBy}&vote_count.gte=500`
+      `${process.env.NEXT_PUBLIC_BASE_DISCOVER_API_URL}movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&sort_by=${sortBy}&vote_count.gte=500`
     );
     const data = await response.json();
 
@@ -35,7 +35,7 @@ export const fetchTvSeriesRankingData = createAsyncThunk<Movies, RankingSort>(
   "search/fetchTvSeriesRankingData",
   async (sortBy: RankingSort = "vote_average.desc") => {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_DISCOVER_API_URL}tv/?api_key=${process.env.NEXT_PUBLIC_API_KEY}&sort_by=${sortBy}&vote_count.gte=500`
+      `${process.env.NEXT_PUBLIC_BASE_DISCOVER_API_URL}tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&sort_by=${sortBy}&vote_count.gte=500`
     );
     const data = await response.json();
 
