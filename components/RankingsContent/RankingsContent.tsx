@@ -29,9 +29,9 @@ const RankingsContent = () => {
     setActiveTabKey(key);
     dispatch(setSortBy("vote_average.desc"))
     if (key === "1") {
-      await dispatch(fetchMoviesRankingData("vote_average.desc"));
+      await dispatch(fetchMoviesRankingData({ sortBy: "vote_average.desc" }));
     } else if (key === "2") {
-      await dispatch(fetchTvSeriesRankingData("vote_average.desc"));
+      await dispatch(fetchTvSeriesRankingData({ sortBy: "vote_average.desc" }));
     }
   };
 
