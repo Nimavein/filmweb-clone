@@ -24,7 +24,7 @@ const RankingOptions = ({ options, contentType }: RankingOptionsProps) => {
 
   return (
     <ul className={styles["ranking-types"]}>
-      {options.map((option) => (
+      {options?.map((option) => (
         <li key={option.label} className={styles["ranking-type"]}>
           <label
             className={`${styles["ranking-type__label"]} ${

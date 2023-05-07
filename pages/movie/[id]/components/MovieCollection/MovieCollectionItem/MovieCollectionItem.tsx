@@ -22,7 +22,7 @@ const MovieCollectionItem = ({ title, id, poster_path, release_date }: Movie) =>
       )}
       <p className={styles["movie-collection__list-item-title"]}>{title}</p>
       <p className={styles["movie-collection__list-item-release"]}>
-        {`(${release_date.slice(0, 4)})`}
+        {`(${release_date?.slice(0, 4)})`}
       </p>
     </Link>
   );

@@ -29,11 +29,11 @@ const RankingFilter = ({
   }, [activeFilters]);
 
   const onChange = (value: string) => {
-    if (filter.name === "Original Language") {
+    if (filter?.name === "Original Language") {
       setActiveFilters({ ...activeFilters, originalLanguage: value });
-    } else if (filter.name === "Genre") {
+    } else if (filter?.name === "Genre") {
       setActiveFilters({ ...activeFilters, genre: value });
-    } else if (filter.name === "Production Year") {
+    } else if (filter?.name === "Production Year") {
       setActiveFilters({ ...activeFilters, productionYear: parseInt(value, 10) });
     }
   };
@@ -41,13 +41,13 @@ const RankingFilter = ({
   return (
     <Select
       showSearch
-      placeholder={filter.name}
+      placeholder={filter?.name}
       optionFilterProp="children"
       onChange={onChange}
       filterOption={(input, option) =>
         (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
       }
-      options={filter.values}
+      options={filter?.values}
     />
   );
 };
