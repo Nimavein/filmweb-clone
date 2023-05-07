@@ -9,10 +9,7 @@ interface MovieContentCreditsCarouselProps {
   cast?: Cast;
   crew?: Crew;
 }
-const MovieCreditsCarousel = ({
-  cast,
-  crew,
-}: MovieContentCreditsCarouselProps) => {
+const MovieCreditsCarousel = ({ cast, crew }: MovieContentCreditsCarouselProps) => {
   return (
     <Carousel
       slidesToShow={4}
