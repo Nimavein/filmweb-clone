@@ -1,4 +1,4 @@
-import { ApiStatus, Movies, RankingSort, TvSeries } from "@/types/types";
+import { ActiveRankingFilters, ApiStatus, Movies, RankingSort, TvSeries } from "@/types/types";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface RankingState {
@@ -19,27 +19,58 @@ const initialState: RankingState = {
   error: null,
 };
 
-export const fetchMoviesRankingData = createAsyncThunk<Movies, RankingSort>(
-  "search/fetchMoviesRankingData",
-  async (sortBy: RankingSort = "vote_average.desc") => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_DISCOVER_API_URL}movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&sort_by=${sortBy}&vote_count.gte=500`
-    );
-    const data = await response.json();
+interface RankingFilters {
+  sortBy: RankingSort;
+  filters?: ActiveRankingFilters;
+}
 
-    return data;
+export const fetchMoviesRankingData = createAsyncThunk<Movies, RankingFilters>(
+  "search/fetchMoviesRankingData",
+  async ({ sortBy = "vote_average.desc", filters }) => {
+    const { originalLanguage, genre, productionYear } = filters || {};
+    const url = `${process.env.NEXT_PUBLIC_BASE_DISCOVER_API_URL}movie?api_key=${
+      process.env.NEXT_PUBLIC_API_KEY
+    }&sort_by=${sortBy}&vote_count.gte=500${
+      originalLanguage ? `&with_original_language=${originalLanguage}` : ""
+    }${genre ? `&with_genres=${genre}` : ""}${
+      productionYear ? `&primary_release_year=${productionYear}` : ""
+    }`;
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+      throw new Error("Failed to fetch movies ranking data");
+    }
   }
 );
 
-export const fetchTvSeriesRankingData = createAsyncThunk<Movies, RankingSort>(
+export const fetchTvSeriesRankingData = createAsyncThunk<Movies, RankingFilters>(
   "search/fetchTvSeriesRankingData",
-  async (sortBy: RankingSort = "vote_average.desc") => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_DISCOVER_API_URL}tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&sort_by=${sortBy}&vote_count.gte=500`
-    );
-    const data = await response.json();
-
-    return data;
+  async ({ sortBy = "vote_average.desc", filters }) => {
+    const { originalLanguage, genre, productionYear } = filters || {};
+    const url = `${process.env.NEXT_PUBLIC_BASE_DISCOVER_API_URL}tv?api_key=${
+      process.env.NEXT_PUBLIC_API_KEY
+    }&sort_by=${sortBy}&vote_count.gte=500${
+      originalLanguage ? `&with_original_language=${originalLanguage}` : ""
+    }${genre ? `&with_genres=${genre}` : ""}${
+      productionYear ? `&primary_release_year=${productionYear}` : ""
+    }`;
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+      throw new Error("Failed to fetch tv series ranking data");
+    }
   }
 );
 

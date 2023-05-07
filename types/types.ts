@@ -674,3 +674,11 @@ export type RankingSort =
     label: string;
     value: RankingSort;
   }
+
+  export type RankingContentType = "movies" | "tv-series";
+
+  export interface ActiveRankingFilters {
+    originalLanguage: string;
+    genre: string;
+    productionYear: number | null;
+  }

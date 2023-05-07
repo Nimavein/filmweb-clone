@@ -2,8 +2,12 @@
   max-width: 1064px;
   margin: 40px auto;
 
+  &__options-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
   &-types {
-    margin-top: 14px;
     display: flex;
     gap: 4px;
   }
@@ -19,6 +23,7 @@
       border: 1px solid $gray;
       padding: 12px 20px;
       cursor: pointer;
+      display: flex;
 
       &--active {
         background-color: $black;
@@ -59,7 +64,7 @@
 
       &-title,
       &-name {
-        font-size: 20px;
+        font-size: 18px;
       }
 
       &-rating {

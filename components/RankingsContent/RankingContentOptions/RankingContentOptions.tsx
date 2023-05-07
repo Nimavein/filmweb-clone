@@ -1,12 +1,12 @@
 import React from "react";
-import { RankingSort, RankingSortOption } from "@/types/types";
+import { RankingContentType, RankingSort, RankingSortOption } from "@/types/types";
 import styles from "../RankingsContent.module.scss";
 import { fetchMoviesRankingData, fetchTvSeriesRankingData, setSortBy } from "@/store/rankingSlice";
 import { useAppDispatch, useAppSelector } from "@/store";
 
 interface RankingContentOptionsProps {
   options: RankingSortOption[];
-  contentType: "movies" | "tv-series";
+  contentType: RankingContentType;
 }
 
 const RankingContentOptions = ({ options, contentType }: RankingContentOptionsProps) => {
@@ -16,9 +16,9 @@ const RankingContentOptions = ({ options, contentType }: RankingContentOptionsPr
   const onOptionClick = async (value: RankingSort) => {
     dispatch(setSortBy(value));
     if (contentType === "movies") {
-      await dispatch(fetchMoviesRankingData(value));
+      await dispatch(fetchMoviesRankingData({ sortBy: value }));
     } else if (contentType === "tv-series") {
-      await dispatch(fetchTvSeriesRankingData(value));
+      await dispatch(fetchTvSeriesRankingData({ sortBy: value }));
     }
   };
 

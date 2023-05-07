@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/store";
-import { RankingSort, RankingSortOption, Series } from "@/types/types";
+import { RankingSortOption, Series } from "@/types/types";
 import { fetchTvSeriesRankingData, setSortBy } from "@/store/rankingSlice";
 import styles from "../RankingsContent.module.scss";
 import Image from "next/image";
@@ -8,15 +8,19 @@ import Link from "next/link";
 import Rating from "@/components/Rating/Rating";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 import RankingContentOptions from "../RankingContentOptions/RankingContentOptions";
+import { FilterOutlined } from "@ant-design/icons";
+import RankingContentFilters from "../RankingContentFilters/RankingContentFilters";
+import Button from "@/components/Button/Button";
 
 const RankingContentTvSeries = () => {
+  const [areFiltersOpen, setAreFiltersOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const { tvSeriesRanking } = useAppSelector((state) => state.ranking);
   const imageHeight = 120;
   const imageWidth = imageHeight * 0.667;
 
   useEffect(() => {
-    dispatch(fetchTvSeriesRankingData("vote_average.desc"));
+    dispatch(fetchTvSeriesRankingData({ sortBy: "vote_average.desc" }));
   }, []);
 
   const options: RankingSortOption[] = [
@@ -32,7 +36,17 @@ const RankingContentTvSeries = () => {
 
   return (
     <>
-      <RankingContentOptions options={options} contentType="tv-series" />
+      <div className={styles["ranking__options-wrapper"]}>
+        <RankingContentOptions options={options} contentType="tv-series" />
+        <Button
+          ariaLabel={areFiltersOpen ? "Close filters" : "Open filters"}
+          active={areFiltersOpen}
+          onClick={() => setAreFiltersOpen(!areFiltersOpen)}
+        >
+          <FilterOutlined />
+        </Button>
+      </div>
+      {areFiltersOpen && <RankingContentFilters contentType="tv-series" />}
       <ul className={styles["ranking-list"]}>
         {tvSeriesRanking?.results?.map((series: Series, index: number) => (
           <li key={series.id}>
