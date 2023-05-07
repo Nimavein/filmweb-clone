@@ -1,0 +1,21 @@
+.series-review {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  &__text {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  &__user {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 10px;
+
+    &-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

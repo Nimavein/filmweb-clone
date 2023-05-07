@@ -442,7 +442,7 @@ export interface SeriesCreator {
   profile_path: string | null;
 }
 
-export interface SeriesNetwork {
+export interface SeriesNetworkType {
   name: string;
   id: number;
   logo_path: string | null;
@@ -492,7 +492,7 @@ export interface SeriesDetails {
   last_episode_to_air?: SeriesLastEpisode;
   name?: string;
   next_episode_to_air?: null;
-  networks?: SeriesNetwork[];
+  networks?: SeriesNetworkType[];
   number_of_episodes?: number;
   number_of_seasons?: number;
   origin_country?: string[];

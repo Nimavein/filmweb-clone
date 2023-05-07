@@ -1,9 +1,9 @@
 import Loader from "@/components/Loader/Loader";
-import PersonContent from "@/components/PersonContent/PersonContent";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { fetchPersonData } from "@/store/personSlice";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import PersonContent from "./components/Person";
 
 const Person = () => {
   const router = useRouter();

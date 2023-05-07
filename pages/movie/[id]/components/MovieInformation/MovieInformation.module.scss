@@ -1,0 +1,26 @@
+.movie-information {
+  &__details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+
+  &__detail {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    &-name {
+      color: $gray;
+      font-size: 14px;
+    }
+
+    &-value {
+      text-align: right;
+      svg {
+        width: 20px;
+      }
+    }
+  }
+}

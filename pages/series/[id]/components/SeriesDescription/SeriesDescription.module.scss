@@ -1,0 +1,30 @@
+.series-description {
+  max-width: 724px;
+  margin: 40px auto;
+  display: flex;
+  gap: 20px;
+
+  &__seasons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 10px;
+  }
+
+  &__detail {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    &-name {
+      font-size: 14px;
+      color: $gray;
+    }
+  }
+}

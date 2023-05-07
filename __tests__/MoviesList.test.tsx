@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom/extend-expect";
 import { render } from "@testing-library/react";
-import MoviesList from "../components/MoviesList/MoviesList";
+import MoviesList from "../pages/movies/components/MoviesList";
 
 describe("MoviesList", () => {
   const movies = [

@@ -1,10 +1,10 @@
-import RankingsContent from "@/components/RankingsContent/RankingsContent";
 import React from "react";
+import Rankings from "./components/Rankings";
 
 const RankingsPage = () => {
   return (
     <main>
-      <RankingsContent />
+      <Rankings />
     </main>
   );
 };

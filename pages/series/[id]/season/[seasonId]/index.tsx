@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import Loader from "@/components/Loader/Loader";
-import SeriesSeasonContent from "@/components/SeriesSeasonContent/SeriesSeasonContent";
+import SeriesSeasonContent from "@/pages/series/[id]/season/[seasonId]/components/SeriesSeasonContent";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { fetchSeriesData, fetchSeriesSeasonData } from "@/store/seriesSlice";
 

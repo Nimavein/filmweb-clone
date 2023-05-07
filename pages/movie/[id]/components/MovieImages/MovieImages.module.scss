@@ -1,0 +1,10 @@
+.movie-images {
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    &-item {
+      position: relative;
+    }
+  }
+}

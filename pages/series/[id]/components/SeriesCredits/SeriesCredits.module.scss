@@ -1,0 +1,20 @@
+.series-credits {
+  &__slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+
+    &-title {
+      text-align: center;
+    }
+
+    &-job,
+    &-character {
+      color: $gray;
+      font-size: 14px;
+      text-align: center;
+    }
+  }
+}

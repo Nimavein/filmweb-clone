@@ -1,0 +1,14 @@
+.series {
+  max-width: 1024px;
+  margin: 0 auto;
+
+  &-section {
+    max-width: 724px;
+    margin: 40px auto;
+
+    &__header {
+      font-size: 20px;
+      margin-bottom: 22px;
+    }
+  }
+}

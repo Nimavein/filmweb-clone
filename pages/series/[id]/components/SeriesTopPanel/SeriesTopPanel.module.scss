@@ -1,0 +1,22 @@
+.series-top-panel {
+  height: 576px;
+  position: relative;
+  background-color: $black;
+
+  &__wrapper {
+    display: flex;
+    gap: 14px;
+    color: $light-gray;
+    font-size: 14px;
+  }
+
+  &__details {
+    position: absolute;
+    bottom: 30px;
+    left: 40px;
+    background: rgba($black, 0.6);
+    color: $white;
+    padding: 20px;
+    border-radius: 4px;
+  }
+}

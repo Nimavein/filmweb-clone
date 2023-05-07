@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAppSelector } from "@/store";
-import SearchList from "@/components/SearchList/SearchList";
+import SearchList from "@/pages/search/components/SearchList";
 
 const SearchPage = () => {
   const { results } = useAppSelector((state) => state.search);

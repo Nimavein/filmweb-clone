@@ -1,4 +1,4 @@
-import MoviesListItem from "../components/MoviesList/MoviesListItem/MoviesListItem";
+import MoviesListItem from "../pages/movies/components/MoviesListItem/MoviesListItem";
 import { render } from "@testing-library/react";
 
 describe("MoviesListItem", () => {

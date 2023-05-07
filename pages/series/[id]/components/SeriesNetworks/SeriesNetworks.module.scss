@@ -1,0 +1,22 @@
+.series-networks {
+  margin: 12px 0;
+
+  &__header {
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: $gray;
+  }
+
+  &-list {
+    display: flex;
+    gap: 16px;
+
+    &-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+    }
+  }
+}

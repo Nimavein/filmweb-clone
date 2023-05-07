@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { fetchWatchProviders } from "@/store/watchProvidersSlice";
-import VodPageContent from "@/components/VodPageContent/VodPageContent";
+import VodPageContent from "@/pages/vod/components/VodPageContent";
 
 const VodPage = () => {
   const dispatch = useAppDispatch();

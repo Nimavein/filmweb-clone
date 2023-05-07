@@ -1,9 +1,9 @@
 import Loader from "@/components/Loader/Loader";
-import SeriesContent from "@/components/SeriesContent/SeriesContent";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { fetchSeriesData } from "@/store/seriesSlice";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import SeriesContent from "./components/Series";
 
 const Series = () => {
   const router = useRouter();

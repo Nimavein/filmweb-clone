@@ -1,9 +1,9 @@
 import Loader from "@/components/Loader/Loader";
-import MovieContent from "@/components/MovieContent/MovieContent";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { fetchMovieData } from "@/store/movieSlice";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import MovieContent from "./components/Movie";
 
 const Movie = () => {
   const router = useRouter();
