@@ -2,18 +2,20 @@ import { KeyboardEvent, useState } from "react";
 import { AutoComplete } from "antd";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { setSearchQuery, searchMulti } from "@/store/searchSlice";
-import { useRouter } from "next/router";
 import navbarStyles from "../Navbar.module.scss";
 import NavbarSearchItem from "./NavbarSearchItem/NavbarSearchItem";
+import { usePathname, useRouter } from "next/navigation";
 
 const NavbarSearch = () => {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
-  const [timeoutId, setTimeoutId] = useState<ReturnType<typeof setTimeout> | null>(null);
+  const [timeoutId, setTimeoutId] = useState<ReturnType<
+    typeof setTimeout
+  > | null>(null);
   const dispatch = useAppDispatch();
   const { results } = useAppSelector((state) => state.search);
+  const isSearchPage = usePathname().includes("/search");
   const router = useRouter();
-  const isSearchPage = router.pathname.includes("/search");
 
   const delayedSearch = async (value: string) => {
     await dispatch(searchMulti(value));
@@ -45,11 +47,10 @@ const NavbarSearch = () => {
   };
 
   const handleEnterClick = (event: KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === "Enter" && router.asPath !== "/search") {
+    if (event.key === "Enter" && !isSearchPage) {
       const chosenOption = document.querySelector(
         ".ant-select-item-option-active a"
       ) as HTMLAnchorElement;
-      console.log(chosenOption);
 
       if (chosenOption) {
         event.preventDefault();
@@ -62,7 +63,8 @@ const NavbarSearch = () => {
   };
 
   const searchOptions = results?.map((result) => {
-    const title = "title" in result ? result.title : "name" in result && result.name;
+    const title =
+      "title" in result ? result.title : "name" in result && result.name;
     const mediaType = result.media_type;
     const id = result.id;
 

@@ -1,4 +1,12 @@
-import { ActiveRankingFilters, ApiStatus, Movies, RankingSort, TvSeries } from "@/types/types";
+"use client";
+
+import {
+  ActiveRankingFilters,
+  ApiStatus,
+  Movies,
+  RankingSort,
+  TvSeries,
+} from "@/types/types";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface RankingState {
@@ -28,7 +36,9 @@ export const fetchMoviesRankingData = createAsyncThunk<Movies, RankingFilters>(
   "search/fetchMoviesRankingData",
   async ({ sortBy = "vote_average.desc", filters }) => {
     const { originalLanguage, genre, productionYear } = filters || {};
-    const url = `${process.env.NEXT_PUBLIC_BASE_DISCOVER_API_URL}movie?api_key=${
+    const url = `${
+      process.env.NEXT_PUBLIC_BASE_DISCOVER_API_URL
+    }movie?api_key=${
       process.env.NEXT_PUBLIC_API_KEY
     }&sort_by=${sortBy}&vote_count.gte=500${
       originalLanguage ? `&with_original_language=${originalLanguage}` : ""
@@ -49,7 +59,10 @@ export const fetchMoviesRankingData = createAsyncThunk<Movies, RankingFilters>(
   }
 );
 
-export const fetchTvSeriesRankingData = createAsyncThunk<Movies, RankingFilters>(
+export const fetchTvSeriesRankingData = createAsyncThunk<
+  Movies,
+  RankingFilters
+>(
   "search/fetchTvSeriesRankingData",
   async ({ sortBy = "vote_average.desc", filters }) => {
     const { originalLanguage, genre, productionYear } = filters || {};

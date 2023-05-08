@@ -1,3 +1,5 @@
+"use client";
+
 import { ApiStatus, People } from "@/types/types";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 

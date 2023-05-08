@@ -1,3 +1,7 @@
+"use client";
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { ApiStatus, GetWatchProviders } from "@/types/types";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
@@ -19,8 +23,8 @@ const initialState: WatchProvidersState = {
   error: null,
   filters: {
     watchProviderId: null,
-    filterBy: "popularity.desc"
-  }
+    filterBy: "popularity.desc",
+  },
 };
 
 export const fetchWatchProviders = createAsyncThunk<{
