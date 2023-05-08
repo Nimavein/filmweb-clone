@@ -1,4 +1,3 @@
-import Loader from "@/components/Loader/Loader";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { fetchSeriesData } from "@/store/seriesSlice";
 import { useRouter } from "next/router";
@@ -10,17 +9,13 @@ const Series = () => {
   const dispatch = useAppDispatch();
 
   const { id } = router.query;
-  const { details, status } = useAppSelector((state) => state.series);
+  const { details } = useAppSelector((state) => state.series);
 
   useEffect(() => {
     if (id && details?.id !== Number(id)) dispatch(fetchSeriesData(Number(id)));
   }, [id]);
 
-  return status === "loading" ? (
-    <Loader />
-  ) : (
-    <>{details && <SeriesContent />}</>
-  );
+  return details && <SeriesContent />;
 };
 
 export default Series;

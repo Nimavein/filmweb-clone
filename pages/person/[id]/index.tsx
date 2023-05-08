@@ -1,4 +1,3 @@
-import Loader from "@/components/Loader/Loader";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { fetchPersonData } from "@/store/personSlice";
 import { useRouter } from "next/router";
@@ -10,17 +9,13 @@ const Person = () => {
   const dispatch = useAppDispatch();
 
   const { id } = router.query;
-  const { details, status } = useAppSelector((state) => state.person);
+  const { details } = useAppSelector((state) => state.person);
 
   useEffect(() => {
     if (id && details?.id !== Number(id)) dispatch(fetchPersonData(Number(id)));
   }, [id]);
 
-  return status === "loading" ? (
-    <Loader />
-  ) : (
-    <>{details && <PersonContent />}</>
-  );
+  return details && <PersonContent />;
 };
 
 export default Person;

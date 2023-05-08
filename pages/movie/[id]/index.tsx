@@ -1,4 +1,3 @@
-import Loader from "@/components/Loader/Loader";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { fetchMovieData } from "@/store/movieSlice";
 import { useRouter } from "next/router";
@@ -10,19 +9,13 @@ const Movie = () => {
   const dispatch = useAppDispatch();
 
   const { id } = router.query;
-  const { movieDetails, status } = useAppSelector((state) => state.movie);
+  const { movieDetails } = useAppSelector((state) => state.movie);
 
   useEffect(() => {
-    if ( id && Number(id) !== movieDetails?.id) dispatch(fetchMovieData(Number(id)));
+    if (id && Number(id) !== movieDetails?.id) dispatch(fetchMovieData(Number(id)));
   }, [id]);
 
-  return status === "loading" ? (
-    <Loader />
-  ) : (
-    <>
-      {movieDetails && <MovieContent />}
-    </>
-  );
+  return movieDetails && <MovieContent />;
 };
 
 export default Movie;

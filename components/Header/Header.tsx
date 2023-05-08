@@ -5,8 +5,6 @@ import Navbar from "./Navbar/Navbar";
 const Header = () => {
   return (
     <header className={styles["main-header"]}>
-      {/* <Logo /> */}
-      {/* <Search /> */}
       <Navbar />
     </header>
   );

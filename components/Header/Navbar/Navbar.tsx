@@ -8,7 +8,7 @@ import { HomeFilled } from "@ant-design/icons";
 import NavbarSearch from "./NavbarSearch/NavbarSearch";
 
 const Navbar = () => {
-  const [current, setCurrent] = useState("mail");
+  const [current, setCurrent] = useState("home");
 
   const getNavbarItem = (
     label: React.ReactNode,
