@@ -1,10 +1,11 @@
 import React from "react";
 import SeriesReviewsList from "./components/SeriesReviewsList";
+import { PageIdParams } from "@/types/types";
 
-const SeriesReviews = () => {
+const SeriesReviews = ({ params: { id } }: PageIdParams) => {
   return (
     <main>
-      <SeriesReviewsList />
+      <SeriesReviewsList id={id} />
     </main>
   );
 };

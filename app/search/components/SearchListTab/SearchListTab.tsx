@@ -1,3 +1,5 @@
+"use client";
+
 import { SearchResults } from "@/types/types";
 import React, { useCallback, useEffect, useState } from "react";
 import SearchListItem from "./SearchListItem/SearchListItem";
@@ -30,7 +32,11 @@ const SearchListTab = ({ results }: SearchListTabProps) => {
     <InfiniteScroll
       dataLength={visibleResults?.length ?? 0}
       next={loadMoreResults}
-      hasMore={visibleResults && results ? visibleResults?.length < results?.length : false}
+      hasMore={
+        visibleResults && results
+          ? visibleResults?.length < results?.length
+          : false
+      }
       loader={<div>Loading...</div>}
     >
       <ul className={styles["search-list__items"]}>

@@ -1,10 +1,13 @@
+"use client";
+
 import React from "react";
 import MovieReviewsList from "./components/MovieReviewsList";
+import { PageIdParams } from "@/types/types";
 
-const MovieReviews = () => {
+const MovieReviews = ({ params: { id } }: PageIdParams) => {
   return (
     <main>
-      <MovieReviewsList />
+      <MovieReviewsList id={id} />
     </main>
   );
 };

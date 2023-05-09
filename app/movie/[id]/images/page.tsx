@@ -2,10 +2,9 @@ import { useAppDispatch, useAppSelector } from "@/store";
 import { fetchMovieData } from "@/store/movieSlice";
 import React, { useEffect } from "react";
 import MovieImagesList from "./components/MovieImagesList";
-import { useSearchParams } from "next/navigation";
+import { PageIdParams } from "@/types/types";
 
-const MovieImages = () => {
-  const id = useSearchParams().get("id");
+const MovieImages = ({ params: { id } }: PageIdParams) => {
   const dispatch = useAppDispatch();
   const images = useAppSelector((state) => state.movie.movieDetails?.images);
 

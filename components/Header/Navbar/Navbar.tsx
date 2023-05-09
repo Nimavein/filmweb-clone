@@ -26,7 +26,7 @@ const Navbar = () => {
     } as MenuItem;
   };
 
-  const createLink = (link: NavbarLink) => <Link href={link.path}>{link.name}</Link>;
+  const createLink = (link: NavbarLink) => <Link replace prefetch={false} href={link.path}>{link.name}</Link>;
 
   const onClick: MenuProps["onClick"] = (e) => {
     setCurrent(e.key);

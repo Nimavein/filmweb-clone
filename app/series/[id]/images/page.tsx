@@ -2,10 +2,9 @@ import { useAppDispatch, useAppSelector } from "@/store";
 import { fetchSeriesData } from "@/store/seriesSlice";
 import React, { useEffect } from "react";
 import SeriesImagesList from "./components/SeriesImagesList";
-import { useSearchParams } from "next/navigation";
+import { PageIdParams } from "@/types/types";
 
-const SeriesImages = () => {
-  const id = useSearchParams().get("id");
+const SeriesImages = ({ params: { id } }: PageIdParams) => {
   const dispatch = useAppDispatch();
   const images = useAppSelector((state) => state.series.details?.images);
 

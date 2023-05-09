@@ -65,11 +65,15 @@ const RankingTvSeries = () => {
                 )}
                 <div className={styles["ranking-list__item-content"]}>
                   <div className={styles["ranking-list__item-text"]}>
-                    <h2 className={styles["ranking-list__item-title"]}>{series.name}</h2>
+                    <h2 className={styles["ranking-list__item-title"]}>
+                      {series.name}
+                    </h2>
                   </div>
                   {series.vote_average && series.vote_count && (
                     <div className={styles["ranking-list__item-rating"]}>
-                      <div className={styles["ranking-list__item-vote-average"]}>
+                      <div
+                        className={styles["ranking-list__item-vote-average"]}
+                      >
                         <Rating
                           small
                           defaultValue={series.vote_average}

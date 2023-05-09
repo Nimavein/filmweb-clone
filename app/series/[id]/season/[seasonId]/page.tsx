@@ -1,14 +1,14 @@
+"use client";
+
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { fetchSeriesData, fetchSeriesSeasonData } from "@/store/seriesSlice";
 import SeriesSeasonContent from "./components/SeriesSeasonContent";
-import { useSearchParams } from "next/navigation";
+import { SeasonPageParams } from "@/types/types";
 
-const SeriesSeasons = () => {
+const SeriesSeasons = ({ params: { id, seasonId } }: SeasonPageParams) => {
   const dispatch = useAppDispatch();
   const { season, details } = useAppSelector((state) => state.series);
-  const id = useSearchParams().get("id");
-  const seasonId = useSearchParams().get("seasonId");
 
   useEffect(() => {
     if (id && details?.id !== Number(id)) dispatch(fetchSeriesData(Number(id)));

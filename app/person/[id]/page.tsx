@@ -4,11 +4,10 @@ import { useAppDispatch, useAppSelector } from "@/store";
 import { fetchPersonData } from "@/store/personSlice";
 import { useEffect } from "react";
 import PersonContent from "./components/Person";
-import { useSearchParams } from "next/navigation";
+import { PageIdParams } from "@/types/types";
 
-const Person = () => {
+const Person = ({ params: { id } }: PageIdParams) => {
   const dispatch = useAppDispatch();
-  const id = useSearchParams().get("id");
 
   const { details } = useAppSelector((state) => state.person);
 

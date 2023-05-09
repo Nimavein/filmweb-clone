@@ -4,11 +4,10 @@ import { useAppDispatch, useAppSelector } from "@/store";
 import { fetchSeriesData } from "@/store/seriesSlice";
 import { useEffect } from "react";
 import SeriesContent from "./components/Series";
-import { useSearchParams } from "next/navigation";
+import { PageIdParams } from "@/types/types";
 
-const Series = () => {
+const Series = ({ params: { id } }: PageIdParams) => {
   const dispatch = useAppDispatch();
-  const id = useSearchParams().get("id");
   const { details } = useAppSelector((state) => state.series);
 
   useEffect(() => {
