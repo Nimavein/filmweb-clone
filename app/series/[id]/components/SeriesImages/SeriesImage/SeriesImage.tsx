@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Backdrop } from "@/types/types";
 import Image from "next/image";

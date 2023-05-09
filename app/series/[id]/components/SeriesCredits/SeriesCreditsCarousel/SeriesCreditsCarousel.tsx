@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { RightOutlined, LeftOutlined, UserOutlined } from "@ant-design/icons";
 import { Carousel } from "antd";
