@@ -6,7 +6,6 @@ import React from "react";
 const NewsPage = () => {
   return (
     <main>
-      Test
       <News />
     </main>
   );
