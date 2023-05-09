@@ -14,7 +14,7 @@ const Series = ({ params: { id } }: PageIdParams) => {
     if (id && details?.id !== Number(id)) dispatch(fetchSeriesData(Number(id)));
   }, [id]);
 
-  return details ? <SeriesContent /> : <></>;
+  return <></>;
 };
 
 export default Series;
