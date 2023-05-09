@@ -1,3 +1,5 @@
+"use client";
+
 import { useAppDispatch, useAppSelector } from "@/store";
 import { fetchMovieData } from "@/store/movieSlice";
 import React, { useEffect } from "react";
