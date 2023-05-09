@@ -10,10 +10,6 @@ const Series = ({ params: { id } }: PageIdParams) => {
   const dispatch = useAppDispatch();
   const { details } = useAppSelector((state) => state.series);
 
-  useEffect(() => {
-    if (id && details?.id !== Number(id)) dispatch(fetchSeriesData(Number(id)));
-  }, [id]);
-
   return <></>;
 };
 
