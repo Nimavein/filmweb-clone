@@ -15,7 +15,7 @@ const Person = ({ params: { id } }: PageIdParams) => {
     if (id && details?.id !== Number(id)) dispatch(fetchPersonData(Number(id)));
   }, [id]);
 
-  return details && <PersonContent />;
+  return details ? <PersonContent /> : <></>;
 };
 
 export default Person;

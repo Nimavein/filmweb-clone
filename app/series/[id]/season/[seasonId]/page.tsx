@@ -21,7 +21,7 @@ const SeriesSeasons = ({ params: { id, seasonId } }: SeasonPageParams) => {
       );
   }, [seasonId]);
 
-  return season && <SeriesSeasonContent />;
+  return season ? <SeriesSeasonContent /> : <></>;
 };
 
 export default SeriesSeasons;

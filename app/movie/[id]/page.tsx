@@ -16,7 +16,7 @@ const Movie = ({ params: { id } }: PageIdParams) => {
       dispatch(fetchMovieData(Number(id)));
   }, [id]);
 
-  return movieDetails && <MovieContent />;
+  return movieDetails ? <MovieContent /> : <></>;
 };
 
 export default Movie;
