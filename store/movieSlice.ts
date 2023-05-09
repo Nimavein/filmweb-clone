@@ -1,4 +1,13 @@
-import { ApiStatus, CollectionDetails, MovieDetails, Reviews, WatchProviders } from "@/types/types";
+"use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import {
+  ApiStatus,
+  CollectionDetails,
+  MovieDetails,
+  Reviews,
+  WatchProviders,
+} from "@/types/types";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 interface MovieState {
@@ -44,7 +53,10 @@ export const fetchMovieData = createAsyncThunk<
   }
 });
 
-export const fetchMovieReviews = createAsyncThunk<Reviews, { movie_id: number; page: number }>(
+export const fetchMovieReviews = createAsyncThunk<
+  Reviews,
+  { movie_id: number; page: number }
+>(
   "movieData/fetchMovieReviews",
   async ({ movie_id, page }, { rejectWithValue }) => {
     try {
@@ -65,20 +77,21 @@ export const fetchCollectionData = createAsyncThunk<
   CollectionDetails,
   number,
   { rejectValue: string }
->("movieData/fetchCollectionData", async (collection_id, { rejectWithValue }) => {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_COLLECTION_API_URL}${collection_id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-    );
+>(
+  "movieData/fetchCollectionData",
+  async (collection_id, { rejectWithValue }) => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_COLLECTION_API_URL}${collection_id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+      );
 
-    const data = await response.json();
-    console.log(data);
-
-    return data;
-  } catch (error: any) {
-    return rejectWithValue(error.message);
+      const data = await response.json();
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
   }
-});
+);
 
 const movieSlice = createSlice({
   name: "movieData",

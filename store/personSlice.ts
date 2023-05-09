@@ -1,3 +1,5 @@
+"use client";
+
 import { ApiStatus, PersonDetails } from "@/types/types";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -14,7 +16,7 @@ const initialState: PersonState = {
 };
 
 export const fetchPersonData = createAsyncThunk<
-  { details: PersonDetails; },
+  { details: PersonDetails },
   number,
   { rejectValue: string }
 >("personData/fetchPersonData", async (person_id, { rejectWithValue }) => {

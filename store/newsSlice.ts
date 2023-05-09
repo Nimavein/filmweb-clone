@@ -1,3 +1,5 @@
+"use client";
+
 import { News } from "@/types/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 

@@ -643,7 +643,9 @@ export interface GetWatchProviders {
   results: GetWatchProvidersResults;
 }
 
-export type SearchResults = Array<MovieDetails | SeriesDetails | PersonDetails> | null;
+export type SearchResults = Array<
+  MovieDetails | SeriesDetails | PersonDetails
+> | null;
 
 export interface Article {
   id: string;
@@ -670,15 +672,28 @@ export type RankingSort =
   | "vote_average.desc"
   | "vote_average.inc";
 
-  export interface RankingSortOption {
-    label: string;
-    value: RankingSort;
-  }
+export interface RankingSortOption {
+  label: string;
+  value: RankingSort;
+}
 
-  export type RankingContentType = "movies" | "tv-series";
+export type RankingContentType = "movies" | "tv-series";
 
-  export interface ActiveRankingFilters {
-    originalLanguage: string;
-    genre: string;
-    productionYear: number | null;
-  }
+export interface ActiveRankingFilters {
+  originalLanguage: string;
+  genre: string;
+  productionYear: number | null;
+}
+
+export type PageIdParams = {
+  params: {
+    id: string;
+  };
+};
+
+export type SeasonPageParams = {
+  params: {
+    id: string;
+    seasonId: string;
+  };
+};

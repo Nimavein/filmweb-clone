@@ -1,4 +1,12 @@
-import { ApiStatus, Reviews, SeasonDetails, SeriesDetails, WatchProviders } from "@/types/types";
+"use client";
+
+import {
+  ApiStatus,
+  Reviews,
+  SeasonDetails,
+  SeriesDetails,
+  WatchProviders,
+} from "@/types/types";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 interface SeriesState {
@@ -44,7 +52,10 @@ export const fetchSeriesData = createAsyncThunk<
   }
 });
 
-export const fetchSeriesReviews = createAsyncThunk<Reviews, { tv_id: number; page: number }>(
+export const fetchSeriesReviews = createAsyncThunk<
+  Reviews,
+  { tv_id: number; page: number }
+>(
   "seriesData/fetchSeriesReviews",
   async ({ tv_id, page }, { rejectWithValue }) => {
     const response = await fetch(
@@ -52,7 +63,9 @@ export const fetchSeriesReviews = createAsyncThunk<Reviews, { tv_id: number; pag
     );
 
     if (!response.ok) {
-      const error = await Promise.reject("Failed to fetch reviews of the series.");
+      const error = await Promise.reject(
+        "Failed to fetch reviews of the series."
+      );
       return rejectWithValue(error);
     }
 
@@ -65,20 +78,25 @@ export const fetchSeriesReviews = createAsyncThunk<Reviews, { tv_id: number; pag
 export const fetchSeriesSeasonData = createAsyncThunk<
   SeasonDetails,
   { tv_id: number; season_number: number }
->("seriesData/fetchSeriesSeasonData", async ({ tv_id, season_number }, { rejectWithValue }) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_SERIES_API_URL}${tv_id}/season/${season_number}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=images,videos,credits`
-  );
+>(
+  "seriesData/fetchSeriesSeasonData",
+  async ({ tv_id, season_number }, { rejectWithValue }) => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_SERIES_API_URL}${tv_id}/season/${season_number}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=images,videos,credits`
+    );
 
-  if (!response.ok) {
-    const error = await Promise.reject("Failed to fetch seasons of the series.");
-    return rejectWithValue(error);
+    if (!response.ok) {
+      const error = await Promise.reject(
+        "Failed to fetch seasons of the series."
+      );
+      return rejectWithValue(error);
+    }
+
+    const data = await response.json();
+
+    return data;
   }
-
-  const data = await response.json();
-
-  return data;
-});
+);
 
 const seriesSlice = createSlice({
   name: "seriesData",
