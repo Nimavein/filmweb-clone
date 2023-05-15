@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { useAppSelector } from "@/store";
 import Link from "next/link";
@@ -12,7 +10,8 @@ import SeriesReview from "./SeriesReview/SeriesReview";
 
 const SeriesReviews = () => {
   const { details, reviews } = useAppSelector((state) => state.series);
-  const reviewsSectionHeader = `Reviews of the series ${details?.name}`.toUpperCase();
+  const reviewsSectionHeader =
+    `Reviews of the series ${details?.name}`.toUpperCase();
   const displayedReviewsInCarousel = 3;
 
   return (
@@ -34,18 +33,22 @@ const SeriesReviews = () => {
         infinite={false}
       >
         {reviews?.results
-          ?.slice(0, Math.min(displayedReviewsInCarousel, reviews?.results?.length))
+          ?.slice(
+            0,
+            Math.min(displayedReviewsInCarousel, reviews?.results?.length)
+          )
           .map((review, index) => (
             <div key={index}>
               <SeriesReview slideId={index} {...review} />
             </div>
           ))}
       </Carousel>
-      {reviews?.results && reviews?.results?.length > displayedReviewsInCarousel && (
-        <Link href={`/series/${details?.id}/reviews`}>
-          <Button>{`See all ${reviews?.results?.length} reviews`}</Button>
-        </Link>
-      )}
+      {reviews?.results &&
+        reviews?.results?.length > displayedReviewsInCarousel && (
+          <Link href={`/series/${details?.id}/reviews`}>
+            <Button>{`See all ${reviews?.results?.length} reviews`}</Button>
+          </Link>
+        )}
     </section>
   );
 };

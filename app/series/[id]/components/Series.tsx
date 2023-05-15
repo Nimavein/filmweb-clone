@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useEffect } from "react";
 import styles from "./Series.module.scss";
 import { useAppDispatch, useAppSelector } from "@/store";

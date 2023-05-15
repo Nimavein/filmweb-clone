@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { useAppSelector } from "@/store";
 import styles from "./SeriesCredits.module.scss";

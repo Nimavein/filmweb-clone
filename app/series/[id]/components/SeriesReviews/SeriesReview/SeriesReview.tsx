@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import styles from "./SeriesReview.module.scss";
 import ReadMoreText from "@/components/ReadMoreText/ReadMoreText";
@@ -13,7 +11,11 @@ type SeriesReviewType = Review & {
   slideId: number;
 };
 
-const SeriesReview = ({ content, author_details, slideId }: SeriesReviewType) => {
+const SeriesReview = ({
+  content,
+  author_details,
+  slideId,
+}: SeriesReviewType) => {
   const images = useAppSelector((state) => state.series.details?.images);
   const imageHeight = 162;
 
@@ -38,9 +40,15 @@ const SeriesReview = ({ content, author_details, slideId }: SeriesReviewType) =>
         <div className={styles["series-review__user"]}>
           <UserAvatar avatarPath={author_details?.avatar_path} />
           <div className={styles["series-review__user-wrapper"]}>
-            <span className={styles["series-review__user-name"]}>{author_details?.name}</span>
+            <span className={styles["series-review__user-name"]}>
+              {author_details?.name}
+            </span>
             {author_details?.rating && (
-              <Rating showNumber disabled defaultValue={author_details.rating} />
+              <Rating
+                showNumber
+                disabled
+                defaultValue={author_details.rating}
+              />
             )}
           </div>
         </div>

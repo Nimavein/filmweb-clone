@@ -1,5 +1,3 @@
-"use client";
-
 import React, { ReactNode } from "react";
 import { useAppSelector } from "@/store";
 import styles from "./SeriesInformation.module.scss";
@@ -14,7 +12,8 @@ interface SeriesInformationType {
 const SeriesInformation = () => {
   const { details } = useAppSelector((state) => state.series);
 
-  const informationSectionHeader = `Information about the series ${details?.name}`.toUpperCase();
+  const informationSectionHeader =
+    `Information about the series ${details?.name}`.toUpperCase();
 
   const information: SeriesInformationType[] = [
     {
@@ -24,11 +23,15 @@ const SeriesInformation = () => {
     { name: "Tagline", value: details?.tagline },
     {
       name: "Production Companies",
-      value: details?.production_companies?.map((company) => company.name)?.join(", "),
+      value: details?.production_companies
+        ?.map((company) => company.name)
+        ?.join(", "),
     },
     {
       name: "Spoken languages",
-      value: details?.spoken_languages?.map((language) => language.english_name)?.join(", "),
+      value: details?.spoken_languages
+        ?.map((language) => language.english_name)
+        ?.join(", "),
     },
     { name: "Original name", value: details?.original_name },
     {
@@ -60,7 +63,10 @@ const SeriesInformation = () => {
         {information.map(
           (informationDetail) =>
             informationDetail?.value && (
-              <div className={styles["series-information__detail"]} key={informationDetail.name}>
+              <div
+                className={styles["series-information__detail"]}
+                key={informationDetail.name}
+              >
                 <p className={styles["series-information__detail-name"]}>
                   {informationDetail.name}
                 </p>

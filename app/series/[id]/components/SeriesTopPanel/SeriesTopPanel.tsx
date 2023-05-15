@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import styles from "./SeriesTopPanel.module.scss";
 import Image from "next/image";
@@ -26,7 +24,8 @@ const SeriesTopPanel = () => {
           </span>
           <span className={styles["series-top-panel__release"]}>
             {`${details?.first_air_date?.substring(0, 4)} ${
-              details?.last_air_date && ` - ${details?.last_air_date?.substring(0, 4)}`
+              details?.last_air_date &&
+              ` - ${details?.last_air_date?.substring(0, 4)}`
             }`}
           </span>
           <span className={styles["series-top-panel__runtime"]}>
@@ -37,7 +36,11 @@ const SeriesTopPanel = () => {
           <Rating
             fontSize={24}
             small
-            defaultValue={details?.vote_average ? parseFloat(details?.vote_average.toFixed(2)) : 0}
+            defaultValue={
+              details?.vote_average
+                ? parseFloat(details?.vote_average.toFixed(2))
+                : 0
+            }
             voteCount={details?.vote_count}
           />
         </div>

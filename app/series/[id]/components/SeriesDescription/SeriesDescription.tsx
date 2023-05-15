@@ -1,5 +1,3 @@
-"use client";
-
 import React, { ReactNode } from "react";
 import Image from "next/image";
 import { useAppSelector } from "@/store";
