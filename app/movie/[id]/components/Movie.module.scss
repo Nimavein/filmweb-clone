@@ -1,6 +1,10 @@
 .movie {
-  max-width: 1024px;
-  margin: 0 auto;
+  margin: 0 12px;
+
+  @include respond-to($mq-medium) {
+    max-width: 1024px;
+    margin: 0 auto;
+  }
 
   &-section {
     max-width: 724px;

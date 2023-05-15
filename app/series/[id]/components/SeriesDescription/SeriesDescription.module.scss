@@ -1,8 +1,11 @@
 .series-description {
-  max-width: 724px;
-  margin: 40px auto;
   display: flex;
+  flex-direction: column;
   gap: 20px;
+
+  @include respond-to($mq-medium) {
+    flex-direction: row;
+  }
 
   &__seasons {
     display: flex;

@@ -5,7 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 import styles from "../SeriesCredits.module.scss";
-import { SeriesAggregateCreditsCast, SeriesAggregateCreditsCrew } from "@/types/types";
+import {
+  SeriesAggregateCreditsCast,
+  SeriesAggregateCreditsCrew,
+} from "@/types/types";
 
 interface SeriesCreditsCarouselProps {
   credits: SeriesAggregateCreditsCast | SeriesAggregateCreditsCrew | undefined;
