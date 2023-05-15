@@ -22,7 +22,8 @@ const Footer = () => {
         </ul>
       </nav>
       <p>
-        &copy; {new Date().getFullYear()} Site created by Michał Żygiel using data from TMDB API.
+        &copy; {new Date().getFullYear()} Site created by Michał Żygiel using
+        data from TMDB API.
       </p>
     </footer>
   );
