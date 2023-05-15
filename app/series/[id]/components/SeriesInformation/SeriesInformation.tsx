@@ -59,11 +59,11 @@ const SeriesInformation = () => {
       >
         {informationSectionHeader}
       </h2>
-      <div className={styles["series-information__details"]}>
+      <ul className={styles["series-information__details"]}>
         {information.map(
           (informationDetail) =>
             informationDetail?.value && (
-              <div
+              <li
                 className={styles["series-information__detail"]}
                 key={informationDetail.name}
               >
@@ -73,10 +73,10 @@ const SeriesInformation = () => {
                 <p className={styles["series-information__detail-value"]}>
                   {informationDetail.value}
                 </p>
-              </div>
+              </li>
             )
         )}
-      </div>
+      </ul>
     </section>
   );
 };

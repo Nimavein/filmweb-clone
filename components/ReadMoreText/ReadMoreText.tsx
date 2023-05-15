@@ -23,7 +23,9 @@ const ReadMoreText = ({
   const isLongText = text.length > showTextLength;
   const [isReadMore, setIsReadMore] = useState<boolean>(false);
 
-  const handleReadMoreClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleReadMoreClick = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     e.preventDefault();
     setIsReadMore(!isReadMore);
   };
@@ -31,7 +33,9 @@ const ReadMoreText = ({
   return (
     <div className={styles["read-more"]}>
       <span className={`${textClassName} ${styles["read-more__text"]}`}>
-        {text && (isReadMore || !isLongText) ? text : `${text?.substring(0, showTextLength)}...`}
+        {text && (isReadMore || !isLongText)
+          ? text
+          : `${text?.substring(0, showTextLength)}...`}
       </span>
       {isLongText && displayButton && (
         <button

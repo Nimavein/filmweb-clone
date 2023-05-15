@@ -28,11 +28,15 @@ const MovieInformation = () => {
     },
     {
       name: "Production Companies",
-      value: movieDetails?.production_companies?.map((company) => company.name)?.join(", "),
+      value: movieDetails?.production_companies
+        ?.map((company) => company.name)
+        ?.join(", "),
     },
     {
       name: "Spoken languages",
-      value: movieDetails?.spoken_languages?.map((language) => language.english_name)?.join(", "),
+      value: movieDetails?.spoken_languages
+        ?.map((language) => language.english_name)
+        ?.join(", "),
     },
     { name: "Original title", value: movieDetails?.original_title },
     {
@@ -60,19 +64,24 @@ const MovieInformation = () => {
       >
         {informationSectionHeader}
       </h2>
-      <div className={styles["movie-information__details"]}>
+      <ul className={styles["movie-information__details"]}>
         {information.map(
           (informationDetail) =>
             informationDetail?.value && (
-              <div className={styles["movie-information__detail"]} key={informationDetail.name}>
-                <p className={styles["movie-information__detail-name"]}>{informationDetail.name}</p>
+              <li
+                className={styles["movie-information__detail"]}
+                key={informationDetail.name}
+              >
+                <p className={styles["movie-information__detail-name"]}>
+                  {informationDetail.name}
+                </p>
                 <p className={styles["movie-information__detail-value"]}>
                   {informationDetail.value}
                 </p>
-              </div>
+              </li>
             )
         )}
-      </div>
+      </ul>
     </section>
   );
 };

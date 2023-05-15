@@ -6,6 +6,7 @@ import UserAvatar from "@/components/UserAvatar/UserAvatar";
 import Image from "next/image";
 import { useAppSelector } from "@/store";
 import { Review } from "@/types/types";
+import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 
 type SeriesReviewType = Review & {
   slideId: number;
@@ -17,17 +18,24 @@ const SeriesReview = ({
   slideId,
 }: SeriesReviewType) => {
   const images = useAppSelector((state) => state.series.details?.images);
-  const imageHeight = 162;
+  const imageHeight = 168;
+  const imageWidth = imageHeight * 1.667;
 
   return (
     <div className={styles["series-review"]}>
-      {images?.backdrops && images?.backdrops[slideId].aspect_ratio && (
+      {images?.backdrops &&
+      images.backdrops[slideId].file_path &&
+      images.backdrops[slideId].aspect_ratio ? (
         <Image
-          src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${images?.backdrops[slideId]?.file_path}`}
+          src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${images.backdrops[slideId]?.file_path}`}
           alt=""
-          width={imageHeight * images.backdrops[slideId].aspect_ratio!}
+          width={
+            imageHeight * images.backdrops[slideId].aspect_ratio! || imageWidth
+          }
           height={imageHeight}
         />
+      ) : (
+        <ImagePlaceholder height={imageHeight} width={imageWidth} />
       )}
       <div>
         {content && (

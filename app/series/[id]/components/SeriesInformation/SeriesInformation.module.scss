@@ -1,8 +1,14 @@
 .series-information {
   &__details {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    @include respond-to($mq-medium) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
   }
 
   &__detail {

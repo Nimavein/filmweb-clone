@@ -6,6 +6,7 @@ import UserAvatar from "@/components/UserAvatar/UserAvatar";
 import Image from "next/image";
 import { useAppSelector } from "@/store";
 import { Review } from "@/types/types";
+import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 
 type MovieReviewType = Review & {
   slideId: number;
@@ -13,16 +14,24 @@ type MovieReviewType = Review & {
 
 const MovieReview = ({ content, author_details, slideId }: MovieReviewType) => {
   const images = useAppSelector((state) => state.movie.movieDetails?.images);
+  const imageHeight = 168;
+  const imageWidth = imageHeight * 1.667;
 
   return (
     <div className={styles["movie-review"]}>
-      {images?.backdrops && (
+      {images?.backdrops &&
+      images.backdrops[slideId].file_path &&
+      images.backdrops[slideId].aspect_ratio ? (
         <Image
           src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${images?.backdrops[slideId]?.file_path}`}
           alt=""
-          width={296}
-          height={162}
+          width={
+            imageHeight * images.backdrops[slideId].aspect_ratio! || imageWidth
+          }
+          height={imageHeight}
         />
+      ) : (
+        <ImagePlaceholder width={imageWidth} height={imageHeight} />
       )}
       <div>
         {content && (
@@ -35,9 +44,15 @@ const MovieReview = ({ content, author_details, slideId }: MovieReviewType) => {
         <div className={styles["movie-review__user"]}>
           <UserAvatar avatarPath={author_details?.avatar_path} />
           <div className={styles["movie-review__user-wrapper"]}>
-            <span className={styles["movie-review__user-name"]}>{author_details?.name}</span>
+            <span className={styles["movie-review__user-name"]}>
+              {author_details?.name}
+            </span>
             {author_details?.rating && (
-              <Rating showNumber disabled defaultValue={author_details.rating} />
+              <Rating
+                showNumber
+                disabled
+                defaultValue={author_details.rating}
+              />
             )}
           </div>
         </div>
