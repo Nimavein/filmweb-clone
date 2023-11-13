@@ -1,6 +1,6 @@
 import React from "react";
 import Rating from "@/components/Rating/Rating";
-import styles from "../SeriesReviewsList.module.scss";
+import styles from "../../SeriesReviews.module.scss";
 import ReadMoreText from "@/components/ReadMoreText/ReadMoreText";
 import UserAvatar from "@/components/UserAvatar/UserAvatar";
 import { Review } from "@/types/types";
