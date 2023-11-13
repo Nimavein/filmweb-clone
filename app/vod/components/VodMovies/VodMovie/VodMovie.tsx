@@ -20,7 +20,11 @@ const VodMovie = ({ title, id, poster_path }: Movie) => {
             width={imageWidth}
           />
         ) : (
-          <ImagePlaceholder width={imageWidth} height={imageHeight} icon={<CameraOutlined />} />
+          <ImagePlaceholder
+            width={imageWidth}
+            height={imageHeight}
+            icon={<CameraOutlined />}
+          />
         )}
         <p className={styles["vod-movie__title"]}>{title}</p>
       </div>
