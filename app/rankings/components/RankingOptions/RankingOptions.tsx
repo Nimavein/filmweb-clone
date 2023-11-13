@@ -1,25 +1,20 @@
+"use client";
+
 import React from "react";
-import { RankingContentType, RankingSort, RankingSortOption } from "@/types/types";
-import styles from "../Rankings.module.scss";
-import { fetchMoviesRankingData, fetchTvSeriesRankingData, setSortBy } from "@/store/rankingSlice";
-import { useAppDispatch, useAppSelector } from "@/store";
+import { RankingSort, RankingSortOption } from "@/types/types";
+import styles from "../../Rankings.module.scss";
+import useSearchParam from "@/hooks/useSearchParam";
 
 interface RankingOptionsProps {
   options: RankingSortOption[];
-  contentType: RankingContentType;
+  sortBy: string;
 }
 
-const RankingOptions = ({ options, contentType }: RankingOptionsProps) => {
-  const dispatch = useAppDispatch();
-  const { sortBy } = useAppSelector((state) => state.ranking);
+const RankingOptions = ({ options, sortBy }: RankingOptionsProps) => {
+  const { setSearchParam } = useSearchParam();
 
   const onOptionClick = async (value: RankingSort) => {
-    dispatch(setSortBy(value));
-    if (contentType === "movies") {
-      await dispatch(fetchMoviesRankingData({ sortBy: value }));
-    } else if (contentType === "tv-series") {
-      await dispatch(fetchTvSeriesRankingData({ sortBy: value }));
-    }
+    setSearchParam("sortBy", value);
   };
 
   return (
@@ -28,7 +23,9 @@ const RankingOptions = ({ options, contentType }: RankingOptionsProps) => {
         <li key={option.label} className={styles["ranking-type"]}>
           <label
             className={`${styles["ranking-type__label"]} ${
-              sortBy === option.value ? styles["ranking-type__label--active"] : ""
+              sortBy === option.value
+                ? styles["ranking-type__label--active"]
+                : ""
             }`}
           >
             <input

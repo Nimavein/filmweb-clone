@@ -1,19 +1,25 @@
+"use client";
+
 import React from "react";
-import { useAppSelector } from "@/store";
 import { RightOutlined, LeftOutlined } from "@ant-design/icons";
 import { Carousel } from "antd";
 import styles from "./VodTvSeries.module.scss";
-import sectionStyles from "../Vod.module.scss";
+import sectionStyles from "../../Vod.module.scss";
 import VodSeries from "./VodSeries/VodSeries";
+import { TvSeries } from "@/types/types";
 
-const VodTvSeries = () => {
-  const { watchProviderTvSeries } = useAppSelector((state) => state.tvSeries);
+interface VodTvSeriesProps {
+  watchProviderTvSeries: TvSeries;
+}
 
+const VodTvSeries = ({ watchProviderTvSeries }: VodTvSeriesProps) => {
   return (
     <section
       className={`${styles["vod-tv-series"]} ${sectionStyles["vod-section"]} `}
     >
-      <h2 className={sectionStyles["vod-section__header"]}>AVAILABLE TV SERIES</h2>
+      <h2 className={sectionStyles["vod-section__header"]}>
+        AVAILABLE TV SERIES
+      </h2>
       <Carousel
         slidesToShow={4}
         arrows

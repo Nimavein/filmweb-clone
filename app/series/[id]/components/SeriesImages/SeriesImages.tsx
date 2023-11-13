@@ -1,18 +1,22 @@
 import React from "react";
-import { useAppSelector } from "@/store";
 import styles from "./SeriesImages.module.scss";
-import sectionStyles from "../Series.module.scss";
+import sectionStyles from "../../Series.module.scss";
 import Button from "@/components/Button/Button";
 import Link from "next/link";
 import SeriesContentImage from "./SeriesImage/SeriesImage";
+import { SeriesDetails } from "@/types/types";
 
-const SeriesImages = () => {
-  const details = useAppSelector((state) => state.series.details);
-  const images = details?.images;
+interface SeriesImagesProps {
+  seriesDetails: SeriesDetails;
+}
+
+const SeriesImages = ({
+  seriesDetails: { images, id, name },
+}: SeriesImagesProps) => {
   const displayedImagesAmount = 12;
 
   const imagesSectionHeader =
-    `Images of the series ${details?.name} (${images?.backdrops?.length})`.toUpperCase();
+    `Images of the series ${name} (${images?.backdrops?.length})`.toUpperCase();
 
   return (
     <section
@@ -27,12 +31,15 @@ const SeriesImages = () => {
       </h2>
       <ul className={styles["series-images__list"]}>
         {images?.backdrops?.slice(0, displayedImagesAmount)?.map((image) => (
-          <li key={image.file_path} className={styles["series-images__list-item"]}>
+          <li
+            key={image.file_path}
+            className={styles["series-images__list-item"]}
+          >
             <SeriesContentImage {...image} />
           </li>
         ))}
       </ul>
-      <Link href={`/series/${details?.id}/images`}>
+      <Link href={`/series/${id}/images`}>
         <Button>{`See all ${images?.backdrops?.length} images`}</Button>
       </Link>
     </section>

@@ -4,7 +4,18 @@ import Link from "next/link";
 import { PeopleResult } from "@/types/types";
 import { getDepartmentName } from "@/helpers/getDepartmentName";
 
-const PeopleListItem = ({id, name, profile_path, known_for_department, known_for} : PeopleResult) => {
+const PeopleListItem = ({
+  id,
+  name,
+  profile_path,
+  known_for_department,
+  known_for,
+}: PeopleResult) => {
+  const knownForText = known_for
+    ?.map((show) =>
+      "title" in show ? show.title : "name" in show && show.name
+    )
+    .join(", ");
   return (
     <Link href={`/person/${id}`}>
       <div className={styles["people-list__item"]}>
@@ -22,9 +33,7 @@ const PeopleListItem = ({id, name, profile_path, known_for_department, known_for
               {getDepartmentName(known_for_department)}
             </p>
             <p className={styles["people-list__item-known-for"]}>
-              {known_for
-                ?.map((show) => ("title" in show ? show.title : "name" in show && show.name))
-                .join(", ")}
+              {knownForText}
             </p>
           </div>
         </div>

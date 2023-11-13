@@ -1,20 +1,31 @@
+"use client";
+
 import React from "react";
 import styles from "./PersonCredits.module.scss";
-import sectionStyles from "../Person.module.scss";
-import { useAppSelector } from "@/store";
+import sectionStyles from "../../Person.module.scss";
 import { Tabs, TabsProps } from "antd";
-import { PersonMovieCast, PersonMovieCrew, PersonTvCast, PersonTvCrew } from "@/types/types";
+import {
+  PersonDetails,
+  PersonMovieCast,
+  PersonMovieCrew,
+  PersonTvCast,
+  PersonTvCrew,
+} from "@/types/types";
 import PersonCreditsCarousel from "./PersonCreditsCarousel/PersonCreditsCarousel";
 
 interface PersonCreditsProps {
-  cast: PersonMovieCast | PersonTvCast  | undefined;
+  cast: PersonMovieCast | PersonTvCast | undefined;
   crew: PersonMovieCrew | PersonTvCrew | undefined;
   type: "movies" | "tv-series";
+  personDetails: PersonDetails;
 }
 
-const PersonCredits = ({ cast, crew, type }: PersonCreditsProps) => {
-  const { details } = useAppSelector((state) => state.person);
-
+const PersonCredits = ({
+  cast,
+  crew,
+  type,
+  personDetails,
+}: PersonCreditsProps) => {
   const tabs: TabsProps["items"] = [
     {
       key: "1",
@@ -30,7 +41,9 @@ const PersonCredits = ({ cast, crew, type }: PersonCreditsProps) => {
     },
   ];
 
-  const creditsSectionHeader = `${type === "movies" ? "Movies" : "TV series"} associated with ${details?.name}`.toUpperCase();
+  const creditsSectionHeader = `${
+    type === "movies" ? "Movies" : "TV series"
+  } associated with ${personDetails?.name}`.toUpperCase();
   return (
     <section
       className={`${styles["person-credits"]} ${sectionStyles["person-section"]}`}

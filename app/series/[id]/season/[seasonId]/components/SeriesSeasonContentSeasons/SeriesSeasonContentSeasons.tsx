@@ -1,22 +1,37 @@
 import React from "react";
-import { useAppSelector } from "@/store";
 import styles from "./SeriesSeasonContentSeasons.module.scss";
 import Link from "next/link";
 import Button from "@/components/Button/Button";
+import { SeriesDetails, SeasonDetails } from "@/types/types";
 
-const SeriesSeasonContentSeasons = () => {
-  const { details, season } = useAppSelector((state) => state.series);
+interface SeriesSeasonContentSeasonsProps {
+  seriesDetails: SeriesDetails;
+  seasonDetails: SeasonDetails;
+}
 
+const SeriesSeasonContentSeasons = ({
+  seasonDetails,
+  seriesDetails,
+}: SeriesSeasonContentSeasonsProps) => {
   return (
     <section className={`${styles["series-season-content__seasons"]}`}>
       <ul className={styles["series-season-content__seasons-list"]}>
-        {details?.seasons?.map((seasonItem, index) => (
-          <li key={index} className={styles["series-season-content__seasons-list-item"]}>
+        {seriesDetails?.seasons?.map((seasonItem, index) => (
+          <li
+            key={index}
+            className={styles["series-season-content__seasons-list-item"]}
+          >
             <Link
               key={seasonItem.name}
-              href={`/series/${details?.id}/season/${seasonItem.season_number}`}
+              href={`/series/${seriesDetails?.id}/season/${seasonItem.season_number}`}
             >
-              <Button active={seasonItem.season_number === season?.season_number}>{`${seasonItem?.name}`}</Button>
+              <Button
+                active={
+                  seasonItem.season_number === seasonDetails?.season_number
+                }
+              >
+                {seasonItem?.name}
+              </Button>
             </Link>
           </li>
         ))}

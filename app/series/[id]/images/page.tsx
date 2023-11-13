@@ -1,22 +1,35 @@
-"use client";
-
-import { useAppDispatch, useAppSelector } from "@/store";
-import { fetchSeriesData } from "@/store/seriesSlice";
-import React, { useEffect } from "react";
-import SeriesImagesList from "./components/SeriesImagesList";
+import React from "react";
 import { PageIdParams } from "@/types/types";
 
-const SeriesImages = ({ params: { id } }: PageIdParams) => {
-  const dispatch = useAppDispatch();
-  const images = useAppSelector((state) => state.series.details?.images);
+import styles from "./SeriesImages.module.scss";
+import { getSeriesData } from "@/api";
+import SeriesImage from "./components/SeriesImage/SeriesImage";
 
-  useEffect(() => {
-    if (id && !images) dispatch(fetchSeriesData(Number(id)));
-  }, [images, id, dispatch]);
+const SeriesImages = async ({ params: { id } }: PageIdParams) => {
+  const numberId = Number(id);
+  const seriesData = await getSeriesData(numberId);
+  const seriesDetails = seriesData?.seriesDetails;
+  const seriesImages = seriesDetails?.images;
 
   return (
-    <main>
-      <SeriesImagesList />
+    <main className={styles["series-images"]}>
+      <h1
+        className={styles["series-images__title"]}
+      >{`Images of ${seriesDetails?.name} (${seriesImages?.backdrops?.length})`}</h1>
+      <ul className={styles["series-images__list"]}>
+        {seriesImages?.backdrops?.map(
+          (image) =>
+            image.aspect_ratio &&
+            image.file_path && (
+              <li
+                key={image.file_path}
+                className={styles["series-images__list-item"]}
+              >
+                <SeriesImage {...image} />
+              </li>
+            )
+        )}
+      </ul>
     </main>
   );
 };

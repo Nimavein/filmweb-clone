@@ -1,19 +1,47 @@
-"use client";
+import VodFilter from "./components/VodFilter/VodFilter";
+import VodMovies from "./components/VodMovies/VodMovies";
+import VodTvSeries from "./components/VodTvSeries/VodTvSeries";
+import { getWatchProviders } from "@/api/watchProvidersApi";
+import { getWatchProviderMovies, getWatchProviderTvSeries } from "@/api";
 
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/store";
-import { fetchWatchProviders } from "@/store/watchProvidersSlice";
-import VodPageContent from "./components/VodPageContent";
+import styles from "./Vod.module.scss";
+import { PageVodParams, WatchProvidersFiltersType } from "@/types/types";
 
-const VodPage = () => {
-  const dispatch = useAppDispatch();
-  const { tv, movies } = useAppSelector((state) => state.watchProviders);
+const VodPage = async ({
+  searchParams: { watchProvider, sortBy = "popularity.desc" },
+}: PageVodParams) => {
+  const watchProviderId = parseInt(watchProvider);
+  const filters: WatchProvidersFiltersType = {
+    watchProviderId,
+    sortBy,
+  };
+  const { moviesProviders, tvProviders } = await getWatchProviders();
+  const watchProviderMovies = await getWatchProviderMovies(
+    1,
+    watchProviderId,
+    sortBy
+  );
+  const tvSeriesProviderMovies = await getWatchProviderTvSeries(
+    1,
+    watchProviderId,
+    sortBy
+  );
 
-  useEffect(() => {
-    if (!tv && !movies) dispatch(fetchWatchProviders());
-  }, [dispatch]);
-
-  return <>{tv && movies && <VodPageContent />}</>;
+  return (
+    <main className={styles["vod"]}>
+      <VodFilter
+        tvProviders={tvProviders}
+        moviesProviders={moviesProviders}
+        filters={filters}
+      />
+      {watchProviderMovies && (
+        <VodMovies watchProviderMovies={watchProviderMovies} />
+      )}
+      {tvSeriesProviderMovies && (
+        <VodTvSeries watchProviderTvSeries={tvSeriesProviderMovies} />
+      )}
+    </main>
+  );
 };
 
 export default VodPage;

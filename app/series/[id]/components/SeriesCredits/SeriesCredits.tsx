@@ -1,15 +1,22 @@
+"use client";
+
 import React from "react";
-import { useAppSelector } from "@/store";
 import styles from "./SeriesCredits.module.scss";
-import sectionStyles from "../Series.module.scss";
+import sectionStyles from "../../Series.module.scss";
 import Link from "next/link";
 import Button from "@/components/Button/Button";
 import { Tabs, TabsProps } from "antd";
 import SeriesCreditsCarousel from "./SeriesCreditsCarousel/SeriesCreditsCarousel";
+import { SeriesDetails } from "@/types/types";
 
-const SeriesCredits = () => {
-  const details = useAppSelector((state) => state.series.details);
-  const aggregateCredits = details?.aggregate_credits;
+interface SeriesCreditsProps {
+  seriesDetails: SeriesDetails;
+}
+
+const SeriesCredits = ({
+  seriesDetails: { name, aggregate_credits, id },
+}: SeriesCreditsProps) => {
+  const aggregateCredits = aggregate_credits;
 
   const tabs: TabsProps["items"] = [
     {
@@ -24,7 +31,7 @@ const SeriesCredits = () => {
     },
   ];
 
-  const creditsSectionHeader = `Credits of the series ${details?.name}`.toUpperCase();
+  const creditsSectionHeader = `Credits of the series ${name}`.toUpperCase();
   return (
     <section
       className={`${styles["series-credits"]} ${sectionStyles["series-section"]}`}
@@ -37,7 +44,7 @@ const SeriesCredits = () => {
         {creditsSectionHeader}
       </h2>
       <Tabs items={tabs} defaultActiveKey={"1"} />
-      <Link href={`/series/${details?.id}/credits`}>
+      <Link href={`/series/${id}/credits`}>
         <Button>See all credits</Button>
       </Link>
     </section>

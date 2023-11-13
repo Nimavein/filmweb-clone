@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Rate } from "antd";
 import { StarFilled } from "@ant-design/icons";
@@ -27,7 +29,12 @@ const Rating = ({
   vertical = false,
 }: RatingProps) =>
   small ? (
-    <div className={`${styles["small-rating"]} ${vertical ? styles["small-rating--vertical"] : ""}`} style={{ fontSize: fontSize }}>
+    <div
+      className={`${styles["small-rating"]} ${
+        vertical ? styles["small-rating--vertical"] : ""
+      }`}
+      style={{ fontSize: fontSize }}
+    >
       <StarFilled className={styles["small-rating__icon"]} />
       <span className={styles["small-rating__value"]}>{defaultValue}</span>
       <div className={styles["small-rating__votes"]}>
@@ -37,7 +44,9 @@ const Rating = ({
     </div>
   ) : (
     <div className={styles["rating"]}>
-      {showNumber && <span className={styles["rating__value"]}>{defaultValue}</span>}
+      {showNumber && (
+        <span className={styles["rating__value"]}>{defaultValue}</span>
+      )}
       <Rate
         count={starCount}
         allowHalf={allowHalf}

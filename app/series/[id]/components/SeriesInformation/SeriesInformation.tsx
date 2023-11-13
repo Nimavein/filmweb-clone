@@ -1,39 +1,50 @@
 import React, { ReactNode } from "react";
-import { useAppSelector } from "@/store";
 import styles from "./SeriesInformation.module.scss";
-import sectionStyles from "../Series.module.scss";
-import { CircularProgressbar } from "react-circular-progressbar";
+import sectionStyles from "../../Series.module.scss";
+import CircularProgressbar from "@/components/CircularProgressbar/CircularProgressbar";
+import { SeriesDetails } from "@/types/types";
 
 interface SeriesInformationType {
   name: string;
   value: string | undefined | number | ReactNode;
 }
 
-const SeriesInformation = () => {
-  const { details } = useAppSelector((state) => state.series);
+interface SeriesInformationProps {
+  seriesDetails: SeriesDetails;
+}
 
+const SeriesInformation = ({
+  seriesDetails: {
+    name,
+    origin_country,
+    tagline,
+    production_companies,
+    spoken_languages,
+    original_name,
+    popularity,
+    status,
+  },
+}: SeriesInformationProps) => {
   const informationSectionHeader =
-    `Information about the series ${details?.name}`.toUpperCase();
+    `Information about the series ${name}`.toUpperCase();
 
   const information: SeriesInformationType[] = [
     {
       name: "Origin Country",
-      value: details?.origin_country?.map((country) => country).join(", "),
+      value: origin_country?.map((country) => country).join(", "),
     },
-    { name: "Tagline", value: details?.tagline },
+    { name: "Tagline", value: tagline },
     {
       name: "Production Companies",
-      value: details?.production_companies
-        ?.map((company) => company.name)
-        ?.join(", "),
+      value: production_companies?.map((company) => company.name)?.join(", "),
     },
     {
       name: "Spoken languages",
-      value: details?.spoken_languages
+      value: spoken_languages
         ?.map((language) => language.english_name)
         ?.join(", "),
     },
-    { name: "Original name", value: details?.original_name },
+    { name: "Original name", value: original_name },
     {
       name: "Popularity",
       value: (
@@ -41,11 +52,11 @@ const SeriesInformation = () => {
           strokeWidth={14}
           background
           maxValue={10000}
-          value={details?.popularity || 0}
+          value={popularity || 0}
         />
       ),
     },
-    { name: "Status", value: details?.status },
+    { name: "Status", value: status },
   ];
 
   return (

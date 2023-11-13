@@ -1,16 +1,21 @@
+"use client";
+
 import React from "react";
-import { useAppSelector } from "@/store";
 import styles from "./MovieCredits.module.scss";
-import sectionStyles from "../Movie.module.scss";
+import sectionStyles from "../../Movie.module.scss";
 import Link from "next/link";
 import Button from "@/components/Button/Button";
 import { Tabs, TabsProps } from "antd";
 import MovieContentCreditsCarousel from "./MovieCreditsCarousel/MovieCreditsCarousel";
+import { MovieDetails } from "@/types/types";
 
-const MovieCredits = () => {
-  const movieDetails = useAppSelector((state) => state.movie.movieDetails);
-  const credits = movieDetails?.credits;
+interface MovieCreditsProps {
+  movieDetails: MovieDetails;
+}
 
+const MovieCredits = ({
+  movieDetails: { credits, title, id },
+}: MovieCreditsProps) => {
   const tabs: TabsProps["items"] = [
     {
       key: "1",
@@ -24,7 +29,7 @@ const MovieCredits = () => {
     },
   ];
 
-  const creditsSectionHeader = `Credits of the movie ${movieDetails?.title}`.toUpperCase();
+  const creditsSectionHeader = `Credits of the movie ${title}`.toUpperCase();
   return (
     <section
       className={`${styles["movie-credits"]} ${sectionStyles["movie-section"]}`}
@@ -37,7 +42,7 @@ const MovieCredits = () => {
         {creditsSectionHeader}
       </h2>
       <Tabs items={tabs} defaultActiveKey={"1"} />
-      <Link href={`/movie/${movieDetails?.id}/credits`}>
+      <Link href={`/movie/${id}/credits`}>
         <Button>See all credits</Button>
       </Link>
     </section>

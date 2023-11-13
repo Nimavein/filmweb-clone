@@ -4,29 +4,34 @@ import ReadMoreText from "@/components/ReadMoreText/ReadMoreText";
 import Rating from "@/components/Rating/Rating";
 import UserAvatar from "@/components/UserAvatar/UserAvatar";
 import Image from "next/image";
-import { useAppSelector } from "@/store";
-import { Review } from "@/types/types";
+import { Images, Review } from "@/types/types";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 
-type MovieReviewType = Review & {
+type MovieReviewProps = Review & {
   slideId: number;
+  movieImages: Images;
 };
 
-const MovieReview = ({ content, author_details, slideId }: MovieReviewType) => {
-  const images = useAppSelector((state) => state.movie.movieDetails?.images);
+const MovieReview = ({
+  content,
+  author_details,
+  slideId,
+  movieImages,
+}: MovieReviewProps) => {
   const imageHeight = 168;
   const imageWidth = imageHeight * 1.667;
 
   return (
     <div className={styles["movie-review"]}>
-      {images?.backdrops &&
-      images.backdrops[slideId].file_path &&
-      images.backdrops[slideId].aspect_ratio ? (
+      {movieImages?.backdrops &&
+      movieImages.backdrops[slideId].file_path &&
+      movieImages.backdrops[slideId].aspect_ratio ? (
         <Image
-          src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${images?.backdrops[slideId]?.file_path}`}
+          src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${movieImages?.backdrops[slideId]?.file_path}`}
           alt=""
           width={
-            imageHeight * images.backdrops[slideId].aspect_ratio! || imageWidth
+            imageHeight * movieImages.backdrops[slideId].aspect_ratio! ||
+            imageWidth
           }
           height={imageHeight}
         />

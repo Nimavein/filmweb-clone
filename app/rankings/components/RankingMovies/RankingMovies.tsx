@@ -1,27 +1,34 @@
-import React, { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/store";
-import { Movie, RankingSortOption } from "@/types/types";
-import { fetchMoviesRankingData } from "@/store/rankingSlice";
-import styles from "../Rankings.module.scss";
+import React from "react";
+import {
+  ActiveRankingFilters,
+  GenresDTO,
+  Movie,
+  Movies,
+  RankingSortOption,
+} from "@/types/types";
+import styles from "../../Rankings.module.scss";
 import Rating from "@/components/Rating/Rating";
 import Link from "next/link";
 import Image from "next/image";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 import RankingContentOptions from "../RankingOptions/RankingOptions";
-import Button from "@/components/Button/Button";
-import { FilterOutlined } from "@ant-design/icons";
 import RankingContentFilters from "../RankingFilters/RankingFilters";
 
-const RankingMovies = () => {
-  const [areFiltersOpen, setAreFiltersOpen] = useState<boolean>(false);
-  const { moviesRanking } = useAppSelector((state) => state.ranking);
-  const dispatch = useAppDispatch();
+interface RankingMoviesProps {
+  sortBy: string;
+  movies: Movies;
+  activeFilters: ActiveRankingFilters;
+  genres: GenresDTO;
+}
+
+const RankingMovies = ({
+  sortBy,
+  movies,
+  activeFilters,
+  genres,
+}: RankingMoviesProps) => {
   const imageHeight = 120;
   const imageWidth = imageHeight * 0.667;
-
-  useEffect(() => {
-    dispatch(fetchMoviesRankingData({ sortBy: "vote_average.desc" }));
-  }, []);
 
   const options: RankingSortOption[] = [
     {
@@ -37,18 +44,15 @@ const RankingMovies = () => {
   return (
     <>
       <div className={styles["ranking__options-wrapper"]}>
-        <RankingContentOptions options={options} contentType="movies" />
-        <Button
-          ariaLabel={areFiltersOpen ? "Close filters" : "Open filters"}
-          active={areFiltersOpen}
-          onClick={() => setAreFiltersOpen(!areFiltersOpen)}
-        >
-          <FilterOutlined />
-        </Button>
+        <RankingContentOptions options={options} sortBy={sortBy} />
       </div>
-      {areFiltersOpen && <RankingContentFilters contentType="movies" />}
+      <RankingContentFilters
+        contentType="movies"
+        activeFilters={activeFilters}
+        genres={genres}
+      />
       <ul className={styles["ranking-list"]}>
-        {moviesRanking?.results?.map((movie: Movie, index: number) => (
+        {movies?.results?.map((movie: Movie, index: number) => (
           <li key={movie.id}>
             <Link href={`/movie/${movie.id}`}>
               <div className={styles["ranking-list__item"]}>
@@ -65,7 +69,9 @@ const RankingMovies = () => {
                 )}
                 <div className={styles["ranking-list__item-content"]}>
                   <div className={styles["ranking-list__item-text"]}>
-                    <h2 className={styles["ranking-list__item-title"]}>{movie.title}</h2>
+                    <h2 className={styles["ranking-list__item-title"]}>
+                      {movie.title}
+                    </h2>
                   </div>
                   <div className={styles["ranking-list__item-rating"]}>
                     <span className={styles["ranking-list__item-vote-average"]}>

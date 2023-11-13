@@ -1,30 +1,48 @@
-import { KeyboardEvent, useState } from "react";
+import { KeyboardEvent, useEffect, useState } from "react";
 import { AutoComplete } from "antd";
-import { useAppDispatch, useAppSelector } from "@/store";
-import { setSearchQuery, searchMulti } from "@/store/searchSlice";
 import navbarStyles from "../Navbar.module.scss";
 import NavbarSearchItem from "./NavbarSearchItem/NavbarSearchItem";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { getSearchMulti } from "@/api/searchApi";
+import useSearchParam from "@/hooks/useSearchParam";
+import { SearchResults } from "@/types/types";
 
 const NavbarSearch = () => {
-  const [query, setQuery] = useState("");
+  const searchParams = useSearchParams();
+  const [query, setQuery] = useState(searchParams.get("query"));
+  const [results, setResults] = useState<SearchResults>();
   const [open, setOpen] = useState(false);
   const [timeoutId, setTimeoutId] = useState<ReturnType<
     typeof setTimeout
   > | null>(null);
-  const dispatch = useAppDispatch();
-  const { results } = useAppSelector((state) => state.search);
+  const { setSearchParam, removeSearchParam } = useSearchParam();
   const isSearchPage = usePathname().includes("/search");
   const router = useRouter();
 
-  const delayedSearch = async (value: string) => {
-    await dispatch(searchMulti(value));
+  const fetchSearchResults = async (value: string) => {
+    if (value || query) {
+      const newResults = await getSearchMulti(value || query || "");
+      setResults(newResults);
+      if (value) {
+        setSearchParam("query", value);
+      } else {
+        removeSearchParam("query");
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchSearchResults(query || "");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const delayedSearch = (value: string) => {
+    fetchSearchResults(value);
   };
 
   const handleSearch = async (value: string) => {
     if (results && results?.length > 0 && !isSearchPage) setOpen(true);
     setQuery(value);
-    dispatch(setSearchQuery(value));
 
     if (timeoutId) {
       clearTimeout(timeoutId);
@@ -33,8 +51,7 @@ const NavbarSearch = () => {
     setTimeoutId(setTimeout(() => delayedSearch(value), 500));
   };
 
-  const handleSelect = (value: string) => {
-    setQuery(value);
+  const handleSelect = () => {
     setOpen(false);
   };
 
@@ -51,12 +68,12 @@ const NavbarSearch = () => {
       const chosenOption = document.querySelector(
         ".ant-select-item-option-active a"
       ) as HTMLAnchorElement;
+      event.preventDefault();
 
       if (chosenOption) {
-        event.preventDefault();
         chosenOption.click();
-      } else if (query.length > 0) {
-        router.push("/search");
+      } else if (query && query?.length > 0) {
+        router.push(`/search?${searchParams}`);
       }
       setOpen(false);
     }

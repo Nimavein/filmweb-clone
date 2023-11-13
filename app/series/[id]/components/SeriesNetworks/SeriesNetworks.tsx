@@ -1,16 +1,18 @@
 import React from "react";
-import { useAppSelector } from "@/store";
 import styles from "./SeriesNetworks.module.scss";
 import SeriesNetwork from "./SeriesNetwork/SeriesNetwork";
+import { SeriesNetworkType } from "@/types/types";
 
-const SeriesNetworks = () => {
-  const { details } = useAppSelector((state) => state.series);
+interface SeriesNetworksProps {
+  seriesNetworks: SeriesNetworkType[];
+}
 
+const SeriesNetworks = ({ seriesNetworks }: SeriesNetworksProps) => {
   return (
     <div className={styles["series-networks"]}>
       <p className={styles["series-networks__header"]}>Available on: </p>
       <ul className={styles["series-networks__list"]}>
-        {details?.networks?.map((network, index) => (
+        {seriesNetworks?.map((network, index) => (
           <SeriesNetwork key={index} {...network} />
         ))}
       </ul>

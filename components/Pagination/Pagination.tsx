@@ -1,11 +1,13 @@
+"use client";
+
 import React from "react";
 import { Pagination as AntdPagination } from "antd";
 import type { PaginationProps as AntdPaginationProps } from "antd";
+import useSearchParam from "@/hooks/useSearchParam";
 
 interface PaginationProps {
   totalItemsAmount: number | undefined;
   currentPage: number;
-  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   pageSize: number;
   hideOnSinglePage?: boolean;
 }
@@ -13,12 +15,13 @@ interface PaginationProps {
 const Pagination = ({
   totalItemsAmount,
   currentPage,
-  setCurrentPage,
   pageSize,
   hideOnSinglePage = true,
 }: PaginationProps) => {
+  const { setSearchParam } = useSearchParam();
+
   const onChange: AntdPaginationProps["onChange"] = (page: number) => {
-    setCurrentPage(page);
+    setSearchParam("page", page.toString());
     window.scrollTo({ top: 0 });
   };
 

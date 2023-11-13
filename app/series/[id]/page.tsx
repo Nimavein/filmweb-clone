@@ -1,20 +1,44 @@
-"use client";
-
-import { useAppDispatch, useAppSelector } from "@/store";
-import { fetchSeriesData } from "@/store/seriesSlice";
-import { useEffect } from "react";
-import SeriesContent from "./components/Series";
 import { PageIdParams } from "@/types/types";
+import { getSeriesData, getSeriesReviews } from "@/api";
+import SeriesCredits from "./components/SeriesCredits/SeriesCredits";
+import SeriesDescription from "./components/SeriesDescription/SeriesDescription";
+import SeriesInformation from "./components/SeriesInformation/SeriesInformation";
+import SeriesTopPanel from "./components/SeriesTopPanel/SeriesTopPanel";
+import SeriesImages from "./components/SeriesImages/SeriesImages";
+import SeriesReviews from "./components/SeriesReviews/SeriesReviews";
 
-const Series = ({ params: { id } }: PageIdParams) => {
-  const dispatch = useAppDispatch();
-  const { details } = useAppSelector((state) => state.series);
+import styles from "./Series.module.scss";
 
-  useEffect(() => {
-    if (id && details?.id !== Number(id)) dispatch(fetchSeriesData(Number(id)));
-  }, [id]);
+const Series = async ({ params: { id } }: PageIdParams) => {
+  const numberId = parseInt(id);
+  const seriesData = await getSeriesData(numberId);
+  const seriesDetails = seriesData?.seriesDetails;
+  const aggregateCredits = seriesDetails?.aggregate_credits;
+  const images = seriesDetails?.images;
+  const seriesReviews = await getSeriesReviews(numberId, 1);
+  const seriesReviewsResults = seriesReviews?.results;
 
-  return details ? <SeriesContent /> : <></>;
+  return (
+    seriesDetails && (
+      <main className={styles["series"]}>
+        <SeriesTopPanel seriesDetails={seriesDetails} />
+        <SeriesDescription seriesDetails={seriesDetails} />
+        {seriesReviewsResults && seriesReviewsResults?.length > 0 && (
+          <SeriesReviews
+            seriesDetails={seriesDetails}
+            reviews={seriesReviews}
+          />
+        )}
+        {aggregateCredits?.cast && aggregateCredits?.cast?.length > 0 && (
+          <SeriesCredits seriesDetails={seriesDetails} />
+        )}
+        <SeriesInformation seriesDetails={seriesDetails} />
+        {images?.backdrops && images?.backdrops?.length > 0 && (
+          <SeriesImages seriesDetails={seriesDetails} />
+        )}
+      </main>
+    )
+  );
 };
 
 export default Series;

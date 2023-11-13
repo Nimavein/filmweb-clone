@@ -1,16 +1,14 @@
 import styles from "./TvSeriesList.module.scss";
 import Pagination from "../../../components/Pagination/Pagination";
-import { Dispatch, SetStateAction } from "react";
 import { TvSeries } from "@/types/types";
 import TvSeriesListItem from "./TvSeriesListItem/TvSeriesListItem";
 
 interface TvSeriesListPropsType {
   tvSeries: TvSeries;
   currentPage: number;
-  setCurrentPage: Dispatch<SetStateAction<number>>;
 }
 
-const TvSeriesList = ({ tvSeries, currentPage, setCurrentPage }: TvSeriesListPropsType) => {
+const TvSeriesList = ({ tvSeries, currentPage }: TvSeriesListPropsType) => {
   return (
     <section className={styles["tv-series"]}>
       <ul className={styles["tv-series-list"]}>
@@ -22,7 +20,6 @@ const TvSeriesList = ({ tvSeries, currentPage, setCurrentPage }: TvSeriesListPro
       </ul>
       <Pagination
         currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
         totalItemsAmount={tvSeries?.total_results}
         pageSize={20}
       />

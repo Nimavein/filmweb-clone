@@ -1,29 +1,17 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/store";
-import { fetchPopularTvSeries } from "@/store/tvSeriesSlice";
+import { PagePaginationParams } from "@/types/types";
+import { getPopularTvSeries } from "@/api";
 import TvSeriesList from "../components/TvSeriesList";
 
-const PopularTvSeriesPage = () => {
-  const dispatch = useAppDispatch();
-  const popularTvSeries = useAppSelector(
-    (state) => state.tvSeries.popularTvSeries
-  );
-  const [currentPage, setCurrentPage] = useState<number>(1);
-
-  useEffect(() => {
-    dispatch(fetchPopularTvSeries({ page: currentPage }));
-  }, [dispatch, currentPage]);
+const PopularTvSeriesPage = async ({
+  searchParams: { page },
+}: PagePaginationParams) => {
+  const currentPage = parseInt(page) || 1;
+  const popularTvSeries = await getPopularTvSeries(currentPage);
 
   return (
     <main>
       {popularTvSeries && (
-        <TvSeriesList
-          tvSeries={popularTvSeries}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        />
+        <TvSeriesList tvSeries={popularTvSeries} currentPage={currentPage} />
       )}
     </main>
   );

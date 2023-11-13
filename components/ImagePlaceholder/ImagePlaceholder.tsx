@@ -1,3 +1,5 @@
+"use client";
+
 import React, { ReactNode } from "react";
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
@@ -18,10 +20,13 @@ const ImagePlaceholder = ({
   avatarShape = "square",
   icon = <UserOutlined />,
   height,
-  width
+  width,
 }: ImagePlaceholderProps) => {
   return (
-    <div className={`${className} ${styles["image-placeholder"]}`} style={{height, width}}>
+    <div
+      className={`${className} ${styles["image-placeholder"]}`}
+      style={{ height, width }}
+    >
       <Avatar size={avatarSize} shape={avatarShape} icon={icon} />
     </div>
   );

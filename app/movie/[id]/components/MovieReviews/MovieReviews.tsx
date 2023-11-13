@@ -1,18 +1,29 @@
+"use client";
+
 import React from "react";
-import { useAppSelector } from "@/store";
 import Link from "next/link";
 import styles from "./MovieReviews.module.scss";
-import sectionStyles from "../Movie.module.scss";
+import sectionStyles from "../../Movie.module.scss";
 import Button from "@/components/Button/Button";
 import MovieContentReview from "./MovieReview/MovieReview";
 import { Carousel } from "antd";
 import { RightOutlined, LeftOutlined } from "@ant-design/icons";
+import { MovieDetails, Reviews } from "@/types/types";
 
-const MovieReviews = () => {
-  const { movieDetails, reviews } = useAppSelector((state) => state.movie);
+interface MovieReviewsProps {
+  movieDetails: MovieDetails;
+  movieReviews: Reviews;
+}
+
+const MovieReviews = ({ movieDetails, movieReviews }: MovieReviewsProps) => {
+  const reviews = movieReviews?.results;
   const reviewsSectionHeader =
     `Reviews of the movie ${movieDetails?.title}`.toUpperCase();
   const displayedReviewsInCarousel = 3;
+  const reviewsToDisplay = reviews?.slice(
+    0,
+    Math.min(displayedReviewsInCarousel, reviews.length)
+  );
 
   return (
     <section
@@ -32,17 +43,19 @@ const MovieReviews = () => {
         prevArrow={<LeftOutlined />}
         infinite={false}
       >
-        {reviews?.results
-          ?.slice(0, Math.min(displayedReviewsInCarousel, reviews?.results?.length))
-          .map((review, index) => (
-            <div key={index}>
-              <MovieContentReview slideId={index} {...review} />
-            </div>
-          ))}
+        {reviewsToDisplay?.map((review, index) => (
+          <div key={index}>
+            <MovieContentReview
+              slideId={index}
+              {...review}
+              movieImages={movieDetails?.images}
+            />
+          </div>
+        ))}
       </Carousel>
-      {reviews?.results && reviews?.results?.length > displayedReviewsInCarousel && (
+      {reviews && reviews?.length > displayedReviewsInCarousel && (
         <Link href={`/movie/${movieDetails?.id}/reviews`}>
-          <Button>{`See all ${reviews?.results?.length} reviews`}</Button>
+          <Button>{`See all ${reviews?.length} reviews`}</Button>
         </Link>
       )}
     </section>
