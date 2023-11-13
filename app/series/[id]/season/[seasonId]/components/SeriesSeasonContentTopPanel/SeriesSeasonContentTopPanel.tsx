@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 import { SeasonDetails, SeriesDetails } from "@/types/types";
-import ImagePlaceholderIcon from "@/public/icons/image-placeholder.png";
 import Divider from "@/components/Divider/Divider";
 
 import styles from "./SeriesSeasonContentTopPanel.module.scss";
@@ -54,11 +53,7 @@ const SeriesSeasonContentTopPanel = ({
             src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${seasonDetails?.poster_path}`}
           />
         ) : (
-          <ImagePlaceholder
-            width={imageWidth}
-            height={imageHeight}
-            icon={<ImagePlaceholderIcon />}
-          />
+          <ImagePlaceholder width={imageWidth} height={imageHeight} />
         )}
         <div className={styles["series-season-content__top-panel-info-text"]}>
           <h1

@@ -7,7 +7,6 @@ import { getGenresNames } from "@/helpers/getGenresNames";
 import { getProductionCountries } from "@/helpers/getProductionCountries";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 import { MovieDetails } from "@/types/types";
-import ImagePlaceholderIcon from "@/public/icons/image-placeholder.png";
 
 interface MovieDetail {
   name: string;
@@ -53,11 +52,7 @@ const MovieDescription = ({
           height={imageHeight}
         />
       ) : (
-        <ImagePlaceholder
-          height={imageHeight}
-          width={imageWidth}
-          icon={<ImagePlaceholderIcon />}
-        />
+        <ImagePlaceholder height={imageHeight} width={imageWidth} />
       )}
       <div className={styles["movie-description__info"]}>
         <p className={styles["movie-description__overview"]}>{overview}</p>

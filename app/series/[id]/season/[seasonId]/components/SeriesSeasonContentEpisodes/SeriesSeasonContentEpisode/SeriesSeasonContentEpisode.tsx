@@ -4,7 +4,6 @@ import { SeriesEpisode } from "@/types/types";
 import Image from "next/image";
 import Rating from "@/components/Rating/Rating";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
-import ImagePlaceholderIcon from "@/public/icons/image-placeholder.png";
 
 const SeriesSeasonContentEpisode = ({
   name,
@@ -30,11 +29,7 @@ const SeriesSeasonContentEpisode = ({
           src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${still_path}`}
         />
       ) : (
-        <ImagePlaceholder
-          height={imageHeight}
-          width={imageWidth}
-          icon={<ImagePlaceholderIcon />}
-        />
+        <ImagePlaceholder height={imageHeight} width={imageWidth} />
       )}
       <div
         className={styles["series-season-content__episodes-list-item-content"]}
