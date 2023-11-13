@@ -3,11 +3,13 @@ import styles from "./MovieTopPanel.module.scss";
 import Image from "next/image";
 import { formatDuration } from "date-fns";
 import Rating from "@/components/Rating/Rating";
-import { useAppSelector } from "@/store";
+import { MovieDetails } from "@/types/types";
 
-const MovieTopPanel = () => {
-  const { movieDetails } = useAppSelector((state) => state.movie);
+interface MovieTopPanelProps {
+  movieDetails: MovieDetails;
+}
 
+const MovieTopPanel = ({ movieDetails }: MovieTopPanelProps) => {
   const movieDuration = { minutes: movieDetails?.runtime };
   const formattedMovieDuration = formatDuration(movieDuration, {
     format: ["hours", "minutes"],
@@ -23,7 +25,9 @@ const MovieTopPanel = () => {
         quality={100}
       />
       <div className={styles["movie-top-panel__details"]}>
-        <h1 className={styles["movie-top-panel__title"]}>{movieDetails?.title}</h1>
+        <h1 className={styles["movie-top-panel__title"]}>
+          {movieDetails?.title}
+        </h1>
         <div className={styles["movie-top-panel__wrapper"]}>
           <span className={styles["movie-top-panel__title-original"]}>
             {movieDetails?.original_title}
@@ -31,14 +35,18 @@ const MovieTopPanel = () => {
           <span className={styles["movie-top-panel__release"]}>
             {movieDetails?.release_date?.substring(0, 4)}
           </span>
-          <span className={styles["movie-top-panel__runtime"]}>{formattedMovieDuration}</span>
+          <span className={styles["movie-top-panel__runtime"]}>
+            {formattedMovieDuration}
+          </span>
         </div>
         <div className={styles["movie-top-panel__rating"]}>
           <Rating
             fontSize={24}
             small
             defaultValue={
-              movieDetails?.vote_average ? parseFloat(movieDetails?.vote_average.toFixed(2)) : 0
+              movieDetails?.vote_average
+                ? parseFloat(movieDetails?.vote_average.toFixed(2))
+                : 0
             }
             voteCount={movieDetails?.vote_count}
           />

@@ -1,26 +1,34 @@
+"use client";
+
 import React, { useState } from "react";
-import { ActiveRankingFilters, RankingContentType } from "@/types/types";
+import {
+  ActiveRankingFilters,
+  GenresDTO,
+  RankingContentType,
+} from "@/types/types";
 import RankingFilter from "./RankingFilter/RankingFilter";
+import { FilterOutlined } from "@ant-design/icons";
+import Button from "@/components/Button/Button";
 
 interface RankingFiltersProps {
   contentType: RankingContentType;
+  activeFilters: ActiveRankingFilters;
+  genres: GenresDTO;
 }
 
 export interface RankingFilterType {
-  name: "Original Language" | "Genre" | "Production Year";
+  label: string;
+  name: keyof ActiveRankingFilters;
   values: { label: string; value: string | number }[];
 }
 
-const RankingFilters = ({ contentType }: RankingFiltersProps) => {
-  const [activeFilters, setActiveFilters] = useState<ActiveRankingFilters>({
-    originalLanguage: "",
-    genre: "",
-    productionYear: null,
-  });
+const RankingFilters = ({ activeFilters, genres }: RankingFiltersProps) => {
+  const [areFiltersOpen, setAreFiltersOpen] = useState<boolean>(false);
 
   const filters: RankingFilterType[] = [
     {
-      name: "Original Language",
+      label: "Original Language",
+      name: "originalLanguage",
       values: [
         { label: "English", value: "en" },
         { label: "German", value: "de" },
@@ -29,15 +37,14 @@ const RankingFilters = ({ contentType }: RankingFiltersProps) => {
       ],
     },
     {
-      name: "Genre",
-      values: [
-        { label: "Poland", value: "pl" },
-        { label: "USA", value: "us" },
-        { label: "United Kingdom", value: "uk" },
-      ],
+      label: "Genre",
+      name: "genre",
+      values:
+        genres.map((genre) => ({ label: genre.name, value: genre.id })) || [],
     },
     {
-      name: "Production Year",
+      label: "ProductionYear",
+      name: "productionYear",
       values: [
         { label: "2023", value: 2023 },
         { label: "2022", value: 2022 },
@@ -46,18 +53,24 @@ const RankingFilters = ({ contentType }: RankingFiltersProps) => {
     },
   ];
   return (
-    <ul>
-      {filters.map((filter: RankingFilterType) => (
-        <li key={filter.name}>
-          <RankingFilter
-            filter={filter}
-            activeFilters={activeFilters}
-            setActiveFilters={setActiveFilters}
-            contentType={contentType}
-          />
-        </li>
-      ))}
-    </ul>
+    <>
+      <Button
+        ariaLabel={areFiltersOpen ? "Close filters" : "Open filters"}
+        active={areFiltersOpen}
+        onClick={() => setAreFiltersOpen(!areFiltersOpen)}
+      >
+        <FilterOutlined />
+      </Button>
+      {areFiltersOpen && (
+        <ul>
+          {filters.map((filter: RankingFilterType) => (
+            <li key={filter.name}>
+              <RankingFilter filter={filter} activeFilters={activeFilters} />
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 };
 

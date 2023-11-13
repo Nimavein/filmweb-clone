@@ -1,27 +1,39 @@
-"use client";
-
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/store";
-import { fetchSeriesData, fetchSeriesSeasonData } from "@/store/seriesSlice";
-import SeriesSeasonContent from "./components/SeriesSeasonContent";
 import { SeasonPageParams } from "@/types/types";
+import { getSeriesData, getSeriesSeasonData } from "@/api";
+import SeriesSeasonContentEpisodes from "./components/SeriesSeasonContentEpisodes/SeriesSeasonContentEpisodes";
+import SeriesSeasonContentSeasons from "./components/SeriesSeasonContentSeasons/SeriesSeasonContentSeasons";
+import SeriesSeasonContentTopPanel from "./components/SeriesSeasonContentTopPanel/SeriesSeasonContentTopPanel";
 
-const SeriesSeasons = ({ params: { id, seasonId } }: SeasonPageParams) => {
-  const dispatch = useAppDispatch();
-  const { season, details } = useAppSelector((state) => state.series);
+import styles from "./SeriesSeason.module.scss";
 
-  useEffect(() => {
-    if (id && details?.id !== Number(id)) dispatch(fetchSeriesData(Number(id)));
-    if (seasonId && season?.season_number !== Number(seasonId))
-      dispatch(
-        fetchSeriesSeasonData({
-          tv_id: Number(id),
-          season_number: Number(seasonId),
-        })
-      );
-  }, [seasonId]);
+const SeriesSeasons = async ({
+  params: { id, seasonId },
+}: SeasonPageParams) => {
+  const numberSeriesId = Number(id);
+  const numberSeasonId = Number(seasonId);
+  const seriesData = await getSeriesData(numberSeriesId);
+  const seasonDetails = await getSeriesSeasonData(
+    numberSeriesId,
+    numberSeasonId
+  );
+  const seriesDetails = seriesData?.seriesDetails;
 
-  return season ? <SeriesSeasonContent /> : <></>;
+  return (
+    seasonDetails &&
+    seriesDetails && (
+      <main className={styles["series-season-content"]}>
+        <SeriesSeasonContentTopPanel
+          seriesDetails={seriesDetails}
+          seasonDetails={seasonDetails}
+        />
+        <SeriesSeasonContentSeasons
+          seasonDetails={seasonDetails}
+          seriesDetails={seriesDetails}
+        />
+        <SeriesSeasonContentEpisodes seasonDetails={seasonDetails} />
+      </main>
+    )
+  );
 };
 
 export default SeriesSeasons;

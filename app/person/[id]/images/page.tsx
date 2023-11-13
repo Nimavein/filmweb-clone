@@ -1,22 +1,33 @@
-"use client";
-
-import { useAppDispatch, useAppSelector } from "@/store";
-import { fetchPersonData } from "@/store/personSlice";
-import React, { useEffect } from "react";
-import PersonImagesList from "./components/PersonImagesList";
+import { getPersonData } from "@/api";
 import { PageIdParams } from "@/types/types";
+import PersonImage from "./components/PersonImage/PersonImage";
 
-const PersonImages = ({ params: { id } }: PageIdParams) => {
-  const dispatch = useAppDispatch();
-  const images = useAppSelector((state) => state.person.details?.images);
+import styles from "./PersonImages.module.scss";
 
-  useEffect(() => {
-    if (id && !images) dispatch(fetchPersonData(Number(id)));
-  }, [images, id, dispatch]);
+const PersonImages = async ({ params: { id } }: PageIdParams) => {
+  const numberId = Number(id);
+  const personDetails = await getPersonData(numberId);
+  const personImages = personDetails?.images;
 
   return (
-    <main>
-      <PersonImagesList />
+    <main className={styles["person-images"]}>
+      <h1
+        className={styles["person-images__title"]}
+      >{`Images of ${personDetails?.name} (${personImages?.profiles?.length})`}</h1>
+      <ul className={styles["person-images__list"]}>
+        {personImages?.profiles?.map(
+          (image) =>
+            image.aspect_ratio &&
+            image.file_path && (
+              <li
+                key={image.file_path}
+                className={styles["person-images__list-item"]}
+              >
+                <PersonImage {...image} />
+              </li>
+            )
+        )}
+      </ul>
     </main>
   );
 };

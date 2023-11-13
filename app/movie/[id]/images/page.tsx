@@ -1,22 +1,37 @@
-"use client";
-
-import { useAppDispatch, useAppSelector } from "@/store";
-import { fetchMovieData } from "@/store/movieSlice";
-import React, { useEffect } from "react";
-import MovieImagesList from "./components/MovieImagesList";
+import React from "react";
 import { PageIdParams } from "@/types/types";
+import { getMovieData } from "@/api";
 
-const MovieImages = ({ params: { id } }: PageIdParams) => {
-  const dispatch = useAppDispatch();
-  const images = useAppSelector((state) => state.movie.movieDetails?.images);
+import styles from "./MovieImages.module.scss";
+import MovieImage from "./components/MovieImage/MovieImage";
 
-  useEffect(() => {
-    if (id && !images) dispatch(fetchMovieData(Number(id)));
-  }, [images, id, dispatch]);
+const MovieImages = async ({ params: { id } }: PageIdParams) => {
+  const numberId = Number(id);
+  const movieData = await getMovieData(numberId);
+  const movieDetails = movieData?.movieDetails;
+  const movieImages = movieDetails?.images;
 
   return (
-    <main>
-      <MovieImagesList />
+    <main className={styles["movie-images"]}>
+      <section className={styles["movie-images"]}>
+        <h1
+          className={styles["movie-images__title"]}
+        >{`Images of ${movieDetails?.title}`}</h1>
+        <ul className={styles["movie-images__list"]}>
+          {movieImages?.backdrops?.map(
+            (image) =>
+              image.aspect_ratio &&
+              image.file_path && (
+                <li
+                  key={image.file_path}
+                  className={styles["movie-images__list-item"]}
+                >
+                  <MovieImage {...image} />
+                </li>
+              )
+          )}
+        </ul>
+      </section>
     </main>
   );
 };

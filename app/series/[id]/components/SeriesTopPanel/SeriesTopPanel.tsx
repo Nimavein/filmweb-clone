@@ -2,34 +2,46 @@ import React from "react";
 import styles from "./SeriesTopPanel.module.scss";
 import Image from "next/image";
 import Rating from "@/components/Rating/Rating";
-import { useAppSelector } from "@/store";
+import { SeriesDetails } from "@/types/types";
 
-const SeriesTopPanel = () => {
-  const { details } = useAppSelector((state) => state.series);
+interface SeriesTopPanelProps {
+  seriesDetails: SeriesDetails;
+}
 
+const SeriesTopPanel = ({
+  seriesDetails: {
+    backdrop_path,
+    name,
+    original_name,
+    first_air_date,
+    last_air_date,
+    episode_run_time,
+    vote_average,
+    vote_count,
+  },
+}: SeriesTopPanelProps) => {
   return (
     <section className={styles["series-top-panel"]}>
       <Image
-        src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${details?.backdrop_path}`}
+        src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${backdrop_path}`}
         alt=""
         fill
         className={styles["series-top-panel__banner"]}
         quality={100}
       />
       <div className={styles["series-top-panel__details"]}>
-        <h1 className={styles["series-top-panel__title"]}>{details?.name}</h1>
+        <h1 className={styles["series-top-panel__title"]}>{name}</h1>
         <div className={styles["series-top-panel__wrapper"]}>
           <span className={styles["series-top-panel__title-original"]}>
-            {details?.original_name}
+            {original_name}
           </span>
           <span className={styles["series-top-panel__release"]}>
-            {`${details?.first_air_date?.substring(0, 4)} ${
-              details?.last_air_date &&
-              ` - ${details?.last_air_date?.substring(0, 4)}`
+            {`${first_air_date?.substring(0, 4)} ${
+              last_air_date && ` - ${last_air_date?.substring(0, 4)}`
             }`}
           </span>
           <span className={styles["series-top-panel__runtime"]}>
-            {`${details?.episode_run_time} minutes`}
+            {`${episode_run_time} minutes`}
           </span>
         </div>
         <div className={styles["series-top-panel__rating"]}>
@@ -37,11 +49,9 @@ const SeriesTopPanel = () => {
             fontSize={24}
             small
             defaultValue={
-              details?.vote_average
-                ? parseFloat(details?.vote_average.toFixed(2))
-                : 0
+              vote_average ? parseFloat(vote_average.toFixed(2)) : 0
             }
-            voteCount={details?.vote_count}
+            voteCount={vote_count}
           />
         </div>
       </div>

@@ -4,20 +4,20 @@ import ReadMoreText from "@/components/ReadMoreText/ReadMoreText";
 import Rating from "@/components/Rating/Rating";
 import UserAvatar from "@/components/UserAvatar/UserAvatar";
 import Image from "next/image";
-import { useAppSelector } from "@/store";
-import { Review } from "@/types/types";
+import { Images, Review } from "@/types/types";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 
 type SeriesReviewType = Review & {
   slideId: number;
+  images: Images;
 };
 
 const SeriesReview = ({
   content,
   author_details,
   slideId,
+  images,
 }: SeriesReviewType) => {
-  const images = useAppSelector((state) => state.series.details?.images);
   const imageHeight = 168;
   const imageWidth = imageHeight * 1.667;
 

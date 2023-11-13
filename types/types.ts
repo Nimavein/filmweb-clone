@@ -643,6 +643,11 @@ export interface GetWatchProviders {
   results: GetWatchProvidersResults;
 }
 
+export interface WatchProvidersFiltersType {
+  watchProviderId: number | null;
+  sortBy: string | null;
+}
+
 export type SearchResults = Array<
   MovieDetails | SeriesDetails | PersonDetails
 > | null;
@@ -650,9 +655,11 @@ export type SearchResults = Array<
 export interface Article {
   id: string;
   title: string;
-  description: string;
   link: string;
-  image: string;
+  mainImage: {
+    url: string;
+  };
+  status: string;
 }
 
 export type News = Article[];
@@ -689,6 +696,34 @@ export type PageIdParams = {
   params: {
     id: string;
   };
+  searchParams: {
+    page: string;
+  };
+};
+
+export type PagePaginationParams = {
+  searchParams: {
+    page: string;
+  };
+};
+
+export type PageSearchParams = {
+  searchParams: {
+    query: string;
+  };
+};
+
+export type PageVodParams = {
+  searchParams: {
+    watchProvider: string;
+    sortBy: string;
+  };
+};
+
+export type PageRankingParams = {
+  searchParams: {
+    sortBy: string;
+  } & ActiveRankingFilters;
 };
 
 export type SeasonPageParams = {
@@ -697,3 +732,10 @@ export type SeasonPageParams = {
     seasonId: string;
   };
 };
+
+export interface GenreType {
+  id: number;
+  name: string;
+}
+
+export type GenresDTO = GenreType[];

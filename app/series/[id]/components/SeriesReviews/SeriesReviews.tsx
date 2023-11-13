@@ -1,18 +1,30 @@
+"use client";
+
 import React from "react";
-import { useAppSelector } from "@/store";
 import Link from "next/link";
 import styles from "./SeriesReviews.module.scss";
-import sectionStyles from "../Series.module.scss";
+import sectionStyles from "../../Series.module.scss";
 import Button from "@/components/Button/Button";
 import { Carousel } from "antd";
 import { RightOutlined, LeftOutlined } from "@ant-design/icons";
 import SeriesReview from "./SeriesReview/SeriesReview";
+import { Reviews, SeriesDetails } from "@/types/types";
 
-const SeriesReviews = () => {
-  const { details, reviews } = useAppSelector((state) => state.series);
-  const reviewsSectionHeader =
-    `Reviews of the series ${details?.name}`.toUpperCase();
+interface SeriesTopPanelProps {
+  seriesDetails: SeriesDetails;
+  reviews: Reviews;
+}
+
+const SeriesReviews = ({
+  seriesDetails: { name, id, images },
+  reviews,
+}: SeriesTopPanelProps) => {
+  const reviewsSectionHeader = `Reviews of the series ${name}`.toUpperCase();
   const displayedReviewsInCarousel = 3;
+  const reviewsToDisplay = reviews?.results?.slice(
+    0,
+    Math.min(displayedReviewsInCarousel, reviews?.results?.length)
+  );
 
   return (
     <section
@@ -32,20 +44,15 @@ const SeriesReviews = () => {
         prevArrow={<LeftOutlined />}
         infinite={false}
       >
-        {reviews?.results
-          ?.slice(
-            0,
-            Math.min(displayedReviewsInCarousel, reviews?.results?.length)
-          )
-          .map((review, index) => (
-            <div key={index}>
-              <SeriesReview slideId={index} {...review} />
-            </div>
-          ))}
+        {reviewsToDisplay?.map((review, index) => (
+          <div key={index}>
+            <SeriesReview slideId={index} images={images} {...review} />
+          </div>
+        ))}
       </Carousel>
       {reviews?.results &&
         reviews?.results?.length > displayedReviewsInCarousel && (
-          <Link href={`/series/${details?.id}/reviews`}>
+          <Link href={`/series/${id}/reviews`}>
             <Button>{`See all ${reviews?.results?.length} reviews`}</Button>
           </Link>
         )}

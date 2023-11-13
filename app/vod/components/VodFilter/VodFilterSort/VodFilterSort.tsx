@@ -1,21 +1,23 @@
+"use client";
+
 import React from "react";
-import { useAppDispatch, useAppSelector } from "@/store";
 import styles from "../VodFilter.module.scss";
-import { fetchWatchProviderMovies } from "@/store/moviesSlice";
-import { fetchWatchProviderTvSeries } from "@/store/tvSeriesSlice";
-import { setFilterBy } from "@/store/watchProvidersSlice";
+import { getWatchProviderMovies, getWatchProviderTvSeries } from "@/api";
+import { WatchProvidersFiltersType } from "@/types/types";
+import useSearchParam from "@/hooks/useSearchParam";
 
-const VodFilterSort = () => {
-  const dispatch = useAppDispatch();
+interface VodFilterSortProps {
+  filters: WatchProvidersFiltersType;
+}
 
-  const { filters } = useAppSelector((state) => state.watchProviders);
+const VodFilterSort = ({ filters }: VodFilterSortProps) => {
+  const watchProviderId = filters?.watchProviderId;
+  const { setSearchParam } = useSearchParam();
 
-  const onDiscoverOptionClick = (filterBy: string) => {
-    dispatch(setFilterBy(filterBy));
-    dispatch(fetchWatchProviderMovies({ page: 1, providerId: filters?.watchProviderId, filterBy }));
-    dispatch(
-      fetchWatchProviderTvSeries({ page: 1, providerId: filters?.watchProviderId, filterBy })
-    );
+  const onDiscoverOptionClick = async (sortBy: string) => {
+    setSearchParam("sortBy", sortBy);
+    await getWatchProviderMovies(1, watchProviderId, sortBy);
+    await getWatchProviderTvSeries(1, watchProviderId, sortBy);
   };
 
   const sortOptions = [
@@ -34,7 +36,7 @@ const VodFilterSort = () => {
               type="radio"
               name="sort option"
               value={option.value}
-              checked={filters.filterBy === option.value}
+              checked={filters.sortBy === option.value}
               onChange={() => onDiscoverOptionClick(option.value)}
               className={styles["vod-filter__sort-option-input"]}
             />

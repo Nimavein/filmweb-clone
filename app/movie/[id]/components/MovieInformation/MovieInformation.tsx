@@ -1,44 +1,56 @@
 import React, { ReactNode } from "react";
-import { useAppSelector } from "@/store";
 import styles from "./MovieInformation.module.scss";
-import sectionStyles from "../Movie.module.scss";
+import sectionStyles from "../../Movie.module.scss";
 import { formatCurrency } from "@/helpers/formatCurrency";
-import { CircularProgressbar } from "react-circular-progressbar";
+import { MovieDetails } from "@/types/types";
+import CircularProgressbar from "@/components/CircularProgressbar/CircularProgressbar";
 
 interface MovieInformationType {
   name: string;
   value: string | undefined | number | ReactNode;
 }
 
-const MovieInformation = () => {
-  const { movieDetails } = useAppSelector((state) => state.movie);
+interface MovieInformationProps {
+  movieDetails: MovieDetails;
+}
 
+const MovieInformation = ({
+  movieDetails: {
+    title,
+    revenue,
+    tagline,
+    budget,
+    production_companies,
+    spoken_languages,
+    original_title,
+    popularity,
+    status,
+  },
+}: MovieInformationProps) => {
   const informationSectionHeader =
-    `Information about the movie ${movieDetails?.title}`.toUpperCase();
+    `Information about the movie ${title}`.toUpperCase();
 
   const information: MovieInformationType[] = [
     {
       name: "Boxoffice",
-      value: movieDetails?.revenue ? formatCurrency(movieDetails?.revenue) : "",
+      value: revenue ? formatCurrency(revenue) : "",
     },
-    { name: "Tagline", value: movieDetails?.tagline },
+    { name: "Tagline", value: tagline },
     {
       name: "Budget",
-      value: movieDetails?.budget ? formatCurrency(movieDetails?.budget) : "",
+      value: budget ? formatCurrency(budget) : "",
     },
     {
       name: "Production Companies",
-      value: movieDetails?.production_companies
-        ?.map((company) => company.name)
-        ?.join(", "),
+      value: production_companies?.map((company) => company.name)?.join(", "),
     },
     {
       name: "Spoken languages",
-      value: movieDetails?.spoken_languages
+      value: spoken_languages
         ?.map((language) => language.english_name)
         ?.join(", "),
     },
-    { name: "Original title", value: movieDetails?.original_title },
+    { name: "Original title", value: original_title },
     {
       name: "Popularity",
       value: (
@@ -46,11 +58,11 @@ const MovieInformation = () => {
           strokeWidth={14}
           background
           maxValue={10000}
-          value={movieDetails?.popularity || 0}
+          value={popularity || 0}
         />
       ),
     },
-    { name: "Status", value: movieDetails?.status },
+    { name: "Status", value: status },
   ];
 
   return (

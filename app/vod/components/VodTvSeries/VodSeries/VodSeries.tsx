@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import styles from "../VodTvSeries.module.scss";
-import { CameraOutlined } from "@ant-design/icons";
 import Image from "next/image";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 import { Series } from "@/types/types";
@@ -20,7 +19,7 @@ const VodSeries = ({ name, id, poster_path }: Series) => {
             width={imageWidth}
           />
         ) : (
-          <ImagePlaceholder width={imageWidth} height={imageHeight} icon={<CameraOutlined />} />
+          <ImagePlaceholder width={imageWidth} height={imageHeight} />
         )}
         <p className={styles["vod-series__title"]}>{name}</p>
       </div>

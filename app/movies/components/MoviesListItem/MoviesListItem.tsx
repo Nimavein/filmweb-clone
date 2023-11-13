@@ -29,7 +29,12 @@ const MoviesListItem = ({
           </div>
           <div className={styles["movies-list__item-rating"]}>
             <span className={styles["movies-list__item-vote-average"]}>
-              <Rating vertical small defaultValue={vote_average} voteCount={vote_count} />
+              <Rating
+                vertical
+                small
+                defaultValue={vote_average}
+                voteCount={vote_count}
+              />
             </span>
           </div>
         </div>

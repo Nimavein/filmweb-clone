@@ -4,7 +4,7 @@ import { SearchResults } from "@/types/types";
 import React, { useCallback, useEffect, useState } from "react";
 import SearchListItem from "./SearchListItem/SearchListItem";
 import InfiniteScroll from "react-infinite-scroll-component";
-import styles from "../SearchList.module.scss";
+import styles from "../../Search.module.scss";
 
 interface SearchListTabProps {
   results: SearchResults;

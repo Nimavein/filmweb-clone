@@ -1,29 +1,43 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
-import { useAppDispatch, useAppSelector } from "@/store";
 import styles from "../VodFilter.module.scss";
-import { setWatchProviderId } from "@/store/watchProvidersSlice";
 import Button from "@/components/Button/Button";
-import { fetchWatchProviderMovies } from "@/store/moviesSlice";
-import { fetchWatchProviderTvSeries } from "@/store/tvSeriesSlice";
+import { getWatchProviderMovies, getWatchProviderTvSeries } from "@/api";
+import { GetWatchProviders, WatchProvidersFiltersType } from "@/types/types";
+import useSearchParam from "@/hooks/useSearchParam";
 
-const VodFilterProviders = () => {
-  const dispatch = useAppDispatch();
+interface VodFilterProvidersProps {
+  filters: WatchProvidersFiltersType;
+  tvProviders: GetWatchProviders;
+}
 
-  const { tv, filters } = useAppSelector((state) => state.watchProviders);
+const VodFilterProviders = ({
+  filters,
+  tvProviders,
+}: VodFilterProvidersProps) => {
+  const { setSearchParam } = useSearchParam();
+  const sortBy = filters?.sortBy || "";
 
   const onProviderClick = (providerId: number) => {
-    dispatch(setWatchProviderId(providerId));
-    dispatch(fetchWatchProviderMovies({ page: 1, providerId, filterBy: filters?.filterBy }));
-    dispatch(fetchWatchProviderTvSeries({ page: 1, providerId, filterBy: filters?.filterBy }));
+    setSearchParam("watchProvider", providerId.toString());
+    getWatchProviderMovies(1, providerId, sortBy);
+    getWatchProviderTvSeries(1, providerId, sortBy);
   };
 
   return (
     <ul className={styles["vod-filter__providers"]}>
-      {tv?.results
-        .filter((provider) => provider.display_priority && provider.display_priority < 5)
+      {tvProviders?.results
+        .filter(
+          (provider) =>
+            provider.display_priority && provider.display_priority < 5
+        )
         .map((provider) => (
-          <li key={provider.provider_id} className={styles["vod-filter__provider"]}>
+          <li
+            key={provider.provider_id}
+            className={styles["vod-filter__provider"]}
+          >
             <Button
               disabled={filters.watchProviderId === provider.provider_id}
               active={filters.watchProviderId === provider.provider_id}

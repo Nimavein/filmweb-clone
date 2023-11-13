@@ -1,12 +1,17 @@
 import React from "react";
 import styles from "./SeriesSeasonContentEpisodes.module.scss";
-import sectionStyles from "../SeriesSeasonContent.module.scss";
-import { useAppSelector } from "@/store";
+import sectionStyles from "../../SeriesSeason.module.scss";
 import SeriesSeasonContentEpisode from "./SeriesSeasonContentEpisode/SeriesSeasonContentEpisode";
+import { SeasonDetails } from "@/types/types";
 
-const SeriesSeasonContentEpisodes = () => {
-  const { details, season } = useAppSelector((state) => state.series);
-  const seasonEpisodesSectionHeader = `LIST OF EPISODES (${season?.episodes?.length})`;
+interface SeriesSeasonContentEpisodesProps {
+  seasonDetails: SeasonDetails;
+}
+
+const SeriesSeasonContentEpisodes = ({
+  seasonDetails,
+}: SeriesSeasonContentEpisodesProps) => {
+  const seasonEpisodesSectionHeader = `LIST OF EPISODES (${seasonDetails?.episodes?.length})`;
   return (
     <section
       className={`${styles["series-season-content__episodes"]}`}
@@ -19,7 +24,7 @@ const SeriesSeasonContentEpisodes = () => {
         {seasonEpisodesSectionHeader}
       </h2>
       <ul className={styles["series-season-content__episodes-list"]}>
-        {season?.episodes?.map((episode) => (
+        {seasonDetails?.episodes?.map((episode) => (
           <SeriesSeasonContentEpisode key={episode.name} {...episode} />
         ))}
       </ul>

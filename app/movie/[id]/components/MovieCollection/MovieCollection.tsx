@@ -1,13 +1,15 @@
 import React from "react";
-import { useAppSelector } from "@/store";
 import styles from "./MovieCollection.module.scss";
-import sectionStyles from "../Movie.module.scss";
+import sectionStyles from "../../Movie.module.scss";
 import MovieCollectionItem from "./MovieCollectionItem/MovieCollectionItem";
+import { CollectionDetails } from "@/types/types";
 
-const MovieCollection = () => {
-  const {collection} = useAppSelector((state) => state.movie);
+interface MovieCollectionProps {
+  movieCollection: CollectionDetails;
+}
 
-  const imagesSectionHeader = collection?.name?.toUpperCase();
+const MovieCollection = ({ movieCollection }: MovieCollectionProps) => {
+  const imagesSectionHeader = movieCollection?.name?.toUpperCase();
 
   return (
     <section
@@ -21,9 +23,9 @@ const MovieCollection = () => {
         {imagesSectionHeader}
       </h2>
       <ul className={styles["movie-collection__list"]}>
-        {collection?.parts.map((collectionMovie) => (
-          <li key={collectionMovie.id}>
-            <MovieCollectionItem {...collectionMovie} />
+        {movieCollection?.parts.map((collectionItem) => (
+          <li key={collectionItem.id}>
+            <MovieCollectionItem {...collectionItem} />
           </li>
         ))}
       </ul>

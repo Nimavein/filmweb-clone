@@ -1,28 +1,17 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/store";
-import { fetchPopularMovies } from "@/store/moviesSlice";
+import { PagePaginationParams } from "@/types/types";
 import MoviesList from "../components/MoviesList";
+import { getPopularMovies } from "@/api";
 
-const PopularMoviesPage = () => {
-  const dispatch = useAppDispatch();
-  const popularMovies = useAppSelector((state) => state.movies.popularMovies);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-
-  useEffect(() => {
-    if (!popularMovies || popularMovies?.page !== currentPage)
-      dispatch(fetchPopularMovies({ page: currentPage }));
-  }, [dispatch, currentPage]);
+const PopularMoviesPage = async ({
+  searchParams: { page },
+}: PagePaginationParams) => {
+  const currentPage = parseInt(page) || 1;
+  const popularMovies = await getPopularMovies(currentPage);
 
   return (
     <main>
       {popularMovies && (
-        <MoviesList
-          movies={popularMovies}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        />
+        <MoviesList movies={popularMovies} currentPage={currentPage} />
       )}
     </main>
   );
