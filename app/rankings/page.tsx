@@ -27,7 +27,7 @@ const Rankings = async ({
 
   const tabs = [
     {
-      key: "1",
+      key: "movies",
       label: "Movies",
       children: (
         <RankingMovies
@@ -39,7 +39,7 @@ const Rankings = async ({
       ),
     },
     {
-      key: "2",
+      key: "tv-series",
       label: "TV series",
       children: (
         <RankingTvSeries
@@ -53,7 +53,7 @@ const Rankings = async ({
   ];
   return (
     <main className={styles["ranking"]}>
-      <Tabs items={tabs} defaultActiveKey="1" />
+      <Tabs items={tabs} defaultActiveKey="movies" paramKey="rankingContent" />
     </main>
   );
 };

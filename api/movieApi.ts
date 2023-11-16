@@ -47,3 +47,42 @@ export const getMovieCollection = async (collectionId: number) => {
     console.error(error);
   }
 };
+
+export const addMovieRating = async (
+  movieId: number,
+  sessionId: string,
+  rating: number
+) => {
+  try {
+    await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_MOVIE_API_URL}${movieId}/rating?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          value: rating,
+        }),
+      }
+    );
+  } catch (error: any) {
+    console.error(error);
+  }
+};
+
+export const deleteMovieRating = async (movieId: number, sessionId: string) => {
+  try {
+    await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_MOVIE_API_URL}${movieId}/rating?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  } catch (error: any) {
+    console.error(error);
+  }
+};

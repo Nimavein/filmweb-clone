@@ -3,6 +3,7 @@ import styles from "./SeriesTopPanel.module.scss";
 import Image from "next/image";
 import Rating from "@/components/Rating/Rating";
 import { SeriesDetails } from "@/types/types";
+import RateMedia from "@/components/RateMedia/RateMedia";
 
 interface SeriesTopPanelProps {
   seriesDetails: SeriesDetails;
@@ -18,6 +19,8 @@ const SeriesTopPanel = ({
     episode_run_time,
     vote_average,
     vote_count,
+    id,
+    media_type
   },
 }: SeriesTopPanelProps) => {
   return (
@@ -30,11 +33,10 @@ const SeriesTopPanel = ({
         quality={100}
       />
       <div className={styles["series-top-panel__details"]}>
+        <RateMedia mediaType="tv" mediaId={id} />
         <h1 className={styles["series-top-panel__title"]}>{name}</h1>
         <div className={styles["series-top-panel__wrapper"]}>
-          <span className={styles["series-top-panel__title-original"]}>
-            {original_name}
-          </span>
+          <span className={styles["series-top-panel__title-original"]}>{original_name}</span>
           <span className={styles["series-top-panel__release"]}>
             {`${first_air_date?.substring(0, 4)} ${
               last_air_date && ` - ${last_air_date?.substring(0, 4)}`
@@ -48,9 +50,7 @@ const SeriesTopPanel = ({
           <Rating
             fontSize={24}
             small
-            defaultValue={
-              vote_average ? parseFloat(vote_average.toFixed(2)) : 0
-            }
+            defaultValue={vote_average ? parseFloat(vote_average.toFixed(2)) : 0}
             voteCount={vote_count}
           />
         </div>

@@ -2,6 +2,7 @@
 
 import React, { useState, ReactNode } from "react";
 import Button from "../Button/Button";
+import useSearchParam from "@/hooks/useSearchParam";
 
 interface Tab {
   key: string;
@@ -10,19 +11,24 @@ interface Tab {
   disabled?: boolean;
 }
 
-interface TabsProps {
+export interface TabsProps {
+  paramKey: string;
   defaultActiveKey?: string;
   onTabClick?: (key?: string) => void;
   items: Tab[];
 }
 
-const Tabs = ({ defaultActiveKey, onTabClick, items }: TabsProps) => {
-  const [activeKey, setActiveKey] = useState<string>(defaultActiveKey || "");
+const Tabs = ({ defaultActiveKey, onTabClick, items, paramKey }: TabsProps) => {
+  const { getSearchParam, setSearchParam } = useSearchParam();
+  const [activeKey, setActiveKey] = useState<string>(
+    getSearchParam(paramKey) || defaultActiveKey || ""
+  );
 
   const handleTabClick = (key: string) => {
     if (key !== activeKey) {
       setActiveKey(key);
       onTabClick?.(key);
+      setSearchParam(paramKey, key)
     }
   };
 

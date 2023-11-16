@@ -19,24 +19,24 @@ const SearchPage = async ({ searchParams: { query } }: PageSearchParams) => {
 
   const tabs = [
     {
-      key: "1",
+      key: "all",
       label: `All (${results?.length})`,
       children: <SearchListTab results={results || []} />,
     },
     {
-      key: "2",
+      key: "movies",
       label: `Movies (${moviesAmount})`,
       children: <SearchListTab results={movies} />,
       disabled: moviesAmount === 0,
     },
     {
-      key: "3",
+      key: "tv-series",
       label: `Tv Series (${tvSeriesAmount})`,
       children: <SearchListTab results={tvSeries} />,
       disabled: tvSeriesAmount === 0,
     },
     {
-      key: "4",
+      key: "people",
       label: `People (${peopleAmount})`,
       children: <SearchListTab results={people} />,
       disabled: peopleAmount === 0,
@@ -46,7 +46,7 @@ const SearchPage = async ({ searchParams: { query } }: PageSearchParams) => {
   return (
     <main className={styles["search-list"]}>
       {results?.length && results?.length > 0 ? (
-        <Tabs items={tabs} defaultActiveKey={"1"} />
+        <Tabs items={tabs} defaultActiveKey={"all"} paramKey="searchContent" />
       ) : (
         <>No results</>
       )}

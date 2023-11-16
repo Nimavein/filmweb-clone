@@ -27,9 +27,11 @@ const Button = ({
       disabled={disabled}
       aria-label={ariaLabel}
       onClick={onClick}
-      className={`${styles["button"]}${size ? ` ${styles[`button--${size}`]}` : ""}${
-        uppercase ? ` ${styles["button--uppercase"]}` : ""
-      }${active ? ` ${styles["button--active"]}` : ""}`}
+      className={`${styles["button"]}${
+        size ? ` ${styles[`button--${size}`]}` : ""
+      }${uppercase ? ` ${styles["button--uppercase"]}` : ""}${
+        active ? ` ${styles["button--active"]}` : ""
+      }`}
       type={type}
     >
       {children}

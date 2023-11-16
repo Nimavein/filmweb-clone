@@ -4,6 +4,7 @@ import Image from "next/image";
 import { formatDuration } from "date-fns";
 import Rating from "@/components/Rating/Rating";
 import { MovieDetails } from "@/types/types";
+import RateMedia from "@/components/RateMedia/RateMedia";
 
 interface MovieTopPanelProps {
   movieDetails: MovieDetails;
@@ -25,6 +26,7 @@ const MovieTopPanel = ({ movieDetails }: MovieTopPanelProps) => {
         quality={100}
       />
       <div className={styles["movie-top-panel__details"]}>
+        <RateMedia mediaType="movie" mediaId={movieDetails.id} />
         <h1 className={styles["movie-top-panel__title"]}>
           {movieDetails?.title}
         </h1>

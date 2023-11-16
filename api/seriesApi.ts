@@ -50,3 +50,42 @@ export const getSeriesSeasonData = async (
     console.error(error);
   }
 };
+
+export const addSeriesRating = async (
+  seriesId: number,
+  sessionId: string,
+  rating: number
+) => {
+  try {
+    await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_SERIES_API_URL}${seriesId}/rating?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify({
+          value: rating,
+        }),
+      }
+    );
+  } catch (error: any) {
+    console.error(error);
+  }
+};
+
+export const deleteSeriesRating = async (seriesId: number, sessionId: string) => {
+  try {
+    await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_SERIES_API_URL}${seriesId}/rating?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+      }
+    );
+  } catch (error: any) {
+    console.error(error);
+  }
+};
