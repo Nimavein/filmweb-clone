@@ -1,5 +1,5 @@
 import { PageIdParams } from "@/types/types";
-import { getSeriesData, getSeriesReviews } from "@/api";
+import { getSeriesData, getSeriesReviews } from "@/apiHelpers";
 import SeriesCredits from "./components/SeriesCredits/SeriesCredits";
 import SeriesDescription from "./components/SeriesDescription/SeriesDescription";
 import SeriesInformation from "./components/SeriesInformation/SeriesInformation";

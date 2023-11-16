@@ -1,12 +1,12 @@
 "use client";
 
 import React, { ReactNode, createContext, useContext } from "react";
-import { addMovieRating, addSeriesRating, deleteMovieRating, deleteSeriesRating } from "@/api";
+import { addMovieRating, addSeriesRating, deleteMovieRating, deleteSeriesRating } from "@/apiHelpers";
 import { MediaType, Movies, RatedMovies, RatedTvSeries, TvSeries } from "@/types/types";
 import { useAuthentication } from "./Authentication.context";
 import useSWR from "swr";
-import { profileApi } from "@/api/urlHelper";
-import { updateFavoriteMedia, updateWatchlistMedia } from "@/api/profileApi";
+import { profileApi } from "@/apiHelpers/urlHelper";
+import { updateFavoriteMedia, updateWatchlistMedia } from "@/apiHelpers/profileApi";
 
 interface ProfileDataType {
   favoriteMovies: Movies | undefined;

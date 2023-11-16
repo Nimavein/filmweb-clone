@@ -2,7 +2,7 @@ import React from "react";
 import { PageIdParams } from "@/types/types";
 
 import styles from "./SeriesImages.module.scss";
-import { getSeriesData } from "@/api";
+import { getSeriesData } from "@/apiHelpers";
 import SeriesImage from "./components/SeriesImage/SeriesImage";
 
 const SeriesImages = async ({ params: { id } }: PageIdParams) => {

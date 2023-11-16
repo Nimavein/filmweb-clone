@@ -1,4 +1,4 @@
-import { getPersonData } from "@/api";
+import { getPersonData } from "@/apiHelpers";
 import { PageIdParams } from "@/types/types";
 import PersonImage from "./components/PersonImage/PersonImage";
 

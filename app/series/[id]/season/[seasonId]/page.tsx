@@ -1,5 +1,5 @@
 import { SeasonPageParams } from "@/types/types";
-import { getSeriesData, getSeriesSeasonData } from "@/api";
+import { getSeriesData, getSeriesSeasonData } from "@/apiHelpers";
 import SeriesSeasonContentEpisodes from "./components/SeriesSeasonContentEpisodes/SeriesSeasonContentEpisodes";
 import SeriesSeasonContentSeasons from "./components/SeriesSeasonContentSeasons/SeriesSeasonContentSeasons";
 import SeriesSeasonContentTopPanel from "./components/SeriesSeasonContentTopPanel/SeriesSeasonContentTopPanel";

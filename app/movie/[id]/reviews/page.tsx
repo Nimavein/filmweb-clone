@@ -1,6 +1,6 @@
 import React from "react";
 import { PageIdParams, Review } from "@/types/types";
-import { getMovieReviews, getMovieData } from "@/api";
+import { getMovieReviews, getMovieData } from "@/apiHelpers";
 import MovieReview from "./components/MovieReview/MovieReview";
 import Pagination from "@/components/Pagination/Pagination";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { PageIdParams, Review } from "@/types/types";
-import { getSeriesData, getSeriesReviews } from "@/api";
+import { getSeriesData, getSeriesReviews } from "@/apiHelpers";
 import SeriesReview from "./components/SeriesReview/SeriesReview";
 import Pagination from "@/components/Pagination/Pagination";
 

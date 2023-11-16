@@ -5,7 +5,7 @@ import {
   getMoviesRankingData,
   getTvSeriesGenres,
   getTvSeriesRankingData,
-} from "@/api";
+} from "@/apiHelpers";
 import RankingMovies from "./components/RankingMovies/RankingMovies";
 import RankingTvSeries from "./components/RankingTvSeries/RankingTvSeries";
 import Tabs from "@/components/Tabs/Tabs";

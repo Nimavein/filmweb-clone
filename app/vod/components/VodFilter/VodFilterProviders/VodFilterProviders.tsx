@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import styles from "../VodFilter.module.scss";
 import Button from "@/components/Button/Button";
-import { getWatchProviderMovies, getWatchProviderTvSeries } from "@/api";
+import { getWatchProviderMovies, getWatchProviderTvSeries } from "@/apiHelpers";
 import { GetWatchProviders, WatchProvidersFiltersType } from "@/types/types";
 import useSearchParam from "@/hooks/useSearchParam";
 

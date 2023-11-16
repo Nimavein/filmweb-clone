@@ -7,7 +7,7 @@ import {
   createNewSession,
   getAccountData,
   deleteSession,
-} from "@/api";
+} from "@/apiHelpers";
 import {
   setStorageItem,
   removeStorageItem,

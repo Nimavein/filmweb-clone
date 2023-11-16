@@ -1,4 +1,4 @@
-import { getSearchMulti } from "@/api/searchApi";
+import { getSearchMulti } from "@/apiHelpers/searchApi";
 import SearchListTab from "./components/SearchListTab/SearchListTab";
 import { PageSearchParams } from "@/types/types";
 import Tabs from "@/components/Tabs/Tabs";

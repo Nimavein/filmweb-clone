@@ -1,5 +1,5 @@
 import { PagePaginationParams } from "@/types/types";
-import { getPopularTvSeries } from "@/api";
+import { getPopularTvSeries } from "@/apiHelpers";
 import TvSeriesList from "../components/TvSeriesList";
 
 const PopularTvSeriesPage = async ({
