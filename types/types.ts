@@ -34,12 +34,20 @@ export interface Movie {
   vote_count: number;
 }
 
+export interface RatedMovie extends Movie {
+  rating: number;
+}
 export interface Movies {
   page?: number;
   results?: Movie[];
   total_results?: number;
   total_pages?: number;
 }
+
+export interface RatedMovies extends Movies {
+  results?: RatedMovie[];
+}
+
 export interface MovieDetails {
   adult: boolean;
   backdrop_path: string;
@@ -415,7 +423,7 @@ export interface PersonTvCredits {
 export interface Series {
   poster_path?: string | null;
   popularity?: number;
-  id?: number;
+  id: number;
   backdrop_path?: string | null;
   vote_average?: number;
   overview?: string;
@@ -424,8 +432,12 @@ export interface Series {
   genre_ids?: number[];
   original_language?: string;
   vote_count?: number;
-  name?: string;
+  name: string;
   original_name?: string;
+}
+
+export interface RatedSeries extends Series {
+  rating: number;
 }
 
 export interface TvSeries {
@@ -434,6 +446,10 @@ export interface TvSeries {
   total_results?: number;
   total_pages?: number;
 }
+export interface RatedTvSeries extends TvSeries {
+  results?: RatedSeries[];
+}
+
 export interface SeriesCreator {
   id: number;
   credit_id: string;
@@ -485,7 +501,7 @@ export interface SeriesDetails {
   first_air_date?: string;
   genres?: Genre[];
   homepage?: string;
-  id?: number;
+  id: number;
   in_production?: boolean;
   languages?: string[];
   last_air_date?: string;
@@ -739,3 +755,31 @@ export interface GenreType {
 }
 
 export type GenresDTO = GenreType[];
+
+export interface RequestTokenType {
+  success: boolean;
+  expires_at: Date;
+  request_token: string;
+}
+
+export interface SessionType {
+  success: boolean;
+  session_id: string;
+}
+
+export interface AccountDataType {
+  avatar: {
+    gravatar: {
+      hash: string;
+    };
+    tmdb: {
+      avatar_path: string;
+    };
+  };
+  id: number;
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  include_adult: boolean;
+  username: string;
+}

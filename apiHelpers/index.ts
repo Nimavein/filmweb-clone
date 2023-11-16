@@ -1,4 +1,10 @@
-import { getMovieData, getMovieCollection, getMovieReviews } from "./movieApi";
+import {
+  getMovieData,
+  getMovieCollection,
+  getMovieReviews,
+  addMovieRating,
+  deleteMovieRating,
+} from "./movieApi";
 import {
   getPopularMovies,
   getWatchProviderMovies,
@@ -10,6 +16,8 @@ import {
   getSeriesData,
   getSeriesReviews,
   getSeriesSeasonData,
+  deleteSeriesRating,
+  addSeriesRating,
 } from "./seriesApi";
 import {
   getPopularTvSeries,
@@ -18,6 +26,20 @@ import {
 } from "./tvSeriesApi";
 import { getTvSeriesRankingData, getMoviesRankingData } from "./rankingApi";
 import { getNews } from "./newsApi";
+import {
+  getRequestToken,
+  deleteSession,
+  createNewSession,
+  getAccountData,
+} from "./authenticationApi";
+import {
+  getFavoriteMovies,
+  getFavoriteTvSeries,
+  getWatchListMovies,
+  getWatchListTvSeries,
+  getRatedMovies,
+  getRatedTvSeries,
+} from "./profileApi";
 
 export {
   getMovieData,
@@ -37,4 +59,18 @@ export {
   getMoviesGenres,
   getTvSeriesGenres,
   getNews,
+  getRequestToken,
+  deleteSession,
+  createNewSession,
+  getAccountData,
+  getFavoriteMovies,
+  getFavoriteTvSeries,
+  getWatchListMovies,
+  getWatchListTvSeries,
+  getRatedMovies,
+  getRatedTvSeries,
+  addMovieRating,
+  deleteMovieRating,
+  deleteSeriesRating,
+  addSeriesRating,
 };

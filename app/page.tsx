@@ -1,4 +1,4 @@
-import { getNews } from "@/api";
+import { getNews } from "@/apiHelpers";
 import News from "@/components/News/News";
 import React from "react";
 

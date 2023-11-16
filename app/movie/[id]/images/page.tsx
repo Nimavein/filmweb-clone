@@ -1,6 +1,6 @@
 import React from "react";
 import { PageIdParams } from "@/types/types";
-import { getMovieData } from "@/api";
+import { getMovieData } from "@/apiHelpers";
 
 import styles from "./MovieImages.module.scss";
 import MovieImage from "./components/MovieImage/MovieImage";

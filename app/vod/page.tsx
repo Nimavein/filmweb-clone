@@ -1,8 +1,8 @@
 import VodFilter from "./components/VodFilter/VodFilter";
 import VodMovies from "./components/VodMovies/VodMovies";
 import VodTvSeries from "./components/VodTvSeries/VodTvSeries";
-import { getWatchProviders } from "@/api/watchProvidersApi";
-import { getWatchProviderMovies, getWatchProviderTvSeries } from "@/api";
+import { getWatchProviders } from "@/apiHelpers/watchProvidersApi";
+import { getWatchProviderMovies, getWatchProviderTvSeries } from "@/apiHelpers";
 
 import styles from "./Vod.module.scss";
 import { PageVodParams, WatchProvidersFiltersType } from "@/types/types";

@@ -3,7 +3,7 @@ import { AutoComplete } from "antd";
 import navbarStyles from "../Navbar.module.scss";
 import NavbarSearchItem from "./NavbarSearchItem/NavbarSearchItem";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { getSearchMulti } from "@/api/searchApi";
+import { getSearchMulti } from "@/apiHelpers/searchApi";
 import useSearchParam from "@/hooks/useSearchParam";
 import { SearchResults } from "@/types/types";
 

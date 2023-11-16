@@ -1,5 +1,5 @@
 import { PageIdParams } from "@/types/types";
-import { getMovieCollection, getMovieData, getMovieReviews } from "@/api";
+import { getMovieCollection, getMovieData, getMovieReviews } from "@/apiHelpers";
 import MovieCollection from "./components/MovieCollection/MovieCollection";
 import MovieDescription from "./components/MovieDescription/MovieDescription";
 import MovieInformation from "./components/MovieInformation/MovieInformation";

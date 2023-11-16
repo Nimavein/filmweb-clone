@@ -1,5 +1,5 @@
 import { PageIdParams } from "@/types/types";
-import { getPersonData } from "@/api";
+import { getPersonData } from "@/apiHelpers";
 import PersonCredits from "./components/PersonCredits/PersonCredits";
 import PersonDetails from "./components/PersonDetails/PersonDetails";
 import PersonImages from "./components/PersonImages/PersonImages";

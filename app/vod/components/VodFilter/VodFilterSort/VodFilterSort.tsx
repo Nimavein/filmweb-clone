@@ -2,7 +2,7 @@
 
 import React from "react";
 import styles from "../VodFilter.module.scss";
-import { getWatchProviderMovies, getWatchProviderTvSeries } from "@/api";
+import { getWatchProviderMovies, getWatchProviderTvSeries } from "@/apiHelpers";
 import { WatchProvidersFiltersType } from "@/types/types";
 import useSearchParam from "@/hooks/useSearchParam";
 

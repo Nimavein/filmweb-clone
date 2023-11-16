@@ -14,9 +14,14 @@ const useSearchParam = () => {
     router.push(`?${searchParams}`);
   };
 
+  const getSearchParam = (paramName: string) => {
+    return searchParams.get(paramName);
+  };
+
   return {
     setSearchParam,
     removeSearchParam,
+    getSearchParam,
   };
 };
 

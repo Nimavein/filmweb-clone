@@ -1,5 +1,10 @@
 import React from "react";
-import { PersonMovieCast, PersonMovieCrew, PersonTvCast, PersonTvCrew } from "@/types/types";
+import {
+  PersonMovieCast,
+  PersonMovieCrew,
+  PersonTvCast,
+  PersonTvCrew,
+} from "@/types/types";
 import { RightOutlined, LeftOutlined, CameraOutlined } from "@ant-design/icons";
 import { Carousel } from "antd";
 import Image from "next/image";
@@ -8,11 +13,19 @@ import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 import styles from "../PersonCredits.module.scss";
 
 interface PersonCreditsCarouselProps {
-  credits: PersonMovieCast | PersonMovieCrew | PersonTvCast | PersonTvCrew | undefined;
+  credits:
+    | PersonMovieCast
+    | PersonMovieCrew
+    | PersonTvCast
+    | PersonTvCrew
+    | undefined;
   type: "movies" | "tv-series";
 }
 
-const PersonCreditsCarousel = ({ credits, type }: PersonCreditsCarouselProps) => {
+const PersonCreditsCarousel = ({
+  credits,
+  type,
+}: PersonCreditsCarouselProps) => {
   const imageHeight = 240;
   const imageWidth = imageHeight * 0.667;
 
@@ -26,7 +39,10 @@ const PersonCreditsCarousel = ({ credits, type }: PersonCreditsCarouselProps) =>
       infinite={false}
     >
       {credits?.map((credit, index) => (
-        <Link key={index} href={`/${type === "movies" ? "movie" : "series"}/${credit.id}`}>
+        <Link
+          key={index}
+          href={`/${type === "movies" ? "movie" : "series"}/${credit.id}`}
+        >
           <div className={styles["person-credits__slide"]}>
             {credit?.poster_path ? (
               <Image
@@ -43,18 +59,30 @@ const PersonCreditsCarousel = ({ credits, type }: PersonCreditsCarouselProps) =>
                 icon={<CameraOutlined />}
               />
             )}
-            <p className={styles["person-credits__slide-title"]} style={{ maxWidth: imageWidth }}>
-              {`${"title" in credit ? credit.title : "name" in credit && credit.name} (${
+            <p
+              className={styles["person-credits__slide-title"]}
+              style={{ maxWidth: imageWidth }}
+            >
+              {`${
+                "title" in credit
+                  ? credit.title
+                  : "name" in credit && credit.name
+              } (${
                 "release_date" in credit
                   ? credit?.release_date?.slice(0, 4)
-                  : "first_air_date" in credit && credit.first_air_date?.slice(0, 4)
+                  : "first_air_date" in credit &&
+                    credit.first_air_date?.slice(0, 4)
               })`}
             </p>
             {"job" in credit && credit.job && (
-              <p className={styles["person-credits__slide-job"]}>{credit.job}</p>
+              <p className={styles["person-credits__slide-job"]}>
+                {credit.job}
+              </p>
             )}
             {"character" in credit && credit.character && (
-              <p className={styles["person-credits__slide-character"]}>{credit.character}</p>
+              <p className={styles["person-credits__slide-character"]}>
+                {credit.character}
+              </p>
             )}
           </div>
         </Link>

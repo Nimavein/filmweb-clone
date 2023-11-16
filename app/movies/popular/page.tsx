@@ -1,6 +1,6 @@
 import { PagePaginationParams } from "@/types/types";
 import MoviesList from "../components/MoviesList";
-import { getPopularMovies } from "@/api";
+import { getPopularMovies } from "@/apiHelpers";
 
 const PopularMoviesPage = async ({
   searchParams: { page },
