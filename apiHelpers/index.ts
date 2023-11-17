@@ -40,6 +40,7 @@ import {
   getRatedMovies,
   getRatedTvSeries,
 } from "./profileApi";
+import { getNetworkImages } from "./networksApi";
 
 export {
   getMovieData,
@@ -73,4 +74,5 @@ export {
   deleteMovieRating,
   deleteSeriesRating,
   addSeriesRating,
+  getNetworkImages,
 };

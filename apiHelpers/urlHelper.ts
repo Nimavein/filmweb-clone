@@ -1,5 +1,6 @@
 const baseTMDBUrl = "https://api.themoviedb.org/3/";
-const baseTMDBAccountUrl = `${baseTMDBUrl}account/`;
+export const baseTMDBAccountUrl = `${baseTMDBUrl}account/`;
+export const baseTMDBNetworkUrl = `${baseTMDBUrl}network/`;
 
 const profileApi = {
   getFavoriteMovies: (accountId?: number, sessionId?: string) =>
@@ -28,4 +29,9 @@ const profileApi = {
       : null,
 };
 
-export { profileApi };
+const networkApi = {
+  getNetworkImages: (networkId: number) =>
+    `${baseTMDBNetworkUrl}${networkId}/images?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
+};
+
+export { profileApi, networkApi };
