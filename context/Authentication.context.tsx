@@ -1,22 +1,14 @@
 "use client";
 
 /* eslint-disable @typescript-eslint/no-empty-function */
-import React, { ReactNode, createContext, useContext, useState } from "react";
-import {
-  getRequestToken,
-  createNewSession,
-  getAccountData,
-  deleteSession,
-} from "@/apiHelpers";
-import {
-  setStorageItem,
-  removeStorageItem,
-  getStorageItem,
-} from "@/helpers/localStorageHelpers";
+import React, { ReactNode, createContext, useContext, useEffect, useState } from "react";
+import { getRequestToken, createNewSession, getAccountData, deleteSession } from "@/apiHelpers";
+import { setStorageItem, removeStorageItem, getStorageItem } from "@/helpers/localStorageHelpers";
+import { AccountDataType } from "@/types/types";
 
 interface AuthStateType {
   requestToken: string | null;
-  accountId: number | null;
+  accountData: AccountDataType | null;
   sessionId: string | null;
 }
 
@@ -30,7 +22,7 @@ interface AuthenticationContextType extends AuthStateType {
 
 const AuthenticationContext = createContext<AuthenticationContextType>({
   requestToken: null,
-  accountId: null,
+  accountData: null,
   sessionId: null,
   connectWithTDB: async () => {},
   login: async () => {},
@@ -44,16 +36,27 @@ export const useAuthentication = () => {
 };
 
 export const AuthenticationProvider = ({ children }: { children: ReactNode }) => {
-  const [authState, setAuthState] = useState(() => ({
+  const [authState, setAuthState] = useState<AuthStateType>({
     requestToken: getStorageItem("requestToken"),
-    accountId: parseInt(getStorageItem("accountId")),
+    accountData: null,
     sessionId: getStorageItem("sessionId"),
-  }));
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (authState.sessionId) {
+        const accountData = await getAccountData(authState.sessionId);
+        updateAuthState({ accountData });
+      }
+    };
+
+    fetchData();
+  }, [authState.sessionId]);
 
   const updateAuthState = (updates: {
     requestToken?: string;
     sessionId?: string;
-    accountId?: number;
+    accountData?: AccountDataType;
   }) => {
     setAuthState((prevState) => ({ ...prevState, ...updates }));
   };
@@ -78,9 +81,7 @@ export const AuthenticationProvider = ({ children }: { children: ReactNode }) =>
 
     if (session) {
       const accountData = await getAccountData(sessionId);
-      const accountId = accountData?.id || 0;
-      setStorageItem("accountId", accountId.toString());
-      updateAuthState({ accountId });
+      updateAuthState({ accountData });
     }
   };
 
@@ -92,7 +93,7 @@ export const AuthenticationProvider = ({ children }: { children: ReactNode }) =>
     removeStorageItem("accountId");
     removeStorageItem("requestToken");
     removeStorageItem("sessionId");
-    setAuthState({ requestToken: "", sessionId: "", accountId: NaN });
+    setAuthState({ requestToken: "", sessionId: "", accountData: null });
   };
 
   const contextValue = {
@@ -100,13 +101,11 @@ export const AuthenticationProvider = ({ children }: { children: ReactNode }) =>
     connectWithTDB,
     login,
     logout,
-    isLoggedIn: !!authState.accountId,
+    isLoggedIn: !!authState?.accountData?.id,
     isAuthorized: !!authState.sessionId,
   };
 
   return (
-    <AuthenticationContext.Provider value={contextValue}>
-      {children}
-    </AuthenticationContext.Provider>
+    <AuthenticationContext.Provider value={contextValue}>{children}</AuthenticationContext.Provider>
   );
 };

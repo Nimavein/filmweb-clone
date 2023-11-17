@@ -25,11 +25,11 @@ const MovieTopPanel = ({ movieDetails }: MovieTopPanelProps) => {
         className={styles["movie-top-panel__banner"]}
         quality={100}
       />
-      <div className={styles["movie-top-panel__details"]}>
+      <div className={styles["movie-top-panel__rate"]}>
         <RateMedia mediaType="movie" mediaId={movieDetails.id} />
-        <h1 className={styles["movie-top-panel__title"]}>
-          {movieDetails?.title}
-        </h1>
+      </div>
+      <div className={styles["movie-top-panel__details"]}>
+        <h1 className={styles["movie-top-panel__title"]}>{movieDetails?.title}</h1>
         <div className={styles["movie-top-panel__wrapper"]}>
           <span className={styles["movie-top-panel__title-original"]}>
             {movieDetails?.original_title}
@@ -37,18 +37,14 @@ const MovieTopPanel = ({ movieDetails }: MovieTopPanelProps) => {
           <span className={styles["movie-top-panel__release"]}>
             {movieDetails?.release_date?.substring(0, 4)}
           </span>
-          <span className={styles["movie-top-panel__runtime"]}>
-            {formattedMovieDuration}
-          </span>
+          <span className={styles["movie-top-panel__runtime"]}>{formattedMovieDuration}</span>
         </div>
         <div className={styles["movie-top-panel__rating"]}>
           <Rating
             fontSize={24}
             small
             defaultValue={
-              movieDetails?.vote_average
-                ? parseFloat(movieDetails?.vote_average.toFixed(2))
-                : 0
+              movieDetails?.vote_average ? parseFloat(movieDetails?.vote_average.toFixed(2)) : 0
             }
             voteCount={movieDetails?.vote_count}
           />

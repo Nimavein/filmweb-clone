@@ -15,11 +15,22 @@
 
   &__auth {
     margin-left: auto;
+    display: flex;
+    gap: 10px;
+    align-items: center;
   }
 
   &__list {
     background-color: $black;
-  } 
+  }
+
+  &__connect-button, &__login-button {
+    background: none;
+    color: $white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+  }
 
   &__search {
     width: 320px;

@@ -11,12 +11,16 @@ import NavbarSearch from "./NavbarSearch/NavbarSearch";
 import Button from "@/components/Button/Button";
 import { useAuthentication } from "@/context/Authentication.context";
 import { usePathname, useRouter } from "next/navigation";
+import Avatar from "antd/es/avatar/avatar";
+import Image from "next/image";
+import ProfileAvatar from "@/components/ProfileAvatar/ProfileAvatar";
 
 const Navbar = () => {
   const [current, setCurrent] = useState(navbarLinks.home.key);
-  const { login, logout, connectWithTDB, requestToken, isLoggedIn } = useAuthentication();
+  const { login, logout, connectWithTDB, requestToken, isLoggedIn, accountData } = useAuthentication();
   const router = useRouter();
   const pathname = usePathname();
+  const avatarPath = accountData?.avatar?.tmdb?.avatar_path
 
   const getNavbarItem = (
     label: React.ReactNode,
@@ -80,16 +84,23 @@ const Navbar = () => {
       <div className={styles["main-navbar__top"]}>
         <NavbarSearch />
         <div className={styles["main-navbar__auth"]}>
-          {!requestToken && <Button onClick={connectWithTDB}>Connect with TDB</Button>}
+          {!requestToken && (
+            <button className={styles["main-navbar__login-button"]} onClick={connectWithTDB}>
+              Connect with TDB
+            </button>
+          )}
           {isLoggedIn && (
             <Link href="/profile">
-              <UserOutlined style={{ color: "white" }} />
+              <ProfileAvatar avatarPath={avatarPath} />
             </Link>
           )}
           {requestToken && (
-            <Button onClick={isLoggedIn ? handleLogout : handleLogin}>
+            <button
+              className={styles["main-navbar__login-button"]}
+              onClick={isLoggedIn ? handleLogout : handleLogin}
+            >
               {isLoggedIn ? "Logout" : "Login"}
-            </Button>
+            </button>
           )}
         </div>
       </div>

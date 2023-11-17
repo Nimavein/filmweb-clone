@@ -73,7 +73,8 @@ export const useProfileData = () => {
 };
 
 export const ProfileDataProvider = ({ children }: { children: ReactNode }) => {
-  const { accountId, sessionId } = useAuthentication();
+  const { accountData, sessionId } = useAuthentication();
+  const accountId = accountData?.id
 
   const { data: favoriteMovies, mutate: mutateFavoriteMovies } = useSWR<Movies>(
     accountId && sessionId ? profileApi.getFavoriteMovies(accountId, sessionId) : null

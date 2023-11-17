@@ -32,8 +32,10 @@ const SeriesTopPanel = ({
         className={styles["series-top-panel__banner"]}
         quality={100}
       />
-      <div className={styles["series-top-panel__details"]}>
+      <div className={styles["series-top-panel__rate"]}>
         <RateMedia mediaType="tv" mediaId={id} />
+      </div>
+      <div className={styles["series-top-panel__details"]}>
         <h1 className={styles["series-top-panel__title"]}>{name}</h1>
         <div className={styles["series-top-panel__wrapper"]}>
           <span className={styles["series-top-panel__title-original"]}>{original_name}</span>

@@ -1,0 +1,37 @@
+.rate-media {
+  background-color: $white;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 4px;
+
+  &__top-bar {
+    display: flex;
+    align-items: center;
+  }
+
+  &__text {
+    margin-left: 6px;
+    font-size: 14px;
+    color: $black;
+  }
+
+  &__favorite-button {
+    margin-left: auto;
+  }
+
+  &__watchlist-button {
+    color: $black;
+    background: none;
+    width: 100%;
+    padding: 8px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $gray;
+    cursor: pointer;
+    font-size: 12px;
+  }
+}
