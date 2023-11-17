@@ -25,7 +25,7 @@ const MovieTopPanel = ({ movieDetails }: MovieTopPanelProps) => {
         className={styles["movie-top-panel__banner"]}
         quality={100}
       />
-      <div className={styles["movie-top-panel__rate"]}>
+      <div className={styles["movie-top-panel__rate--desktop"]}>
         <RateMedia mediaType="movie" mediaId={movieDetails.id} />
       </div>
       <div className={styles["movie-top-panel__details"]}>

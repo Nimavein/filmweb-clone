@@ -9,6 +9,7 @@ import Link from "next/link";
 import Button from "@/components/Button/Button";
 import SeriesContentNetworks from "../SeriesNetworks/SeriesNetworks";
 import { SeriesDetails } from "@/types/types";
+import RateMedia from "@/components/RateMedia/RateMedia";
 
 interface SeriesDetail {
   name: string;
@@ -59,9 +60,7 @@ const SeriesDescription = ({
   ];
 
   return (
-    <section
-      className={`${styles["series-description"]} ${sectionStyles["series-section"]}`}
-    >
+    <section className={`${styles["series-description"]} ${sectionStyles["series-section"]}`}>
       <div>
         <Image
           src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${poster_path}`}
@@ -70,18 +69,13 @@ const SeriesDescription = ({
           height={300}
           className={styles["series-description__image"]}
         />
-        {networks && networks?.length > 0 && (
-          <SeriesContentNetworks seriesNetworks={networks} />
-        )}
+        {networks && networks?.length > 0 && <SeriesContentNetworks seriesNetworks={networks} />}
       </div>
       <div className={styles["series-description__info"]}>
         <p className={styles["series-description__overview"]}>{overview}</p>
         <ul className={styles["series-description__seasons"]}>
           {seasons?.map((season) => (
-            <li
-              key={season.name}
-              className={styles["series-description__season"]}
-            >
+            <li key={season.name} className={styles["series-description__season"]}>
               <Link href={`/series/${id}/season/${season.season_number}`}>
                 <Button>{season?.name}</Button>
               </Link>
@@ -92,20 +86,16 @@ const SeriesDescription = ({
           {displayedDetails.map(
             (detail) =>
               detail?.value && (
-                <div
-                  className={styles["series-description__detail"]}
-                  key={detail.name}
-                >
-                  <p className={styles["series-description__detail-name"]}>
-                    {detail.name}
-                  </p>
-                  <p className={styles["series-description__detail-value"]}>
-                    {detail.value}
-                  </p>
+                <div className={styles["series-description__detail"]} key={detail.name}>
+                  <p className={styles["series-description__detail-name"]}>{detail.name}</p>
+                  <p className={styles["series-description__detail-value"]}>{detail.value}</p>
                 </div>
               )
           )}
         </div>
+      </div>
+      <div className={styles["series-description__rate--mobile"]}>
+        <RateMedia mediaType="tv" mediaId={id} />
       </div>
     </section>
   );

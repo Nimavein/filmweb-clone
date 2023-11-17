@@ -20,7 +20,6 @@ const SeriesTopPanel = ({
     vote_average,
     vote_count,
     id,
-    media_type
   },
 }: SeriesTopPanelProps) => {
   return (
@@ -32,7 +31,7 @@ const SeriesTopPanel = ({
         className={styles["series-top-panel__banner"]}
         quality={100}
       />
-      <div className={styles["series-top-panel__rate"]}>
+      <div className={styles["series-top-panel__rate--desktop"]}>
         <RateMedia mediaType="tv" mediaId={id} />
       </div>
       <div className={styles["series-top-panel__details"]}>

@@ -7,6 +7,13 @@
     flex-direction: row;
   }
 
+  &__rate--mobile {
+    border: 1px solid $gray;
+    @include respond-to($mq-medium) {
+      display: none;
+    }
+  }
+
   &__seasons {
     display: flex;
     flex-wrap: wrap;

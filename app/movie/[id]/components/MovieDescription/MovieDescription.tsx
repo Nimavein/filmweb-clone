@@ -7,6 +7,7 @@ import { getGenresNames } from "@/helpers/getGenresNames";
 import { getProductionCountries } from "@/helpers/getProductionCountries";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 import { MovieDetails } from "@/types/types";
+import RateMedia from "@/components/RateMedia/RateMedia";
 
 interface MovieDetail {
   name: string;
@@ -25,6 +26,7 @@ const MovieDescription = ({
     release_date,
     poster_path,
     overview,
+    id
   },
 }: MovieDescriptionProps) => {
   const imageHeight = 300;
@@ -41,9 +43,7 @@ const MovieDescription = ({
   ];
 
   return (
-    <section
-      className={`${styles["movie-description"]} ${sectionStyles["movie-section"]}`}
-    >
+    <section className={`${styles["movie-description"]} ${sectionStyles["movie-section"]}`}>
       {poster_path ? (
         <Image
           src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${poster_path}`}
@@ -60,20 +60,16 @@ const MovieDescription = ({
           {details.map(
             (detail) =>
               detail?.value && (
-                <div
-                  className={styles["movie-description__detail"]}
-                  key={detail.name}
-                >
-                  <p className={styles["movie-description__detail-name"]}>
-                    {detail.name}
-                  </p>
-                  <p className={styles["movie-description__detail-value"]}>
-                    {detail.value}
-                  </p>
+                <div className={styles["movie-description__detail"]} key={detail.name}>
+                  <p className={styles["movie-description__detail-name"]}>{detail.name}</p>
+                  <p className={styles["movie-description__detail-value"]}>{detail.value}</p>
                 </div>
               )
           )}
         </div>
+      </div>
+      <div className={styles["movie-description__rate--mobile"]}>
+        <RateMedia mediaType="movie" mediaId={id} />
       </div>
     </section>
   );
