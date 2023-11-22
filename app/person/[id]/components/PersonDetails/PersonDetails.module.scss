@@ -9,6 +9,18 @@
     }
   }
 
+  &__image {
+    img {
+      height: 100%;
+      width: 100%;
+
+      @include respond-to($mq-medium) {
+        width: auto;
+        height: auto;
+      }
+    }
+  }
+
   &__text {
     display: flex;
     flex-direction: column;
