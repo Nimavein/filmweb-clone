@@ -5,12 +5,11 @@ import {
   PersonTvCast,
   PersonTvCrew,
 } from "@/types/types";
-import { RightOutlined, LeftOutlined, CameraOutlined } from "@ant-design/icons";
-import { Carousel } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 import styles from "../PersonCredits.module.scss";
+import Carousel from "@/components/Carousel/Carousel";
 
 interface PersonCreditsCarouselProps {
   credits:
@@ -30,14 +29,7 @@ const PersonCreditsCarousel = ({
   const imageWidth = imageHeight * 0.667;
 
   return credits ? (
-    <Carousel
-      slidesToShow={4}
-      arrows
-      nextArrow={<RightOutlined />}
-      prevArrow={<LeftOutlined />}
-      dots={false}
-      infinite={false}
-    >
+    <Carousel>
       {credits?.map((credit, index) => (
         <Link
           key={index}
@@ -56,7 +48,7 @@ const PersonCreditsCarousel = ({
                 key={index}
                 height={imageHeight}
                 width={imageWidth}
-                icon={<CameraOutlined />}
+                type="person"
               />
             )}
             <p

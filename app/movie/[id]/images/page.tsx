@@ -1,9 +1,9 @@
 import React from "react";
 import { PageIdParams } from "@/types/types";
 import { getMovieData } from "@/apiHelpers";
+import Image from "next/image";
 
 import styles from "./MovieImages.module.scss";
-import MovieImage from "./components/MovieImage/MovieImage";
 
 const MovieImages = async ({ params: { id } }: PageIdParams) => {
   const numberId = Number(id);
@@ -26,7 +26,12 @@ const MovieImages = async ({ params: { id } }: PageIdParams) => {
                   key={image.file_path}
                   className={styles["movie-images__list-item"]}
                 >
-                  <MovieImage {...image} />
+                  <Image
+                    src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${image.file_path}`}
+                    alt=""
+                    fill
+                    style={{ objectFit: "cover" }}
+                  />
                 </li>
               )
           )}

@@ -3,8 +3,8 @@ import styles from "./PersonImages.module.scss";
 import sectionStyles from "../../Person.module.scss";
 import Link from "next/link";
 import Button from "@/components/Button/Button";
-import PersonContentImage from "./PersonImage/PersonImage";
 import { PersonDetails } from "@/types/types";
+import Image from "next/image";
 
 interface PersonImagesProps {
   personDetails: PersonDetails;
@@ -34,8 +34,16 @@ const PersonImages = ({ personDetails }: PersonImagesProps) => {
           (image) =>
             image.aspect_ratio &&
             image.file_path && (
-              <li key={image.file_path} className={styles["person-images__list-item"]}>
-                <PersonContentImage {...image} />
+              <li
+                key={image.file_path}
+                className={styles["person-images__list-item"]}
+              >
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${image.file_path}`}
+                  alt=""
+                  fill
+                  style={{ objectFit: "cover" }}
+                />
               </li>
             )
         )}

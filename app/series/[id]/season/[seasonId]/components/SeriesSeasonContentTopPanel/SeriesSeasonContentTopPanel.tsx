@@ -53,7 +53,11 @@ const SeriesSeasonContentTopPanel = ({
             src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${seasonDetails?.poster_path}`}
           />
         ) : (
-          <ImagePlaceholder width={imageWidth} height={imageHeight} />
+          <ImagePlaceholder
+            width={imageWidth}
+            height={imageHeight}
+            type="image"
+          />
         )}
         <div className={styles["series-season-content__top-panel-info-text"]}>
           <h1

@@ -26,7 +26,11 @@ const MovieCollectionItem = ({
           width={imageWidth}
         />
       ) : (
-        <ImagePlaceholder width={imageWidth} height={imageHeight} />
+        <ImagePlaceholder
+          width={imageWidth}
+          height={imageHeight}
+          type="image"
+        />
       )}
       <p className={styles["movie-collection__list-item-title"]}>{title}</p>
       <p className={styles["movie-collection__list-item-release"]}>

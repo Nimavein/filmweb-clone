@@ -1,7 +1,6 @@
 import React from "react";
 import { MediaType, Movies, TvSeries } from "@/types/types";
 import Image from "next/image";
-import { CameraOutlined } from "@ant-design/icons";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 import Link from "next/link";
 import { getSearchResultType } from "@/helpers/getSearchResultType";
@@ -13,8 +12,10 @@ interface ProfileTabProps {
   movies: Movies | undefined;
 }
 
+const baseCSSClassName = "profile-tab";
+
 const ProfileTab = ({ tvSeries, movies }: ProfileTabProps) => {
-  const imageHeight = 120;
+  const imageHeight = 180;
   const imageWidth = imageHeight * 0.667;
 
   const renderItem = (
@@ -34,7 +35,11 @@ const ProfileTab = ({ tvSeries, movies }: ProfileTabProps) => {
             src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${imagePath}`}
           />
         ) : (
-          <ImagePlaceholder width={imageWidth} height={imageHeight} icon={<CameraOutlined />} />
+          <ImagePlaceholder
+            width={imageWidth}
+            height={imageHeight}
+            type="image"
+          />
         )}
         {title}
       </Link>
@@ -42,11 +47,11 @@ const ProfileTab = ({ tvSeries, movies }: ProfileTabProps) => {
   );
 
   return (
-    <>
+    <div className={styles[baseCSSClassName]}>
       {!!(movies?.total_results && !!(movies?.total_results > 0)) && (
-        <>
-          <h2>Movies</h2>
-          <ul className={styles["profile-tab__items"]}>
+        <div className={styles[`${baseCSSClassName}__movies`]}>
+          <h2 className={styles[`${baseCSSClassName}__subheader`]}>Movies</h2>
+          <ul className={styles[`${baseCSSClassName}__items`]}>
             {movies?.results?.map((result) =>
               renderItem(
                 result.id,
@@ -57,12 +62,12 @@ const ProfileTab = ({ tvSeries, movies }: ProfileTabProps) => {
               )
             )}
           </ul>
-        </>
+        </div>
       )}
       {!!(tvSeries?.total_results && tvSeries?.total_results > 0) && (
-        <>
-          <h2>TV series</h2>
-          <ul className={styles["profile-tab__items"]}>
+        <div className={styles[`${baseCSSClassName}__tv-series`]}>
+          <h2 className={styles[`${baseCSSClassName}__subheader`]}>TV series</h2>
+          <ul className={styles[`${baseCSSClassName}__items`]}>
             {tvSeries?.results?.map((result) =>
               renderItem(
                 result.id,
@@ -73,9 +78,9 @@ const ProfileTab = ({ tvSeries, movies }: ProfileTabProps) => {
               )
             )}
           </ul>
-        </>
+        </div>
       )}
-    </>
+    </div>
   );
 };
 

@@ -3,8 +3,8 @@ import styles from "./SeriesImages.module.scss";
 import sectionStyles from "../../Series.module.scss";
 import Button from "@/components/Button/Button";
 import Link from "next/link";
-import SeriesContentImage from "./SeriesImage/SeriesImage";
 import { SeriesDetails } from "@/types/types";
+import Image from "next/image";
 
 interface SeriesImagesProps {
   seriesDetails: SeriesDetails;
@@ -30,14 +30,23 @@ const SeriesImages = ({
         {imagesSectionHeader}
       </h2>
       <ul className={styles["series-images__list"]}>
-        {images?.backdrops?.slice(0, displayedImagesAmount)?.map((image) => (
-          <li
-            key={image.file_path}
-            className={styles["series-images__list-item"]}
-          >
-            <SeriesContentImage {...image} />
-          </li>
-        ))}
+        {images?.backdrops?.slice(0, displayedImagesAmount)?.map(
+          (image) =>
+            image.aspect_ratio &&
+            image.file_path && (
+              <li
+                key={image.file_path}
+                className={styles["series-images__list-item"]}
+              >
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${image.file_path}`}
+                  alt=""
+                  fill
+                  style={{ objectFit: "cover" }}
+                />
+              </li>
+            )
+        )}
       </ul>
       <Link href={`/series/${id}/images`}>
         <Button>{`See all ${images?.backdrops?.length} images`}</Button>

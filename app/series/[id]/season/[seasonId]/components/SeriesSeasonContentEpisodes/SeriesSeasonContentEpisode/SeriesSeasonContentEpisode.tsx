@@ -29,7 +29,11 @@ const SeriesSeasonContentEpisode = ({
           src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${still_path}`}
         />
       ) : (
-        <ImagePlaceholder height={imageHeight} width={imageWidth} />
+        <ImagePlaceholder
+          height={imageHeight}
+          width={imageWidth}
+          type="image"
+        />
       )}
       <div
         className={styles["series-season-content__episodes-list-item-content"]}

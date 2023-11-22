@@ -1,5 +1,4 @@
 import React from "react";
-import { UserOutlined, CameraOutlined } from "@ant-design/icons";
 import Image from "next/image";
 import Link from "next/link";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
@@ -35,7 +34,7 @@ const SearchListItem = (
         <ImagePlaceholder
           width={dropdownImageWidth}
           height={dropdownImageHeight}
-          icon={mediaType === "person" ? <UserOutlined /> : <CameraOutlined />}
+          type={mediaType === "person" ? "person" : "image"}
         />
       )}
       {title}

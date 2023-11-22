@@ -36,7 +36,11 @@ const MovieReview = ({
           height={imageHeight}
         />
       ) : (
-        <ImagePlaceholder width={imageWidth} height={imageHeight} />
+        <ImagePlaceholder
+          width={imageWidth}
+          height={imageHeight}
+          type="image"
+        />
       )}
       <div>
         {content && (

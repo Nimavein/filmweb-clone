@@ -6,9 +6,8 @@ import styles from "./MovieReviews.module.scss";
 import sectionStyles from "../../Movie.module.scss";
 import Button from "@/components/Button/Button";
 import MovieContentReview from "./MovieReview/MovieReview";
-import { Carousel } from "antd";
-import { RightOutlined, LeftOutlined } from "@ant-design/icons";
 import { MovieDetails, Reviews } from "@/types/types";
+import Carousel from "@/components/Carousel/Carousel";
 
 interface MovieReviewsProps {
   movieDetails: MovieDetails;
@@ -36,13 +35,7 @@ const MovieReviews = ({ movieDetails, movieReviews }: MovieReviewsProps) => {
       >
         {reviewsSectionHeader}
       </h2>
-      <Carousel
-        dots
-        arrows
-        nextArrow={<RightOutlined />}
-        prevArrow={<LeftOutlined />}
-        infinite={false}
-      >
+      <Carousel slidesToShow={1} responsive={[]} dots>
         {reviewsToDisplay?.map((review, index) => (
           <div key={index}>
             <MovieContentReview

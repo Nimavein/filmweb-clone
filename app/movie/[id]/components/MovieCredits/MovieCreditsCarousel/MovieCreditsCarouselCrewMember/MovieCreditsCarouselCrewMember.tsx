@@ -25,7 +25,11 @@ const MovieCreditsCarouselCrewMember = ({
             className={styles["credits-carousel__person-image"]}
           />
         ) : (
-          <ImagePlaceholder width={imageWidth} height={imageHeight} />
+          <ImagePlaceholder
+            width={imageWidth}
+            height={imageHeight}
+            type="person"
+          />
         )}
         <p className={styles["credits-carousel__person-name"]}>{name}</p>
         <p className={styles["credits-carousel__person-character"]}>{job}</p>

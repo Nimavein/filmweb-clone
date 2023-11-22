@@ -9,10 +9,12 @@
   &-section {
     max-width: 724px;
     margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 
     &__header {
       font-size: 20px;
-      margin-bottom: 22px;
     }
   }
 }

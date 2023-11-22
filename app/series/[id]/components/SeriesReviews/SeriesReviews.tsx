@@ -37,13 +37,7 @@ const SeriesReviews = ({
       >
         {reviewsSectionHeader}
       </h2>
-      <Carousel
-        dots
-        arrows
-        nextArrow={<RightOutlined />}
-        prevArrow={<LeftOutlined />}
-        infinite={false}
-      >
+      <Carousel slidesToShow={1} responsive={[]} dots>
         {reviewsToDisplay?.map((review, index) => (
           <div key={index}>
             <SeriesReview slideId={index} images={images} {...review} />

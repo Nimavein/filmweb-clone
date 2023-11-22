@@ -26,7 +26,7 @@ const MovieDescription = ({
     release_date,
     poster_path,
     overview,
-    id
+    id,
   },
 }: MovieDescriptionProps) => {
   const imageHeight = 300;
@@ -43,26 +43,41 @@ const MovieDescription = ({
   ];
 
   return (
-    <section className={`${styles["movie-description"]} ${sectionStyles["movie-section"]}`}>
-      {poster_path ? (
-        <Image
-          src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${poster_path}`}
-          alt=""
-          width={imageWidth}
-          height={imageHeight}
-        />
-      ) : (
-        <ImagePlaceholder height={imageHeight} width={imageWidth} />
-      )}
+    <section
+      className={`${styles["movie-description"]} ${sectionStyles["movie-section"]}`}
+    >
+      <div className={styles["movie-description__image"]}>
+        {poster_path ? (
+          <Image
+            src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${poster_path}`}
+            alt=""
+            width={imageWidth}
+            height={imageHeight}
+          />
+        ) : (
+          <ImagePlaceholder
+            height={imageHeight}
+            width={imageWidth}
+            type="image"
+          />
+        )}
+      </div>
       <div className={styles["movie-description__info"]}>
         <p className={styles["movie-description__overview"]}>{overview}</p>
         <div className={styles["movie-description__details"]}>
           {details.map(
             (detail) =>
               detail?.value && (
-                <div className={styles["movie-description__detail"]} key={detail.name}>
-                  <p className={styles["movie-description__detail-name"]}>{detail.name}</p>
-                  <p className={styles["movie-description__detail-value"]}>{detail.value}</p>
+                <div
+                  className={styles["movie-description__detail"]}
+                  key={detail.name}
+                >
+                  <p className={styles["movie-description__detail-name"]}>
+                    {detail.name}
+                  </p>
+                  <p className={styles["movie-description__detail-value"]}>
+                    {detail.value}
+                  </p>
                 </div>
               )
           )}

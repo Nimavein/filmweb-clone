@@ -5,7 +5,12 @@ import styles from "../MovieCreditsCarousel.module.scss";
 import Link from "next/link";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 
-const MovieCreditsCarouselCastMember = ({ name, profile_path, character, id }: CastMember) => {
+const MovieCreditsCarouselCastMember = ({
+  name,
+  profile_path,
+  character,
+  id,
+}: CastMember) => {
   const imageHeight = 240;
   const imageWidth = imageHeight * 0.667;
   return (
@@ -20,10 +25,16 @@ const MovieCreditsCarouselCastMember = ({ name, profile_path, character, id }: C
             className={styles["credits-carousel__person-image"]}
           />
         ) : (
-          <ImagePlaceholder width={imageWidth} height={imageHeight} />
+          <ImagePlaceholder
+            width={imageWidth}
+            height={imageHeight}
+            type="person"
+          />
         )}
         <p className={styles["credits-carousel__person-name"]}>{name}</p>
-        <p className={styles["credits-carousel__person-character"]}>{character}</p>
+        <p className={styles["credits-carousel__person-character"]}>
+          {character}
+        </p>
       </div>
     </Link>
   );

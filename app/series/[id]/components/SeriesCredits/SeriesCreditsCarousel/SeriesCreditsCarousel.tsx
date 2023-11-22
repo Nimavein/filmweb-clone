@@ -1,6 +1,4 @@
 import React from "react";
-import { RightOutlined, LeftOutlined, UserOutlined } from "@ant-design/icons";
-import { Carousel } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
@@ -9,6 +7,7 @@ import {
   SeriesAggregateCreditsCast,
   SeriesAggregateCreditsCrew,
 } from "@/types/types";
+import Carousel from "@/components/Carousel/Carousel";
 
 interface SeriesCreditsCarouselProps {
   credits: SeriesAggregateCreditsCast | SeriesAggregateCreditsCrew | undefined;
@@ -19,14 +18,7 @@ const SeriesCreditsCarousel = ({ credits }: SeriesCreditsCarouselProps) => {
   const imageWidth = imageHeight * 0.667;
 
   return credits ? (
-    <Carousel
-      slidesToShow={4}
-      arrows
-      nextArrow={<RightOutlined />}
-      prevArrow={<LeftOutlined />}
-      dots={false}
-      infinite={false}
-    >
+    <Carousel>
       {credits?.map((credit, index) => (
         <Link key={index} href={`/person/${credit.id}`}>
           <div className={styles["series-credits__slide"]}>
@@ -42,7 +34,7 @@ const SeriesCreditsCarousel = ({ credits }: SeriesCreditsCarouselProps) => {
                 key={index}
                 height={imageHeight}
                 width={imageWidth}
-                icon={<UserOutlined />}
+                type="person"
               />
             )}
             <p

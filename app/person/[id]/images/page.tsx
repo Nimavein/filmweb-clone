@@ -1,6 +1,6 @@
 import { getPersonData } from "@/apiHelpers";
 import { PageIdParams } from "@/types/types";
-import PersonImage from "./components/PersonImage/PersonImage";
+import Image from "next/image";
 
 import styles from "./PersonImages.module.scss";
 
@@ -23,7 +23,12 @@ const PersonImages = async ({ params: { id } }: PageIdParams) => {
                 key={image.file_path}
                 className={styles["person-images__list-item"]}
               >
-                <PersonImage {...image} />
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${image.file_path}`}
+                  alt=""
+                  fill
+                  style={{ objectFit: "cover" }}
+                />
               </li>
             )
         )}

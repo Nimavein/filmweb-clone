@@ -1,7 +1,12 @@
 .person-details {
   &__top {
     display: flex;
+    flex-direction: column;
     gap: 30px;
+
+    @include respond-to($mq-medium) {
+      flex-direction: row;
+    }
   }
 
   &__text {

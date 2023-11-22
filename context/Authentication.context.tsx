@@ -1,9 +1,25 @@
 "use client";
 
 /* eslint-disable @typescript-eslint/no-empty-function */
-import React, { ReactNode, createContext, useContext, useEffect, useState } from "react";
-import { getRequestToken, createNewSession, getAccountData, deleteSession } from "@/apiHelpers";
-import { setStorageItem, removeStorageItem, getStorageItem } from "@/helpers/localStorageHelpers";
+import React, {
+  PropsWithChildren,
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import {
+  getRequestToken,
+  createNewSession,
+  getAccountData,
+  deleteSession,
+} from "@/apiHelpers";
+import {
+  setStorageItem,
+  removeStorageItem,
+  getStorageItem,
+} from "@/helpers/localStorageHelpers";
 import { AccountDataType } from "@/types/types";
 
 interface AuthStateType {
@@ -35,7 +51,9 @@ export const useAuthentication = () => {
   return useContext(AuthenticationContext);
 };
 
-export const AuthenticationProvider = ({ children }: { children: ReactNode }) => {
+export const AuthenticationProvider = ({
+  children,
+}: PropsWithChildren) => {
   const [authState, setAuthState] = useState<AuthStateType>({
     requestToken: getStorageItem("requestToken"),
     accountData: null,
@@ -106,6 +124,8 @@ export const AuthenticationProvider = ({ children }: { children: ReactNode }) =>
   };
 
   return (
-    <AuthenticationContext.Provider value={contextValue}>{children}</AuthenticationContext.Provider>
+    <AuthenticationContext.Provider value={contextValue}>
+      {children}
+    </AuthenticationContext.Provider>
   );
 };

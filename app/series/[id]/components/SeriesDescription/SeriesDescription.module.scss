@@ -7,6 +7,14 @@
     flex-direction: row;
   }
 
+  &__image {
+    display: none;
+
+    @include respond-to($mq-medium) {
+      display: block;
+    }
+  }
+
   &__rate--mobile {
     border: 1px solid $gray;
     @include respond-to($mq-medium) {

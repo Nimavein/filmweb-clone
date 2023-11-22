@@ -69,9 +69,14 @@ const PersonDetails = ({
             alt=""
             width={imageWidth}
             height={imageHeight}
+            quality={100}
           />
         ) : (
-          <ImagePlaceholder height={imageHeight} width={imageWidth} />
+          <ImagePlaceholder
+            height={imageHeight}
+            width={imageWidth}
+            type="person"
+          />
         )}
         <div className={styles["person-details__text"]}>
           <h1 className={styles["person-details__name"]}>{name}</h1>

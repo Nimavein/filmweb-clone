@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./MovieImages.module.scss";
 import sectionStyles from "../../Movie.module.scss";
-import MovieContentImage from "./MovieImage/MovieImage";
 import Button from "@/components/Button/Button";
 import Link from "next/link";
 import { MovieDetails } from "@/types/types";
+import Image from "next/image";
 
 interface MovieImagesProps {
   movieDetails: MovieDetails;
@@ -37,7 +37,12 @@ const MovieImages = ({
                 key={image.file_path}
                 className={styles["movie-images__list-item"]}
               >
-                <MovieContentImage {...image} />
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${image.file_path}`}
+                  alt=""
+                  fill
+                  style={{ objectFit: "cover" }}
+                />
               </li>
             )
         )}

@@ -1,7 +1,19 @@
 .movie-top-panel {
-  height: 576px;
   position: relative;
   background-color: $black;
+  height: 286px;
+
+  @include respond-to($mq-medium) {
+    height: 576px;
+  }
+
+  &__title {
+    font-size: 22px;
+
+    @include respond-to($mq-medium) {
+      height: 26px;
+    }
+  }
 
   &__wrapper {
     display: flex;
@@ -29,20 +41,25 @@
     background: rgba($black, 0.6);
     color: $white;
     border-radius: 4px;
-    bottom: 30px;
+    bottom: -25px;
     width: 90%;
-    padding: 20px;
+    padding: 14px;
 
     @include respond-to($mq-medium) {
+      padding: 20px;
       left: 40px;
       width: auto;
       transform: none;
+      bottom: 30px;
     }
   }
 
   &__rating {
     display: flex;
     gap: 12px;
-    margin-top: 6px;
+
+    @include respond-to($mq-medium) {
+      margin-top: 6px;
+    }
   }
 }

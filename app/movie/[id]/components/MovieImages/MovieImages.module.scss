@@ -1,11 +1,12 @@
 .movie-images {
   &__list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, auto));
+    grid-gap: 10px;
 
     &-item {
       position: relative;
+      height: 180px;
     }
   }
 }

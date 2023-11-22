@@ -30,6 +30,7 @@ const SeriesTopPanel = ({
         fill
         className={styles["series-top-panel__banner"]}
         quality={100}
+        style={{ objectFit: "cover" }}
       />
       <div className={styles["series-top-panel__rate--desktop"]}>
         <RateMedia mediaType="tv" mediaId={id} />
@@ -37,7 +38,9 @@ const SeriesTopPanel = ({
       <div className={styles["series-top-panel__details"]}>
         <h1 className={styles["series-top-panel__title"]}>{name}</h1>
         <div className={styles["series-top-panel__wrapper"]}>
-          <span className={styles["series-top-panel__title-original"]}>{original_name}</span>
+          <span className={styles["series-top-panel__title-original"]}>
+            {original_name}
+          </span>
           <span className={styles["series-top-panel__release"]}>
             {`${first_air_date?.substring(0, 4)} ${
               last_air_date && ` - ${last_air_date?.substring(0, 4)}`
@@ -51,7 +54,9 @@ const SeriesTopPanel = ({
           <Rating
             fontSize={24}
             small
-            defaultValue={vote_average ? parseFloat(vote_average.toFixed(2)) : 0}
+            defaultValue={
+              vote_average ? parseFloat(vote_average.toFixed(2)) : 0
+            }
             voteCount={vote_count}
           />
         </div>

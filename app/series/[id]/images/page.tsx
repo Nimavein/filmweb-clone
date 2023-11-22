@@ -1,9 +1,9 @@
 import React from "react";
 import { PageIdParams } from "@/types/types";
+import { getSeriesData } from "@/apiHelpers";
+import Image from "next/image";
 
 import styles from "./SeriesImages.module.scss";
-import { getSeriesData } from "@/apiHelpers";
-import SeriesImage from "./components/SeriesImage/SeriesImage";
 
 const SeriesImages = async ({ params: { id } }: PageIdParams) => {
   const numberId = Number(id);
@@ -25,7 +25,12 @@ const SeriesImages = async ({ params: { id } }: PageIdParams) => {
                 key={image.file_path}
                 className={styles["series-images__list-item"]}
               >
-                <SeriesImage {...image} />
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${image.file_path}`}
+                  alt=""
+                  fill
+                  style={{ objectFit: "cover" }}
+                />
               </li>
             )
         )}

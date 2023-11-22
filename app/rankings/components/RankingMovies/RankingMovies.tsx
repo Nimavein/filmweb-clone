@@ -65,7 +65,11 @@ const RankingMovies = ({
                     width={imageWidth}
                   />
                 ) : (
-                  <ImagePlaceholder width={imageWidth} height={imageHeight} />
+                  <ImagePlaceholder
+                    width={imageWidth}
+                    height={imageHeight}
+                    type="image"
+                  />
                 )}
                 <div className={styles["ranking-list__item-content"]}>
                   <div className={styles["ranking-list__item-text"]}>

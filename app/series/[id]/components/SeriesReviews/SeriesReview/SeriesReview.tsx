@@ -35,7 +35,11 @@ const SeriesReview = ({
           height={imageHeight}
         />
       ) : (
-        <ImagePlaceholder height={imageHeight} width={imageWidth} />
+        <ImagePlaceholder
+          height={imageHeight}
+          width={imageWidth}
+          type="image"
+        />
       )}
       <div>
         {content && (
