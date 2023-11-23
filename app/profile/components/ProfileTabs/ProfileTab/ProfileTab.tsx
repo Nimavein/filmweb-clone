@@ -25,7 +25,7 @@ const ProfileTab = ({ tvSeries, movies }: ProfileTabProps) => {
     mediaType: MediaType,
     linkUrl: string
   ) => (
-    <li key={id}>
+    <li className={styles["profile-tab__list-item"]} key={id}>
       <Link className={styles["profile-tab__item"]} href={linkUrl}>
         {imagePath ? (
           <Image
@@ -66,7 +66,9 @@ const ProfileTab = ({ tvSeries, movies }: ProfileTabProps) => {
       )}
       {!!(tvSeries?.total_results && tvSeries?.total_results > 0) && (
         <div className={styles[`${baseCSSClassName}__tv-series`]}>
-          <h2 className={styles[`${baseCSSClassName}__subheader`]}>TV series</h2>
+          <h2 className={styles[`${baseCSSClassName}__subheader`]}>
+            TV series
+          </h2>
           <ul className={styles[`${baseCSSClassName}__items`]}>
             {tvSeries?.results?.map((result) =>
               renderItem(

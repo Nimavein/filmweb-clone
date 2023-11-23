@@ -1,12 +1,13 @@
+"use client";
+
+import { Divider as AntdDivider, DividerProps } from "antd";
+
 import React from "react";
-import "./Divider.module.scss";
 
-interface DividerProps {
-  style: React.CSSProperties;
-}
-
-const Divider = ({ style }: DividerProps) => {
-  return <div style={style} className="divider"></div>;
+const Divider = (props: DividerProps) => {
+  return (
+    <AntdDivider {...props} style={{ margin: "12px 0", ...props.style }} />
+  );
 };
 
 export default Divider;

@@ -11,32 +11,30 @@ const TvSeriesListItem = ({
   id,
   vote_count,
   vote_average,
+  first_air_date
 }: Series) => {
+  const imageHeight = 200;
+  const imageWidth = imageHeight * 0.667;
   return (
     <Link href={`/series/${id}`}>
       <div className={styles["tv-series-list__item"]}>
         <Image
           src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${poster_path}`}
           alt=""
-          width={200}
-          height={200}
+          width={imageWidth}
+          height={imageHeight}
           className={styles["tv-series-list__item-cover"]}
         />
         <div className={styles["tv-series-list__item-content"]}>
           <div className={styles["tv-series-list__item-text"]}>
-            <h2 className={styles["tv-series-list__item-title"]}>{name}</h2>
-            <p className={styles["tv-series-list__item-overview"]}>
-              {overview}
-            </p>
+            <h2
+              className={styles["tv-series-list__item-title"]}
+            >{`${name} (${first_air_date?.substring(0, 4)})`}</h2>
+            <p className={styles["tv-series-list__item-overview"]}>{overview}</p>
           </div>
           <div className={styles["tv-series-list__item-rating"]}>
             <div className={styles["tv-series-list__item-vote-average"]}>
-              <Rating
-                vertical
-                small
-                defaultValue={vote_average || 0}
-                voteCount={vote_count}
-              />
+              <Rating vertical small defaultValue={vote_average || 0} voteCount={vote_count} />
             </div>
           </div>
         </div>

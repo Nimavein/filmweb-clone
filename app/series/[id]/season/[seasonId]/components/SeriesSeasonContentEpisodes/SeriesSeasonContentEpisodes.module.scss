@@ -1,6 +1,6 @@
 .series-season-content__episodes {
   margin: 20px 0;
-  
+
   &-list {
     display: flex;
     flex-direction: column;
@@ -9,11 +9,32 @@
     &-item {
       border: 1px solid $light-gray;
       display: flex;
+      flex-direction: column;
+
+      @include respond-to($mq-medium) {
+        flex-direction: row;
+      }
+
+      &-image {
+        img {
+          width: 100%;
+          height: auto;
+
+          @include respond-to($mq-medium) {
+            height: 100%;
+          }
+        }
+        @include respond-to($mq-medium) {
+          width: 280px;
+          height: 186px;
+        }
+      }
 
       &-content {
         padding: 10px 20px;
         display: flex;
         flex-direction: column;
+        flex: 1;
       }
 
       &-release {

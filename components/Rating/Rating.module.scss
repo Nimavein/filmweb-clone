@@ -6,27 +6,29 @@
 
 .small-rating {
   display: flex;
-  margin-top: 6px;
   align-items: center;
+  gap: 4px;
   &--vertical {
-    flex-direction: column;
-    justify-content: center;
-    .small-rating__value,
-    .small-rating__votes {
-      margin-left: 0;
+    gap: 10px;
+    @include respond-to($mq-medium) {
+      gap: 0;
+      flex-direction: column;
+      justify-content: center;
     }
-  }
-  &__value {
-    margin-left: 4px;
   }
 
   &__votes {
     text-align: center;
-    margin-left: 10px;
     display: flex;
-    flex-direction: column;
     color: $light-gray;
     justify-content: center;
+    gap: 4px;
+    align-items: center;
+
+    @include respond-to($mq-medium) {
+      flex-direction: column;
+      gap: 0;
+    }
 
     &-title {
       font-size: 10px;

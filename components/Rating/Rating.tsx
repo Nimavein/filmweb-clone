@@ -36,7 +36,9 @@ const Rating = ({
       style={{ fontSize: fontSize }}
     >
       <StarFilled className={styles["small-rating__icon"]} />
-      <span className={styles["small-rating__value"]}>{defaultValue}</span>
+      <span className={styles["small-rating__value"]}>
+        {defaultValue.toFixed(2)}
+      </span>
       <div className={styles["small-rating__votes"]}>
         <span className={styles["small-rating__votes-value"]}>{voteCount}</span>
         <span className={styles["small-rating__votes-title"]}>votes</span>
@@ -45,7 +47,9 @@ const Rating = ({
   ) : (
     <div className={styles["rating"]}>
       {showNumber && (
-        <span className={styles["rating__value"]}>{defaultValue}</span>
+        <span className={styles["rating__value"]}>
+          {defaultValue.toFixed(2)}
+        </span>
       )}
       <Rate
         count={starCount}
