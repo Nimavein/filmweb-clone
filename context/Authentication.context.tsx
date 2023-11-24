@@ -51,9 +51,7 @@ export const useAuthentication = () => {
   return useContext(AuthenticationContext);
 };
 
-export const AuthenticationProvider = ({
-  children,
-}: PropsWithChildren) => {
+export const AuthenticationProvider = ({ children }: PropsWithChildren) => {
   const [authState, setAuthState] = useState<AuthStateType>({
     requestToken: getStorageItem("requestToken"),
     accountData: null,

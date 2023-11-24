@@ -1,13 +1,16 @@
+"use client";
+
 import { KeyboardEvent, useEffect, useState } from "react";
 import { AutoComplete } from "antd";
-import navbarStyles from "../Navbar.module.scss";
-import NavbarSearchItem from "./NavbarSearchItem/NavbarSearchItem";
+import NavbarSearchItem from "./HeaderSearchItem/HeaderSearchItem";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { getSearchMulti } from "@/apiHelpers/searchApi";
 import useSearchParam from "@/hooks/useSearchParam";
 import { SearchResults } from "@/types/types";
 
-const NavbarSearch = () => {
+import styles from "./HeaderSearch.module.scss";
+
+const HeaderSearch = () => {
   const searchParams = useSearchParams();
   const [query, setQuery] = useState(searchParams.get("query"));
   const [results, setResults] = useState<SearchResults>();
@@ -99,7 +102,7 @@ const NavbarSearch = () => {
       onBlur={handleBlur}
       onKeyDown={(event) => handleEnterClick(event)}
       allowClear
-      className={navbarStyles["main-navbar__search"]}
+      className={styles["header-search"]}
       placeholder="Search for movies, tv series and people"
       options={searchOptions}
       onSelect={handleSelect}
@@ -109,4 +112,4 @@ const NavbarSearch = () => {
   );
 };
 
-export default NavbarSearch;
+export default HeaderSearch;

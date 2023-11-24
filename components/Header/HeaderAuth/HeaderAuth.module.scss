@@ -1,0 +1,15 @@
+.header-auth {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  &__connect-button,
+  &__login-button {
+    background: none;
+    color: $white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+  }
+}

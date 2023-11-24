@@ -1,6 +1,6 @@
 import { PagePaginationParams } from "@/types/types";
 import { getPopularPeople } from "@/apiHelpers";
-import PeopleList from "../components/PeopleList";
+import PeopleList from "./components/PeopleList";
 
 const PopularPeoplePage = async ({
   searchParams: { page },

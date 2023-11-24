@@ -1,5 +1,5 @@
 import {
-  ActiveRankingFilters,
+  ActiveMediaFiltersType,
   GenresDTO,
   RankingSortOption,
   Series,
@@ -11,12 +11,12 @@ import Link from "next/link";
 import Rating from "@/components/Rating/Rating";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 import RankingContentOptions from "../RankingOptions/RankingOptions";
-import RankingContentFilters from "../RankingFilters/RankingFilters";
+import RankingContentFilters from "../../../../components/MediaFilters/MediaFilters";
 
 interface RankingTvSeriesProps {
   sortBy: string;
   tvSeries: TvSeries;
-  activeFilters: ActiveRankingFilters;
+  activeFilters: ActiveMediaFiltersType;
   genres: GenresDTO;
 }
 

@@ -59,7 +59,9 @@ const PersonDetails = ({
   ];
 
   return (
-    <section className={`${styles["person-details"]} ${sectionStyles["person-section"]}`}>
+    <section
+      className={`${styles["person-details"]} ${sectionStyles["person-section"]}`}
+    >
       <div className={styles["person-details__top"]}>
         <div className={styles["person-details__image"]}>
           {profile_path ? (
@@ -71,13 +73,19 @@ const PersonDetails = ({
               quality={100}
             />
           ) : (
-            <ImagePlaceholder height={imageHeight} width={imageWidth} type="person" />
+            <ImagePlaceholder
+              height={imageHeight}
+              width={imageWidth}
+              type="person"
+            />
           )}
         </div>
         <div className={styles["person-details__text"]}>
           <h1 className={styles["person-details__name"]}>{name}</h1>
           {also_known_as && (
-            <p className={styles["person-details__aka"]}>{also_known_as.join(", ")}</p>
+            <p className={styles["person-details__aka"]}>
+              {also_known_as.join(", ")}
+            </p>
           )}
           {biography && (
             <ReadMoreText
@@ -86,14 +94,27 @@ const PersonDetails = ({
               textClassName={styles["person-details__bio"]}
             />
           )}
-          <h2 className={styles["person-details__personal-header"]}>Personal data:</h2>
+          <h2 className={styles["person-details__personal-header"]}>
+            Personal data:
+          </h2>
           <div className={styles["person-details__personal"]}>
             {detailsToDisplay.map(
               (detail) =>
                 detail?.value && (
-                  <div className={styles["person-details__personal-detail"]} key={detail.name}>
-                    <p className={styles["person-details__personal-detail-name"]}>{detail.name}</p>
-                    <p className={styles["person-details__personal-detail-value"]}>
+                  <div
+                    className={styles["person-details__personal-detail"]}
+                    key={detail.name}
+                  >
+                    <p
+                      className={styles["person-details__personal-detail-name"]}
+                    >
+                      {detail.name}
+                    </p>
+                    <p
+                      className={
+                        styles["person-details__personal-detail-value"]
+                      }
+                    >
                       {detail.value}
                     </p>
                   </div>

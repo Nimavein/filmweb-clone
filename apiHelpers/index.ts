@@ -9,6 +9,7 @@ import {
   getPopularMovies,
   getWatchProviderMovies,
   getMoviesGenres,
+  getUpcomingMovies,
 } from "./moviesApi";
 import { getPersonData } from "./personApi";
 import { getPopularPeople } from "./peopleApi";
@@ -23,6 +24,7 @@ import {
   getPopularTvSeries,
   getWatchProviderTvSeries,
   getTvSeriesGenres,
+  getUpcomingTvSeries,
 } from "./tvSeriesApi";
 import { getTvSeriesRankingData, getMoviesRankingData } from "./rankingApi";
 import { getNews } from "./newsApi";
@@ -75,4 +77,6 @@ export {
   deleteSeriesRating,
   addSeriesRating,
   getNetworkImages,
+  getUpcomingMovies,
+  getUpcomingTvSeries,
 };

@@ -1,23 +1,24 @@
 import React from "react";
 import {
-  ActiveRankingFilters,
+  ActiveMediaFiltersType,
   GenresDTO,
   Movie,
   Movies,
   RankingSortOption,
 } from "@/types/types";
-import styles from "../../Rankings.module.scss";
 import Rating from "@/components/Rating/Rating";
 import Link from "next/link";
 import Image from "next/image";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
-import RankingContentOptions from "../RankingOptions/RankingOptions";
-import RankingContentFilters from "../RankingFilters/RankingFilters";
+import RankingOptions from "../RankingOptions/RankingOptions";
+import RankingFilters from "../../../../components/MediaFilters/MediaFilters";
+
+import styles from "../../Rankings.module.scss";
 
 interface RankingMoviesProps {
   sortBy: string;
   movies: Movies;
-  activeFilters: ActiveRankingFilters;
+  activeFilters: ActiveMediaFiltersType;
   genres: GenresDTO;
 }
 
@@ -44,9 +45,9 @@ const RankingMovies = ({
   return (
     <>
       <div className={styles["ranking__options-wrapper"]}>
-        <RankingContentOptions options={options} sortBy={sortBy} />
+        <RankingOptions options={options} sortBy={sortBy} />
       </div>
-      <RankingContentFilters
+      <RankingFilters
         contentType="movies"
         activeFilters={activeFilters}
         genres={genres}

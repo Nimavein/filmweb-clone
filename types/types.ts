@@ -170,18 +170,9 @@ export interface NavbarLink {
 
 export interface NavbarLinks {
   home: NavbarLink;
-  movies: {
-    main: NavbarLink;
-    popular: NavbarLink;
-  };
-  tvSeries: {
-    main: NavbarLink;
-    popular: NavbarLink;
-  };
-  people: {
-    main: NavbarLink;
-    popular: NavbarLink;
-  };
+  movies: NavbarLink;
+  tvSeries: NavbarLink;
+  people: NavbarLink;
   vod: NavbarLink;
   rankings: NavbarLink;
 }
@@ -700,9 +691,9 @@ export interface RankingSortOption {
   value: RankingSort;
 }
 
-export type RankingContentType = "movies" | "tv-series";
+export type FiltersContentType = "movies" | "tv-series";
 
-export interface ActiveRankingFilters {
+export interface ActiveMediaFiltersType {
   originalLanguage: string;
   genre: string;
   productionYear: number | null;
@@ -717,11 +708,6 @@ export type PageIdParams = {
   };
 };
 
-export type PagePaginationParams = {
-  searchParams: {
-    page: string;
-  };
-};
 
 export type PageSearchParams = {
   searchParams: {
@@ -739,8 +725,14 @@ export type PageVodParams = {
 export type PageRankingParams = {
   searchParams: {
     sortBy: string;
-  } & ActiveRankingFilters;
+  } & ActiveMediaFiltersType;
 };
+
+export type PagePaginationParams = {
+  searchParams: {
+    page: string;
+  };
+} & PageRankingParams;
 
 export type SeasonPageParams = {
   params: {
@@ -793,7 +785,7 @@ export interface NetworkImageType {
   vote_average: number;
   vote_count: number;
   width: number;
-};
+}
 
 export interface NetworkImagesDTO {
   id: number;

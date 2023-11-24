@@ -4,9 +4,9 @@ import React from "react";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 import { getSearchResultType } from "@/helpers/getSearchResultType";
 import { MovieDetails, SeriesDetails, PersonDetails } from "@/types/types";
-import styles from "../../Navbar.module.scss";
+import styles from "../../Header.module.scss";
 
-const NavbarSearchItem = (
+const HeaderSearchItem = (
   result: MovieDetails | SeriesDetails | PersonDetails
 ) => {
   const title =
@@ -23,11 +23,7 @@ const NavbarSearchItem = (
   const dropdownImageWidth = dropdownImageHeight * 0.667;
 
   return (
-    <Link
-      className={styles["main-navbar__search-item"]}
-      key={id}
-      href={linkUrl}
-    >
+    <Link className={styles["header-search__item"]} key={id} href={linkUrl}>
       {imagePath ? (
         <Image
           alt=""
@@ -47,4 +43,4 @@ const NavbarSearchItem = (
   );
 };
 
-export default NavbarSearchItem;
+export default HeaderSearchItem;

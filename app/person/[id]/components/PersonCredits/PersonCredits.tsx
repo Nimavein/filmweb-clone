@@ -3,7 +3,6 @@
 import React from "react";
 import styles from "./PersonCredits.module.scss";
 import sectionStyles from "../../Person.module.scss";
-import { Tabs, TabsProps } from "antd";
 import {
   PersonDetails,
   PersonMovieCast,
@@ -12,6 +11,7 @@ import {
   PersonTvCrew,
 } from "@/types/types";
 import PersonCreditsCarousel from "./PersonCreditsCarousel/PersonCreditsCarousel";
+import Tabs from "@/components/Tabs/Tabs";
 
 interface PersonCreditsProps {
   cast: PersonMovieCast | PersonTvCast | undefined;
@@ -26,15 +26,15 @@ const PersonCredits = ({
   type,
   personDetails,
 }: PersonCreditsProps) => {
-  const tabs: TabsProps["items"] = [
+  const tabs = [
     {
-      key: "1",
+      key: "cast",
       label: `AS CAST MEMBER (${cast?.length})`,
       children: <PersonCreditsCarousel type={type} credits={cast} />,
       disabled: cast?.length === 0,
     },
     {
-      key: "2",
+      key: "crew",
       label: `AS CREW MEMBER (${crew?.length})`,
       children: <PersonCreditsCarousel type={type} credits={crew} />,
       disabled: crew?.length === 0,
@@ -55,7 +55,11 @@ const PersonCredits = ({
       >
         {creditsSectionHeader}
       </h2>
-      <Tabs items={tabs} defaultActiveKey={"1"} />
+      <Tabs
+        items={tabs}
+        defaultActiveKey={`cast`}
+        paramKey={`credits-${type}`}
+      />
     </section>
   );
 };

@@ -1,8 +1,9 @@
-import { ActiveRankingFilters, Movies } from "@/types/types";
+import { ActiveMediaFiltersType, Movies } from "@/types/types";
 
 export const getMoviesRankingData = async (
   sortBy = "vote_average.desc",
-  filters?: ActiveRankingFilters
+  filters?: ActiveMediaFiltersType,
+  page = 1
 ) => {
   const { originalLanguage, genre, productionYear } = filters || {};
   const url = `${process.env.NEXT_PUBLIC_BASE_DISCOVER_API_URL}movie?api_key=${
@@ -11,7 +12,7 @@ export const getMoviesRankingData = async (
     originalLanguage ? `&with_original_language=${originalLanguage}` : ""
   }${genre ? `&with_genres=${genre}` : ""}${
     productionYear ? `&primary_release_year=${productionYear}` : ""
-  }`;
+  }&page=${page}`;
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -27,7 +28,8 @@ export const getMoviesRankingData = async (
 
 export const getTvSeriesRankingData = async (
   sortBy = "vote_average.desc",
-  filters?: ActiveRankingFilters
+  filters?: ActiveMediaFiltersType,
+  page = 1
 ) => {
   const { originalLanguage, genre, productionYear } = filters || {};
   const url = `${process.env.NEXT_PUBLIC_BASE_DISCOVER_API_URL}tv?api_key=${
@@ -36,7 +38,7 @@ export const getTvSeriesRankingData = async (
     originalLanguage ? `&with_original_language=${originalLanguage}` : ""
   }${genre ? `&with_genres=${genre}` : ""}${
     productionYear ? `&primary_release_year=${productionYear}` : ""
-  }`;
+  }&page=${page}`;
   try {
     const response = await fetch(url);
     if (!response.ok) {

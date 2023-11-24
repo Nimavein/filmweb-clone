@@ -1,16 +1,16 @@
 import React from "react";
+import { Movie } from "@/types/types";
 import Link from "next/link";
-import styles from "../VodTvSeries.module.scss";
+import styles from "./VodMovie.module.scss";
 import Image from "next/image";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
-import { Series } from "@/types/types";
 
-const VodSeries = ({ name, id, poster_path }: Series) => {
+const VodMovie = ({ title, id, poster_path }: Movie) => {
   const imageHeight = 240;
   const imageWidth = imageHeight * 0.667;
   return (
-    <Link href={`/series/${id}`}>
-      <div className={styles["vod-series"]}>
+    <Link href={`/movie/${id}`}>
+      <div className={styles["vod-movie"]}>
         {poster_path ? (
           <Image
             src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${poster_path}`}
@@ -25,10 +25,10 @@ const VodSeries = ({ name, id, poster_path }: Series) => {
             type="image"
           />
         )}
-        <p className={styles["vod-series__title"]}>{name}</p>
+        <p className={styles["vod-movie__title"]}>{title}</p>
       </div>
     </Link>
   );
 };
 
-export default VodSeries;
+export default VodMovie;

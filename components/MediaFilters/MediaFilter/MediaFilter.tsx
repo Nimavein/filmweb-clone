@@ -1,17 +1,19 @@
 import React from "react";
 import { Select } from "antd";
-import { RankingFilterType } from "../RankingFilters";
 import useSearchParam from "@/hooks/useSearchParam";
-import { ActiveRankingFilters } from "@/types/types";
-interface RankingFilterProps {
-  filter: RankingFilterType;
-  activeFilters: ActiveRankingFilters;
+import { MediaFilterType } from "../MediaFilters";
+import { ActiveMediaFiltersType } from "@/types/types";
+
+interface MediaFilterProps {
+  filter: MediaFilterType;
+  activeFilters: ActiveMediaFiltersType;
 }
 
-const RankingFilter = ({ filter, activeFilters }: RankingFilterProps) => {
-  const { setSearchParam } = useSearchParam();
+const MediaFilter = ({ filter, activeFilters }: MediaFilterProps) => {
+  const { setSearchParam, getSearchParam } = useSearchParam();
   const onChange = (value: string) => {
     setSearchParam(filter?.name, value);
+    if (getSearchParam("page")) setSearchParam("page", "1");
   };
 
   return (
@@ -29,4 +31,4 @@ const RankingFilter = ({ filter, activeFilters }: RankingFilterProps) => {
   );
 };
 
-export default RankingFilter;
+export default MediaFilter;

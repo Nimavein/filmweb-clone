@@ -1,14 +1,12 @@
 .vod {
-  max-width: 1024px;
-  margin: 0 auto;
+  max-width: 724px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 
-  &-section {
-    max-width: 724px;
-    margin: 40px auto;
-
-    &__header {
-      font-size: 20px;
-      margin-bottom: 22px;
-    }
+  &__header {
+    font-size: 20px;
+    margin-bottom: 22px;
   }
 }

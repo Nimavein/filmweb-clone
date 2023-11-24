@@ -7,6 +7,8 @@ interface NewsProps {
 }
 
 const News = ({ news }: NewsProps) => {
+  const listArticleImageWidth = 160;
+  const listArticleImageHeight = listArticleImageWidth / 1.73;
   return (
     <section className={styles["news"]}>
       <div className={styles["news__main"]}>
@@ -16,7 +18,12 @@ const News = ({ news }: NewsProps) => {
           className={styles["news__main-article"]}
         >
           <div className={styles["news__main-article-image-wrapper"]}>
-            <Image alt="" src={news[0]?.mainImage?.url} fill />
+            <Image
+              alt=""
+              src={news[0]?.mainImage?.url}
+              fill
+              style={{ objectFit: "cover" }}
+            />
             <p
               className={styles["news__main-article-title"]}
               dangerouslySetInnerHTML={{ __html: news[0]?.title }}
@@ -38,7 +45,12 @@ const News = ({ news }: NewsProps) => {
                 <div
                   className={styles["news__main-list-article-image-wrapper"]}
                 >
-                  <Image alt="" src={article.mainImage?.url} fill />
+                  <Image
+                    alt=""
+                    src={article.mainImage?.url}
+                    fill
+                    style={{ objectFit: "cover" }}
+                  />
                 </div>
                 <p
                   className={styles["news__main-list-article-title"]}
@@ -68,8 +80,8 @@ const News = ({ news }: NewsProps) => {
               <Image
                 alt=""
                 src={article.mainImage?.url}
-                width={140}
-                height={80}
+                width={listArticleImageWidth}
+                height={listArticleImageHeight}
               />
               <div>
                 <p

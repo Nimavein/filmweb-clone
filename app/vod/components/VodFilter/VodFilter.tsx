@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./VodFilter.module.scss";
-import sectionStyles from "../../Vod.module.scss";
 import VodFilterProviders from "./VodFilterProviders/VodFilterProviders";
 import VodFilterSort from "./VodFilterSort/VodFilterSort";
 import { GetWatchProviders, WatchProvidersFiltersType } from "@/types/types";
@@ -24,9 +23,7 @@ const VodFilter = ({
     ?.provider_name?.toUpperCase();
 
   return (
-    <section
-      className={`${sectionStyles["vod-section"]} ${styles["vod-filter"]}`}
-    >
+    <section className={styles["vod-filter"]}>
       <h1 className={styles["vod-filter__header"]}>
         {`Available content on ${chosenProviderName || "platforms"}`}
       </h1>

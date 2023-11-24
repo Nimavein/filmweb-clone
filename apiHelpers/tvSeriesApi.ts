@@ -14,6 +14,18 @@ export const getPopularTvSeries = async (page: number) => {
   }
 };
 
+export const getUpcomingTvSeries = async (page = 1) => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_SERIES_API_URL}on_the_air?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${page}&vote_count.gte=100`
+    );
+    const tvSeries: TvSeries = await response.json();
+    return tvSeries;
+  } catch (error: any) {
+    console.error(error);
+  }
+};
+
 export const getTvSeriesGenres = async () => {
   try {
     const response = await fetch(

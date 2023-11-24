@@ -28,7 +28,7 @@ const Tabs = ({ defaultActiveKey, onTabClick, items, paramKey }: TabsProps) => {
     if (key !== activeKey) {
       setActiveKey(key);
       onTabClick?.(key);
-      setSearchParam(paramKey, key)
+      setSearchParam(paramKey, key);
     }
   };
 

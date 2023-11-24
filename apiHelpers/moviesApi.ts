@@ -14,6 +14,18 @@ export const getPopularMovies = async (page: number) => {
   }
 };
 
+export const getUpcomingMovies = async (page = 1) => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_MOVIE_API_URL}upcoming?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${page}`
+    );
+    const movies: Movies = await response.json();
+    return movies;
+  } catch (error: any) {
+    console.error(error);
+  }
+};
+
 export const getMoviesGenres = async () => {
   try {
     const response = await fetch(

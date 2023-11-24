@@ -1,11 +1,12 @@
 import VodFilter from "./components/VodFilter/VodFilter";
-import VodMovies from "./components/VodMovies/VodMovies";
-import VodTvSeries from "./components/VodTvSeries/VodTvSeries";
 import { getWatchProviders } from "@/apiHelpers/watchProvidersApi";
 import { getWatchProviderMovies, getWatchProviderTvSeries } from "@/apiHelpers";
+import { PageVodParams, WatchProvidersFiltersType } from "@/types/types";
+import MediaCarousel from "@/components/MediaCarousel/MediaCarousel";
+import VodMovie from "./components/VodMovie/VodMovie";
 
 import styles from "./Vod.module.scss";
-import { PageVodParams, WatchProvidersFiltersType } from "@/types/types";
+import VodSeries from "./components/VodSeries/VodSeries";
 
 const VodPage = async ({
   searchParams: { watchProvider, sortBy = "popularity.desc" },
@@ -21,7 +22,7 @@ const VodPage = async ({
     watchProviderId,
     sortBy
   );
-  const tvSeriesProviderMovies = await getWatchProviderTvSeries(
+  const watchProviderTvSeries = await getWatchProviderTvSeries(
     1,
     watchProviderId,
     sortBy
@@ -35,10 +36,26 @@ const VodPage = async ({
         filters={filters}
       />
       {watchProviderMovies && (
-        <VodMovies watchProviderMovies={watchProviderMovies} />
+        <MediaCarousel
+          medias={watchProviderMovies}
+          type="movies"
+          title="AVAILABLE MOVIES"
+        >
+          {watchProviderMovies?.results?.map((movie) => (
+            <VodMovie key={movie.id} {...movie} />
+          ))}
+        </MediaCarousel>
       )}
-      {tvSeriesProviderMovies && (
-        <VodTvSeries watchProviderTvSeries={tvSeriesProviderMovies} />
+      {watchProviderTvSeries && (
+        <MediaCarousel
+          medias={watchProviderTvSeries}
+          type="tv-series"
+          title="AVAILABLE TV SERIES"
+        >
+          {watchProviderTvSeries?.results?.map((series) => (
+            <VodSeries key={series.id} {...series} />
+          ))}
+        </MediaCarousel>
       )}
     </main>
   );

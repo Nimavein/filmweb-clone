@@ -1,0 +1,9 @@
+.home {
+  &__upcoming {
+    max-width: 1024px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}

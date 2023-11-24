@@ -1,5 +1,5 @@
 import React from "react";
-import { ActiveRankingFilters, PageRankingParams } from "@/types/types";
+import { ActiveMediaFiltersType, PageRankingParams } from "@/types/types";
 import {
   getMoviesGenres,
   getMoviesRankingData,
@@ -15,7 +15,7 @@ import styles from "./Rankings.module.scss";
 const Rankings = async ({
   searchParams: { sortBy, productionYear, genre, originalLanguage },
 }: PageRankingParams) => {
-  const activeFilters: ActiveRankingFilters = {
+  const activeFilters: ActiveMediaFiltersType = {
     productionYear,
     genre,
     originalLanguage,

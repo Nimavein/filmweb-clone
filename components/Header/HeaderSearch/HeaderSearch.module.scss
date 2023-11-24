@@ -1,0 +1,10 @@
+.header-search {
+  width: 320px;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: $black;
+  }
+}

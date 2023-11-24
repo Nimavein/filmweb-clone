@@ -19,6 +19,12 @@ const VodFilterProviders = ({
 }: VodFilterProvidersProps) => {
   const { setSearchParam } = useSearchParam();
   const sortBy = filters?.sortBy || "";
+  const providersToDisplay = (tvProviders?.results || [])
+    .filter(
+      (provider) =>
+        provider.display_priority !== undefined && provider.display_priority < 5
+    )
+    .sort((a, b) => (a.display_priority || 0) - (b.display_priority || 0));
 
   const onProviderClick = (providerId: number) => {
     setSearchParam("watchProvider", providerId.toString());
@@ -28,31 +34,26 @@ const VodFilterProviders = ({
 
   return (
     <ul className={styles["vod-filter__providers"]}>
-      {tvProviders?.results
-        .filter(
-          (provider) =>
-            provider.display_priority && provider.display_priority < 5
-        )
-        .map((provider) => (
-          <li
-            key={provider.provider_id}
-            className={styles["vod-filter__provider"]}
+      {providersToDisplay.map((provider) => (
+        <li
+          key={provider.provider_id}
+          className={styles["vod-filter__provider"]}
+        >
+          <Button
+            disabled={filters.watchProviderId === provider.provider_id}
+            active={filters.watchProviderId === provider.provider_id}
+            ariaLabel={provider.provider_name}
+            onClick={() => onProviderClick(provider.provider_id)}
           >
-            <Button
-              disabled={filters.watchProviderId === provider.provider_id}
-              active={filters.watchProviderId === provider.provider_id}
-              ariaLabel={provider.provider_name}
-              onClick={() => onProviderClick(provider.provider_id)}
-            >
-              <Image
-                alt=""
-                src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${provider.logo_path}`}
-                width={30}
-                height={22}
-              />
-            </Button>
-          </li>
-        ))}
+            <Image
+              alt=""
+              src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${provider.logo_path}`}
+              width={30}
+              height={22}
+            />
+          </Button>
+        </li>
+      ))}
     </ul>
   );
 };

@@ -2,30 +2,30 @@
 
 import React, { useState } from "react";
 import {
-  ActiveRankingFilters,
+  ActiveMediaFiltersType,
+  FiltersContentType,
   GenresDTO,
-  RankingContentType,
 } from "@/types/types";
-import RankingFilter from "./RankingFilter/RankingFilter";
 import { FilterOutlined } from "@ant-design/icons";
 import Button from "@/components/Button/Button";
+import MediaFilter from "./MediaFilter/MediaFilter";
 
-interface RankingFiltersProps {
-  contentType: RankingContentType;
-  activeFilters: ActiveRankingFilters;
+interface MediaFiltersProps {
+  contentType: FiltersContentType;
+  activeFilters: ActiveMediaFiltersType;
   genres: GenresDTO;
 }
 
-export interface RankingFilterType {
+export interface MediaFilterType {
   label: string;
-  name: keyof ActiveRankingFilters;
+  name: keyof ActiveMediaFiltersType;
   values: { label: string; value: string | number }[];
 }
 
-const RankingFilters = ({ activeFilters, genres }: RankingFiltersProps) => {
+const MediaFilters = ({ activeFilters, genres }: MediaFiltersProps) => {
   const [areFiltersOpen, setAreFiltersOpen] = useState<boolean>(false);
 
-  const filters: RankingFilterType[] = [
+  const filters: MediaFilterType[] = [
     {
       label: "Original Language",
       name: "originalLanguage",
@@ -52,6 +52,7 @@ const RankingFilters = ({ activeFilters, genres }: RankingFiltersProps) => {
       ],
     },
   ];
+
   return (
     <>
       <Button
@@ -63,9 +64,9 @@ const RankingFilters = ({ activeFilters, genres }: RankingFiltersProps) => {
       </Button>
       {areFiltersOpen && (
         <ul>
-          {filters.map((filter: RankingFilterType) => (
+          {filters.map((filter) => (
             <li key={filter.name}>
-              <RankingFilter filter={filter} activeFilters={activeFilters} />
+              <MediaFilter filter={filter} activeFilters={activeFilters} />
             </li>
           ))}
         </ul>
@@ -74,4 +75,4 @@ const RankingFilters = ({ activeFilters, genres }: RankingFiltersProps) => {
   );
 };
 
-export default RankingFilters;
+export default MediaFilters;
