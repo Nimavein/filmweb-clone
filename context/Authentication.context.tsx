@@ -33,7 +33,6 @@ interface AuthenticationContextType extends AuthStateType {
   logout: () => Promise<void>;
   isLoggedIn: boolean;
   isAuthorized: boolean;
-  setAuthState: React.Dispatch<React.SetStateAction<AuthStateType>>;
 }
 
 const AuthenticationContext = createContext<AuthenticationContextType>({
@@ -45,7 +44,6 @@ const AuthenticationContext = createContext<AuthenticationContextType>({
   logout: async () => {},
   isLoggedIn: false,
   isAuthorized: false,
-  setAuthState: () => null,
 });
 
 export const useAuthentication = () => {
@@ -54,7 +52,7 @@ export const useAuthentication = () => {
 
 export const AuthenticationProvider = ({ children }: PropsWithChildren) => {
   const [authState, setAuthState] = useState<AuthStateType>({
-    requestToken: getStorageItem("requestToken"),
+    requestToken: null,
     accountData: null,
     sessionId: getStorageItem("sessionId"),
   });
@@ -81,7 +79,6 @@ export const AuthenticationProvider = ({ children }: PropsWithChildren) => {
   const connectWithTDB = async () => {
     const { request_token: token } = (await getRequestToken()) || {};
     if (token) {
-      setStorageItem("requestToken", token);
       updateAuthState({ requestToken: token });
       window.open(`https://www.themoviedb.org/authenticate/${token}`);
     }
@@ -120,7 +117,6 @@ export const AuthenticationProvider = ({ children }: PropsWithChildren) => {
     logout,
     isLoggedIn: !!authState?.accountData?.id,
     isAuthorized: !!authState.sessionId,
-    setAuthState,
   };
 
   return (

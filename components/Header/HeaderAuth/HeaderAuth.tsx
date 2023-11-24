@@ -4,8 +4,7 @@ import ProfileAvatar from "@/components/ProfileAvatar/ProfileAvatar";
 import { useAuthentication } from "@/context/Authentication.context";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import React, { useEffect } from "react";
-import { removeStorageItem } from "@/helpers/localStorageHelpers";
+import React from "react";
 
 import styles from "./HeaderAuth.module.scss";
 
@@ -17,18 +16,10 @@ const HeaderAuth = () => {
     requestToken,
     isLoggedIn,
     accountData,
-    setAuthState,
   } = useAuthentication();
   const router = useRouter();
   const pathname = usePathname();
   const avatarPath = accountData?.avatar?.tmdb?.avatar_path;
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      removeStorageItem("requestToken");
-      setAuthState((prevState) => ({ ...prevState, requestToken: "" }));
-    }
-  }, []);
 
   const handleLogout = async () => {
     await logout();
