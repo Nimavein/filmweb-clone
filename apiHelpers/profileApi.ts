@@ -1,8 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { MediaType, Movies, RatedMovies, RatedTvSeries, TvSeries } from "@/types/types";
-
-const baseUrl = "https://api.themoviedb.org/3/account/";
+import {
+  MediaType,
+  Movies,
+  RatedMovies,
+  RatedTvSeries,
+  TvSeries,
+} from "@/types/types";
+import { accountTMDBUrl } from "./urlHelper";
 
 export const getFavoriteMovies = async (
   accountId: number,
@@ -11,7 +16,7 @@ export const getFavoriteMovies = async (
 ) => {
   try {
     const response = await fetch(
-      `${baseUrl}${accountId}/favorite/movies?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}&page=${page}`
+      `${accountTMDBUrl}/${accountId}/favorite/movies?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}&page=${page}`
     );
     const movies: Movies = await response.json();
     return movies;
@@ -27,7 +32,7 @@ export const getFavoriteTvSeries = async (
 ) => {
   try {
     const response = await fetch(
-      `${baseUrl}${accountId}/favorite/tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}&page=${page}`
+      `${accountTMDBUrl}/${accountId}/favorite/tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}&page=${page}`
     );
     const tvSeries: TvSeries = await response.json();
     return tvSeries;
@@ -43,7 +48,7 @@ export const getRatedMovies = async (
 ) => {
   try {
     const response = await fetch(
-      `${baseUrl}${accountId}/rated/movies?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}&page=${page}`
+      `${accountTMDBUrl}/${accountId}/rated/movies?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}&page=${page}`
     );
     const movies: RatedMovies = await response.json();
     return movies;
@@ -59,7 +64,7 @@ export const getRatedTvSeries = async (
 ) => {
   try {
     const response = await fetch(
-      `${baseUrl}${accountId}/rated/tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}&page=${page}`
+      `${accountTMDBUrl}/${accountId}/rated/tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}&page=${page}`
     );
     const tvSeries: RatedTvSeries = await response.json();
     return tvSeries;
@@ -75,7 +80,7 @@ export const getWatchListMovies = async (
 ) => {
   try {
     const response = await fetch(
-      `${baseUrl}${accountId}/watchlist/movies?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}&page=${page}`
+      `${accountTMDBUrl}/${accountId}/watchlist/movies?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}&page=${page}`
     );
     const movies: Movies = await response.json();
     return movies;
@@ -91,7 +96,7 @@ export const getWatchListTvSeries = async (
 ) => {
   try {
     const response = await fetch(
-      `${baseUrl}${accountId}/watchlist/tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}&page=${page}`
+      `${accountTMDBUrl}/${accountId}/watchlist/tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}&page=${page}`
     );
     const tvSeries: TvSeries = await response.json();
     return tvSeries;
@@ -109,7 +114,7 @@ export const updateFavoriteMedia = async (
 ) => {
   try {
     await fetch(
-      `${baseUrl}${accountId}/favorite?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`,
+      `${accountTMDBUrl}/${accountId}/favorite?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`,
       {
         method: "POST",
         headers: {
@@ -136,7 +141,7 @@ export const updateWatchlistMedia = async (
 ) => {
   try {
     await fetch(
-      `${baseUrl}${accountId}/watchlist?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`,
+      `${accountTMDBUrl}/${accountId}/watchlist?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`,
       {
         method: "POST",
         headers: {

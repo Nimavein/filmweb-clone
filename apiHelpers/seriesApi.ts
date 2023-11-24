@@ -6,12 +6,13 @@ import {
   SeriesDetails,
   WatchProviders,
 } from "@/types/types";
+import { seriesTMDBUrl } from "./urlHelper";
 
 export const getSeriesData = async (tvSeriesId: number) => {
   try {
     const [seriesDetails, watchProviders] = await Promise.all([
       fetch(
-        `${process.env.NEXT_PUBLIC_BASE_SERIES_API_URL}${tvSeriesId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=images,videos,aggregate_credits`
+        `${seriesTMDBUrl}${tvSeriesId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=images,videos,aggregate_credits`
       ).then((res) => res.json()) as Promise<SeriesDetails>,
       fetch(
         `${process.env.NEXT_PUBLIC_BASE_SERIES_API_URL}${tvSeriesId}/watch/providers?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
@@ -26,7 +27,7 @@ export const getSeriesData = async (tvSeriesId: number) => {
 export const getSeriesReviews = async (seriesId: number, page: number) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_MOVIE_API_URL}${seriesId}/reviews?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${page}`
+      `${seriesTMDBUrl}${seriesId}/reviews?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${page}`
     );
     const reviews: Reviews = await response.json();
     return reviews;
@@ -41,7 +42,7 @@ export const getSeriesSeasonData = async (
 ) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_SERIES_API_URL}${seriesId}/season/${seasonNumber}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=images,videos,credits`
+      `${seriesTMDBUrl}${seriesId}/season/${seasonNumber}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=images,videos,credits`
     );
 
     const seasonData: SeasonDetails = await response.json();
@@ -58,7 +59,7 @@ export const addSeriesRating = async (
 ) => {
   try {
     await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_SERIES_API_URL}${seriesId}/rating?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`,
+      `${seriesTMDBUrl}${seriesId}/rating?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`,
       {
         method: "POST",
         headers: {
@@ -74,10 +75,13 @@ export const addSeriesRating = async (
   }
 };
 
-export const deleteSeriesRating = async (seriesId: number, sessionId: string) => {
+export const deleteSeriesRating = async (
+  seriesId: number,
+  sessionId: string
+) => {
   try {
     await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_SERIES_API_URL}${seriesId}/rating?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`,
+      `${seriesTMDBUrl}${seriesId}/rating?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`,
       {
         method: "DELETE",
         headers: {

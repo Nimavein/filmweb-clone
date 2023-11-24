@@ -1,37 +1,66 @@
 const baseTMDBUrl = "https://api.themoviedb.org/3/";
-export const baseTMDBAccountUrl = `${baseTMDBUrl}account/`;
-export const baseTMDBNetworkUrl = `${baseTMDBUrl}network/`;
+
+const createTMDBUrl = (path: string) => `${baseTMDBUrl}${path}`;
+
+const accountTMDBUrl = createTMDBUrl("account");
+const networkTMDBUrl = createTMDBUrl("network/");
+const movieTMDBUrl = createTMDBUrl("movie/");
+const discoverTMDBUrl = createTMDBUrl("discover/");
+const personTMDBUrl = createTMDBUrl("person/");
+const seriesTMDBUrl = createTMDBUrl("tv/");
+const collectionTMDBUrl = createTMDBUrl("collection/");
+const watchProvidersTMDBUrl = createTMDBUrl("watch/providers/");
+const searchTMDBUrl = createTMDBUrl("search/");
+const moviesGenresTMDBUrl = createTMDBUrl("genre/movie/list");
+const tvGenresTMDBUrl = createTMDBUrl("genre/tv/list");
+const authenticationTMDBUrl = createTMDBUrl("authentication/");
+const newsTMDBUrl = "https://flixster.p.rapidapi.com/news/list";
 
 const profileApi = {
   getFavoriteMovies: (accountId?: number, sessionId?: string) =>
     accountId && sessionId
-      ? `${baseTMDBAccountUrl}${accountId}/favorite/movies?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`
+      ? `${accountTMDBUrl}/${accountId}/favorite/movies?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`
       : null,
   getFavoriteTvSeries: (accountId?: number, sessionId?: string) =>
     accountId && sessionId
-      ? `${baseTMDBAccountUrl}${accountId}/favorite/tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`
+      ? `${accountTMDBUrl}/${accountId}/favorite/tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`
       : null,
   getWatchListMovies: (accountId?: number, sessionId?: string) =>
     accountId && sessionId
-      ? `${baseTMDBAccountUrl}${accountId}/watchlist/movies?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`
+      ? `${accountTMDBUrl}/${accountId}/watchlist/movies?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`
       : null,
   getWatchListTvSeries: (accountId?: number, sessionId?: string) =>
     accountId && sessionId
-      ? `${baseTMDBAccountUrl}${accountId}/watchlist/tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`
+      ? `${accountTMDBUrl}/${accountId}/watchlist/tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`
       : null,
   getRatedMovies: (accountId?: number, sessionId?: string) =>
     accountId && sessionId
-      ? `${baseTMDBAccountUrl}${accountId}/rated/movies?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`
+      ? `${accountTMDBUrl}/${accountId}/rated/movies?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`
       : null,
   getRatedTvSeries: (accountId?: number, sessionId?: string) =>
     accountId && sessionId
-      ? `${baseTMDBAccountUrl}${accountId}/rated/tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`
+      ? `${accountTMDBUrl}/${accountId}/rated/tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`
       : null,
 };
 
 const networkApi = {
   getNetworkImages: (networkId: number) =>
-    `${baseTMDBNetworkUrl}${networkId}/images?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
+    `${networkTMDBUrl}${networkId}/images?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
 };
 
-export { profileApi, networkApi };
+export {
+  profileApi,
+  networkApi,
+  accountTMDBUrl,
+  movieTMDBUrl,
+  discoverTMDBUrl,
+  personTMDBUrl,
+  seriesTMDBUrl,
+  collectionTMDBUrl,
+  watchProvidersTMDBUrl,
+  searchTMDBUrl,
+  moviesGenresTMDBUrl,
+  tvGenresTMDBUrl,
+  authenticationTMDBUrl,
+  newsTMDBUrl,
+};

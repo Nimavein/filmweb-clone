@@ -4,7 +4,7 @@ import React from "react";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 import { getSearchResultType } from "@/helpers/getSearchResultType";
 import { MovieDetails, SeriesDetails, PersonDetails } from "@/types/types";
-import styles from "../../Header.module.scss";
+import styles from "../HeaderSearch.module.scss";
 
 const HeaderSearchItem = (
   result: MovieDetails | SeriesDetails | PersonDetails

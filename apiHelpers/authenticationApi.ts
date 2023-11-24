@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { AccountDataType, RequestTokenType, SessionType } from "@/types/types";
+import { accountTMDBUrl, authenticationTMDBUrl } from "./urlHelper";
 
 export const getRequestToken = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_AUTHENTICATION_API_URL}token/new?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+      `${authenticationTMDBUrl}token/new?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
     );
     const token: RequestTokenType = await response.json();
     return token;
@@ -17,7 +18,7 @@ export const getRequestToken = async () => {
 export const createNewSession = async (requestToken: string) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_AUTHENTICATION_API_URL}session/new?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
+      `${authenticationTMDBUrl}session/new?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
       {
         method: "POST",
         headers: {
@@ -36,7 +37,7 @@ export const createNewSession = async (requestToken: string) => {
 export const deleteSession = async (sessionId: string) => {
   try {
     await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_AUTHENTICATION_API_URL}session?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`,
+      `${authenticationTMDBUrl}session?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`,
       {
         method: "DELETE",
         headers: {
@@ -52,7 +53,7 @@ export const deleteSession = async (sessionId: string) => {
 export const getAccountData = async (sessionId: string) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_ACCOUNT_API_URL}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`
+      `${accountTMDBUrl}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`
     );
     const accountData: AccountDataType = await response.json();
     return accountData;

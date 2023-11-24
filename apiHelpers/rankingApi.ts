@@ -1,4 +1,5 @@
 import { ActiveMediaFiltersType, Movies } from "@/types/types";
+import { discoverTMDBUrl } from "./urlHelper";
 
 export const getMoviesRankingData = async (
   sortBy = "vote_average.desc",
@@ -6,7 +7,7 @@ export const getMoviesRankingData = async (
   page = 1
 ) => {
   const { originalLanguage, genre, productionYear } = filters || {};
-  const url = `${process.env.NEXT_PUBLIC_BASE_DISCOVER_API_URL}movie?api_key=${
+  const url = `${discoverTMDBUrl}movie?api_key=${
     process.env.NEXT_PUBLIC_API_KEY
   }&sort_by=${sortBy}&vote_count.gte=500${
     originalLanguage ? `&with_original_language=${originalLanguage}` : ""
@@ -32,7 +33,7 @@ export const getTvSeriesRankingData = async (
   page = 1
 ) => {
   const { originalLanguage, genre, productionYear } = filters || {};
-  const url = `${process.env.NEXT_PUBLIC_BASE_DISCOVER_API_URL}tv?api_key=${
+  const url = `${discoverTMDBUrl}tv?api_key=${
     process.env.NEXT_PUBLIC_API_KEY
   }&sort_by=${sortBy}&vote_count.gte=500${
     originalLanguage ? `&with_original_language=${originalLanguage}` : ""

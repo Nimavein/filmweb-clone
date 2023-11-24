@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { NetworkImagesDTO } from "@/types/types";
 import { networkApi } from "./urlHelper";
 

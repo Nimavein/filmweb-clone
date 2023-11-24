@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { GenresDTO, Movies } from "@/types/types";
+import { discoverTMDBUrl, movieTMDBUrl, moviesGenresTMDBUrl } from "./urlHelper";
 
 export const getPopularMovies = async (page: number) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_MOVIE_API_URL}popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${page}`
+      `${movieTMDBUrl}popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${page}`
     );
     const movies: Movies = await response.json();
     return movies;
@@ -17,7 +18,7 @@ export const getPopularMovies = async (page: number) => {
 export const getUpcomingMovies = async (page = 1) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_MOVIE_API_URL}upcoming?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${page}`
+      `${movieTMDBUrl}upcoming?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${page}`
     );
     const movies: Movies = await response.json();
     return movies;
@@ -29,7 +30,7 @@ export const getUpcomingMovies = async (page = 1) => {
 export const getMoviesGenres = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_MOVIE_GENRES_API_URL}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+      `${moviesGenresTMDBUrl}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
     );
     const data = await response.json();
     const genres: GenresDTO = data.genres;
@@ -46,7 +47,7 @@ export const getWatchProviderMovies = async (
 ) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API_URL}discover/movie?api_key=${
+      `${discoverTMDBUrl}movie?api_key=${
         process.env.NEXT_PUBLIC_API_KEY
       }&page=${page}${
         providerId !== null ? `&with_watch_providers=${providerId}` : ""

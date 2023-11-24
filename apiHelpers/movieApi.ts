@@ -6,15 +6,16 @@ import {
   Reviews,
   WatchProviders,
 } from "@/types/types";
+import { collectionTMDBUrl, movieTMDBUrl } from "./urlHelper";
 
 export const getMovieData = async (movieId: number) => {
   try {
     const [movieDetails, watchProviders] = await Promise.all([
       fetch(
-        `${process.env.NEXT_PUBLIC_BASE_MOVIE_API_URL}${movieId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=images,videos,credits`
+        `${movieTMDBUrl}${movieId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=images,videos,credits`
       ).then((res) => res.json()) as Promise<MovieDetails>,
       fetch(
-        `${process.env.NEXT_PUBLIC_BASE_MOVIE_API_URL}${movieId}/watch/providers?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+        `${movieTMDBUrl}${movieId}/watch/providers?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
       ).then((res) => res.json()) as Promise<WatchProviders>,
     ]);
     return { movieDetails, watchProviders };
@@ -26,7 +27,7 @@ export const getMovieData = async (movieId: number) => {
 export const getMovieReviews = async (movieId: number, page: number) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_MOVIE_API_URL}${movieId}/reviews?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${page}`
+      `${movieTMDBUrl}${movieId}/reviews?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${page}`
     );
     const reviews: Reviews = await response.json();
     return reviews;
@@ -38,7 +39,7 @@ export const getMovieReviews = async (movieId: number, page: number) => {
 export const getMovieCollection = async (collectionId: number) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_COLLECTION_API_URL}${collectionId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+      `${collectionTMDBUrl}${collectionId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
     );
 
     const collection: CollectionDetails = await response.json();
@@ -55,7 +56,7 @@ export const addMovieRating = async (
 ) => {
   try {
     await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_MOVIE_API_URL}${movieId}/rating?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`,
+      `${movieTMDBUrl}${movieId}/rating?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`,
       {
         method: "POST",
         headers: {
@@ -74,7 +75,7 @@ export const addMovieRating = async (
 export const deleteMovieRating = async (movieId: number, sessionId: string) => {
   try {
     await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_MOVIE_API_URL}${movieId}/rating?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`,
+      `${movieTMDBUrl}${movieId}/rating?api_key=${process.env.NEXT_PUBLIC_API_KEY}&session_id=${sessionId}`,
       {
         method: "DELETE",
         headers: {

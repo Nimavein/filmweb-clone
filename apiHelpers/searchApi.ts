@@ -4,6 +4,7 @@ import {
   MovieDetails,
   PersonDetails,
 } from "@/types/types";
+import { searchTMDBUrl } from "./urlHelper";
 
 export const getSearchMulti = async (query: string) => {
   if (query) {
@@ -12,7 +13,7 @@ export const getSearchMulti = async (query: string) => {
 
     while (page < 10) {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_SEARCH_API_URL}multi?api_key=${process.env.NEXT_PUBLIC_API_KEY}&query=${query}&page=${page}`
+        `${searchTMDBUrl}multi?api_key=${process.env.NEXT_PUBLIC_API_KEY}&query=${query}&page=${page}`
       );
       const data = await response.json();
       const pageResults = data.results.filter(
