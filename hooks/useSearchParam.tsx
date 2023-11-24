@@ -11,7 +11,7 @@ const useSearchParam = () => {
 
   const removeSearchParam = (paramName: string) => {
     searchParams.delete(paramName);
-    router.push(`?${searchParams}`);
+    router.push(`?${searchParams}`, { scroll: false });
   };
 
   const getSearchParam = (paramName: string) => {

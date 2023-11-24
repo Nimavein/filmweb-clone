@@ -24,7 +24,7 @@ const HeaderAuth = () => {
   const handleLogout = async () => {
     await logout();
     if (pathname.includes("/profile")) {
-      router.push("/");
+      router.push("/", { scroll: false });
     }
   };
 
