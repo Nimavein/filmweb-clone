@@ -1,14 +1,24 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React from "react";
 import { Carousel as AntdCarousel, CarouselProps } from "antd";
 import { RightOutlined, LeftOutlined } from "@ant-design/icons";
 
+const CustomRightOutlined = ({ currentSlide, slideCount, ...props }: any) => {
+  return <RightOutlined {...props} />;
+};
+
+const CustomLeftOutlined = ({ currentSlide, slideCount, ...props }: any) => {
+  return <LeftOutlined {...props} />;
+};
+
+
 const Carousel = ({
   slidesToShow = 4,
   arrows = true,
-  nextArrow = <RightOutlined />,
-  prevArrow = <LeftOutlined />,
+  nextArrow = <CustomRightOutlined />,
+  prevArrow = <CustomLeftOutlined />,
   dots = false,
   infinite = false,
   responsive = [

@@ -3,7 +3,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import React, {
   PropsWithChildren,
-  ReactNode,
   createContext,
   useContext,
   useEffect,
@@ -34,6 +33,7 @@ interface AuthenticationContextType extends AuthStateType {
   logout: () => Promise<void>;
   isLoggedIn: boolean;
   isAuthorized: boolean;
+  setAuthState: React.Dispatch<React.SetStateAction<AuthStateType>>;
 }
 
 const AuthenticationContext = createContext<AuthenticationContextType>({
@@ -45,6 +45,7 @@ const AuthenticationContext = createContext<AuthenticationContextType>({
   logout: async () => {},
   isLoggedIn: false,
   isAuthorized: false,
+  setAuthState: () => null,
 });
 
 export const useAuthentication = () => {
@@ -119,6 +120,7 @@ export const AuthenticationProvider = ({ children }: PropsWithChildren) => {
     logout,
     isLoggedIn: !!authState?.accountData?.id,
     isAuthorized: !!authState.sessionId,
+    setAuthState,
   };
 
   return (
