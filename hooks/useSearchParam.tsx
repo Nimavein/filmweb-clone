@@ -6,7 +6,7 @@ const useSearchParam = () => {
 
   const setSearchParam = (paramName: string, paramValue: string) => {
     searchParams.set(paramName, paramValue);
-    router.push(`?${searchParams}`);
+    router.push(`?${searchParams}`, { scroll: false });
   };
 
   const removeSearchParam = (paramName: string) => {
