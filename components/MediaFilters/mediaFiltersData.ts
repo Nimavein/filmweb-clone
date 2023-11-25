@@ -11,8 +11,8 @@ const mediaFiltersSortOptions: MediaSortGroupsType = [
   {
     label: "Revenue",
     options: [
-      { label: "Most revenue", value: "revenue.desc" },
-      { label: "Least revenue", value: "revenue.asc" },
+      { label: "Highest revenue", value: "revenue.desc" },
+      { label: "Lowest revenue", value: "revenue.asc" },
     ],
   },
   {
@@ -32,8 +32,8 @@ const mediaFiltersSortOptions: MediaSortGroupsType = [
   {
     label: "Vote count",
     options: [
-      { label: "The youngest", value: "vote_count.desc" },
-      { label: "The oldest", value: "vote_count.asc" },
+      { label: "Most rated", value: "vote_count.desc" },
+      { label: "Least rated", value: "vote_count.asc" },
     ],
   },
 ];
