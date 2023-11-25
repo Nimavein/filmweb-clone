@@ -1,4 +1,9 @@
 .movies {
-    max-width: 768px;
-    margin: 40px auto;
+  max-width: 768px;
+  margin: 40px auto;
+
+  &__header {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
 }

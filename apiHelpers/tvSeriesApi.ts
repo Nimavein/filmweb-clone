@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { GenresDTO, TvSeries } from "@/types/types";
-import { discoverTMDBUrl, seriesTMDBUrl, tvGenresTMDBUrl } from "./urlHelper";
+import { TvSeries } from "@/types/types";
+import { discoverTMDBUrl, seriesTMDBUrl } from "./urlHelper";
 
 export const getPopularTvSeries = async (page: number) => {
   try {
@@ -22,17 +22,6 @@ export const getUpcomingTvSeries = async (page = 1) => {
     );
     const tvSeries: TvSeries = await response.json();
     return tvSeries;
-  } catch (error: any) {
-    console.error(error);
-  }
-};
-
-export const getTvSeriesGenres = async () => {
-  try {
-    const response = await fetch(`${tvGenresTMDBUrl}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`);
-    const data = await response.json();
-    const genres: GenresDTO = data.genres;
-    return genres;
   } catch (error: any) {
     console.error(error);
   }

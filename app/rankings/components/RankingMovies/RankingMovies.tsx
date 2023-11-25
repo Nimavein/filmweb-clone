@@ -1,33 +1,19 @@
 import React from "react";
-import {
-  ActiveMediaFiltersType,
-  GenresDTO,
-  Movie,
-  Movies,
-  RankingSortOption,
-} from "@/types/types";
+import { Movie, Movies, RankingSortOption } from "@/types/types";
 import Rating from "@/components/Rating/Rating";
 import Link from "next/link";
 import Image from "next/image";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 import RankingOptions from "../RankingOptions/RankingOptions";
-import RankingFilters from "../../../../components/MediaFilters/MediaFilters";
 
 import styles from "../../Rankings.module.scss";
 
 interface RankingMoviesProps {
   sortBy: string;
   movies: Movies;
-  activeFilters: ActiveMediaFiltersType;
-  genres: GenresDTO;
 }
 
-const RankingMovies = ({
-  sortBy,
-  movies,
-  activeFilters,
-  genres,
-}: RankingMoviesProps) => {
+const RankingMovies = ({ sortBy, movies }: RankingMoviesProps) => {
   const imageHeight = 120;
   const imageWidth = imageHeight * 0.667;
 
@@ -47,11 +33,6 @@ const RankingMovies = ({
       <div className={styles["ranking__options-wrapper"]}>
         <RankingOptions options={options} sortBy={sortBy} />
       </div>
-      <RankingFilters
-        contentType="movies"
-        activeFilters={activeFilters}
-        genres={genres}
-      />
       <ul className={styles["ranking-list"]}>
         {movies?.results?.map((movie: Movie, index: number) => (
           <li key={movie.id}>

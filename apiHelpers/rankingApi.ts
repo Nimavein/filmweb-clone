@@ -38,7 +38,7 @@ export const getTvSeriesRankingData = async (
   }&sort_by=${sortBy}&vote_count.gte=500${
     originalLanguage ? `&with_original_language=${originalLanguage}` : ""
   }${genre ? `&with_genres=${genre}` : ""}${
-    productionYear ? `&primary_release_year=${productionYear}` : ""
+    productionYear ? `&first_air_date_year=${productionYear}` : ""
   }&page=${page}`;
   try {
     const response = await fetch(url);

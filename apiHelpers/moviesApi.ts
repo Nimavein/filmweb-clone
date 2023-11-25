@@ -27,19 +27,6 @@ export const getUpcomingMovies = async (page = 1) => {
   }
 };
 
-export const getMoviesGenres = async () => {
-  try {
-    const response = await fetch(
-      `${moviesGenresTMDBUrl}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-    );
-    const data = await response.json();
-    const genres: GenresDTO = data.genres;
-    return genres;
-  } catch (error: any) {
-    console.error(error);
-  }
-};
-
 export const getWatchProviderMovies = async (
   page: number,
   providerId: number | null,

@@ -8,7 +8,6 @@ import {
 import {
   getPopularMovies,
   getWatchProviderMovies,
-  getMoviesGenres,
   getUpcomingMovies,
 } from "./moviesApi";
 import { getPersonData } from "./personApi";
@@ -23,7 +22,6 @@ import {
 import {
   getPopularTvSeries,
   getWatchProviderTvSeries,
-  getTvSeriesGenres,
   getUpcomingTvSeries,
 } from "./tvSeriesApi";
 import { getTvSeriesRankingData, getMoviesRankingData } from "./rankingApi";
@@ -59,8 +57,6 @@ export {
   getWatchProviderTvSeries,
   getTvSeriesRankingData,
   getMoviesRankingData,
-  getMoviesGenres,
-  getTvSeriesGenres,
   getNews,
   getRequestToken,
   deleteSession,

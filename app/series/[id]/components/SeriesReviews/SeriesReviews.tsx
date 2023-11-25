@@ -5,10 +5,9 @@ import Link from "next/link";
 import styles from "./SeriesReviews.module.scss";
 import sectionStyles from "../../Series.module.scss";
 import Button from "@/components/Button/Button";
-import { Carousel } from "antd";
-import { RightOutlined, LeftOutlined } from "@ant-design/icons";
 import SeriesReview from "./SeriesReview/SeriesReview";
 import { Reviews, SeriesDetails } from "@/types/types";
+import Carousel from "@/components/Carousel/Carousel";
 
 interface SeriesTopPanelProps {
   seriesDetails: SeriesDetails;

@@ -48,8 +48,18 @@ const networkApi = {
     `${networkTMDBUrl}${networkId}/images?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
 };
 
+const moviesApi = {
+  getMoviesGenres: () => `${moviesGenresTMDBUrl}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
+};
+
+const tvSeriesApi = {
+  getTvSeriesGenres: () => `${tvGenresTMDBUrl}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
+};
+
 export {
   profileApi,
+  moviesApi,
+  tvSeriesApi,
   networkApi,
   accountTMDBUrl,
   movieTMDBUrl,

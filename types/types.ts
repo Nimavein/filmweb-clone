@@ -694,9 +694,9 @@ export interface RankingSortOption {
 export type FiltersContentType = "movies" | "tv-series";
 
 export interface ActiveMediaFiltersType {
-  originalLanguage: string;
-  genre: string;
-  productionYear: number | null;
+  originalLanguage: string[];
+  genre: string[];
+  productionYear: string[];
 }
 
 export type PageIdParams = {
@@ -707,7 +707,6 @@ export type PageIdParams = {
     page: string;
   };
 };
-
 
 export type PageSearchParams = {
   searchParams: {
@@ -725,7 +724,10 @@ export type PageVodParams = {
 export type PageRankingParams = {
   searchParams: {
     sortBy: string;
-  } & ActiveMediaFiltersType;
+    originalLanguage: string;
+    genre: string;
+    productionYear: string;
+  };
 };
 
 export type PagePaginationParams = {
@@ -746,7 +748,9 @@ export interface GenreType {
   name: string;
 }
 
-export type GenresDTO = GenreType[];
+export type GenresDTO = {
+  genres: GenreType[];
+};
 
 export interface RequestTokenType {
   success: boolean;
@@ -790,4 +794,18 @@ export interface NetworkImageType {
 export interface NetworkImagesDTO {
   id: number;
   logos: NetworkImageType[];
+}
+
+export interface MediaSortGroupType {
+  label: string;
+  options: { label: string; value: string }[];
+}
+
+export type MediaSortGroupsType = MediaSortGroupType[];
+
+
+export interface MediaFilterType {
+  label: string;
+  name: keyof ActiveMediaFiltersType;
+  values: { label: string; value: string | number }[];
 }

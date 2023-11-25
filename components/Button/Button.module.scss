@@ -2,6 +2,8 @@
   border: 1px solid $gray;
   padding: 12px 20px;
   cursor: pointer;
+  background-color: $white;
+  border-radius: 8px;
 
   &--uppercase {
     text-transform: uppercase;

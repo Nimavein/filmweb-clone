@@ -1,31 +1,17 @@
-import {
-  ActiveMediaFiltersType,
-  GenresDTO,
-  RankingSortOption,
-  Series,
-  TvSeries,
-} from "@/types/types";
+import { RankingSortOption, Series, TvSeries } from "@/types/types";
 import styles from "../../Rankings.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import Rating from "@/components/Rating/Rating";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 import RankingContentOptions from "../RankingOptions/RankingOptions";
-import RankingContentFilters from "../../../../components/MediaFilters/MediaFilters";
 
 interface RankingTvSeriesProps {
   sortBy: string;
   tvSeries: TvSeries;
-  activeFilters: ActiveMediaFiltersType;
-  genres: GenresDTO;
 }
 
-const RankingTvSeries = ({
-  tvSeries,
-  sortBy,
-  activeFilters,
-  genres,
-}: RankingTvSeriesProps) => {
+const RankingTvSeries = ({ tvSeries, sortBy }: RankingTvSeriesProps) => {
   const imageHeight = 120;
   const imageWidth = imageHeight * 0.667;
 
@@ -45,11 +31,6 @@ const RankingTvSeries = ({
       <div className={styles["ranking__options-wrapper"]}>
         <RankingContentOptions options={options} sortBy={sortBy} />
       </div>
-      <RankingContentFilters
-        activeFilters={activeFilters}
-        contentType="tv-series"
-        genres={genres}
-      />
       <ul className={styles["ranking-list"]}>
         {tvSeries?.results?.map((series: Series, index: number) => (
           <li key={series.id}>

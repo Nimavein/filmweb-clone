@@ -43,7 +43,7 @@ const SeriesSeasonContentTopPanel = ({
           {seasonDetails?.name}
         </span>
       </div>
-      <Divider style={{ background: "gray" }} />
+      <Divider />
       <div className={styles["series-season-content__top-panel-info"]}>
         {seasonDetails?.poster_path ? (
           <Image

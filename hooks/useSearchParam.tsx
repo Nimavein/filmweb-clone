@@ -4,8 +4,13 @@ const useSearchParam = () => {
   const router = useRouter();
   const searchParams = new URLSearchParams(useSearchParams());
 
-  const setSearchParam = (paramName: string, paramValue: string) => {
-    searchParams.set(paramName, paramValue);
+  const setSearchParam = (paramName: string, paramValue: string | string[]) => {
+    if (Array.isArray(paramValue)) {
+      searchParams.set(paramName, paramValue.join(","));
+    } else {
+      searchParams.set(paramName, paramValue);
+    }
+
     router.push(`?${searchParams}`, { scroll: false });
   };
 
