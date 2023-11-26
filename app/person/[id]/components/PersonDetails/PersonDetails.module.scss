@@ -5,7 +5,8 @@
     gap: 30px;
 
     @include respond-to($mq-medium) {
-      flex-direction: row;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
@@ -13,11 +14,6 @@
     img {
       height: 100%;
       width: 100%;
-
-      @include respond-to($mq-medium) {
-        width: auto;
-        height: auto;
-      }
     }
   }
 
