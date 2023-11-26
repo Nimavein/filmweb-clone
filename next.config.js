@@ -8,6 +8,7 @@ const nextConfig = {
     additionalData: `@import "styles/variables.scss"; @import "styles/responsive.scss";`,
   },
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -18,9 +19,3 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
-
-
-
-
-
-
