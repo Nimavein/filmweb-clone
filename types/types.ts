@@ -88,6 +88,8 @@ export interface MovieDetails {
   images: Images;
   videos: Videos;
   media_type: MediaType;
+  recommendations: Movies;
+  similar: Movies;
 }
 
 export interface CrewMember {
@@ -521,6 +523,8 @@ export interface SeriesDetails {
   images: Images;
   videos: Videos;
   media_type: MediaType;
+  recommendations: TvSeries;
+  similar: TvSeries;
 }
 
 export interface SeriesAggregateCreditsCastRoles {

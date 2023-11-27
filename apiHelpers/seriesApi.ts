@@ -12,7 +12,7 @@ export const getSeriesData = async (tvSeriesId: number) => {
   try {
     const [seriesDetails, watchProviders] = await Promise.all([
       fetch(
-        `${seriesTMDBUrl}${tvSeriesId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=images,videos,aggregate_credits`
+        `${seriesTMDBUrl}${tvSeriesId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=images,videos,aggregate_credits,recommendations,similar`
       ).then((res) => res.json()) as Promise<SeriesDetails>,
       fetch(
         `${seriesTMDBUrl}${tvSeriesId}/watch/providers?api_key=${process.env.NEXT_PUBLIC_API_KEY}`

@@ -12,7 +12,7 @@ export const getMovieData = async (movieId: number) => {
   try {
     const [movieDetails, watchProviders] = await Promise.all([
       fetch(
-        `${movieTMDBUrl}${movieId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=images,videos,credits`
+        `${movieTMDBUrl}${movieId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=images,videos,credits,similar,recommendations`
       ).then((res) => res.json()) as Promise<MovieDetails>,
       fetch(
         `${movieTMDBUrl}${movieId}/watch/providers?api_key=${process.env.NEXT_PUBLIC_API_KEY}`

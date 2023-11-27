@@ -1,5 +1,9 @@
 import { PageIdParams } from "@/types/types";
-import { getMovieCollection, getMovieData, getMovieReviews } from "@/apiHelpers";
+import {
+  getMovieCollection,
+  getMovieData,
+  getMovieReviews,
+} from "@/apiHelpers";
 import MovieCollection from "./components/MovieCollection/MovieCollection";
 import MovieDescription from "./components/MovieDescription/MovieDescription";
 import MovieInformation from "./components/MovieInformation/MovieInformation";
@@ -7,6 +11,7 @@ import MovieTopPanel from "./components/MovieTopPanel/MovieTopPanel";
 import MovieReviews from "./components/MovieReviews/MovieReviews";
 import MovieCredits from "./components/MovieCredits/MovieCredits";
 import MovieImages from "./components/MovieImages/MovieImages";
+import MovieRelated from "./components/MovieRelated/MovieRelated";
 
 import styles from "./Movie.module.scss";
 
@@ -17,6 +22,8 @@ const Movie = async ({ params: { id } }: PageIdParams) => {
   const movieDetails = movieData?.movieDetails;
   const movieCredits = movieDetails?.credits;
   const movieImages = movieDetails?.images;
+  const similarMovies = movieDetails?.similar;
+  const recommendedMovies = movieDetails?.recommendations;
   const movieReviews = await getMovieReviews(numberId, 1);
   if (movieDetails?.belongs_to_collection) {
     movieCollection = await getMovieCollection(
@@ -45,6 +52,10 @@ const Movie = async ({ params: { id } }: PageIdParams) => {
         {movieImages?.backdrops && movieImages?.backdrops?.length > 0 && (
           <MovieImages movieDetails={movieDetails} />
         )}
+        <MovieRelated
+          similarMovies={similarMovies}
+          recommendedMovies={recommendedMovies}
+        />
       </main>
     )
   );
