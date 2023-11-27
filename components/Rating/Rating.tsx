@@ -27,8 +27,9 @@ const Rating = ({
   showNumber = false,
   voteCount,
   vertical = false,
-}: RatingProps) =>
-  small ? (
+}: RatingProps) => {
+  const transformedDefaultValue = defaultValue.toString().substring(0, 4);
+  return small ? (
     <div
       className={`${styles["small-rating"]} ${
         vertical ? styles["small-rating--vertical"] : ""
@@ -37,7 +38,7 @@ const Rating = ({
     >
       <StarFilled className={styles["small-rating__icon"]} />
       <span className={styles["small-rating__value"]}>
-        {defaultValue.toFixed(2)}
+        {transformedDefaultValue}
       </span>
       <div className={styles["small-rating__votes"]}>
         <span className={styles["small-rating__votes-value"]}>{voteCount}</span>
@@ -48,7 +49,7 @@ const Rating = ({
     <div className={styles["rating"]}>
       {showNumber && (
         <span className={styles["rating__value"]}>
-          {defaultValue.toFixed(2)}
+          {transformedDefaultValue}
         </span>
       )}
       <Rate
@@ -59,5 +60,6 @@ const Rating = ({
       />
     </div>
   );
+};
 
 export default Rating;
