@@ -1,15 +1,15 @@
 import React from "react";
 import { PageRankingParams } from "@/types/types";
-import { getMoviesRankingData, getTvSeriesRankingData } from "@/apiHelpers";
 import RankingMovies from "./components/RankingMovies/RankingMovies";
 import RankingTvSeries from "./components/RankingTvSeries/RankingTvSeries";
 import Tabs from "@/components/Tabs/Tabs";
+import { getMoviesData, getTvSeriesData } from "@/apiHelpers";
 
 import styles from "./Rankings.module.scss";
 
 const Rankings = async ({ searchParams: { sortBy } }: PageRankingParams) => {
-  const movies = await getMoviesRankingData(sortBy);
-  const tvSeries = await getTvSeriesRankingData(sortBy);
+  const movies = await getMoviesData(sortBy);
+  const tvSeries = await getTvSeriesData(sortBy);
 
   const tabs = [
     {

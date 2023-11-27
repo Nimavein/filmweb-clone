@@ -175,7 +175,6 @@ export interface NavbarLinks {
   movies: NavbarLink;
   tvSeries: NavbarLink;
   people: NavbarLink;
-  vod: NavbarLink;
   rankings: NavbarLink;
 }
 
@@ -654,11 +653,6 @@ export interface GetWatchProviders {
   results: GetWatchProvidersResults;
 }
 
-export interface WatchProvidersFiltersType {
-  watchProviderId: number | null;
-  sortBy: string | null;
-}
-
 export type SearchResults = Array<
   MovieDetails | SeriesDetails | PersonDetails
 > | null;
@@ -701,6 +695,7 @@ export interface ActiveMediaFiltersType {
   originalLanguage: string[];
   genre: string[];
   productionYear: string[];
+  providers: string[];
 }
 
 export type PageIdParams = {
@@ -731,6 +726,8 @@ export type PageRankingParams = {
     originalLanguage: string;
     genre: string;
     productionYear: string;
+    watchProviders: string;
+    minVoteCount: string;
   };
 };
 

@@ -7,7 +7,7 @@ import {
 } from "./movieApi";
 import {
   getPopularMovies,
-  getWatchProviderMovies,
+  getMoviesData,
   getUpcomingMovies,
 } from "./moviesApi";
 import { getPersonData } from "./personApi";
@@ -20,11 +20,10 @@ import {
   addSeriesRating,
 } from "./seriesApi";
 import {
-  getPopularTvSeries,
   getWatchProviderTvSeries,
   getUpcomingTvSeries,
+  getTvSeriesData,
 } from "./tvSeriesApi";
-import { getTvSeriesRankingData, getMoviesRankingData } from "./rankingApi";
 import { getNews } from "./newsApi";
 import {
   getRequestToken,
@@ -43,20 +42,18 @@ import {
 import { getNetworkImages } from "./networksApi";
 
 export {
+  getMoviesData,
+  getTvSeriesData,
   getMovieData,
   getMovieCollection,
   getMovieReviews,
   getPopularMovies,
   getPopularPeople,
-  getWatchProviderMovies,
   getPersonData,
   getSeriesData,
   getSeriesReviews,
   getSeriesSeasonData,
-  getPopularTvSeries,
   getWatchProviderTvSeries,
-  getTvSeriesRankingData,
-  getMoviesRankingData,
   getNews,
   getRequestToken,
   deleteSession,

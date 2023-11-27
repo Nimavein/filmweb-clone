@@ -41,7 +41,8 @@ const mediaFiltersSortOptions: MediaSortGroupsType = [
 const generateYearValues = () =>
   Array.from({ length: 101 }, (_, i) => {
     const year = new Date().getFullYear() - i;
-    return { label: year.toString(), value: year };
+    const yearString = year.toString();
+    return { label: yearString, value: yearString };
   });
 
 const getMediaFilters = (genres: GenresDTO["genres"]): MediaFilterType[] => [
@@ -59,7 +60,11 @@ const getMediaFilters = (genres: GenresDTO["genres"]): MediaFilterType[] => [
   {
     label: "Genre",
     name: "genre",
-    values: genres?.map((genre) => ({ label: genre.name, value: genre.id })) || [],
+    values:
+      genres?.map((genre) => ({
+        label: genre.name,
+        value: genre.id.toString(),
+      })) || [],
   },
   {
     label: "Production Year",

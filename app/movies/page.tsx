@@ -1,20 +1,34 @@
 import { ActiveMediaFiltersType, PagePaginationParams } from "@/types/types";
 import MoviesList from "./components/MoviesList";
-import { getMoviesRankingData } from "@/apiHelpers";
+import { getMoviesData } from "@/apiHelpers";
 import MediaFilters from "@/components/MediaFilters/MediaFilters";
 
 import styles from "./Movies.module.scss";
 
 const Movies = async ({
-  searchParams: { page, productionYear, genre, originalLanguage, sortBy },
+  searchParams: {
+    page,
+    productionYear,
+    genre,
+    originalLanguage,
+    sortBy,
+    watchProviders,
+    minVoteCount,
+  },
 }: PagePaginationParams) => {
   const activeFilters: ActiveMediaFiltersType = {
     productionYear: productionYear?.split(","),
     genre: genre?.split(","),
     originalLanguage: originalLanguage?.split(","),
+    providers: watchProviders?.split(","),
   };
   const currentPage = parseInt(page) || 1;
-  const movies = await getMoviesRankingData(sortBy, activeFilters, currentPage);
+  const movies = await getMoviesData(
+    sortBy,
+    activeFilters,
+    minVoteCount,
+    currentPage
+  );
 
   return (
     <main className={styles["movies"]}>
@@ -25,6 +39,7 @@ const Movies = async ({
         contentType="movies"
         activeFilters={activeFilters}
         sortBy={sortBy}
+        minVoteCount={minVoteCount || "500"}
       />
       {movies && <MoviesList movies={movies} currentPage={currentPage} />}
     </main>

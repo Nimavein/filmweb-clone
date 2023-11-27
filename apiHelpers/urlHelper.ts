@@ -49,11 +49,20 @@ const networkApi = {
 };
 
 const moviesApi = {
-  getMoviesGenres: () => `${moviesGenresTMDBUrl}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
+  getMoviesGenres: () =>
+    `${moviesGenresTMDBUrl}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
 };
 
 const tvSeriesApi = {
-  getTvSeriesGenres: () => `${tvGenresTMDBUrl}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
+  getTvSeriesGenres: () =>
+    `${tvGenresTMDBUrl}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
+};
+
+const watchProvidersApi = {
+  getMoviesWatchProviders: () =>
+    `${watchProvidersTMDBUrl}movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&watch_region=PL`,
+  getTvSeriesWatchProviders: () =>
+    `${watchProvidersTMDBUrl}tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&watch_region=PL`,
 };
 
 export {
@@ -61,6 +70,7 @@ export {
   moviesApi,
   tvSeriesApi,
   networkApi,
+  watchProvidersApi,
   accountTMDBUrl,
   movieTMDBUrl,
   discoverTMDBUrl,

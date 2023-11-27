@@ -6,10 +6,10 @@ export const getWatchProviders = async () => {
   try {
     const [moviesProviders, tvProviders] = await Promise.all([
       fetch(
-        `${watchProvidersTMDBUrl}movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+        `${watchProvidersTMDBUrl}movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&watch_region=PL`
       ).then((res) => res.json()) as Promise<GetWatchProviders>,
       fetch(
-        `${watchProvidersTMDBUrl}tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+        `${watchProvidersTMDBUrl}tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&watch_region=PL`
       ).then((res) => res.json()) as Promise<GetWatchProviders>,
     ]);
     return { moviesProviders, tvProviders };

@@ -2,9 +2,9 @@ import React from "react";
 import { Select } from "antd";
 import useSearchParam from "@/hooks/useSearchParam";
 import { ActiveMediaFiltersType, MediaFilterType } from "@/types/types";
+import Divider from "@/components/Divider/Divider";
 
 import styles from "../MediaFilters.module.scss";
-import Divider from "@/components/Divider/Divider";
 
 interface MediaFilterProps {
   filter: MediaFilterType;
@@ -12,9 +12,12 @@ interface MediaFilterProps {
 }
 
 const MediaFilter = ({ filter, activeFilters }: MediaFilterProps) => {
-  const { setSearchParam, getSearchParam, removeSearchParam } = useSearchParam();
+  const { setSearchParam, getSearchParam, removeSearchParam } =
+    useSearchParam();
   const onChange = (value: string[]) => {
-    value.length === 0 ? removeSearchParam(filter?.name) : setSearchParam(filter?.name, value);
+    value.length === 0
+      ? removeSearchParam(filter?.name)
+      : setSearchParam(filter?.name, value);
     if (getSearchParam("page")) setSearchParam("page", "1");
   };
 
@@ -34,7 +37,7 @@ const MediaFilter = ({ filter, activeFilters }: MediaFilterProps) => {
           }
           style={{ width: "100%" }}
           options={filter?.values}
-          defaultValue={activeFilters[filter?.name]}
+          value={activeFilters[filter?.name]}
         />
       </div>
     </>
