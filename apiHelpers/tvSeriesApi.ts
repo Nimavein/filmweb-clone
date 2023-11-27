@@ -10,27 +10,29 @@ export const getTvSeriesData = async (
   page = 1
 ) => {
   const { originalLanguage, genre, productionYear, providers } = filters || {};
-  const url = `${discoverTMDBUrl}tv?api_key=${
-    process.env.NEXT_PUBLIC_API_KEY
-  }&sort_by=${sortBy}&vote_count.gte=${minVoteCount}${
-    originalLanguage ? `&with_original_language=${originalLanguage}` : ""
-  }${genre ? `&with_genres=${genre}` : ""}${
-    productionYear ? `&first_air_date_year=${productionYear}` : ""
-  }${
-    providers !== null
-      ? `&with_watch_providers=${providers}&watch_region=PL&`
-      : ""
-  }&page=${page}`;
+  const params = new URLSearchParams({
+    api_key: process.env.NEXT_PUBLIC_API_KEY || "",
+    sort_by: sortBy,
+    "vote_count.gte": minVoteCount,
+    with_original_language: originalLanguage?.join("|") || "",
+    with_genres: genre?.join("|") || "",
+    first_air_date_year: productionYear?.join("|") || "",
+    with_watch_providers: providers?.join("|") || "",
+    watch_region: providers !== null ? "PL" : "",
+    page: page.toString(),
+  } as Record<string, string>);
+
+  const url = `${discoverTMDBUrl}tv?${params.toString()}`;
+
   try {
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    const tvSeries = await response.json();
-    return tvSeries;
+    return await response.json();
   } catch (error) {
     console.error(error);
-    throw new Error("Failed to fetch tv series ranking data");
+    throw new Error("Failed to fetch movies ranking data");
   }
 };
 

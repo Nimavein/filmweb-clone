@@ -10,29 +10,32 @@ export const getMoviesData = async (
   page = 1
 ) => {
   const { originalLanguage, genre, productionYear, providers } = filters || {};
-  const url = `${discoverTMDBUrl}movie?api_key=${
-    process.env.NEXT_PUBLIC_API_KEY
-  }&sort_by=${sortBy}&vote_count.gte=${minVoteCount}${
-    originalLanguage ? `&with_original_language=${originalLanguage}` : ""
-  }${genre ? `&with_genres=${genre}` : ""}${
-    productionYear ? `&primary_release_year=${productionYear}` : ""
-  }${
-    providers !== null
-      ? `&with_watch_providers=${providers}&watch_region=PL&`
-      : ""
-  }&page=${page}`;
+  const params = new URLSearchParams({
+    api_key: process.env.NEXT_PUBLIC_API_KEY || "",
+    sort_by: sortBy,
+    "vote_count.gte": minVoteCount,
+    with_original_language: originalLanguage?.join("|") || "",
+    with_genres: genre?.join("|") || "",
+    primary_release_year: productionYear?.join("|") || "",
+    with_watch_providers: providers?.join("|") || "",
+    watch_region: providers !== null ? "PL" : "",
+    page: page.toString(),
+  } as Record<string, string>);
+
+  const url = `${discoverTMDBUrl}movie?${params.toString()}`;
+
   try {
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    const movies: Movies = await response.json();
-    return movies;
+    return await response.json();
   } catch (error) {
     console.error(error);
     throw new Error("Failed to fetch movies ranking data");
   }
 };
+
 
 export const getPopularMovies = async (page: number) => {
   try {
