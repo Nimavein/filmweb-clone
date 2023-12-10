@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { ActiveMediaFiltersType, TvSeries } from "@/types/types";
-import { discoverTMDBUrl, seriesTMDBUrl } from "./urlHelper";
+import { discoverTMDBUrl, seriesTMDBUrl, tvSeriesApi } from "./urlHelper";
 
 export const getTvSeriesData = async (
   sortBy = "vote_average.desc",
@@ -9,20 +9,7 @@ export const getTvSeriesData = async (
   minVoteCount = "500",
   page = 1
 ) => {
-  const { originalLanguage, genre, productionYear, providers } = filters || {};
-  const params = new URLSearchParams({
-    api_key: process.env.NEXT_PUBLIC_API_KEY || "",
-    sort_by: sortBy,
-    "vote_count.gte": minVoteCount,
-    with_original_language: originalLanguage?.join("|") || "",
-    with_genres: genre?.join("|") || "",
-    first_air_date_year: productionYear?.join("|") || "",
-    with_watch_providers: providers?.join("|") || "",
-    watch_region: providers !== null ? "PL" : "",
-    page: page.toString(),
-  } as Record<string, string>);
-
-  const url = `${discoverTMDBUrl}tv?${params.toString()}`;
+  const url = tvSeriesApi.getTvSeriesData(sortBy, filters, minVoteCount, page);
 
   try {
     const response = await fetch(url);

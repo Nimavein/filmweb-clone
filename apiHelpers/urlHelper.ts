@@ -1,3 +1,5 @@
+import { ActiveMediaFiltersType } from "@/types/types";
+
 const baseTMDBUrl = "https://api.themoviedb.org/3/";
 
 const createTMDBUrl = (path: string) => `${baseTMDBUrl}${path}`;
@@ -51,11 +53,55 @@ const networkApi = {
 const moviesApi = {
   getMoviesGenres: () =>
     `${moviesGenresTMDBUrl}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
+  getMoviesData: (
+    sortBy = "vote_average.desc",
+    filters?: ActiveMediaFiltersType,
+    minVoteCount = "500",
+    page = 1
+  ) => {
+    const { originalLanguage, genre, productionYear, providers } =
+      filters || {};
+    const params = new URLSearchParams({
+      api_key: process.env.NEXT_PUBLIC_API_KEY || "",
+      sort_by: sortBy,
+      "vote_count.gte": minVoteCount,
+      with_original_language: originalLanguage?.join("|") || "",
+      with_genres: genre?.join("|") || "",
+      primary_release_year: productionYear?.join("|") || "",
+      with_watch_providers: providers?.join("|") || "",
+      watch_region: providers !== null ? "PL" : "",
+      page: page.toString(),
+    } as Record<string, string>);
+
+    return `${discoverTMDBUrl}movie?${params.toString()}`;
+  },
 };
 
 const tvSeriesApi = {
   getTvSeriesGenres: () =>
     `${tvGenresTMDBUrl}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
+  getTvSeriesData: (
+    sortBy = "vote_average.desc",
+    filters?: ActiveMediaFiltersType,
+    minVoteCount = "500",
+    page = 1
+  ) => {
+    const { originalLanguage, genre, productionYear, providers } =
+      filters || {};
+    const params = new URLSearchParams({
+      api_key: process.env.NEXT_PUBLIC_API_KEY || "",
+      sort_by: sortBy,
+      "vote_count.gte": minVoteCount,
+      with_original_language: originalLanguage?.join("|") || "",
+      with_genres: genre?.join("|") || "",
+      first_air_date_year: productionYear?.join("|") || "",
+      with_watch_providers: providers?.join("|") || "",
+      watch_region: providers !== null ? "PL" : "",
+      page: page.toString(),
+    } as Record<string, string>);
+
+    return `${discoverTMDBUrl}tv?${params.toString()}`;
+  },
 };
 
 const watchProvidersApi = {

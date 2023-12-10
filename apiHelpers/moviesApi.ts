@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { ActiveMediaFiltersType, Movies } from "@/types/types";
-import { discoverTMDBUrl, movieTMDBUrl } from "./urlHelper";
+import { movieTMDBUrl, moviesApi } from "./urlHelper";
 
 export const getMoviesData = async (
   sortBy = "vote_average.desc",
@@ -9,20 +9,7 @@ export const getMoviesData = async (
   minVoteCount = "500",
   page = 1
 ) => {
-  const { originalLanguage, genre, productionYear, providers } = filters || {};
-  const params = new URLSearchParams({
-    api_key: process.env.NEXT_PUBLIC_API_KEY || "",
-    sort_by: sortBy,
-    "vote_count.gte": minVoteCount,
-    with_original_language: originalLanguage?.join("|") || "",
-    with_genres: genre?.join("|") || "",
-    primary_release_year: productionYear?.join("|") || "",
-    with_watch_providers: providers?.join("|") || "",
-    watch_region: providers !== null ? "PL" : "",
-    page: page.toString(),
-  } as Record<string, string>);
-
-  const url = `${discoverTMDBUrl}movie?${params.toString()}`;
+  const url = moviesApi.getMoviesData(sortBy, filters, minVoteCount, page);
 
   try {
     const response = await fetch(url);
@@ -35,7 +22,6 @@ export const getMoviesData = async (
     throw new Error("Failed to fetch movies ranking data");
   }
 };
-
 
 export const getPopularMovies = async (page: number) => {
   try {

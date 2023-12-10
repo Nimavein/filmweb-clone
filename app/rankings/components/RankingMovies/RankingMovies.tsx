@@ -1,40 +1,34 @@
+"use client";
+
 import React from "react";
-import { Movie, Movies, RankingSortOption } from "@/types/types";
+import { Movie } from "@/types/types";
 import Rating from "@/components/Rating/Rating";
 import Link from "next/link";
 import Image from "next/image";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
-import RankingOptions from "../RankingOptions/RankingOptions";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 import styles from "../../Rankings.module.scss";
 
 interface RankingMoviesProps {
-  sortBy: string;
-  movies: Movies;
+  movies: Movie[];
+  fetchMoviesData: () => Promise<void>;
 }
 
-const RankingMovies = ({ sortBy, movies }: RankingMoviesProps) => {
+const RankingMovies = ({ movies, fetchMoviesData }: RankingMoviesProps) => {
   const imageHeight = 120;
   const imageWidth = imageHeight * 0.667;
 
-  const options: RankingSortOption[] = [
-    {
-      label: "Top 100",
-      value: "vote_average.desc",
-    },
-    {
-      label: "Popular",
-      value: "popularity.desc",
-    },
-  ];
-
   return (
-    <>
-      <div className={styles["ranking__options-wrapper"]}>
-        <RankingOptions options={options} sortBy={sortBy} />
-      </div>
+    <InfiniteScroll
+      dataLength={movies.length}
+      next={fetchMoviesData}
+      hasMore={true}
+      loader={<h4>Loading...</h4>}
+      endMessage={<p>No more movies</p>}
+    >
       <ul className={styles["ranking-list"]}>
-        {movies?.results?.map((movie: Movie, index: number) => (
+        {movies.map((movie: Movie, index: number) => (
           <li key={movie.id}>
             <Link href={`/movie/${movie.id}`}>
               <div className={styles["ranking-list__item"]}>
@@ -74,7 +68,7 @@ const RankingMovies = ({ sortBy, movies }: RankingMoviesProps) => {
           </li>
         ))}
       </ul>
-    </>
+    </InfiniteScroll>
   );
 };
 

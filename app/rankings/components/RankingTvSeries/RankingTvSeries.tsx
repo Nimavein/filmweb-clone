@@ -1,38 +1,36 @@
-import { RankingSortOption, Series, TvSeries } from "@/types/types";
-import styles from "../../Rankings.module.scss";
+"use client";
+
+import { Series } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
 import Rating from "@/components/Rating/Rating";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
-import RankingContentOptions from "../RankingOptions/RankingOptions";
+import InfiniteScroll from "react-infinite-scroll-component";
+
+import styles from "../../Rankings.module.scss";
 
 interface RankingTvSeriesProps {
-  sortBy: string;
-  tvSeries: TvSeries;
+  tvSeries: Series[];
+  fetchTvSeriesData: () => Promise<void>;
 }
 
-const RankingTvSeries = ({ tvSeries, sortBy }: RankingTvSeriesProps) => {
+const RankingTvSeries = ({
+  tvSeries,
+  fetchTvSeriesData,
+}: RankingTvSeriesProps) => {
   const imageHeight = 120;
   const imageWidth = imageHeight * 0.667;
 
-  const options: RankingSortOption[] = [
-    {
-      label: "Top 100",
-      value: "vote_average.desc",
-    },
-    {
-      label: "Popular",
-      value: "popularity.desc",
-    },
-  ];
-
   return (
-    <>
-      <div className={styles["ranking__options-wrapper"]}>
-        <RankingContentOptions options={options} sortBy={sortBy} />
-      </div>
+    <InfiniteScroll
+      dataLength={tvSeries.length}
+      next={fetchTvSeriesData}
+      hasMore={true}
+      loader={<h4>Loading...</h4>}
+      endMessage={<p>No more movies</p>}
+    >
       <ul className={styles["ranking-list"]}>
-        {tvSeries?.results?.map((series: Series, index: number) => (
+        {tvSeries?.map((series: Series, index: number) => (
           <li key={series.id}>
             <Link href={`/series/${series.id}`}>
               <div className={styles["ranking-list__item"]}>
@@ -76,7 +74,7 @@ const RankingTvSeries = ({ tvSeries, sortBy }: RankingTvSeriesProps) => {
           </li>
         ))}
       </ul>
-    </>
+    </InfiniteScroll>
   );
 };
 
