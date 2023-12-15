@@ -14,12 +14,9 @@ import {
   getAccountData,
   deleteSession,
 } from "@/apiHelpers";
-import {
-  setStorageItem,
-  removeStorageItem,
-  getStorageItem,
-} from "@/helpers/localStorageHelpers";
 import { AccountDataType } from "@/types/types";
+import { getCookie, setCookie } from "cookies-next";
+import { deleteAuthenticationCookies } from "@/helpers/cookiesHelpers";
 
 interface AuthStateType {
   requestToken: string | null;
@@ -54,7 +51,7 @@ export const AuthenticationProvider = ({ children }: PropsWithChildren) => {
   const [authState, setAuthState] = useState<AuthStateType>({
     requestToken: null,
     accountData: null,
-    sessionId: getStorageItem("sessionId"),
+    sessionId: getCookie("sessionId") ?? "",
   });
 
   useEffect(() => {
@@ -90,11 +87,12 @@ export const AuthenticationProvider = ({ children }: PropsWithChildren) => {
 
     const session = await createNewSession(requestToken);
     const sessionId = session?.session_id || "";
-    setStorageItem("sessionId", sessionId);
+    setCookie("sessionId", sessionId);
     updateAuthState({ sessionId });
 
     if (session) {
       const accountData = await getAccountData(sessionId);
+      setCookie("accountId", accountData?.id);
       updateAuthState({ accountData });
     }
   };
@@ -104,9 +102,7 @@ export const AuthenticationProvider = ({ children }: PropsWithChildren) => {
     if (!sessionId) return;
 
     await deleteSession(sessionId);
-    removeStorageItem("accountId");
-    removeStorageItem("requestToken");
-    removeStorageItem("sessionId");
+    deleteAuthenticationCookies();
     setAuthState({ requestToken: "", sessionId: "", accountData: null });
   };
 

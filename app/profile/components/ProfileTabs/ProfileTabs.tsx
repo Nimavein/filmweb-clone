@@ -3,24 +3,32 @@
 import React from "react";
 import Tabs, { TabsProps } from "@/components/Tabs/Tabs";
 import ProfileTab from "./ProfileTab/ProfileTab";
-import { useProfileData } from "@/context/ProfileData.context";
+import { Movies, TvSeries, RatedMovies, RatedTvSeries } from "@/types/types";
 
-const ProfileTabs = () => {
-  const {
-    favoriteMovies,
-    favoriteMoviesAmount,
-    favoriteTvSeries,
-    favoriteTvSeriesAmount,
-    ratedMoviesAmount,
-    ratedTvSeriesAmount,
-    watchListMoviesAmount,
-    watchListTvSeriesAmount,
-    watchListMovies,
-    watchListTvSeries,
-    ratedMovies,
-    ratedTvSeries,
-  } = useProfileData();
-  
+interface ProfileTabsProps {
+  favoriteMovies: Movies | undefined;
+  favoriteTvSeries: TvSeries | undefined;
+  watchListMovies: Movies | undefined;
+  watchListTvSeries: TvSeries | undefined;
+  ratedMovies: RatedMovies | undefined;
+  ratedTvSeries: RatedTvSeries | undefined;
+}
+
+const ProfileTabs = ({
+  favoriteMovies,
+  favoriteTvSeries,
+  watchListMovies,
+  watchListTvSeries,
+  ratedMovies,
+  ratedTvSeries,
+}: ProfileTabsProps) => {
+  const favoriteMoviesAmount = favoriteMovies?.total_results || 0;
+  const favoriteTvSeriesAmount = favoriteTvSeries?.total_results || 0;
+  const watchListMoviesAmount = watchListMovies?.total_results || 0;
+  const watchListTvSeriesAmount = watchListTvSeries?.total_results || 0;
+  const ratedMoviesAmount = ratedMovies?.total_results || 0;
+  const ratedTvSeriesAmount = ratedTvSeries?.total_results || 0;
+
   const tabs: TabsProps["items"] = [
     {
       key: "favorite",

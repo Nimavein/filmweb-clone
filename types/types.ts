@@ -804,9 +804,15 @@ export interface MediaSortGroupType {
 
 export type MediaSortGroupsType = MediaSortGroupType[];
 
-
 export interface MediaFilterType {
   label: string;
   name: keyof ActiveMediaFiltersType;
   values: { label: string; value: string | number }[];
+}
+
+export interface MediaAccountStates {
+  id: number;
+  favorite: boolean;
+  rated: { value: number } | boolean;
+  watchlist: boolean;
 }
