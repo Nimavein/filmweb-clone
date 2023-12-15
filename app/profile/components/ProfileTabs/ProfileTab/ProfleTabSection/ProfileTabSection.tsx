@@ -37,7 +37,7 @@ const ProfileTabSection = ({
 
   useEffect(() => {
     setMedias(initialMedias);
-    setCurrentPage(1)
+    setCurrentPage(1);
   }, [contentType]);
 
   const getMediasFunction = () => {
@@ -73,10 +73,12 @@ const ProfileTabSection = ({
           );
 
           if (newMedias) {
-            setMedias((prevMedias) => [
-              ...(prevMedias || []),
-              ...(newMedias?.results || []),
-            ]);
+            setMedias(
+              (prevMedias) =>
+                [...(prevMedias || []), ...(newMedias?.results || [])] as
+                  | Series[]
+                  | Movie[]
+            );
             setCurrentPage(currentPage + 1);
           }
         } catch (error) {
