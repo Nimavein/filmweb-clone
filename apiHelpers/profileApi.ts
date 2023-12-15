@@ -10,6 +10,13 @@ import {
 } from "@/types/types";
 import { accountTMDBUrl, profileApi } from "./urlHelper";
 
+export const favoriteMoviesTag = "favoriteMovies";
+export const favoriteTvSeriesTag = "favoriteTvSeries";
+export const ratedMoviesTag = "ratedMovies";
+export const ratedTvSeriesTag = "ratedTvSeries";
+export const watchlistMoviesTag = "watchlistMovies";
+export const watchlistTvSeriesTag = "watchlistTvSeries";
+
 export const getFavoriteMovies = async (
   accountId: number,
   sessionId: string,
@@ -17,7 +24,10 @@ export const getFavoriteMovies = async (
 ) => {
   try {
     const response = await fetch(
-      profileApi.getFavoriteMovies(accountId, sessionId, page)
+      profileApi.getFavoriteMovies(accountId, sessionId, page),
+      {
+        next: { tags: [favoriteMoviesTag] },
+      }
     );
     const movies: Movies = await response.json();
     return movies;
@@ -33,7 +43,10 @@ export const getFavoriteTvSeries = async (
 ) => {
   try {
     const response = await fetch(
-      profileApi.getFavoriteTvSeries(accountId, sessionId, page)
+      profileApi.getFavoriteTvSeries(accountId, sessionId, page),
+      {
+        next: { tags: [favoriteTvSeriesTag] },
+      }
     );
     const tvSeries: TvSeries = await response.json();
     return tvSeries;
@@ -49,7 +62,10 @@ export const getRatedMovies = async (
 ) => {
   try {
     const response = await fetch(
-      profileApi.getRatedMovies(accountId, sessionId, page)
+      profileApi.getRatedMovies(accountId, sessionId, page),
+      {
+        next: { tags: [ratedMoviesTag] },
+      }
     );
     const movies: RatedMovies = await response.json();
     return movies;
@@ -65,7 +81,10 @@ export const getRatedTvSeries = async (
 ) => {
   try {
     const response = await fetch(
-      profileApi.getRatedTvSeries(accountId, sessionId, page)
+      profileApi.getRatedTvSeries(accountId, sessionId, page),
+      {
+        next: { tags: [ratedTvSeriesTag] },
+      }
     );
     const tvSeries: RatedTvSeries = await response.json();
     return tvSeries;
@@ -81,7 +100,10 @@ export const getWatchListMovies = async (
 ) => {
   try {
     const response = await fetch(
-      profileApi.getWatchListMovies(accountId, sessionId, page)
+      profileApi.getWatchListMovies(accountId, sessionId, page),
+      {
+        next: { tags: [watchlistMoviesTag] },
+      }
     );
     const movies: Movies = await response.json();
     return movies;
@@ -97,7 +119,10 @@ export const getWatchListTvSeries = async (
 ) => {
   try {
     const response = await fetch(
-      profileApi.getWatchListTvSeries(accountId, sessionId, page)
+      profileApi.getWatchListTvSeries(accountId, sessionId, page),
+      {
+        next: { tags: [watchlistTvSeriesTag] },
+      }
     );
     const tvSeries: TvSeries = await response.json();
     return tvSeries;

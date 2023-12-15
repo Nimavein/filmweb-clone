@@ -9,9 +9,14 @@ import {
   updateWatchlistMedia,
 } from "@/apiHelpers/profileApi";
 import { profileApi } from "@/apiHelpers/urlHelper";
+import {
+  revalidateFavoriteMedia,
+  revalidateRatedMedia,
+  revalidateWatchlistMedia,
+} from "@/app/actions";
 import { useAuthentication } from "@/context/Authentication.context";
 import { MediaAccountStates, MediaType } from "@/types/types";
-import useSWR, { mutate } from "swr";
+import useSWR from "swr";
 
 const useMediaAccountStates = (mediaType: MediaType, mediaId: number) => {
   const { accountData, sessionId } = useAuthentication();
@@ -32,14 +37,9 @@ const useMediaAccountStates = (mediaType: MediaType, mediaId: number) => {
       const updateFunction =
         mediaType === "movie" ? addMovieRating : addSeriesRating;
       await updateFunction(mediaId, sessionId, rating);
-      // weird bug, looks like mutation is invoked before changes
       await new Promise((resolve) => setTimeout(resolve, 1000));
       await mutateMediaAccountStates();
-      mutate(
-        mediaType === "movie"
-          ? profileApi.getRatedMovies
-          : profileApi.getRatedTvSeries
-      );
+      await revalidateRatedMedia(mediaType);
     }
   };
 
@@ -53,11 +53,7 @@ const useMediaAccountStates = (mediaType: MediaType, mediaId: number) => {
         favorite
       );
       await mutateMediaAccountStates();
-      mutate(
-        mediaType === "movie"
-          ? profileApi.getFavoriteMovies
-          : profileApi.getFavoriteTvSeries
-      );
+      await revalidateFavoriteMedia(mediaType);
     }
   };
 
@@ -71,11 +67,7 @@ const useMediaAccountStates = (mediaType: MediaType, mediaId: number) => {
         watchlist
       );
       await mutateMediaAccountStates();
-      mutate(
-        mediaType === "movie"
-          ? profileApi.getWatchListMovies
-          : profileApi.getWatchListTvSeries
-      );
+      await revalidateWatchlistMedia(mediaType);
     }
   };
 
@@ -84,14 +76,9 @@ const useMediaAccountStates = (mediaType: MediaType, mediaId: number) => {
       const deleteFunction =
         mediaType === "movie" ? deleteMovieRating : deleteSeriesRating;
       await deleteFunction(mediaId, sessionId);
-      // weird bug, looks like mutation is invoked before changes
       await new Promise((resolve) => setTimeout(resolve, 1000));
       await mutateMediaAccountStates();
-      mutate(
-        mediaType === "movie"
-          ? profileApi.getRatedMovies
-          : profileApi.getRatedTvSeries
-      );
+      await revalidateRatedMedia(mediaType);
     }
   };
 
