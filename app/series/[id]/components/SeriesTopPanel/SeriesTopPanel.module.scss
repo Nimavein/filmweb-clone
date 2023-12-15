@@ -11,7 +11,7 @@
     font-size: 22px;
 
     @include respond-to($mq-medium) {
-      height: 26px;
+      font-size: 26px;
     }
   }
 
