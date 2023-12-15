@@ -103,7 +103,7 @@ const ProfileTabSection = ({
             key={media.id}
           >
             <ProfileTabItem
-              linkUrl={`${getSearchResultType("movie")}${media?.id}`}
+              linkUrl={`${getSearchResultType(mediaType)}${media?.id}`}
               imagePath={media.poster_path}
               title={
                 ("title" in media
