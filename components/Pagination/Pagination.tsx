@@ -8,21 +8,25 @@ import useSearchParam from "@/hooks/useSearchParam";
 interface PaginationProps {
   totalItemsAmount: number | undefined;
   currentPage: number;
-  pageSize: number;
+  pageSize?: number;
   hideOnSinglePage?: boolean;
+  searchParam?: string;
+  scrollToTop?: boolean;
 }
 
 const Pagination = ({
   totalItemsAmount,
   currentPage,
-  pageSize,
+  pageSize = 20,
   hideOnSinglePage = true,
+  searchParam = "page",
+  scrollToTop = true
 }: PaginationProps) => {
   const { setSearchParam } = useSearchParam();
 
   const onChange: AntdPaginationProps["onChange"] = (page: number) => {
-    setSearchParam("page", page.toString());
-    window.scrollTo({ top: 0 });
+    setSearchParam(searchParam, page.toString());
+    if (scrollToTop) window.scrollTo({ top: 0 });
   };
 
   return (

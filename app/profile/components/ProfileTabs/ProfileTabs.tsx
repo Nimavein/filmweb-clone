@@ -31,7 +31,7 @@ const ProfileTabs = ({
 
   const tabs: TabsProps["items"] = [
     {
-      key: "favorite",
+      key: "favorites",
       label: `Favorites (${favoriteMoviesAmount + favoriteTvSeriesAmount})`,
       children: (
         <ProfileTab movies={favoriteMovies} tvSeries={favoriteTvSeries} />
@@ -39,13 +39,13 @@ const ProfileTabs = ({
       disabled: favoriteMoviesAmount === 0 && favoriteTvSeriesAmount === 0,
     },
     {
-      key: "rating",
+      key: "ratings",
       label: `Ratings (${ratedMoviesAmount + ratedTvSeriesAmount})`,
       children: <ProfileTab movies={ratedMovies} tvSeries={ratedTvSeries} />,
       disabled: ratedMoviesAmount === 0 && ratedTvSeriesAmount === 0,
     },
     {
-      key: "watch-list",
+      key: "watchList",
       label: `Watch list (${watchListTvSeriesAmount + watchListMoviesAmount})`,
       children: (
         <ProfileTab movies={watchListMovies} tvSeries={watchListTvSeries} />
@@ -55,7 +55,7 @@ const ProfileTabs = ({
   ];
   return (
     <section>
-      <Tabs items={tabs} defaultActiveKey="favorite" paramKey="content" />
+      <Tabs items={tabs} defaultActiveKey="favorites" paramKey="content" />
     </section>
   );
 };

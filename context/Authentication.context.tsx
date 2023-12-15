@@ -30,12 +30,14 @@ interface AuthenticationContextType extends AuthStateType {
   logout: () => Promise<void>;
   isLoggedIn: boolean;
   isAuthorized: boolean;
+  accountId: number | undefined;
 }
 
 const AuthenticationContext = createContext<AuthenticationContextType>({
   requestToken: null,
   accountData: null,
   sessionId: null,
+  accountId: undefined,
   connectWithTDB: async () => {},
   login: async () => {},
   logout: async () => {},
@@ -111,6 +113,7 @@ export const AuthenticationProvider = ({ children }: PropsWithChildren) => {
     connectWithTDB,
     login,
     logout,
+    accountId: authState?.accountData?.id,
     isLoggedIn: !!authState?.accountData?.id,
     isAuthorized: !!authState.sessionId,
   };

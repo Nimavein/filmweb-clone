@@ -40,8 +40,8 @@ export interface RatedMovie extends Movie {
 export interface Movies {
   page?: number;
   results?: Movie[];
-  total_results?: number;
-  total_pages?: number;
+  total_results: number;
+  total_pages: number;
 }
 
 export interface RatedMovies extends Movies {
@@ -435,8 +435,8 @@ export interface RatedSeries extends Series {
 export interface TvSeries {
   page?: number;
   results?: Series[];
-  total_results?: number;
-  total_pages?: number;
+  total_results: number;
+  total_pages: number;
 }
 export interface RatedTvSeries extends TvSeries {
   results?: RatedSeries[];
@@ -816,3 +816,5 @@ export interface MediaAccountStates {
   rated: { value: number } | boolean;
   watchlist: boolean;
 }
+
+export type ProfileContentType = "favorites" | "ratings" | "watchList";
