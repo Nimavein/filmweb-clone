@@ -1,7 +1,6 @@
 import React from "react";
 import { Movies, TvSeries } from "@/types/types";
-import ProfileTabMoviesSection from "./ProfleTabMoviesSection/ProfileTabMoviesSection";
-import ProfileTabTvSeriesSection from "./ProfileTabTvSeriesSection/ProfileTabTvSeriesSection";
+import ProfileTabSection from "./ProfleTabSection/ProfileTabSection";
 
 import styles from "../../../Profile.module.scss";
 
@@ -16,15 +15,17 @@ const ProfileTab = ({ tvSeries, movies }: ProfileTabProps) => {
   return (
     <div className={styles[baseCSSClassName]}>
       {movies?.results && (
-        <ProfileTabMoviesSection
-          initialMovies={movies?.results}
+        <ProfileTabSection
+          initialMedias={movies?.results}
           totalPages={movies?.total_pages}
+          mediaType="movie"
         />
       )}
       {tvSeries?.results && (
-        <ProfileTabTvSeriesSection
-          initialTvSeries={tvSeries?.results}
+        <ProfileTabSection
+          initialMedias={tvSeries?.results}
           totalPages={tvSeries?.total_pages}
+          mediaType="tv"
         />
       )}
     </div>
