@@ -33,7 +33,8 @@ const ProfileTabSection = ({
   const [medias, setMedias] = useState(initialMedias);
   const { getSearchParam } = useSearchParam();
   const { sessionId, accountId } = useAuthentication();
-  const contentType = getSearchParam("content") as ProfileContentType;
+  const contentType =
+    (getSearchParam("content") as ProfileContentType) || "favorites";
 
   useEffect(() => {
     setMedias(initialMedias);
@@ -61,6 +62,8 @@ const ProfileTabSection = ({
   };
 
   const handleLoadMoreMovies = async () => {
+    console.log(contentType);
+
     if (sessionId && accountId && contentType) {
       const getMovies = getMediasFunction();
 
