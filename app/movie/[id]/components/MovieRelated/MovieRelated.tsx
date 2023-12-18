@@ -19,14 +19,14 @@ const MovieRelated = ({
         {similarMovies && (
           <MediaCarousel
             medias={similarMovies}
-            type="movies"
+            mediaType="movie"
             title="SIMILAR MOVIES"
           />
         )}
         {recommendedMovies && (
           <MediaCarousel
             medias={recommendedMovies}
-            type="movies"
+            mediaType="movie"
             title="RECOMMENDED MOVIES"
           />
         )}
