@@ -32,6 +32,13 @@ export interface Movie {
   video: boolean | string;
   vote_average: number;
   vote_count: number;
+  adult: boolean;
+  genre_ids: Array<number>;
+  backdrop_path: string | null;
+}
+
+export interface KnownForMovie extends Movie {
+  media_type?: "movie";
 }
 
 export interface RatedMovie extends Movie {
@@ -92,7 +99,7 @@ export interface MovieDetails {
   similar: Movies;
 }
 
-export interface CrewMember {
+interface StaffMember {
   adult?: boolean;
   gender?: number | null;
   id?: number;
@@ -102,24 +109,18 @@ export interface CrewMember {
   popularity?: number;
   profile_path?: string | null;
   credit_id?: string;
+}
+
+export interface CrewMember extends StaffMember {
   department?: string;
   job?: string;
 }
 
 export type Crew = CrewMember[];
 
-export interface CastMember {
-  adult: boolean;
-  gender?: number | null;
-  id?: number;
-  known_for_department?: string;
-  name?: string;
-  original_name?: string;
-  popularity?: number;
-  profile_path?: string | null;
+export interface CastMember extends StaffMember {
   cast_id?: number;
   character?: string;
-  credit_id?: string;
   order?: number;
 }
 
@@ -150,18 +151,9 @@ export interface Review {
 export interface Reviews {
   id?: number;
   page?: number;
-  results?: Reviews[];
+  results?: Review[];
   total_pages?: number;
   total_results?: number;
-}
-export interface AppState {
-  movies: MoviesState;
-}
-
-export interface MoviesState {
-  movies: Movie[];
-  status: ApiStatus;
-  error: string | null;
 }
 
 export interface NavbarLink {
@@ -178,17 +170,7 @@ export interface NavbarLinks {
   rankings: NavbarLink;
 }
 
-export interface Backdrop {
-  aspect_ratio?: number;
-  file_path?: string;
-  height?: number;
-  iso_639_1?: string | null;
-  vote_average?: number;
-  vote_count?: number;
-  width?: number;
-}
-
-export interface Poster {
+export interface MainImage {
   aspect_ratio?: number;
   file_path?: string;
   height?: number;
@@ -200,8 +182,8 @@ export interface Poster {
 
 export interface Images {
   id: number;
-  backdrops?: Backdrop[];
-  posters?: Poster[];
+  backdrops?: MainImage[];
+  posters?: MainImage[];
 }
 
 export interface Video {
@@ -218,24 +200,15 @@ export interface Video {
 }
 
 export type VideosResults = Video[];
+
 export interface Videos {
   id?: number;
   results?: VideosResults[];
 }
 
-export interface Profile {
-  aspect_ratio?: number;
-  file_path?: string;
-  height?: number;
-  iso_639_1?: null;
-  vote_average?: number;
-  vote_count?: number;
-  width?: number;
-}
-
 export interface PersonImages {
   id?: number;
-  profiles?: Profile[];
+  profiles?: MainImage[];
 }
 
 export type MenuItem = Required<MenuProps>["items"][number];
@@ -244,8 +217,8 @@ export interface PersonDetails {
   birthday?: string | null;
   known_for_department?: string;
   deathday?: string | null;
-  id?: number;
-  name?: string;
+  id: number;
+  name: string;
   also_known_as?: string[];
   gender?: number;
   biography?: string;
@@ -261,39 +234,8 @@ export interface PersonDetails {
   media_type: MediaType;
 }
 
-export interface KnownForMovie {
-  poster_path?: string | null;
-  adult?: boolean;
-  overview?: string;
-  release_date?: string;
-  original_title?: string;
-  genre_ids?: Array<number>;
-  id?: number;
-  media_type?: "movie";
-  original_language?: string;
-  title?: string;
-  backdrop_path?: string | null;
-  popularity?: number;
-  vote_count?: number;
-  video?: boolean;
-  vote_average?: number;
-}
-
-export interface KnownForTv {
-  poster_path?: string | null;
-  popularity?: number;
-  id?: number;
-  overview?: string;
-  backdrop_path?: string | null;
-  vote_average?: number;
+export interface KnownForTv extends Series {
   media_type: "tv";
-  first_air_date?: string;
-  origin_country?: Array<string>;
-  genre_ids?: Array<number>;
-  original_language?: string;
-  vote_count?: number;
-  name?: string;
-  original_name?: string;
 }
 
 export interface PeopleResult {
@@ -314,18 +256,12 @@ export interface People {
   total_pages?: number;
 }
 
-export interface PersonMovieCastMember {
-  character?: string;
+interface PersonStaffMember {
   credit_id?: string;
-  release_date?: string;
   vote_count?: number;
-  video?: boolean;
-  adult?: boolean;
   vote_average?: number;
-  title?: string;
   genre_ids?: number[];
   original_language?: string;
-  original_title?: string;
   popularity?: number;
   id?: number;
   backdrop_path?: string | null;
@@ -333,26 +269,32 @@ export interface PersonMovieCastMember {
   poster_path?: string | null;
 }
 
+interface PersonMovieStaffMember extends PersonStaffMember {
+  release_date?: string;
+  title: string;
+  video?: boolean;
+  adult?: boolean;
+}
+
+interface PersonTvStaffMember extends PersonStaffMember {
+  first_air_date?: string;
+  name: string;
+  original_name?: string;
+  origin_country?: string[];
+  episode_count?: number;
+}
+
+export interface PersonMovieCastMember extends PersonMovieStaffMember {
+  character?: string;
+  video?: boolean;
+  original_title?: string;
+}
+
 export type PersonMovieCast = PersonMovieCastMember[];
 
 export interface PersonMovieCrewMember {
-  id?: number;
   department?: string;
-  original_language?: string;
-  original_title?: string;
   job?: string;
-  overview?: string;
-  vote_count?: number;
-  video?: boolean;
-  poster_path?: string | null;
-  backdrop_path?: string | null;
-  title?: string;
-  popularity?: number;
-  genre_ids?: number[];
-  vote_average?: number;
-  adult?: boolean;
-  release_date?: string;
-  credit_id?: string;
 }
 
 export type PersonMovieCrew = PersonMovieCrewMember[];
@@ -363,45 +305,15 @@ export interface PersonMovieCredits {
   id: number;
 }
 
-export interface PersonTvCastMember {
-  credit_id?: string;
-  original_name?: string;
-  id?: number;
-  genre_ids?: number[];
+export interface PersonTvCastMember extends PersonTvStaffMember {
   character?: string;
-  name?: string;
-  poster_path?: string | null;
-  vote_count?: number;
-  vote_average?: number;
-  popularity?: number;
-  episode_count?: number;
-  original_language?: string;
-  first_air_date?: string;
-  backdrop_path?: string | null;
-  overview?: string;
-  origin_country?: string[];
 }
 
 export type PersonTvCast = PersonTvCastMember[];
 
-export interface PersonTvCrewMember {
-  id?: number;
+export interface PersonTvCrewMember extends PersonTvStaffMember {
   department?: string;
-  original_language?: string;
-  episode_count?: number;
   job?: string;
-  overview?: string;
-  origin_country?: string[];
-  original_name?: string;
-  genre_ids?: number[];
-  name?: string;
-  first_air_date?: string;
-  backdrop_path?: string | null;
-  popularity?: number;
-  vote_count?: number;
-  vote_average?: number;
-  poster_path?: string | null;
-  credit_id?: string;
 }
 
 export type PersonTvCrew = PersonTvCrewMember[];
@@ -438,6 +350,7 @@ export interface TvSeries {
   total_results: number;
   total_pages: number;
 }
+
 export interface RatedTvSeries extends TvSeries {
   results?: RatedSeries[];
 }
@@ -474,40 +387,19 @@ export interface SeriesSeason {
   season_number?: number;
 }
 
-export interface SeriesLastEpisode {
-  air_date?: string;
-  episode_number?: number;
-  id?: number;
-  name?: string;
-  overview?: string;
-  production_code?: string;
-  season_number?: number;
-  still_path?: string | null;
-  vote_average?: number;
-  vote_count?: number;
-}
-export interface SeriesDetails {
-  backdrop_path?: string | null;
+export interface SeriesDetails extends Series {
   created_by?: SeriesCreator[];
   episode_run_time?: number[];
-  first_air_date?: string;
   genres?: Genre[];
   homepage?: string;
-  id: number;
   in_production?: boolean;
   languages?: string[];
   last_air_date?: string;
-  last_episode_to_air?: SeriesLastEpisode;
-  name?: string;
-  next_episode_to_air?: null;
+  last_episode_to_air?: SeriesEpisode;
+  next_episode_to_air?: SeriesEpisode;
   networks?: SeriesNetworkType[];
   number_of_episodes?: number;
   number_of_seasons?: number;
-  origin_country?: string[];
-  original_language?: string;
-  original_name?: string;
-  overview?: string;
-  popularity?: number;
   poster_path?: string | null;
   production_companies?: SeriesProductionCompany[];
   production_countries?: ProductionCountry[];
@@ -516,8 +408,6 @@ export interface SeriesDetails {
   status?: string;
   tagline?: string;
   type?: string;
-  vote_average?: number;
-  vote_count?: number;
   aggregate_credits: SeriesAggregateCredits | null;
   images: Images;
   videos: Videos;
@@ -526,41 +416,31 @@ export interface SeriesDetails {
   similar: TvSeries;
 }
 
-export interface SeriesAggregateCreditsCastRoles {
+export interface SeriesAggregateStaffCredits {
   credit_id?: string;
-  character?: string;
   episode_count?: number;
   total_episode_count?: number;
+}
+
+export interface SeriesAggregateCreditsCastRoles
+  extends SeriesAggregateStaffCredits {
+  character?: string;
   order?: number;
 }
-export interface SeriesAggregateCreditsCastMember {
-  adult?: boolean;
-  gender?: number | null;
-  id?: number;
-  known_for_department?: string;
-  name?: string;
-  original_name?: string;
-  popularity?: number;
-  profile_path?: string | null;
+
+type SeriesAggregateCreditsStaffMember = Omit<StaffMember, "cast_id">;
+export interface SeriesAggregateCreditsCastMember
+  extends SeriesAggregateCreditsStaffMember {
   roles?: SeriesAggregateCreditsCastRoles[];
 }
 
-export interface SeriesAggregateCreditsCrewJobs {
-  credit_id?: string;
+export interface SeriesAggregateCreditsCrewJobs
+  extends SeriesAggregateStaffCredits {
   job?: string;
-  episode_count?: number;
   department?: string;
-  total_episode_count?: number;
 }
-export interface SeriesAggregateCreditsCrewMember {
-  adult?: boolean;
-  gender?: number | null;
-  id?: number;
-  known_for_department?: string;
-  name?: string;
-  original_name?: string;
-  popularity?: number;
-  profile_path?: string | null;
+export interface SeriesAggregateCreditsCrewMember
+  extends SeriesAggregateCreditsStaffMember {
   jobs?: SeriesAggregateCreditsCrewJobs[];
 }
 
@@ -572,21 +452,9 @@ export interface SeriesAggregateCredits {
   crew?: SeriesAggregateCreditsCrew;
 }
 
-export interface GuestStar {
-  credit_id?: string;
-  order?: number;
-  character?: string;
-  adult?: boolean;
-  gender?: number | null;
-  id?: number;
-  known_for_department?: string;
-  name?: string;
-  original_name?: string;
-  popularity?: number;
-  profile_path?: string | null;
-}
+type GuestStar = Omit<CastMember, "cast_id">;
 
-export type GuestStars = GuestStar[];
+type GuestStars = GuestStar[];
 
 export interface SeriesEpisode {
   air_date?: string;
@@ -623,14 +491,11 @@ export interface ProviderItem {
   display_priority: number;
 }
 
-export type ProviderRent = ProviderItem[] | null;
-export type ProviderFlatRate = ProviderItem[] | null;
-export type ProviderBuy = ProviderItem[] | null;
 export interface WatchProvidersResult {
   link: string;
-  flatrate: ProviderFlatRate;
-  rent: ProviderRent;
-  buy: ProviderBuy;
+  flatrate: ProviderItem[];
+  rent: ProviderItem[];
+  buy: ProviderItem[];
 }
 
 export interface WatchProviders {
@@ -781,15 +646,9 @@ export interface AccountDataType {
   username: string;
 }
 
-export interface NetworkImageType {
-  aspect_ratio: number;
-  file_path: string;
-  height: number;
+export type NetworkImageType = Omit<MainImage, "iso_639_1"> & {
   id: string;
   file_type: string;
-  vote_average: number;
-  vote_count: number;
-  width: number;
 }
 
 export interface NetworkImagesDTO {

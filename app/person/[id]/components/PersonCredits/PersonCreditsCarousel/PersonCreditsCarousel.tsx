@@ -10,6 +10,7 @@ import Link from "next/link";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 import styles from "../PersonCredits.module.scss";
 import Carousel from "@/components/Carousel/Carousel";
+import getName from "@/helpers/getName";
 
 interface PersonCreditsCarouselProps {
   credits:
@@ -55,11 +56,7 @@ const PersonCreditsCarousel = ({
               className={styles["person-credits__slide-title"]}
               style={{ maxWidth: imageWidth }}
             >
-              {`${
-                "title" in credit
-                  ? credit.title
-                  : "name" in credit && credit.name
-              } (${
+              {`${getName(credit)} (${
                 "release_date" in credit
                   ? credit?.release_date?.slice(0, 4)
                   : "first_air_date" in credit &&

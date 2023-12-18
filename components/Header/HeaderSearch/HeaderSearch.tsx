@@ -9,6 +9,7 @@ import useSearchParam from "@/hooks/useSearchParam";
 import { SearchResults } from "@/types/types";
 
 import styles from "./HeaderSearch.module.scss";
+import getName from "@/helpers/getName";
 
 const HeaderSearch = () => {
   const searchParams = useSearchParams();
@@ -83,8 +84,7 @@ const HeaderSearch = () => {
   };
 
   const searchOptions = results?.map((result) => {
-    const title =
-      "title" in result ? result.title : "name" in result && result.name;
+    const title = getName(result);
     const mediaType = result.media_type;
     const id = result.id;
 

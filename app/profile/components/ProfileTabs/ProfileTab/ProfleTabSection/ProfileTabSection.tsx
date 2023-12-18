@@ -1,20 +1,14 @@
 import { MediaType, Movie, ProfileContentType, Series } from "@/types/types";
 import React, { useEffect, useState } from "react";
 import ProfileTabItem from "../ProfileTabItem/ProfileTabItem";
-import { getSearchResultType } from "@/helpers/getSearchResultType";
-
-import styles from "../../../../Profile.module.scss";
 import useSearchParam from "@/hooks/useSearchParam";
 import { useAuthentication } from "@/context/Authentication.context";
-import {
-  getFavoriteMovies,
-  getWatchListMovies,
-  getRatedMovies,
-  getFavoriteTvSeries,
-  getRatedTvSeries,
-  getWatchListTvSeries,
-} from "@/apiHelpers";
 import Button from "@/components/Button/Button";
+import getMediasFetchFunction from "@/helpers/getMediasFetchFunction";
+import getName from "@/helpers/getName";
+
+import styles from "../../../../Profile.module.scss";
+import getMediaHref from "@/helpers/getMediaHref";
 
 interface ProfileTabSectionProps {
   initialMedias: Series[] | Movie[];
@@ -41,31 +35,9 @@ const ProfileTabSection = ({
     setCurrentPage(1);
   }, [contentType]);
 
-  const getMediasFunction = () => {
-    if (mediaType === "movie") {
-      if (contentType === "favorites") {
-        return getFavoriteMovies;
-      } else if (contentType === "ratings") {
-        return getRatedMovies;
-      } else if (contentType === "watchList") {
-        return getWatchListMovies;
-      }
-    } else if (mediaType === "tv") {
-      if (contentType === "favorites") {
-        return getFavoriteTvSeries;
-      } else if (contentType === "ratings") {
-        return getRatedTvSeries;
-      } else if (contentType === "watchList") {
-        return getWatchListTvSeries;
-      }
-    }
-  };
-
   const handleLoadMoreMovies = async () => {
-    console.log(contentType);
-
     if (sessionId && accountId && contentType) {
-      const getMovies = getMediasFunction();
+      const getMovies = getMediasFetchFunction(mediaType, contentType);
 
       if (getMovies) {
         try {
@@ -103,13 +75,9 @@ const ProfileTabSection = ({
             key={media.id}
           >
             <ProfileTabItem
-              linkUrl={`${getSearchResultType(mediaType)}${media?.id}`}
+              linkUrl={getMediaHref(mediaType, media.id)}
               imagePath={media.poster_path}
-              title={
-                ("title" in media
-                  ? media.title
-                  : "name" in media && media.name) || ""
-              }
+              title={getName(media)}
             />
           </li>
         ))}

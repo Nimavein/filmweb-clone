@@ -3,6 +3,7 @@ import styles from "./PeopleListItem.module.scss";
 import Link from "next/link";
 import { PeopleResult } from "@/types/types";
 import { getDepartmentName } from "@/helpers/getDepartmentName";
+import getName from "@/helpers/getName";
 
 const PeopleListItem = ({
   id,
@@ -11,11 +12,7 @@ const PeopleListItem = ({
   known_for_department,
   known_for,
 }: PeopleResult) => {
-  const knownForText = known_for
-    ?.map((show) =>
-      "title" in show ? show.title : "name" in show && show.name
-    )
-    .join(", ");
+  const knownForText = known_for?.map((show) => getName(show)).join(", ");
   return (
     <Link href={`/person/${id}`}>
       <div className={styles["people-list__item"]}>
