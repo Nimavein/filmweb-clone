@@ -19,14 +19,14 @@ const SeriesRelated = ({
         {similarTvSeries && (
           <MediaCarousel
             medias={similarTvSeries}
-            type="tv-series"
+            mediaType="tv"
             title="SIMILAR TV SERIES"
           />
         )}
         {recommendedTvSeries && (
           <MediaCarousel
             medias={recommendedTvSeries}
-            type="tv-series"
+            mediaType="tv"
             title="RECOMMENDED TV SERIES"
           />
         )}

@@ -22,7 +22,7 @@ const Home = async () => {
           <MediaCarousel
             title="UPCOMING MOVIES"
             medias={upcomingMovies}
-            type="movies"
+            mediaType="movie"
             slidesToShow={5}
           />
         )}
@@ -30,7 +30,7 @@ const Home = async () => {
           <MediaCarousel
             title="UPCOMING TV SERIES"
             medias={upcomingTvSeries}
-            type="tv-series"
+            mediaType="tv"
             slidesToShow={5}
           />
         )}
