@@ -31,7 +31,7 @@ const Person = async ({ params: { id } }: PageIdParams) => {
           personDetails={personDetails}
           cast={movieCredits?.cast}
           crew={movieCredits?.crew}
-          type="movies"
+          mediaType="movie"
         />
       )}
       {areTvCreditsAvailable && personDetails && (
@@ -39,7 +39,7 @@ const Person = async ({ params: { id } }: PageIdParams) => {
           personDetails={personDetails}
           cast={tvCredits?.cast}
           crew={tvCredits?.crew}
-          type="tv-series"
+          mediaType="tv"
         />
       )}
       {areImagesAvailable && personDetails && (

@@ -263,7 +263,7 @@ interface PersonStaffMember {
   genre_ids?: number[];
   original_language?: string;
   popularity?: number;
-  id?: number;
+  id: number;
   backdrop_path?: string | null;
   overview?: string;
   poster_path?: string | null;
@@ -292,7 +292,7 @@ export interface PersonMovieCastMember extends PersonMovieStaffMember {
 
 export type PersonMovieCast = PersonMovieCastMember[];
 
-export interface PersonMovieCrewMember {
+export interface PersonMovieCrewMember extends PersonMovieStaffMember {
   department?: string;
   job?: string;
 }

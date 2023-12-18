@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  MediaType,
   PersonMovieCast,
   PersonMovieCrew,
   PersonTvCast,
@@ -11,6 +12,7 @@ import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 import styles from "../PersonCredits.module.scss";
 import Carousel from "@/components/Carousel/Carousel";
 import getName from "@/helpers/getName";
+import getMediaHref from "@/helpers/getMediaHref";
 
 interface PersonCreditsCarouselProps {
   credits:
@@ -19,12 +21,12 @@ interface PersonCreditsCarouselProps {
     | PersonTvCast
     | PersonTvCrew
     | undefined;
-  type: "movies" | "tv-series";
+  mediaType: MediaType;
 }
 
 const PersonCreditsCarousel = ({
   credits,
-  type,
+  mediaType,
 }: PersonCreditsCarouselProps) => {
   const imageHeight = 240;
   const imageWidth = imageHeight * 0.667;
@@ -32,10 +34,7 @@ const PersonCreditsCarousel = ({
   return credits ? (
     <Carousel>
       {credits?.map((credit, index) => (
-        <Link
-          key={index}
-          href={`/${type === "movies" ? "movie" : "series"}/${credit.id}`}
-        >
+        <Link key={index} href={getMediaHref(mediaType, credit.id)}>
           <div className={styles["person-credits__slide"]}>
             {credit?.poster_path ? (
               <Image
