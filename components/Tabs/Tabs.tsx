@@ -4,6 +4,8 @@ import React, { useState, ReactNode } from "react";
 import Button from "../Button/Button";
 import useSearchParam from "@/hooks/useSearchParam";
 
+import styles from "./Tabs.module.scss";
+
 interface Tab {
   key: string;
   label: ReactNode;
@@ -33,20 +35,26 @@ const Tabs = ({ defaultActiveKey, onTabClick, items, paramKey }: TabsProps) => {
   };
 
   return (
-    <div>
-      <div style={{ marginBottom: 16 }}>
+    <div className={styles["tabs"]}>
+      <ul role="tablist" className={styles["tabs__tablist"]}>
         {items.map((tab) => (
-          <Button
-            key={tab.key}
-            onClick={() => handleTabClick(tab.key)}
-            active={activeKey === tab.key}
-            disabled={tab.disabled}
-          >
-            {tab.label}
-          </Button>
+          <li key={tab.key} className={styles["tabs__tablist-item"]}>
+            <Button
+              role="tab"
+              onClick={() => handleTabClick(tab.key)}
+              active={activeKey === tab.key}
+              disabled={tab.disabled}
+              tabIndex={tab.disabled ? -1 : 0}
+              aria-selected={activeKey === tab.key}
+            >
+              {tab.label}
+            </Button>
+          </li>
         ))}
+      </ul>
+      <div className={styles["tabs__tabpanel"]} role="tabpanel">
+        {items.find((tab) => tab.key === activeKey)?.children}
       </div>
-      <div>{items.find((tab) => tab.key === activeKey)?.children}</div>
     </div>
   );
 };

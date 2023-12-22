@@ -1,0 +1,11 @@
+.tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__tablist {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+  }
+}
