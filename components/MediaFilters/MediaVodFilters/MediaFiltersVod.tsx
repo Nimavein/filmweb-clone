@@ -57,7 +57,7 @@ const MediaFiltersVod = ({
               active={activeFilters?.providers?.includes(
                 provider.provider_id.toString()
               )}
-              ariaLabel={provider.provider_name}
+              aria-label={provider.provider_name}
               onClick={() => onProviderClick(provider.provider_id)}
             >
               <Image

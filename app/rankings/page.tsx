@@ -57,6 +57,7 @@ const Rankings = () => {
       ),
     },
   ];
+
   return (
     <main className={styles["ranking"]}>
       <Tabs items={tabs} defaultActiveKey="movies" paramKey="rankingContent" />

@@ -93,7 +93,7 @@ const MediaFilters = ({
           size="large"
         />
         <Button
-          ariaLabel={areFiltersOpen ? "Close filters" : "Open filters"}
+          aria-label={areFiltersOpen ? "Close filters" : "Open filters"}
           active={areFiltersOpen}
           onClick={() => setAreFiltersOpen(!areFiltersOpen)}
         >
