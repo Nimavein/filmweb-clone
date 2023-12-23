@@ -4,41 +4,34 @@ import React from "react";
 import RankingMovies from "./components/RankingMovies/RankingMovies";
 import RankingTvSeries from "./components/RankingTvSeries/RankingTvSeries";
 import Tabs from "@/components/Tabs/Tabs";
-
-import styles from "./Rankings.module.scss";
 import { getMoviesData, getTvSeriesData } from "@/apiHelpers";
 import useInfiniteContent from "@/hooks/useInfiniteContent";
-import { Movie, Series } from "@/types/types";
+import { ActiveMediaFiltersType, Movie, Series } from "@/types/types";
+
+import styles from "./Rankings.module.scss";
+
+const fetchData = async <T,>(
+  getData: (
+    sortBy?: string,
+    filters?: ActiveMediaFiltersType,
+    minVoteCount?: string,
+    pageNumber?: number
+  ) => Promise<{ results: T[] }>,
+  pageNumber: number
+): Promise<T[]> => {
+  const data = await getData(undefined, undefined, undefined, pageNumber);
+  return data.results;
+};
 
 const Rankings = () => {
-  const fetchTvSeriesData = async (pageNumber: number): Promise<Series[]> => {
-    const tvSeriesData = await getTvSeriesData(
-      undefined,
-      undefined,
-      undefined,
-      pageNumber
-    );
-    return tvSeriesData.results;
-  };
-
-  const fetchMoviesData = async (pageNumber: number): Promise<Movie[]> => {
-    const moviesData = await getMoviesData(
-      undefined,
-      undefined,
-      undefined,
-      pageNumber
-    );
-    return moviesData.results;
-  };
-
   const { content: tvSeries, fetchMoreData: fetchTvSeries } =
-    useInfiniteContent({
-      fetchFunction: fetchTvSeriesData,
-    });
+    useInfiniteContent((pageNumber: number) =>
+      fetchData<Series>(getTvSeriesData, pageNumber)
+    );
 
-  const { content: movies, fetchMoreData: fetchMovies } = useInfiniteContent({
-    fetchFunction: fetchMoviesData,
-  });
+  const { content: movies, fetchMoreData: fetchMovies } = useInfiniteContent(
+    (pageNumber: number) => fetchData<Movie>(getMoviesData, pageNumber)
+  );
 
   const tabs = [
     {

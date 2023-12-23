@@ -1,12 +1,8 @@
 import { useState, useEffect } from "react";
 
-interface UseInfiniteContentProps<T> {
-  fetchFunction: (pageNumber: number) => Promise<T[]>;
-}
-
-const useInfiniteContent = <T,>({
-  fetchFunction,
-}: UseInfiniteContentProps<T>) => {
+const useInfiniteContent = <T,>(
+  fetchFunction: (pageNumber: number) => Promise<T[]>
+) => {
   const [content, setContent] = useState<T[]>([]);
   const [page, setPage] = useState<number>(1);
 
