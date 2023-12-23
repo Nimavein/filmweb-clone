@@ -1,12 +1,11 @@
 "use client";
 
 import React from "react";
-import RankingMovies from "./components/RankingMovies/RankingMovies";
-import RankingTvSeries from "./components/RankingTvSeries/RankingTvSeries";
 import Tabs from "@/components/Tabs/Tabs";
 import { getMoviesData, getTvSeriesData } from "@/apiHelpers";
 import useInfiniteContent from "@/hooks/useInfiniteContent";
 import { ActiveMediaFiltersType, Movie, Series } from "@/types/types";
+import RankingMedias from "./components/RankingMedias/RankingMedias";
 
 import styles from "./Rankings.module.scss";
 
@@ -37,15 +36,22 @@ const Rankings = () => {
     {
       key: "movies",
       label: "Movies",
-      children: <RankingMovies movies={movies} fetchMoviesData={fetchMovies} />,
+      children: (
+        <RankingMedias
+          medias={movies}
+          fetchMediaData={fetchMovies}
+          mediaType="movie"
+        />
+      ),
     },
     {
       key: "tv-series",
       label: "TV series",
       children: (
-        <RankingTvSeries
-          tvSeries={tvSeries}
-          fetchTvSeriesData={fetchTvSeries}
+        <RankingMedias
+          medias={tvSeries}
+          fetchMediaData={fetchTvSeries}
+          mediaType="tv"
         />
       ),
     },
