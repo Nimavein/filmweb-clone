@@ -3,6 +3,7 @@ import styles from "./MoviesListItem.module.scss";
 import Link from "next/link";
 import Rating from "@/components/Rating/Rating";
 import { Movie } from "@/types/types";
+import getHref from "@/helpers/getHref";
 
 const MoviesListItem = ({
   title,
@@ -16,7 +17,7 @@ const MoviesListItem = ({
   const imageHeight = 200;
   const imageWidth = imageHeight * 0.667;
   return (
-    <Link href={`/movie/${id}`}>
+    <Link href={getHref("movie", title, id)}>
       <div className={styles["movies-list__item"]}>
         <Image
           src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${poster_path}`}
@@ -34,7 +35,12 @@ const MoviesListItem = ({
           </div>
           <div className={styles["movies-list__item-rating"]}>
             <span className={styles["movies-list__item-vote-average"]}>
-              <Rating vertical small defaultValue={vote_average} voteCount={vote_count} />
+              <Rating
+                vertical
+                small
+                defaultValue={vote_average}
+                voteCount={vote_count}
+              />
             </span>
           </div>
         </div>

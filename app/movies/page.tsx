@@ -2,8 +2,15 @@ import { ActiveMediaFiltersType, PagePaginationParams } from "@/types/types";
 import MoviesList from "./components/MoviesList";
 import { getMoviesData } from "@/apiHelpers";
 import MediaFilters from "@/components/MediaFilters/MediaFilters";
+import type { Metadata } from "next";
 
 import styles from "./Movies.module.scss";
+
+export const metadata: Metadata = {
+  title: "Browse Movies: Explore a Variety of Films",
+  description:
+    "Discover a diverse collection of movies. Use filters to find the perfect film and enjoy seamless pagination for an enhanced browsing experience. Find the latest releases, timeless classics, and hidden gems.",
+};
 
 const Movies = async ({
   searchParams: {

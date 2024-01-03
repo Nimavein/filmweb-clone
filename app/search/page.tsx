@@ -2,8 +2,15 @@ import { getSearchMulti } from "@/apiHelpers/searchApi";
 import SearchListTab from "./components/SearchListTab/SearchListTab";
 import { PageSearchParams } from "@/types/types";
 import Tabs from "@/components/Tabs/Tabs";
+import type { Metadata } from "next";
 
 import styles from "./Search.module.scss";
+
+export const metadata: Metadata = {
+  title: "Search and Discover: Find Movies, TV Series, and People",
+  description:
+    "Explore a vast database of movies, TV series, and people. Use the search functionality to discover new content, get information on your favorite titles, and find details about talented individuals in the entertainment industry.",
+};
 
 const SearchPage = async ({ searchParams: { query } }: PageSearchParams) => {
   const results = await getSearchMulti(query);

@@ -4,7 +4,7 @@ import Link from "next/link";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 import { MovieDetails, SeriesDetails, PersonDetails } from "@/types/types";
 import getName from "@/helpers/getName";
-import getMediaHref from "@/helpers/getMediaHref";
+import getHref from "@/helpers/getHref";
 
 import styles from "../../../Search.module.scss";
 
@@ -14,16 +14,23 @@ const SearchListItem = (
   const dropdownImageHeight = 180;
   const dropdownImageWidth = dropdownImageHeight * 0.667;
   const mediaType = result.media_type;
-  const id = result.id;
   const imagePath =
     "poster_path" in result
       ? result.poster_path
       : "profile_path" in result && result.profile_path;
   const imageUrl = `${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${imagePath}`;
   return (
-    <Link className={styles["search-list__item"]} href={getMediaHref(mediaType, id)}>
+    <Link
+      className={styles["search-list__item"]}
+      href={getHref(mediaType, getName(result), result.id)}
+    >
       {imagePath ? (
-        <Image alt="" width={dropdownImageWidth} height={dropdownImageHeight} src={imageUrl} />
+        <Image
+          alt=""
+          width={dropdownImageWidth}
+          height={dropdownImageHeight}
+          src={imageUrl}
+        />
       ) : (
         <ImagePlaceholder
           width={dropdownImageWidth}

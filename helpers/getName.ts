@@ -13,7 +13,7 @@ import {
 } from "@/types/types";
 
 const getName = (
-  media:
+  data:
     | Series
     | Movie
     | MovieDetails
@@ -26,10 +26,6 @@ const getName = (
     | PersonTvCastMember
     | PersonTvCrewMember
 ): string =>
-  "title" in media
-    ? media.title
-    : "name" in media
-    ? media.name
-    : "Unknown Title";
+  "title" in data ? data.title : "name" in data ? data.name : "Unknown Name";
 
 export default getName;

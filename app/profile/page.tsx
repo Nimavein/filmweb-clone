@@ -10,6 +10,13 @@ import {
   getWatchListMovies,
   getWatchListTvSeries,
 } from "@/apiHelpers";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Your Entertainment Profile: Watchlist, Ratings, and Favorites",
+  description:
+    "Explore your personalized entertainment profile. View your watchlist, check your ratings, and discover your favorite movies and TV series. Manage your preferences and keep track of your cinematic journey.",
+};
 
 const Profile = async () => {
   const { sessionId, accountId } = getAuthenticationCookies();

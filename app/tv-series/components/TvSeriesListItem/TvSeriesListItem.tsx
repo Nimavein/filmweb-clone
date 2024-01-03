@@ -3,6 +3,7 @@ import styles from "./TvSeriesListItem.module.scss";
 import Link from "next/link";
 import Rating from "@/components/Rating/Rating";
 import { Series } from "@/types/types";
+import getHref from "@/helpers/getHref";
 
 const TvSeriesListItem = ({
   name,
@@ -16,7 +17,7 @@ const TvSeriesListItem = ({
   const imageHeight = 200;
   const imageWidth = imageHeight * 0.667;
   return (
-    <Link href={`/series/${id}`}>
+    <Link href={getHref("tv", name, id)}>
       <div className={styles["tv-series-list__item"]}>
         <Image
           src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${poster_path}`}

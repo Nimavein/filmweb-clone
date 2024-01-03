@@ -102,9 +102,9 @@ export interface MovieDetails {
 interface StaffMember {
   adult?: boolean;
   gender?: number | null;
-  id?: number;
+  id: number;
   known_for_department?: string;
-  name?: string;
+  name: string;
   original_name?: string;
   popularity?: number;
   profile_path?: string | null;
@@ -244,7 +244,7 @@ export interface PeopleResult {
   known_for_department: string;
   name: string;
   popularity: number;
-  id?: number;
+  id: number;
   known_for?: KnownForMovie[] | KnownForTv[];
   profile_path?: string;
 }

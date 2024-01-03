@@ -7,10 +7,10 @@ import Link from "next/link";
 import Image from "next/image";
 import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 import InfiniteScroll from "react-infinite-scroll-component";
-import getName from "@/helpers/getName";
-import getMediaHref from "@/helpers/getMediaHref";
 
 import styles from "../../Rankings.module.scss";
+import getHref from "@/helpers/getHref";
+import getName from "@/helpers/getName";
 
 interface RankingMediasProps {
   medias: Movie[] | Series[];
@@ -37,7 +37,7 @@ const RankingMedias = ({
       <ul className={styles["ranking-list"]}>
         {medias.map((media, index: number) => (
           <li key={media.id}>
-            <Link href={getMediaHref(mediaType, media.id)}>
+            <Link href={getHref(mediaType, getName(media), media.id)}>
               <div className={styles["ranking-list__item"]}>
                 <p className={styles["ranking-list__item-rank"]}>{index + 1}</p>
                 {media.poster_path ? (

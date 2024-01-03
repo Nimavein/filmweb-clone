@@ -5,10 +5,10 @@ import useSearchParam from "@/hooks/useSearchParam";
 import { useAuthentication } from "@/context/Authentication.context";
 import Button from "@/components/Button/Button";
 import getMediasFetchFunction from "@/helpers/getMediasFetchFunction";
+import getHref from "@/helpers/getHref";
 import getName from "@/helpers/getName";
 
 import styles from "../../../../Profile.module.scss";
-import getMediaHref from "@/helpers/getMediaHref";
 
 interface ProfileTabSectionProps {
   initialMedias: Series[] | Movie[];
@@ -75,7 +75,7 @@ const ProfileTabSection = ({
             key={media.id}
           >
             <ProfileTabItem
-              linkUrl={getMediaHref(mediaType, media.id)}
+              linkUrl={getHref(mediaType, getName(media), media.id)}
               imagePath={media.poster_path}
               title={getName(media)}
             />

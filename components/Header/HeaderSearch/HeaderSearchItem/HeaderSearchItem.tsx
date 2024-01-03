@@ -5,7 +5,7 @@ import ImagePlaceholder from "@/components/ImagePlaceholder/ImagePlaceholder";
 import { MovieDetails, SeriesDetails, PersonDetails } from "@/types/types";
 import styles from "../HeaderSearch.module.scss";
 import getName from "@/helpers/getName";
-import getMediaHref from "@/helpers/getMediaHref";
+import getHref from "@/helpers/getHref";
 
 const HeaderSearchItem = (
   result: MovieDetails | SeriesDetails | PersonDetails
@@ -24,7 +24,7 @@ const HeaderSearchItem = (
     <Link
       className={styles["header-search__item"]}
       key={id}
-      href={getMediaHref(mediaType, id)}
+      href={getHref(mediaType, getName(result), id)}
     >
       {imagePath ? (
         <Image

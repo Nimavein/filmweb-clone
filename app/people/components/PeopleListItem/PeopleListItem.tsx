@@ -3,7 +3,8 @@ import styles from "./PeopleListItem.module.scss";
 import Link from "next/link";
 import { PeopleResult } from "@/types/types";
 import { getDepartmentName } from "@/helpers/getDepartmentName";
-import getName from "@/helpers/getName";
+import getMediaName from "@/helpers/getName";
+import getHref from "@/helpers/getHref";
 
 const PeopleListItem = ({
   id,
@@ -12,9 +13,9 @@ const PeopleListItem = ({
   known_for_department,
   known_for,
 }: PeopleResult) => {
-  const knownForText = known_for?.map((show) => getName(show)).join(", ");
+  const knownForText = known_for?.map((show) => getMediaName(show)).join(", ");
   return (
-    <Link href={`/person/${id}`}>
+    <Link href={getHref("person", name, id)}>
       <div className={styles["people-list__item"]}>
         <Image
           src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${profile_path}`}

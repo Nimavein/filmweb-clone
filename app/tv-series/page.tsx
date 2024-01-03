@@ -2,8 +2,15 @@ import { ActiveMediaFiltersType, PagePaginationParams } from "@/types/types";
 import MediaFilters from "@/components/MediaFilters/MediaFilters";
 import TvSeriesList from "./components/TvSeriesList";
 import { getTvSeriesData } from "@/apiHelpers";
+import type { Metadata } from "next";
 
 import styles from "./TvSeries.module.scss";
+
+export const metadata: Metadata = {
+  title: "Explore TV Series: Browse a Wide Range of Shows",
+  description:
+    "Immerse yourself in a world of television series. Use filters to refine your search and experience seamless pagination for effortless exploration. Find the latest episodes, timeless classics, and captivating series across genres.",
+};
 
 const TvSeries = async ({
   searchParams: {

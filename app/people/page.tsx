@@ -4,9 +4,16 @@ import PeopleList from "./components/PeopleList";
 
 import styles from "./People.module.scss";
 
-const PopularPeoplePage = async ({
-  searchParams: { page },
-}: PagePaginationParams) => {
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title:
+    "Discover Talented Individuals: Explore a List of People in the Entertainment Industry",
+  description:
+    "Explore a diverse array of individuals in the entertainment world. From actors and directors to producers and more, discover the talented people who bring your favorite movies and TV series to life.",
+};
+
+const People = async ({ searchParams: { page } }: PagePaginationParams) => {
   const currentPage = parseInt(page) || 1;
   const people = await getPopularPeople(currentPage);
 
@@ -20,4 +27,4 @@ const PopularPeoplePage = async ({
   );
 };
 
-export default PopularPeoplePage;
+export default People;
